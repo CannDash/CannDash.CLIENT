@@ -24,8 +24,8 @@
                 <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
                 <input id="e-commerce-products-search" class="search-input" type="text" placeholder="Search"
                        translate translate-attr-placeholder="EC.SEARCH" flex>
+                <md-button class="text-boxed green-bg white-fg m-o hover" ng-click="">New Order</md-button>     
             </div>
-            <md-button class="text-boxed green-bg white-fg m-o hover" ng-click="">New Order</md-button>
         </div>
         <!-- / CONTENT HEADER -->
 
@@ -48,14 +48,14 @@
                                     <span class="column-title">ID</span>
                                 </div>
                             </th>
-                            <th class="secondary-text">
+<!--                             <th class="secondary-text">
                                 <div class="table-header">
                                     <span class="column-title">Reference</span>
                                 </div>
-                            </th>
+                            </th> -->
                             <th class="secondary-text">
                                 <div class="table-header">
-                                    <span class="column-title">Delivery</span>
+                                    <span class="column-title">Driver</span>
                                 </div>
                             </th>
                             <th class="secondary-text">
@@ -68,11 +68,11 @@
                                     <span class="column-title">Total</span>
                                 </div>
                             </th>
-                            <th class="secondary-text">
+<!--                             <th class="secondary-text">
                                 <div class="table-header">
                                     <span class="column-title">Payment</span>
                                 </div>
-                            </th>
+                            </th> -->
                             <th class="secondary-text">
                                 <div class="table-header">
                                     <span class="column-title">Status</span>
@@ -93,11 +93,11 @@
                     <tbody>
                         <tr ng-repeat="order in ::vm.orders">
                             <td>{{order.id}}</td>
-                            <td>{{order.reference}}</td>
-                            <td>{{order.delivery}}</td>
+<!--                             <td>{{order.reference}}</td> -->
+                            <td>{{order.driver}}</td>
                             <td>{{order.customer}}</td>
                             <td>{{order.total}}</td>
-                            <td>{{order.payment}}</td>
+<!--                             <td>{{order.payment}}</td> -->
                             <td>{{order.status}}</td>
                             <td class="date">{{order.date}}</td>
                             <td>

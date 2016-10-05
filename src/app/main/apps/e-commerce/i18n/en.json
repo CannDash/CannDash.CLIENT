@@ -1,8 +1,9 @@
 {
     "EC": {
         "ADD_PRODUCT": "Add Product",
+        "PRODUCTS": "Products:",
         "TOTAL_PRODUCTS": "Total Products:",
-        "PRODUCTS": "Products",
+        "PRODUCTS_ORDERED": "Products Ordered",
         "SEARCH": "Search",
         "GO_TO_PRODUCTS": "Go to products",
         "EDIT": "Edit",

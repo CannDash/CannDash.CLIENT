@@ -16,7 +16,7 @@
     {
         // State
         $stateProvider.state('app.pages_coming-soon', {
-            url      : '/pages/coming-soon',
+            url      : '/',
             views    : {
                 'main@'                        : {
                     templateUrl: 'app/core/layouts/content-only.html',
@@ -35,10 +35,10 @@
 
         // Navigation
         msNavigationServiceProvider.saveItem('pages.coming-soon', {
-            title : 'Coming Soon',
-            icon  : 'icon-alarm-check',
+            title : 'Home Page',
+            icon  : 'icon-home',
             state : 'app.pages_coming-soon',
-            weight: 2
+            weight: 1
         });
     }
 

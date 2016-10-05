@@ -11,7 +11,7 @@
             'app.pages.auth.forgot-password',
             'app.pages.auth.reset-password',
             'app.pages.auth.lock',
-            // 'app.pages.coming-soon',
+            'app.pages.coming-soon',
             'app.pages.error-404',
             'app.pages.error-500',
             // 'app.pages.invoice',
@@ -27,7 +27,7 @@
     {
         // Navigation
         msNavigationServiceProvider.saveItem('pages', {
-            title : 'PAGES',
+            title : 'OTHER PAGES',
             group : true,
             weight: 2
         });

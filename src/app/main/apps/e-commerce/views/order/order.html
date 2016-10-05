@@ -133,7 +133,7 @@
                         </div>
                     </div>
 
-                    <div class="order-detail-form-container payments md-background-bg md-whiteframe-1dp">
+<!--                     <div class="order-detail-form-container payments md-background-bg md-whiteframe-1dp">
                         <div class="pb-16" layout="row" layout-align="start center">
                             <md-icon md-font-icon="icon-cash" class="m-0 mr-16"></md-icon>
                             <div class="h2 secondary-text" translate="EC.PAYMENT">Payment</div>
@@ -164,13 +164,13 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
                 </md-tab-body>
             </md-tab>
 
             <md-tab>
                 <md-tab-label>
-                    <span translate="EC.PRODUCTS">Products</span>
+                    <span translate="EC.PRODUCTS_ORDERED">Products Ordered</span>
                 </md-tab-label>
 
                 <md-tab-body>
@@ -230,139 +230,6 @@
                             </tbody>
                         </table>
                     </div>
-                </md-tab-body>
-            </md-tab>
-
-            <md-tab>
-                <md-tab-label>
-                    <span translate="EC.INVOICE">Reciept</span>
-                </md-tab-label>
-
-                <md-tab-body>
-
-                    <div id="invoice" class="compact">
-                        <div class="invoice-container">
-
-                            <!-- INVOICE -->
-                            <div class="card md-whiteframe-8dp">
-
-                                <div class="header">
-                                    <div class="invoice-date">{{vm.order.date}}</div>
-
-                                    <div layout="row" layout-align="space-between stretch">
-                                        <div class="client">
-                                            <div class="invoice-number mb-8" layout="row" layout-align="start center">
-                                                <span class="title" translate="INVOICE.INVOICE">INVOICE</span>
-                                                <span class="number">{{vm.order.reference}}</span>
-                                            </div>
-
-                                            <div class="info">
-                                                <div class="title">{{vm.order.customer.firstName}}
-                                                    {{vm.order.customer.lastName}}
-                                                </div>
-                                                <div class="address">
-                                                    {{vm.order.customer.invoiceAddress}}
-                                                </div>
-                                                <div class="phone">
-                                                    {{vm.order.customer.phone}}
-                                                </div>
-                                                <div class="email">
-                                                    {{vm.order.customer.email}}
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="issuer md-accent-bg" layout="row" layout-align="start center">
-                                            <div class="logo" layout="row" layout-align="center center">
-                                                <span>F</span>
-                                            </div>
-
-                                            <div class="info">
-                                                <div class="title">FUSE INC.</div>
-                                                <div class="address">2810 Country Club Road Cranford, NJ 07016</div>
-                                                <div class="phone">+66 123 455 87</div>
-                                                <div class="email">hello@fuseinc.com</div>
-                                                <div class="website">www.fuseinc.com</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="content">
-                                    <table class="simple invoice-table">
-                                        <thead>
-                                            <th translate="EC.INVOICE_PRODUCT">PRODUCT</th>
-                                            <th class="text-right" translate="EC.INVOICE_PRICE">PRICE</th>
-                                            <th translate="EC.INVOICE_QUANTITY">QUANTITY</th>
-                                            <th class="text-right" translate="EC.INVOICE_TOTAL">TOTAL</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="product in vm.order.products">
-                                                <td>
-                                                    <div class="title">
-                                                        {{product.name}}
-                                                    </div>
-                                                </td>
-                                                <td class="text-right">
-                                                    {{product.price}}
-                                                </td>
-                                                <td>
-                                                    {{product.quantity}}
-                                                </td>
-                                                <td class="text-right">
-                                                    {{product.total}}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <table class="simple invoice-table-footer">
-                                        <tbody>
-                                            <tr class="subtotal">
-                                                <td translate="EC.INVOICE_SUBTOTAL">SUBTOTAL</td>
-                                                <td>{{vm.order.subtotal}}</td>
-                                            </tr>
-                                            <tr class="tax">
-                                                <td translate="EC.INVOICE_TAX">TAX</td>
-                                                <td>{{vm.order.tax}}</td>
-                                            </tr>
-                                            <tr class="discount">
-                                                <td translate="EC.INVOICE_DISCOUNT">DISCOUNT</td>
-                                                <td>{{vm.order.discount}}</td>
-                                            </tr>
-                                            <tr class="total">
-                                                <td translate="EC.INVOICE_TOTAL">TOTAL</td>
-                                                <td>{{vm.order.total}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="footer">
-                                    <div layout="row" layout-align="start start">
-                                        <div class="logo md-accent-bg" layout="row" layout-align="center center">
-                                            <div>F</div>
-                                        </div>
-                                        <div class="small-note">
-                                            In condimentum malesuada efficitur. Mauris volutpat placerat auctor. Ut ac
-                                            congue dolor. Quisque scelerisque lacus sed feugiat fermentum. Cras aliquet
-                                            facilisis pellentesque. Nunc hendrerit quam at leo commodo, a suscipit
-                                            tellus dapibus. Etiam at felis volutpat est mollis lacinia. Mauris placerat
-                                            sem sit amet velit mollis, in porttitor ex finibus. Proin eu nibh id libero
-                                            tincidunt lacinia et eget eros.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- / INVOICE -->
-
-                            <!-- Use the following element to add breaks to your pages -->
-                            <!-- This will make sure that the section after this element will be printed on a new page -->
-                            <div class="page-break"></div>
-
-                        </div>
-                    </div>
-
                 </md-tab-body>
             </md-tab>
 

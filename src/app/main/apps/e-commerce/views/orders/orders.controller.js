@@ -26,7 +26,7 @@
                 },
                 {
                     // Target the status column
-                    targets: 6,
+                    targets: 4,
                     render : function (data, type)
                     {
                         if ( type === 'display' )
@@ -45,7 +45,7 @@
                 },
                 {
                     // Target the actions column
-                    targets           : 8,
+                    targets           : 6,
                     responsivePriority: 1,
                     filterable        : false,
                     sortable          : false

@@ -11,7 +11,8 @@
                 'nvd3',
                 'textAngular',
                 'uiGmapgoogle-maps',
-                'xeditable'
+                'xeditable',
+                'ui.bootstrap'
             ]
         )
         .config(config);
@@ -23,7 +24,7 @@
         $stateProvider
             .state('app.e-commerce', {
                 abstract: true,
-                url     : '/e-commerce'
+                url     : '/dispensary'
             })
             .state('app.e-commerce.dashboard', {
                 url      : '/dashboard',
@@ -119,6 +120,7 @@
 
         // Api
         msApiProvider.register('e-commerce.dashboard', ['app/data/e-commerce/dashboard.json']);
+        msApiProvider.register('e-commerce.inventory', ['app/data/e-commerce/products.json']);
         msApiProvider.register('e-commerce.products', ['app/data/e-commerce/products.json']);
         msApiProvider.register('e-commerce.product', ['app/data/e-commerce/product.json']);
         msApiProvider.register('e-commerce.orders', ['app/data/e-commerce/orders.json']);

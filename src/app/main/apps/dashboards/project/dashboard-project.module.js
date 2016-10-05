@@ -17,7 +17,7 @@
     {
         // State
         $stateProvider.state('app.dashboards_project', {
-            url      : '/dashboard-project',
+            url      : '/dashboard',
             views    : {
                 'content@app': {
                     templateUrl: 'app/main/apps/dashboards/project/dashboard-project.html',

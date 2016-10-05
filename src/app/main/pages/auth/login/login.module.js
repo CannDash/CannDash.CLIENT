@@ -11,7 +11,7 @@
     {
         // State
         $stateProvider.state('app.pages_auth_login', {
-            url      : '/pages/auth/login',
+            url      : '/dispensary/login',
             views    : {
                 'main@'                       : {
                     templateUrl: 'app/core/layouts/content-only.html',

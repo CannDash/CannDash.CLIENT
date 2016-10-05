@@ -11,7 +11,7 @@
     {
         // State
         $stateProvider.state('app.pages_auth_reset-password', {
-            url      : '/pages/auth/reset-password',
+            url      : '/dispensary/reset-password',
             views    : {
                 'main@'                                : {
                     templateUrl: 'app/core/layouts/content-only.html',

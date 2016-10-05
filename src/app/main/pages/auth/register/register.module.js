@@ -11,7 +11,7 @@
     {
         // State
         $stateProvider.state('app.pages_auth_register', {
-            url      : '/pages/auth/register',
+            url      : '/dispensary/register',
             views    : {
                 'main@'                          : {
                     templateUrl: 'app/core/layouts/content-only.html',
