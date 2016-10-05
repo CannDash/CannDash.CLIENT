@@ -28,7 +28,7 @@
             // Apps
             'app.dashboards',
             // 'app.calendar',
-            'app.e-commerce'
+            'app.e-commerce',
             // 'app.mail',
             // 'app.chat',
             // 'app.file-manager',
@@ -39,7 +39,7 @@
             // 'app.notes',
 
             // Pages
-            // 'app.pages',
+            'app.pages',
 
             // User Interface
             // 'app.ui',

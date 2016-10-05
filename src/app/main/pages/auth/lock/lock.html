@@ -8,7 +8,7 @@
                 </div>
 
                 <div flex layout="column" layout-align="start" layout-align-sm="center center">
-                    <div class="title" translate="LOCK.TITLE">Your session is locked</div>
+                    <div class="title" translate="LOCK.TITLE">Your session has expired</div>
                     <div class="subtitle" translate="LOCK.SUBTITLE">
                         Due to inactivity, your session is locked. Enter your password to continue.
                     </div>
@@ -28,7 +28,7 @@
                            required>
                     <div ng-messages="lockForm.password.$error" role="alert">
                         <div ng-message="required">
-                            <span translate="LOCK.ERRORS.PASSWORD_REQUIRED">Password field is required</span>
+                            <span translate="LOCK.ERRORS.PASSWORD_REQUIRED">Password is required</span>
                         </div>
                     </div>
                 </md-input-container>

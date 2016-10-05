@@ -2,15 +2,26 @@
     <div id="register-form-wrapper" layout="column" layout-align="center center">
         <div id="register-form" class="md-whiteframe-8dp">
             <div class="logo md-accent-bg">
-                <span>F</span>
+                <span><img src="../favicon.ico" alt="CannDash Logo" style="width:135px; height:135px;"></span>
             </div>
 
             <div class="title" translate="REGISTER.TITLE">Create an account</div>
 
             <form name="registerForm" novalidate>
                 <md-input-container class="md-block" md-no-float>
-                    <input name="username" ng-model="vm.form.username" placeholder="Name"
-                           translate translate-attr-placeholder="REGISTER.NAME"
+                    <input name="username" ng-model="vm.form.username" placeholder="Dispensary Name"
+                           translate translate-attr-placeholder="REGISTER.DISPENSARY_NAME"
+                           required>
+                    <div ng-messages="registerForm.username.$error" role="alert">
+                        <div ng-message="required">
+                            <span translate="REGISTER.ERRORS.USERNAME_REQUIRED">Dispensary name is required</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" md-no-float>
+                    <input name="username" ng-model="vm.form.username" placeholder="Username"
+                           translate translate-attr-placeholder="REGISTER.USERNAME"
                            required>
                     <div ng-messages="registerForm.username.$error" role="alert">
                         <div ng-message="required">
