@@ -10,7 +10,7 @@
                 <div class="subtitle" translate="COMINGSOON.SUBTITLE">Register for a FREE account today and start keeping track of orders, inventory, drivers and patients:
                 </div>
 
-                <timer end-time="vm.endTime" layout="row" layout-align="center center" layout-wrap>
+ <!--                <timer end-time="vm.endTime" layout="row" layout-align="center center" layout-wrap>
                     <div flex-xs="50">
                         <div class="value">{{days}}</div>
                         <div class="type" translate="COMINGSOON.DAYS">days</div>
@@ -30,7 +30,7 @@
                         <div class="value">{{seconds}}</div>
                         <div class="type" translate="COMINGSOON.SECONDS">seconds</div>
                     </div>
-                </timer>
+                </timer> -->
             </div>
 
             <form>
@@ -44,7 +44,7 @@
                 </md-input-container>
  -->
                 <md-button class="md-raised md-accent" aria-label="REGISTER" translate="COMINGSOON.REGISTER"
-                           translate-attr-aria-label="COMINGSOON.REGISTER">
+                           translate-attr-aria-label="COMINGSOON.REGISTER" ui-sref="app.pages_auth_register">
                     REGISTER
                 </md-button>
             </form>
