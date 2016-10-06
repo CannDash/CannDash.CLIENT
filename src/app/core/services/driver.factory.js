@@ -5,7 +5,7 @@
         .module('cannDash')
         .factory('driverFactory', driverFactory);
 
-    driverFactory.$inject = ['$http', '$q', 'toastr', apiUrl];
+    driverFactory.$inject = ['$http', '$q', 'toastr', 'apiUrl'];
 
     /* @ngInject */
     function driverFactory($http, $q, toastr, apiUrl) {
