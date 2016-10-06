@@ -14,76 +14,63 @@
         }
     ],
     "widget1": {
-        "ranges": {
-            "DY": "Yesterday",
-            "DT": "Today",
-            "DTM": "Tomorrow"
-        },
-        "currentRange": "DT",
+        "title": "Total Patients",
         "data": {
-            "label": "DUE TASKS",
-            "count": {
-                "DY": 21,
-                "DT": 25,
-                "DTM": 19
-            },
+            "label": "PATIENTS",
+            "count": 14,
             "extra": {
-                "label": "Completed",
-                "count": {
-                    "DY": 6,
-                    "DT": 7,
-                    "DTM": "-"
-                }
+                "label": "Expiring This Month",
+                "count": 2
             }
         },
         "detail": "You can show some detailed information about this widget in here."
     },
     "widget2": {
-        "title": "Overdue",
+        "title": "Drivers Working",
         "data": {
-            "label": "TASKS",
+            "label": "DRIVERS",
             "count": 4,
             "extra": {
-                "label": "Yesterday's overdue",
+                "label": "Drivers Off",
                 "count": 2
             }
         },
         "detail": "You can show some detailed information about this widget in here."
     },
     "widget3": {
-        "title": "Issues",
+        "title": "Today's Sales",
         "data": {
-            "label": "OPEN",
-            "count": 32,
+            "label": "SALES",
+            "count": "$32,000",
             "extra": {
-                "label": "Closed today",
-                "count": 0
+                "label": "Montly Sales To-Date",
+                "count": "150,000"
             }
         },
         "detail": "You can show some detailed information about this widget in here."
     },
     "widget4": {
-        "title": "Features",
+        "title": "Orders Completed Today",
         "data": {
-            "label": "PROPOSALS",
+            "label": "ORDERS",
             "count": 42,
             "extra": {
-                "label": "Implemented",
+                "label": "Out for Delivery",
                 "count": 8
             }
         },
         "detail": "You can show some detailed information about this widget in here."
     },
     "widget5": {
-        "title": "Github Issues",
+        "title": "Sales Summary",
         "ranges": {
-            "TW": "This Week",
-            "LW": "Last Week",
-            "2W": "2 Weeks Ago"
+            "TW": "This Month",
+            "LW": "Last Month",
+            "2W": "2 Months Ago"
         },
         "mainChart": [
             {
-                "key": "Closed Issues",
+                "key": "Daily Orders",
                 "values": {
                     "2W": [
                         {"x": "Mon", "y": 9},
@@ -115,7 +102,7 @@
                 }
             },
             {
-                "key": "Issues",
+                "key": "Daily Sales",
                 "values": {
                     "2W": [
                         {"x": "Mon", "y": 37},

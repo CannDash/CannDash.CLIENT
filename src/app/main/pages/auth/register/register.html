@@ -9,9 +9,13 @@
 
             <form name="registerForm" novalidate>
                 <md-input-container class="md-block" md-no-float>
-                    <input name="username" ng-model="vm.form.dispensaryName" placeholder="Dispensary Name"
+                    <!-- <input name="username" ng-model="vm.form.dispensaryName" placeholder="Dispensary Name"
                            translate translate-attr-placeholder="REGISTER.DISPENSARY_NAME"
-                           required>
+                           required> -->
+                    <select class="input-group project-dropdown" ng-model="vm.form.dispensaryName" placeholder="Dispensary Name"
+                           translate translate-attr-placeholder="REGISTER.DISPENSARY_NAME"
+                           required ng-options="option.name for option in vm.form.dispensaryName" ng-model="dispensaryListing.login">
+                            </select>
                     <div ng-messages="registerForm.username.$error" role="alert">
                         <div ng-message="required">
                             <span translate="REGISTER.ERRORS.USERNAME_REQUIRED">Dispensary name is required</span>
