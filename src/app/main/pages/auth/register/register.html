@@ -12,10 +12,10 @@
                     <!-- <input name="username" ng-model="vm.form.dispensaryName" placeholder="Dispensary Name"
                            translate translate-attr-placeholder="REGISTER.DISPENSARY_NAME"
                            required> -->
-                    <select class="input-group project-dropdown" ng-model="vm.form.dispensaryName" placeholder="Dispensary Name"
-                           translate translate-attr-placeholder="REGISTER.DISPENSARY_NAME"
-                           required ng-options="option.name for option in vm.form.dispensaryName" ng-model="dispensaryListing.login">
-                            </select>
+                    <md-select class="input-group project-dropdown" ng-model="vm.form.dispensaryName"  translate translate-attr-placeholder="REGISTER.DISPENSARY_NAME" ng-model="dispensaryListing.login" aria-label="CREATE MY ACCOUNT">
+                        <md-optgroup label="items">
+                            <md-option ng-value="item" required placeholder="Dispensary Name"  ng-options="option.name for option in vm.form.dispensaryName" ng-repeat="item in items">{{ }}</md-option>
+                    </md-select>
                     <div ng-messages="registerForm.username.$error" role="alert">
                         <div ng-message="required">
                             <span translate="REGISTER.ERRORS.USERNAME_REQUIRED">Dispensary name is required</span>

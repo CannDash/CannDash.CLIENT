@@ -38,10 +38,12 @@
       return defer.promise;
     }
 
-    function getAllCustomers() {
+    // Get patientGrid by dispensaryId
+    function getAllCustomers(id) {
       var defer = $q.defer();
 
-      $http.get(apiUrl + '/customers')
+      // Pass in dispensaryID to this APi url
+      $http.get(apiUrl + '/dispensaries/' + id + '/customers')
         .then(
           function(response) {
             defer.resolve(response.data);
@@ -55,10 +57,11 @@
       return defer.promise;
     }
 
+    // Get customerDetail by dispensaryId
     function getByCustomer(id) {
       var defer = $q.defer();
-
-      $http.get(apiUrl + '/customers/' + id)
+      // Pass in dispensaryID to this APi url
+      $http.get(apiUrl + '/dispensaries/customers' + id )
         .then(
           function(response) {
             defer.resolve(response.data);
