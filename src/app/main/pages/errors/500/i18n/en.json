@@ -1,0 +1,8 @@
+{
+    "ERROR500": {
+        "CODE": "500",
+        "MESSAGE": "Well that didn't work",
+        "SUBMESSAGE": "Internal Error. Please Try Again in a Couple Minutes",
+        "REPORT": "Report this problem"
+    }
+}

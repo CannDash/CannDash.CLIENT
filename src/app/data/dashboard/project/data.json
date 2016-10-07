@@ -1,0 +1,1081 @@
+{
+    "projects": [
+        {
+            "name": "ACME Corp. Backend App"
+        },
+        {
+            "name": "ACME Corp. Frontend App"
+        },
+        {
+            "name": "Creapond"
+        },
+        {
+            "name": "Withinpixels"
+        }
+    ],
+    "widget1": {
+        "title": "Total Patients",
+        "data": {
+            "label": "PATIENTS",
+            "count": 14,
+            "extra": {
+                "label": "Expiring This Month",
+                "count": 2
+            }
+        },
+        "detail": "You can show some detailed information about this widget in here."
+    },
+    "widget2": {
+        "title": "Drivers Working",
+        "data": {
+            "label": "DRIVERS",
+            "count": 4,
+            "extra": {
+                "label": "Drivers Off",
+                "count": 2
+            }
+        },
+        "detail": "You can show some detailed information about this widget in here."
+    },
+    "widget3": {
+        "title": "Today's Sales",
+        "data": {
+            "label": "SALES",
+            "count": "$32,000",
+            "extra": {
+                "label": "Montly Sales To-Date",
+                "count": "150,000"
+            }
+        },
+        "detail": "You can show some detailed information about this widget in here."
+    },
+    "widget4": {
+        "title": "Orders Completed Today",
+        "data": {
+            "label": "ORDERS",
+            "count": 42,
+            "extra": {
+                "label": "Out for Delivery",
+                "count": 8
+            }
+        },
+        "detail": "You can show some detailed information about this widget in here."
+    },
+    "widget5": {
+        "title": "Sales Summary",
+        "ranges": {
+            "TW": "This Month",
+            "LW": "Last Month",
+            "2W": "2 Months Ago"
+        },
+        "mainChart": [
+            {
+                "key": "Daily Orders",
+                "values": {
+                    "2W": [
+                        {"x": "Mon", "y": 9},
+                        {"x": "Tue", "y": 12},
+                        {"x": "Wed", "y": 9},
+                        {"x": "Thu", "y": 12},
+                        {"x": "Fri", "y": 7},
+                        {"x": "Sat", "y": 8},
+                        {"x": "Sun", "y": 16}
+                    ],
+                    "LW": [
+                        {"x": "Mon", "y": 12},
+                        {"x": "Tue", "y": 8},
+                        {"x": "Wed", "y": 7},
+                        {"x": "Thu", "y": 13},
+                        {"x": "Fri", "y": 7},
+                        {"x": "Sat", "y": 6},
+                        {"x": "Sun", "y": 10}
+                    ],
+                    "TW": [
+                        {"x": "Mon", "y": 11},
+                        {"x": "Tue", "y": 10},
+                        {"x": "Wed", "y": 8},
+                        {"x": "Thu", "y": 11},
+                        {"x": "Fri", "y": 8},
+                        {"x": "Sat", "y": 10},
+                        {"x": "Sun", "y": 17}
+                    ]
+                }
+            },
+            {
+                "key": "Daily Sales",
+                "values": {
+                    "2W": [
+                        {"x": "Mon", "y": 37},
+                        {"x": "Tue", "y": 32},
+                        {"x": "Wed", "y": 39},
+                        {"x": "Thu", "y": 27},
+                        {"x": "Fri", "y": 18},
+                        {"x": "Sat", "y": 24},
+                        {"x": "Sun", "y": 20}
+                    ],
+                    "LW": [
+                        {"x": "Mon", "y": 37},
+                        {"x": "Tue", "y": 24},
+                        {"x": "Wed", "y": 51},
+                        {"x": "Thu", "y": 31},
+                        {"x": "Fri", "y": 29},
+                        {"x": "Sat", "y": 17},
+                        {"x": "Sun", "y": 31}
+                    ],
+                    "TW": [
+                        {"x": "Mon", "y": 42},
+                        {"x": "Tue", "y": 28},
+                        {"x": "Wed", "y": 43},
+                        {"x": "Thu", "y": 34},
+                        {"x": "Fri", "y": 20},
+                        {"x": "Sat", "y": 25},
+                        {"x": "Sun", "y": 22}
+                    ]
+                }
+            }
+        ]
+    },
+    "widget6": {
+        "title": "Task Distribution",
+        "ranges": {
+            "TW": "This Week",
+            "LW": "Last Week",
+            "2W": "2 Weeks Ago"
+        },
+        "mainChart": [
+            {
+                "label": "Frontend",
+                "values": {
+                    "2W": 18,
+                    "LW": 19,
+                    "TW": 15
+                }
+            },
+            {
+                "label": "Backend",
+                "values": {
+                    "2W": 17,
+                    "LW": 16,
+                    "TW": 20
+                }
+            },
+            {
+                "label": "API",
+                "values": {
+                    "2W": 40,
+                    "LW": 42,
+                    "TW": 38
+                }
+            },
+            {
+                "label": "Issues",
+                "values": {
+                    "2W": 25,
+                    "LW": 23,
+                    "TW": 27
+                }
+            }
+        ],
+        "footerLeft": {
+            "title": "Tasks Added",
+            "count": {
+                "2W": 487,
+                "LW": 526,
+                "TW": 594
+            }
+        },
+        "footerRight": {
+            "title": "Tasks Completed",
+            "count": {
+                "2W": 193,
+                "LW": 260,
+                "TW": 287
+            }
+        }
+    },
+    "widget7": {
+        "title": "Schedule",
+        "ranges": {
+            "T": "Today",
+            "TM": "Tomorrow"
+        },
+        "schedule": {
+            "T": [
+                {
+                    "title": "Group Meeting",
+                    "time": "In 32 minutes",
+                    "location": "Room 1B"
+                },
+                {
+                    "title": "Coffee Break",
+                    "time": "10:30 AM"
+                },
+                {
+                    "title": "Public Beta Release",
+                    "time": "11:00 AM"
+                },
+                {
+                    "title": "Lunch",
+                    "time": "12:10 PM"
+                },
+                {
+                    "title": "Dinner with David",
+                    "time": "17:30 PM"
+                },
+                {
+                    "title": "Jane's Birthday Party",
+                    "time": "19:30 PM"
+                },
+                {
+                    "title": "Overseer's Retirement Party",
+                    "time": "21:30 PM"
+                }
+            ],
+            "TM": [
+                {
+                    "title": "Marketing Meeting",
+                    "time": "09:00 AM"
+                },
+                {
+                    "title": "Public Announcement",
+                    "time": "11:00 AM"
+                },
+                {
+                    "title": "Lunch",
+                    "time": "12:10 PM"
+                },
+                {
+                    "title": "Meeting with Beta Testers",
+                    "time": "15:00 AM"
+                },
+                {
+                    "title": "Live Stream",
+                    "time": "17:30 PM"
+                },
+                {
+                    "title": "Release Party",
+                    "time": "19:30 PM"
+                },
+                {
+                    "title": "CEO's Party",
+                    "time": "22:30 PM"
+                }
+            ]
+        }
+    },
+    "widget8": {
+        "title": "Budget Distribution",
+        "mainChart": [
+            {
+                "label": "Wireframing",
+                "value": 12
+            },
+            {
+                "label": "Design",
+                "value": 17
+            },
+            {
+                "label": "Coding",
+                "value": 28
+            },
+            {
+                "label": "Marketing",
+                "value": 25
+            },
+            {
+                "label": "Extra",
+                "value": 15
+            }
+        ]
+    },
+    "widget9": {
+        "title": "Spent",
+        "ranges": {
+            "TW": "This Week",
+            "LW": "Last Week",
+            "2W": "2 Weeks Ago"
+        },
+        "weeklySpent": {
+            "title": "WEEKLY SPENT",
+            "count": {
+                "2W": "2,682.85",
+                "LW": "1,445.34",
+                "TW": "3,630.15"
+            },
+            "chart": {
+                "label": "Weekly Spent",
+                "values": {
+                    "2W": [
+                        {"x": 0, "y": 6},
+                        {"x": 1, "y": 1},
+                        {"x": 2, "y": 3},
+                        {"x": 3, "y": 4},
+                        {"x": 4, "y": 5},
+                        {"x": 5, "y": 5},
+                        {"x": 6, "y": 2}
+                    ],
+                    "LW": [
+                        {"x": 0, "y": 4},
+                        {"x": 1, "y": 6},
+                        {"x": 2, "y": 2},
+                        {"x": 3, "y": 2},
+                        {"x": 4, "y": 1},
+                        {"x": 5, "y": 3},
+                        {"x": 6, "y": 4}
+                    ],
+                    "TW": [
+                        {"x": 0, "y": 2},
+                        {"x": 1, "y": 6},
+                        {"x": 2, "y": 5},
+                        {"x": 3, "y": 4},
+                        {"x": 4, "y": 5},
+                        {"x": 5, "y": 3},
+                        {"x": 6, "y": 6}
+                    ]
+                }
+            }
+        },
+        "totalSpent": {
+            "title": "TOTAL SPENT",
+            "count": {
+                "2W": "29,682.85",
+                "LW": "31,128.19",
+                "TW": "34,758.34"
+            },
+            "chart": {
+                "label": "Spent",
+                "values": {
+                    "2W": [
+                        {"x": 0, "y": 3},
+                        {"x": 1, "y": 2},
+                        {"x": 2, "y": 2},
+                        {"x": 3, "y": 4},
+                        {"x": 4, "y": 7},
+                        {"x": 5, "y": 7},
+                        {"x": 6, "y": 4}
+                    ],
+                    "LW": [
+                        {"x": 0, "y": 5},
+                        {"x": 1, "y": 7},
+                        {"x": 2, "y": 8},
+                        {"x": 3, "y": 8},
+                        {"x": 4, "y": 6},
+                        {"x": 5, "y": 4},
+                        {"x": 6, "y": 1}
+                    ],
+                    "TW": [
+                        {"x": 0, "y": 6},
+                        {"x": 1, "y": 3},
+                        {"x": 2, "y": 7},
+                        {"x": 3, "y": 5},
+                        {"x": 4, "y": 5},
+                        {"x": 5, "y": 4},
+                        {"x": 6, "y": 7}
+                    ]
+                }
+            }
+        },
+        "remaining": {
+            "title": "REMAINING",
+            "count": {
+                "2W": "94.317,15",
+                "LW": "92.871,81",
+                "TW": "89.241,66"
+            },
+            "chart": {
+                "label": "Remaining",
+                "values": {
+                    "2W": [
+                        {"x": 0, "y": 1},
+                        {"x": 1, "y": 4},
+                        {"x": 2, "y": 5},
+                        {"x": 3, "y": 7},
+                        {"x": 4, "y": 8},
+                        {"x": 5, "y": 2},
+                        {"x": 6, "y": 4}
+                    ],
+                    "LW": [
+                        {"x": 0, "y": 3},
+                        {"x": 1, "y": 2},
+                        {"x": 2, "y": 1},
+                        {"x": 3, "y": 4},
+                        {"x": 4, "y": 8},
+                        {"x": 5, "y": 8},
+                        {"x": 6, "y": 4}
+                    ],
+                    "TW": [
+                        {"x": 0, "y": 2},
+                        {"x": 1, "y": 4},
+                        {"x": 2, "y": 8},
+                        {"x": 3, "y": 6},
+                        {"x": 4, "y": 2},
+                        {"x": 5, "y": 5},
+                        {"x": 6, "y": 1}
+                    ]
+                }
+            }
+        },
+        "totalRemaining": {
+            "title": "TOTAL BUDGET",
+            "count": "124.000,00"
+        },
+        "totalBudget": {
+            "title": "TOTAL BUDGET",
+            "count": "124.000,00"
+        }
+    },
+    "widget10": {
+        "title": "Budget Details",
+        "table": {
+            "columns": [
+                {
+                    "title": "Budget Type"
+                },
+                {
+                    "title": "Total Budget"
+                },
+                {
+                    "title": "Spent ($)"
+                },
+                {
+                    "title": "Spent (%)"
+                },
+                {
+                    "title": "Remaining ($)"
+                },
+                {
+                    "title": "Remaining (%)"
+                }
+            ],
+            "rows": [
+                [
+                    {
+                        "value": "Wireframing",
+                        "classes": "text-boxed m-0 deep-orange-bg white-fg",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$14,880.00",
+                        "classes": "text-bold",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$14,000.00",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%94.08",
+                        "classes": "red-fg",
+                        "icon": "icon icon-trending-up s14 red-fg"
+                    },
+                    {
+                        "value": "$880.00",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%5.92",
+                        "classes": "",
+                        "icon": ""
+                    }
+                ],
+                [
+                    {
+                        "value": "Design",
+                        "classes": "text-boxed m-0 purple-bg white-fg",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$21,080.00",
+                        "classes": "text-bold",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$17,240.34",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%81.78",
+                        "classes": "red-fg",
+                        "icon": "icon icon-trending-up s14 red-fg"
+                    },
+                    {
+                        "value": "$3,839.66",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%18.22",
+                        "classes": "",
+                        "icon": ""
+                    }
+                ],
+                [
+                    {
+                        "value": "Coding",
+                        "classes": "text-boxed m-0 light-blue-bg white-fg",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$34,720.00",
+                        "classes": "text-bold",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$3,518.00",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%10.13",
+                        "classes": "green-fg",
+                        "icon": "icon icon-trending-down s14 green-fg"
+                    },
+                    {
+                        "value": "$31,202.00",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%89.87",
+                        "classes": "",
+                        "icon": ""
+                    }
+                ],
+                [
+                    {
+                        "value": "Marketing",
+                        "classes": "text-boxed m-0 pink-bg white-fg",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$34,720.00",
+                        "classes": "text-bold",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$0.00",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%0.00",
+                        "classes": "green-fg",
+                        "icon": "icon icon-minus s14 green-fg"
+                    },
+                    {
+                        "value": "$34,720.00",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%100.00",
+                        "classes": "",
+                        "icon": ""
+                    }
+                ],
+                [
+                    {
+                        "value": "Extra",
+                        "classes": "text-boxed m-0 amber-bg white-fg",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$18,600.00",
+                        "classes": "text-bold",
+                        "icon": ""
+                    },
+                    {
+                        "value": "$0.00",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%0.00",
+                        "classes": "green-fg",
+                        "icon": "icon icon-minus s14 green-fg"
+                    },
+                    {
+                        "value": "$34,720.00",
+                        "classes": "",
+                        "icon": ""
+                    },
+                    {
+                        "value": "%100.00",
+                        "classes": "",
+                        "icon": ""
+                    }
+                ]
+            ]
+        }
+    },
+    "widget11": {
+        "title": "Patients",
+        "table": {
+            "columns": [
+                {
+                    "title": ""
+                },
+                {
+                    "title": "Name"
+                },
+                {
+                    "title": "Address"
+                },
+                {
+                    "title": "City"
+                },
+                {
+                    "title": "State"
+                },
+                {
+                    "title": "Zip"
+                },
+                {
+                    "title": "E-Mail"
+                },
+                {
+                    "title": "Phone"
+                }
+            ],
+            "rows": [
+                [
+                    "james.jpg",
+                    "Jack Gilbert",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "jgilbert48@mail.com",
+                    "298 032 7774"
+                ],
+                [
+                    "katherine.jpg",
+                    "Kathy Anderson",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "kanderson49@mail.com.br",
+                    "572 311 1136"
+                ],
+                [
+                    "andrew.jpg",
+                    "Mark Turner",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "mturner4a@mail.com",
+                    "139 803 9263"
+                ],
+                [
+                    "jane.jpg",
+                    "Kathryn Martinez",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "kmartinez4b@mail.com",
+                    "467 022 5393"
+                ],
+                [
+                    "alice.jpg",
+                    "Annie Gonzales",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "agonzales4c@mail.edu",
+                    "891 619 7138"
+                ],
+                [
+                    "vincent.jpg",
+                    "Howard King",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "hking4d@mail.gov",
+                    "984 348 1409"
+                ],
+                [
+                    "joyce.jpg",
+                    "Elizabeth Dixon",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "edixon4e@mail.gov",
+                    "332 067 9063"
+                ],
+                [
+                    "danielle.jpg",
+                    "Dorothy Morris",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "dmorris4f@mail.com",
+                    "490 958 6120"
+                ],
+                [
+                    "carl.jpg",
+                    "Mark Gonzales",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "mgonzales4g@mail.com",
+                    "168 394 9935"
+                ],
+                [
+                    "profile.jpg",
+                    "Catherine Rogers",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "crogers4h@mail.com",
+                    "235 407 5373"
+                ],
+                [
+                    "garry.jpg",
+                    "Ruth Grant",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "rgrant4i@mail.pl",
+                    "288 083 8460"
+                ],
+                [
+                    "james.jpg",
+                    "Phyllis Gutierrez",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "pgutierrez4j@mail.net",
+                    "749 861 9304"
+                ],
+                [
+                    "alice.jpg",
+                    "Lillian Morris",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "lmorris4k@mail.de",
+                    "695 110 3856"
+                ],
+                [
+                    "vincent.jpg",
+                    "Jeremy Anderson",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "janderson4l@mail.uk",
+                    "384 115 1448"
+                ],
+                [
+                    "carl.jpg",
+                    "Arthur Lawrence",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "alawrence4m@mail.com",
+                    "631 599 7867"
+                ],
+                [
+                    "andrew.jpg",
+                    "David Simmons",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "dsimmons4n@mail.com",
+                    "189 681 4417"
+                ],
+                [
+                    "danielle.jpg",
+                    "Daniel Johnston",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "djohnston4o@mail.gov",
+                    "028 943 7919"
+                ],
+                [
+                    "joyce.jpg",
+                    "Ann King",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "aking4p@mail.com",
+                    "103 932 6545"
+                ],
+                [
+                    "james.jpg",
+                    "Phillip Franklin",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "pfranklin4q@mail.com",
+                    "820 986 7626"
+                ],
+                [
+                    "garry.jpg",
+                    "Gary Gonzalez",
+                    "444 Elm Ave",
+                    "San Diego",
+                    "CA",
+                    "92101",
+                    "ggonzalez4r@mail.cc",
+                    "862 046 7916"
+                ]
+            ]
+        }
+    },
+    "widget12": {
+        "title": "Drivers",
+        "table": {
+            "columns": [
+                {
+                    "title": ""
+                },
+                {
+                    "title": "Name"
+                },
+                {
+                    "title": "DL #"
+                },
+                {
+                    "title": "Make/Model"
+                },
+                {
+                    "title": "E-Mail"
+                },
+                {
+                    "title": "Phone"
+                }
+            ],
+            "rows": [
+                [
+                    "james.jpg",
+                    "Jack Gilbert",
+                    "C1354587",
+                    "Dodge Neon",
+                    "jgilbert48@mail.com",
+                    "298 032 7774"
+                ],
+                [
+                    "katherine.jpg",
+                    "Kathy Anderson",
+                    "C1354587",
+                    "Dodge Neon",
+                    "kanderson49@mail.com.br",
+                    "572 311 1136"
+                ],
+                [
+                    "andrew.jpg",
+                    "Mark Turner",
+                    "C1354587",
+                    "Dodge Neon",
+                    "mturner4a@mail.com",
+                    "139 803 9263"
+                ],
+                [
+                    "jane.jpg",
+                    "Kathryn Martinez",
+                    "C1354587",
+                    "Dodge Neon",
+                    "kmartinez4b@mail.com",
+                    "467 022 5393"
+                ],
+                [
+                    "alice.jpg",
+                    "Annie Gonzales",
+                    "C1354587",
+                    "Dodge Neon",
+                    "agonzales4c@mail.edu",
+                    "891 619 7138"
+                ],
+                [
+                    "vincent.jpg",
+                    "Howard King",
+                    "C1354587",
+                    "Dodge Neon",
+                    "hking4d@mail.gov",
+                    "984 348 1409"
+                ],
+                [
+                    "joyce.jpg",
+                    "Elizabeth Dixon",
+                    "C1354587",
+                    "Dodge Neon",
+                    "edixon4e@mail.gov",
+                    "332 067 9063"
+                ],
+                [
+                    "danielle.jpg",
+                    "Dorothy Morris",
+                    "C1354587",
+                    "Dodge Neon",
+                    "dmorris4f@mail.com",
+                    "490 958 6120"
+                ],
+                [
+                    "carl.jpg",
+                    "Mark Gonzales",
+                    "C1354587",
+                    "Dodge Neon",
+                    "mgonzales4g@mail.com",
+                    "168 394 9935"
+                ],
+                [
+                    "profile.jpg",
+                    "Catherine Rogers",
+                    "C1354587",
+                    "Dodge Neon",
+                    "crogers4h@mail.com",
+                    "235 407 5373"
+                ],
+                [
+                    "garry.jpg",
+                    "Ruth Grant",
+                    "C1354587",
+                    "Dodge Neon",
+                    "rgrant4i@mail.pl",
+                    "288 083 8460"
+                ],
+                [
+                    "james.jpg",
+                    "Phyllis Gutierrez",
+                    "C1354587",
+                    "Dodge Neon",
+                    "pgutierrez4j@mail.net",
+                    "749 861 9304"
+                ],
+                [
+                    "alice.jpg",
+                    "Lillian Morris",
+                    "C1354587",
+                    "Dodge Neon",
+                    "lmorris4k@mail.de",
+                    "695 110 3856"
+                ],
+                [
+                    "vincent.jpg",
+                    "Jeremy Anderson",
+                    "C1354587",
+                    "Dodge Neon",
+                    "janderson4l@mail.uk",
+                    "384 115 1448"
+                ],
+                [
+                    "carl.jpg",
+                    "Arthur Lawrence",
+                    "C1354587",
+                    "Dodge Neon",
+                    "alawrence4m@mail.com",
+                    "631 599 7867"
+                ],
+                [
+                    "andrew.jpg",
+                    "David Simmons",
+                    "C1354587",
+                    "Dodge Neon",
+                    "dsimmons4n@mail.com",
+                    "189 681 4417"
+                ],
+                [
+                    "danielle.jpg",
+                    "Daniel Johnston",
+                    "C1354587",
+                    "Dodge Neon",
+                    "djohnston4o@mail.gov",
+                    "028 943 7919"
+                ],
+                [
+                    "joyce.jpg",
+                    "Ann King",
+                    "C1354587",
+                    "Dodge Neon",
+                    "aking4p@mail.com",
+                    "103 932 6545"
+                ],
+                [
+                    "james.jpg",
+                    "Phillip Franklin",
+                    "C1354587",
+                    "Dodge Neon",
+                    "pfranklin4q@mail.com",
+                    "820 986 7626"
+                ],
+                [
+                    "garry.jpg",
+                    "Gary Gonzalez",
+                    "C1354587",
+                    "Dodge Neon",
+                    "ggonzalez4r@mail.cc",
+                    "862 046 7916"
+                ]
+            ]
+        }
+    },
+    "weatherWidget": {
+        "locations": {
+            "San Diego": {
+                "name": "San Diego",
+                "icon": "icon-weather-pouring",
+                "temp": {
+                    "C": "22",
+                    "F": "72"
+                },
+                "windSpeed": {
+                    "KMH": 12,
+                    "MPH": 7.5
+                },
+                "windDirection": "NW",
+                "rainProbability": "98%",
+                "next3Days": [
+                    {
+                        "name": "Sunday",
+                        "icon": "icon-weather-sunny",
+                        "temp": {
+                            "C": "21",
+                            "F": "70"
+                        }
+                    },
+                    {
+                        "name": "Sunday",
+                        "icon": "icon-weather-sunny",
+                        "temp": {
+                            "C": "19",
+                            "F": "66"
+                        }
+                    },
+                    {
+                        "name": "Tuesday",
+                        "icon": "icon-weather-partlycloudy",
+                        "temp": {
+                            "C": "24",
+                            "F": "75"
+                        }
+                    }
+                ]
+            }
+        },
+        "currentLocation": "San Diego",
+        "tempUnit": "C",
+        "speedUnit": "KMH"
+    }
+}

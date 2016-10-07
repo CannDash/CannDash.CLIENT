@@ -1,0 +1,8 @@
+{
+    "ERROR404": {
+        "CODE": "404",
+        "MESSAGE": "Page Not Found. Please Login.",
+        "SEARCH": "Search for anything",
+        "GO_BACK": "Go back to login"
+    }
+}

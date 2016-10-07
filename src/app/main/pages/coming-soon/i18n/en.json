@@ -1,0 +1,13 @@
+{
+    "COMINGSOON": {
+        "TITLE": "CannDash is a secured customer management application for California medical dispensaries.",
+        "SUBTITLE": "Register for a FREE account today and start keeping track of orders, inventory, drivers and patients:",
+        "DAYS": "days",
+        "HOURS": "hours",
+        "MINUTES": "minutes",
+        "SECONDS": "seconds",
+        "MESSAGE": "If you would like to be notified when the app is ready, you can subscribe to our e-mail list.",
+        "EMAIL_ADDRESS": "Email address",
+        "REGISTER": "REGISTER"
+    }
+}
