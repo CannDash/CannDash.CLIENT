@@ -1,10 +1,10 @@
 #profile {
 
     .header {
-        height: 320px;
-        min-height: 320px;
-        max-height: 320px;
-        background: url('/assets/images/backgrounds/march.jpg') no-repeat 0 45%;
+        height: 150px;
+        min-height: 130px;
+        max-height: 150px;
+        //background: url('/assets/images/backgrounds/march.jpg') no-repeat 0 45%;
         background-size: 100% auto;
 
         .profile-image {
@@ -94,7 +94,7 @@
         .header {
 
             .profile-image {
-                margin: 0 0 16px 0;
+                margin: 40px 0 0 0;
             }
 
             .name {

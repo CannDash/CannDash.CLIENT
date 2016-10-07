@@ -8,7 +8,7 @@
     inventoryFactory.$inject = ['$http', '$q', 'toastr', 'apiUrl'];
 
     /* @ngInject */
-    function inventoryFactory($http, $q, toastr, 'apiUrl') {
+    function inventoryFactory($http, $q, toastr, apiUrl) {
         var service = {
             addInventory: addInventory,
             getAllInventory: getAllInventory,

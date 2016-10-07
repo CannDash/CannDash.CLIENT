@@ -5,14 +5,14 @@
         .module('cannDash')
         .factory('driverFactory', driverFactory);
 
-    driverFactory.$inject = ['$http', '$q', 'toastr', apiUrl];
+    driverFactory.$inject = ['$http', '$q', 'toastr', 'apiUrl'];
 
     /* @ngInject */
     function driverFactory($http, $q, toastr, apiUrl) {
         var service = {
             addDriver: addDriver,
             getAllDrivers: getAllDrivers,
-            getByDriver: getByDriver,
+            getByDriverId: getByDriverId,
             updateDriver: updateDriver
         };
 
@@ -55,7 +55,7 @@
              return defer.promise;
         }
 
-        function getByDriver(id) {
+        function getByDriverId(id) {
              var defer = $q.defer();
 
              $http.get(apiUrl + '/drivers/' + id)

@@ -9,8 +9,8 @@
     /** @ngInject */
     function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider)
     {
-        $stateProvider.state('app.pages_profile', {
-            url      : '/pages/profile',
+        $stateProvider.state('app.pages_profile_patient', {
+            url      : '/admin/patient-details',
             views    : {
                 'content@app': {
                     templateUrl: 'app/main/pages/profile/profile.html',
@@ -18,18 +18,27 @@
                 }
             },
             resolve  : {
-                Timeline    : function (msApi)
-                {
-                    return msApi.resolve('profile.timeline@get');
-                },
                 About       : function (msApi)
                 {
                     return msApi.resolve('profile.about@get');
                 },
-                PhotosVideos: function (msApi)
-                {
-                    return msApi.resolve('profile.photosVideos@get');
+            },
+            bodyClass: 'profile'
+        });
+
+        $stateProvider.state('app.pages_profile_driver', {
+            url      : '/admin/driver-details',
+            views    : {
+                'content@app': {
+                    templateUrl: 'app/main/pages/profile/profile.html',
+                    controller : 'DriverController as vm'
                 }
+            },
+            resolve  : {
+                About       : function (msApi)
+                {
+                    return msApi.resolve('profile.about@get');
+                },
             },
             bodyClass: 'profile'
         });
@@ -38,13 +47,11 @@
         $translatePartialLoaderProvider.addPart('app/main/pages/profile');
 
         // Api
-        msApiProvider.register('profile.timeline', ['app/data/profile/timeline.json']);
         msApiProvider.register('profile.about', ['app/data/profile/about.json']);
-        msApiProvider.register('profile.photosVideos', ['app/data/profile/photos-videos.json']);
 
         // Navigation
         msNavigationServiceProvider.saveItem('pages.profile', {
-            title : 'Profile',
+            title : 'Patient Details',
             icon  : 'icon-account',
             state : 'app.pages_profile',
             weight: 6
