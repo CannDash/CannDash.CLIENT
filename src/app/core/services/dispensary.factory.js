@@ -11,7 +11,11 @@
     function dispensaryFactory($http, $q, toastr, apiUrl) {
         var service = {
             addDispensary: addDispensary,
-            getByDispensary: getByDispensary
+            getByDispensary: getByDispensary,
+            getDispensaryCustomers: getDispensaryCustomers,
+            getDispensaryDrivers: getDispensaryDrivers,
+            getDispensaryInventory: getDispensaryInventory,
+            getDispensaryOrders: getDispensaryOrders
         };
         return service;
 
@@ -46,6 +50,74 @@
                        function(error) {
                             defer.reject(error);
                             toastr.error('Error getting dispensary detail', 'Error');
+                       }
+                  );
+
+             return defer.promise;
+        }
+
+        function getByDispensaryCustomers(id) {
+             var defer = $q.defer();
+
+             $http.get(apiUrl + '/dispensaries/' + id + '/customers')
+                  .then(
+                       function(response) {
+                            defer.resolve(response.data);
+                       },
+                       function(error) {
+                            defer.reject(error);
+                            toastr.error('Error getting dispensary customers', 'Error');
+                       }
+                  );
+
+             return defer.promise;
+        }
+
+        function getByDispensaryDrivers(id) {
+             var defer = $q.defer();
+
+             $http.get(apiUrl + '/dispensaries/' + id + '/drivers')
+                  .then(
+                       function(response) {
+                            defer.resolve(response.data);
+                       },
+                       function(error) {
+                            defer.reject(error);
+                            toastr.error('Error getting dispensary drivers', 'Error');
+                       }
+                  );
+
+             return defer.promise;
+        }
+
+        function getByDispensaryInventory(id) {
+             var defer = $q.defer();
+
+             $http.get(apiUrl + '/dispensaries/' + id + '/inventories')
+                  .then(
+                       function(response) {
+                            defer.resolve(response.data);
+                       },
+                       function(error) {
+                            defer.reject(error);
+                            toastr.error('Error getting dispensory inventory', 'Error');
+                       }
+                  );
+
+             return defer.promise;
+        }
+
+        function getByDispensaryOrders(id) {
+             var defer = $q.defer();
+
+             $http.get(apiUrl + '/dispensaries/' + id + '/orders')
+                  .then(
+                       function(response) {
+                            defer.resolve(response.data);
+                       },
+                       function(error) {
+                            defer.reject(error);
+                            toastr.error('Error getting dispensory orders', 'Error');
                        }
                   );
 
