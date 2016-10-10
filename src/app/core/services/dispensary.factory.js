@@ -12,10 +12,10 @@
         var service = {
             addDispensary: addDispensary,
             getByDispensary: getByDispensary,
-            getDispensaryCustomers: getDispensaryCustomers,
-            getDispensaryDrivers: getDispensaryDrivers,
-            getDispensaryInventory: getDispensaryInventory,
-            getDispensaryOrders: getDispensaryOrders
+            getByDispensaryCustomers: getByDispensaryCustomers,
+            getByDispensaryDrivers: getByDispensaryDrivers,
+            getByDispensaryInventory: getByDispensaryInventory,
+            getByDispensaryOrders: getByDispensaryOrders
         };
         return service;
 
