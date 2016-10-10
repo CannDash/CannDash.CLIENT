@@ -505,6 +505,12 @@
                     vm.widget12 = data;
                 }
             );
+
+        dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
+                function(data) {
+                    vm.widget11 = data;
+                }
+            );
     }
 
 })();

@@ -186,7 +186,7 @@
 
                                 <div class="p-24 mb-8 border-bottom" layout="row" layout-align="space-between center">
                                     <div class="h2">Patients</div>    
-                                    <div class="text-boxed red-bg white-fg m-0">{{vm.widget11.table.rows.length}}
+                                    <div class="text-boxed red-bg white-fg m-0">{{vm.widget11.customers.length}}
                                         Patients Total
                                     </div>
                                     <md-button class="md-raised text-boxed blue-bg white-fg m-o hover" ng-click="addPatient()">Add Patient</md-button>
@@ -195,24 +195,30 @@
                                 <table class="dataTable row-border hover" datatable="ng"
                                        dt-options="vm.widget11.dtOptions">
                                     <thead>
-                                        <tr>
-                                            <th class="secondary-text"
-                                                ng-repeat="column in ::vm.widget11.table.columns">
-                                                <div class="table-header">
-                                                    <span class="column-title">{{column.title}}</span>
-                                                </div>
-                                            </th>
-                                        </tr>
+                                            <th></th>
+                                            <th>Name</th> 
+                                            <th>Address</th>
+                                            <th>City/Sate/Zip</th>   
+                                            <th>Email</th>
+                                            <th>Phone</th>
                                     </thead>
                                     <tbody>
-                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in ::vm.widget11.table.rows">
-                                            <td ng-repeat="cell in row">
-                                                <img class="avatar" ng-if="$index === 0"
+                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.widget11.customers">
+                                            <td><img class="avatar" ng-if="$index === 0"
                                                      ng-src="assets/images/avatars/{{cell}}">
-                                                <span ng-if="$index != 0" >
+                                                <span ng-if="$index != 0">
                                                     {{cell}}
                                                 </span>
                                             </td>
+                                            <td>
+                                                {{row.firstName}} {{row.lastName}}
+                                            </td>
+                                            <td>{{row.street}} {{row.unitNo}}</td>
+                                            <td> 
+                                                {{row.city}}, {{row.state}} {{row.zipCode}}
+                                            </td>
+                                            <td>{{row.email}}</td>
+                                            <td>{{row.phone}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -248,31 +254,17 @@
                                 </div>
 
                                 <table class="dataTable row-border hover" datatable="ng"
-                                       dt-options="vm.widget12.dtOptions">
+                                       dt-options="vm.widget11.dtOptions">
                                     <thead>
-                                        <tr>
-<!--                                             <th class="secondary-text" ng-repeat="column in ::vm.widget12.table.columns">
-                                                <div class="table-header">
-                                                    <span class="column-title">{{column.title}}</span>
-                                                </div>
-                                            </th> -->
                                             <th></th>
                                             <th>Name</th> 
                                             <th>DL #</th>
                                             <th>Make/Model</th>   
                                             <th>Email</th>
-                                            <th>Phone</th>                                           
-                                        </tr>
+                                            <th>Phone</th>
                                     </thead>
                                     <tbody>
-                                        <tr ui-sref="app.pages_profile_driver({driverId: vm.drivertId })" ng-repeat="row in vm.widget12.drivers">
-<!--                                             <td ng-repeat="cell in row">
-                                                <img class="avatar" ng-if="$index === 0"
-                                                     ng-src="assets/images/avatars/{{cell}}">
-                                                <span ng-if="$index != 0">
-                                                    {{cell}}
-                                                </span>
-                                            </td> -->
+                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.widget11.customers">
                                             <td><img class="avatar" ng-if="$index === 0"
                                                      ng-src="assets/images/avatars/{{cell}}">
                                                 <span ng-if="$index != 0">
@@ -283,11 +275,11 @@
                                                 {{row.firstName}} {{row.lastName}}
                                             </td>
                                             <td>{{row.driversLicense}}</td>
-                                            <td>
+                                            <td> 
                                                 {{row.vehicleMake}} {{row.vehicleModel}}
                                             </td>
                                             <td>{{row.email}}</td>
-                                            <td>{{row.phone}}</td>                                            
+                                            <td>{{row.phone}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
