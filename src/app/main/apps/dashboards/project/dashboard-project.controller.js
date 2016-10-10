@@ -7,7 +7,7 @@
         .controller('DashboardProjectController', DashboardProjectController);
 
     /** @ngInject */
-    function DashboardProjectController($scope, $interval, $mdSidenav, DashboardData, dashboardFactory)
+    function DashboardProjectController($scope, $interval, $mdSidenav, DashboardData, dashboardFactory, dispensaryFactory)
     {
         var vm = this;
         var dispensaryId = 14;
@@ -497,6 +497,18 @@
         dashboardFactory.getDashboardData(dispensaryId).then(
                 function(data) {
                    vm.widget3 = data; 
+                }
+            );
+
+        dispensaryFactory.getByDispensaryDrivers(dispensaryId).then(
+                function(data) {
+                    vm.widget12 = data;
+                }
+            );
+
+        dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
+                function(data) {
+                    vm.widget11 = data;
                 }
             );
     }
