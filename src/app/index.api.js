@@ -178,7 +178,7 @@
         var api = {};
 
         // Base Url
-        api.baseUrl = 'app/data/';
+        api.baseUrl = 'http://canndashdeveloperapi.azurewebsites.net/api/';
 
         /**
          * Here you can find all the definitions that the Demo Project requires
@@ -187,10 +187,11 @@
          * in a similar way.
          */
 
-        /*
-         api.dashboard = {
-         project  : $resource(api.baseUrl + 'dashboard/project/data.json'),
-         server   : $resource(api.baseUrl + 'dashboard/server/data.json'),
+        
+         // api.dashboard = {
+         // project  : $resource(api.baseUrl + 'dispensaries/14/drivers') 
+         // };
+        /* server   : $resource(api.baseUrl + 'dashboard/server/data.json'),
          analytics: $resource(api.baseUrl + 'dashboard/analytics/data.json')
          };
 

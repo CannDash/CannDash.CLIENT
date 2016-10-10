@@ -13,7 +13,7 @@
             addDispensary: addDispensary,
             getByDispensary: getByDispensary,
             getByDispensaryCustomers: getByDispensaryCustomers,
-            getBYDispensaryDrivers: getByDispensaryDrivers,
+            getByDispensaryDrivers: getByDispensaryDrivers,
             getByDispensaryInventory: getByDispensaryInventory,
             getByDispensaryOrders: getByDispensaryOrders
         };

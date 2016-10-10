@@ -18,6 +18,10 @@
                 }
             },
             resolve  : {
+                Timeline    : function (msApi)
+                {
+                    return msApi.resolve('profile.timeline@get');
+                },
                 About       : function (msApi)
                 {
                     return msApi.resolve('profile.about@get');

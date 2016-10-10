@@ -5,9 +5,9 @@
             <header class="md-accent-bg">
                 <div class="title">General Information</div>
             </header>
-
             <div class="content">
                 <div class="info-line">
+
                     <div class="title">Gender</div>
                     <div class="info">{{vm.about.general.gender}}</div>
                 </div>
@@ -19,9 +19,7 @@
 
                 <div class="info-line">
                     <div class="title">Age</div>
-                    <div class="info location" ng-repeat="location in vm.about.general.locations">
-                        <span></span>
-                    </div>
+                        <div class="info">{{vm.about.general.age}}</div>
                 </div>
 
                 <div class="info-line">
@@ -67,7 +65,6 @@
                         <span>{{tel}}</span>
                     </div>
                 </div>
-                <div class="info-line">
                     <div class="title">Email</div>
                     <div class="info" ng-repeat="email in vm.about.contact.emails">
                         <span>{{email}}</span>
@@ -76,4 +73,3 @@
             </div>
         </div>
     </div>
-</div>

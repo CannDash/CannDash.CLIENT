@@ -10,7 +10,7 @@
             // 'app.pages.auth.register-v2',
             'app.pages.auth.forgot-password',
             'app.pages.auth.reset-password',
-            'app.pages.auth.lock',
+            // 'app.pages.auth.lock',
             'app.pages.coming-soon',
             'app.pages.error-404',
             'app.pages.error-500',

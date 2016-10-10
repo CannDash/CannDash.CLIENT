@@ -7,7 +7,7 @@
         <div class="header md-accent-bg" layout="column" layout-align="space-between">
             <div layout="row" layout-align="space-between">
                 <div>
-                    <span class="md-display-1 font-weight-300">Admin Dashboard{{ dispensaryDetail.dispensary.name }}!</span>
+                    <span class="md-display-1 font-weight-300">Admin Dashboard{{ vm.app.dashboards_project.companyName }}!</span>
                 </div>
 
                 <div class="toolbar">
@@ -36,19 +36,19 @@
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
                                 <div class="pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
-                                    <div class="h3">{{vm.widget3.title}}</div>
+                                    <div class="h3">Today's Sales</div>
                                 </div>
 
                                 <div class="pt-8 pb-32" layout="column" layout-align="center center">
-                                    <div class="green-fg font-size-50 line-height-72">
-                                        {{vm.widget3.data.count}}
+                                    <div class="green-fg font-size-60 line-height-72">
+                                        ${{vm.widget3.currentDaySales}}
                                     </div>
-                                    <div class="h3 secondary-text font-weight-500">{{vm.widget3.data.label}}</div>
+                                    <div class="h3 secondary-text font-weight-500">SALES</div>
                                 </div>
 
                                 <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
-                                    <span class="h4 secondary-text text-truncate">{{vm.widget3.data.extra.label}}:</span>
-                                    <span class="h4 ml-8">{{vm.widget3.data.extra.count}}</span>
+                                    <span class="h4 secondary-text text-truncate">Montly Sales To-Date:</span>
+                                    <span class="h4 ml-8">${{vm.widget3.currentMonthSales}}</span>
                                 </div>
                             </ms-widget-front>
                             <!-- / Front -->
@@ -61,19 +61,19 @@
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
                                 <div class="pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
-                                    <div class="h3">{{vm.widget1.title}}</div>
+                                    <div class="h3">Total Patients</div>
                                 </div>
 
                                 <div class="pt-8 pb-32" layout="column" layout-align="center center">
                                     <div class="blue-fg font-size-72 line-height-72">
-                                        {{vm.widget1.data.count}}
+                                        {{vm.widget3.totalCustomers}}
                                     </div>
-                                    <div class="h3 secondary-text font-weight-500">{{vm.widget1.data.label}}</div>
+                                    <div class="h3 secondary-text font-weight-500">PATIENTS</div>
                                 </div>
 
                                 <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
-                                    <span class="h4 secondary-text text-truncate">{{vm.widget1.data.extra.label}}:</span>
-                                    <span class="h4 ml-8">{{vm.widget1.data.extra.count}}</span>
+                                    <span class="h4 secondary-text text-truncate">Expiring This Month:</span>
+                                    <span class="h4 ml-8">{{vm.widget3.totalExpirations}}</span>
                                 </div>
                             </ms-widget-front>
                             <!-- / Front -->
@@ -86,19 +86,19 @@
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
                                 <div class="pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
-                                    <div class="h3">{{vm.widget2.title}}</div>
+                                    <div class="h3">Drivers Working</div>
                                 </div>
 
                                 <div class="pt-8 pb-32" layout="column" layout-align="center center">
                                     <div class="red-fg font-size-72 line-height-72">
-                                        {{vm.widget2.data.count}}
+                                        {{vm.widget3.driversWorking}}
                                     </div>
-                                    <div class="h3 secondary-text font-weight-500">{{vm.widget2.data.label}}</div>
+                                    <div class="h3 secondary-text font-weight-500">DRIVERS</div>
                                 </div>
 
                                 <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
-                                    <span class="h4 secondary-text text-truncate">{{vm.widget2.data.extra.label}}:</span>
-                                    <span class="h4 ml-8">{{vm.widget2.data.extra.count}}</span>
+                                    <span class="h4 secondary-text text-truncate">Drivers Off:</span>
+                                    <span class="h4 ml-8">{{vm.widget3.driversOff}}</span>
                                 </div>
                             </ms-widget-front>
                             <!-- / Front -->
@@ -111,18 +111,18 @@
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
                                 <div class="pl-16 pr-8 pv-16 h-55" layout="row" layout-align="space-between center">
-                                    <div class="h3">{{vm.widget4.title}}</div>
+                                    <div class="h3">Orders Completed Today</div>
                                 </div>
 
                                 <div class="pt-8 pb-32" layout="column" layout-align="center center">
-                                    <div class="blue-grey-fg font-size-72 line-height-72">{{vm.widget4.data.count}}
+                                    <div class="blue-grey-fg font-size-72 line-height-72">{{vm.widget3.ordersDelivered}}
                                     </div>
-                                    <div class="h3 secondary-text font-weight-500">{{vm.widget4.data.label}}</div>
+                                    <div class="h3 secondary-text font-weight-500">ORDERS</div>
                                 </div>
 
                                 <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
-                                    <span class="h4 secondary-text text-truncate">{{vm.widget4.data.extra.label}}:</span>
-                                    <span class="h4 ml-8">{{vm.widget4.data.extra.count}}</span>
+                                    <span class="h4 secondary-text text-truncate">Out for Delivery:</span>
+                                    <span class="h4 ml-8">{{vm.widget3.ordersPendingDelivery}}</span>
                                 </div>
                             </ms-widget-front>
                             <!-- / Front -->
@@ -141,10 +141,10 @@
                             <ms-widget-front class="white-bg">
                                 <div class="ph-16 pv-8 border-bottom" layout="row" layout-align="space-between center"
                                      layout-wrap>
-                                    <div class="pv-8 h3">{{vm.widget5.title}}</div>
+                                    <div class="pv-8 h3">Sales Summary</div>
                                     
-<!-- Barh Graph Range Tab Buttons -->
-<!--                                     <div class="pv-8" layout="row" layout-align="start center" layout-align-sm="end"
+                                    <!-- Bar Graph Range Tab Buttons (maybe use later??) -->
+                                    <div class="pv-8" layout="row" layout-align="start center" layout-align-sm="end"
                                          flex-sm="100">
                                         <md-button class="ph-16"
                                                    ng-repeat="(key, range) in vm.widget5.ranges"
@@ -152,7 +152,7 @@
                                                    ng-disabled="vm.widget5.currentRange == key">
                                             {{range}}
                                         </md-button>
-                                    </div> -->
+                                    </div>
                                 </div>
 
                                 <div layout="row" layout-align="start center" layout-wrap>
@@ -175,44 +175,50 @@
                 <!-- PATIENTS -->
                 <md-tab label="Patients">
 
-                    <!-- WIDGET GROUP -->
+                    <!-- PATIENT WIDGET GROUP -->
                     <div class="widget-group" layout="row" flex="100" layout-wrap>
 
-                        <!-- WIDGET 11 -->
+                        <!-- PATIENT WIDGET 11 -->
                         <ms-widget layout="row" flex="100">
 
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
 
                                 <div class="p-24 mb-8 border-bottom" layout="row" layout-align="space-between center">
-                                    <div class="h2">{{vm.widget11.title}}</div>    
-                                    <div class="text-boxed red-bg white-fg m-0">{{vm.widget11.table.rows.length}}
+                                    <div class="h2">Patients</div>    
+                                    <div class="text-boxed red-bg white-fg m-0">{{vm.widget11.customers.length}}
                                         Patients Total
                                     </div>
-                                    <md-button class="text-boxed blue-bg white-fg m-o hover" ng-click="addPatient()">Add Patient</md-button>
+                                    <md-button class="md-raised text-boxed blue-bg white-fg m-o hover" ng-click="addPatient()">Add Patient</md-button>
                                 </div>
 
                                 <table class="dataTable row-border hover" datatable="ng"
                                        dt-options="vm.widget11.dtOptions">
                                     <thead>
-                                        <tr>
-                                            <th class="secondary-text"
-                                                ng-repeat="column in ::vm.widget11.table.columns">
-                                                <div class="table-header">
-                                                    <span class="column-title">{{column.title}}</span>
-                                                </div>
-                                            </th>
-                                        </tr>
+                                            <th></th>
+                                            <th>Name</th> 
+                                            <th>Address</th>
+                                            <th>City/Sate/Zip</th>   
+                                            <th>Email</th>
+                                            <th>Phone</th>
                                     </thead>
                                     <tbody>
-                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in ::vm.widget11.table.rows">
-                                            <td ng-repeat="cell in row">
-                                                <img class="avatar" ng-if="$index === 0"
+                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.widget11.customers">
+                                            <td><img class="avatar" ng-if="$index === 0"
                                                      ng-src="assets/images/avatars/{{cell}}">
-                                                <span ng-if="$index != 0" >
+                                                <span ng-if="$index != 0">
                                                     {{cell}}
                                                 </span>
                                             </td>
+                                            <td>
+                                                {{row.firstName}} {{row.lastName}}
+                                            </td>
+                                            <td>{{row.street}} {{row.unitNo}}</td>
+                                            <td> 
+                                                {{row.city}}, {{row.state}} {{row.zipCode}}
+                                            </td>
+                                            <td>{{row.email}}</td>
+                                            <td>{{row.phone}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -221,7 +227,7 @@
                             <!-- / Front -->
 
                         </ms-widget>
-                        <!-- / WIDGET 11 -->
+                        <!-- / PATIENT WIDGET 11 -->
 
                     </div>
                     <!-- / PATIENT WIDGET GROUP -->
@@ -230,44 +236,50 @@
                 <!-- DRIVERS -->
                 <md-tab label="Drivers">
 
-                    <!-- WIDGET GROUP -->
+                    <!-- DRIVERS WIDGET GROUP -->
                     <div class="widget-group" layout="row" flex="100" layout-wrap>
 
-                        <!-- WIDGET 12 -->
+                        <!-- DRIVERS WIDGET 12 -->
                         <ms-widget layout="row" flex="100">
 
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
 
                                 <div class="p-24 mb-8 border-bottom" layout="row" layout-align="space-between center">
-                                    <div class="h2">{{vm.widget12.title}}</div>
-                                    <div class="text-boxed red-bg white-fg m-0">{{vm.widget12.table.rows.length}}
+                                    <div class="h2">Drivers</div>
+                                    <div class="text-boxed red-bg white-fg m-0">{{vm.widget12.drivers.length}}
                                         Drivers Total
                                     </div>
-                                    <md-button class="text-boxed blue-bg white-fg m-o hover" ng-click="">Add Driver</md-button>
+                                    <md-button class="md-raised text-boxed blue-bg white-fg m-o hover" ng-click="">Add Driver</md-button>
                                 </div>
 
                                 <table class="dataTable row-border hover" datatable="ng"
-                                       dt-options="vm.widget12.dtOptions">
+                                       dt-options="vm.widget11.dtOptions">
                                     <thead>
-                                        <tr>
-                                            <th class="secondary-text"
-                                                ng-repeat="column in ::vm.widget12.table.columns">
-                                                <div class="table-header">
-                                                    <span class="column-title">{{column.title}}</span>
-                                                </div>
-                                            </th>
-                                        </tr>
+                                            <th></th>
+                                            <th>Name</th> 
+                                            <th>DL #</th>
+                                            <th>Make/Model</th>   
+                                            <th>Email</th>
+                                            <th>Phone</th>
                                     </thead>
                                     <tbody>
-                                        <tr ui-sref="app.pages_profile_driver({driverId: vm.drivertId })" ng-repeat="row in ::vm.widget12.table.rows">
-                                            <td ng-repeat="cell in row">
-                                                <img class="avatar" ng-if="$index === 0"
+                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.widget11.customers">
+                                            <td><img class="avatar" ng-if="$index === 0"
                                                      ng-src="assets/images/avatars/{{cell}}">
                                                 <span ng-if="$index != 0">
                                                     {{cell}}
                                                 </span>
                                             </td>
+                                            <td>
+                                                {{row.firstName}} {{row.lastName}}
+                                            </td>
+                                            <td>{{row.driversLicense}}</td>
+                                            <td> 
+                                                {{row.vehicleMake}} {{row.vehicleModel}}
+                                            </td>
+                                            <td>{{row.email}}</td>
+                                            <td>{{row.phone}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -276,7 +288,7 @@
                             <!-- / Front -->
 
                         </ms-widget>
-                        <!-- / WIDGET 12 -->
+                        <!-- / DRIVERS WIDGET 12 -->
 
                     </div>
                     <!-- / DRIVER WIDGET GROUP -->
@@ -306,8 +318,7 @@
                     <div class="pl-16 pr-8 pv-16" layout="row" layout-align="space-between center">
                         <div class="h3">{{vm.nowWidget.now.weekDay}},
                             {{vm.nowWidget.now.hour}}:{{vm.nowWidget.now.minute}}:{{vm.nowWidget.now.second}}
-                        </div>
-
+                        </div>  
 <!--                         <md-menu>
                             <md-button class="md-icon-button" ng-click="$mdOpenMenu()" md-menu-origin
                                        md-menu-align-target
