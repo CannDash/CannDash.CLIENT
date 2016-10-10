@@ -7,12 +7,26 @@
         .controller('ProductsController', ProductsController);
 
     /** @ngInject */
-    function ProductsController($state, Products)
+    function ProductsController($state, Products, dispensaryProductFactory, dispensaryFactory)
     {
+
         var vm = this;
+        var wProductsUrl = null;
 
         // Data
-        vm.products = Products.data;
+        //vm.products = Products.data;
+        var dispensaryId = 266;
+        dispensaryFactory.getByDispensary(dispensaryId).then(
+             function (response) {
+                  wProductsUrl = response.weedMapMenu;
+
+                  dispensaryProductFactory.getDispensaryProducts(wProductsUrl).then(
+                       function (data) {
+                            vm.products = data;
+                       }
+                  );
+             }
+        );
 
         vm.dtInstance = {};
         vm.dtOptions = {
