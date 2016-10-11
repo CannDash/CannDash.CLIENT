@@ -134,11 +134,6 @@
             weight: 3
         });
 
-        // msNavigationServiceProvider.saveItem('apps.e-commerce.dashboard', {
-        //     title: 'Dashboard',
-        //     state: 'app.e-commerce.dashboard'
-        // });
-
         msNavigationServiceProvider.saveItem('apps.e-commerce.orders', {
             title: 'Orders',
             state: 'app.e-commerce.orders'

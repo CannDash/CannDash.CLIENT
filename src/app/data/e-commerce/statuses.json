@@ -9,11 +9,6 @@
             "id": 2,
             "name": "Canceled",
             "color": "md-pink-500-bg"
-        },
-        {
-            "id": 3,
-            "name": "Refunded",
-            "color": "md-red-500-bg"
         }
     ]
 }
