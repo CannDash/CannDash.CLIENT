@@ -7,9 +7,10 @@
         .controller('OrdersController', OrdersController);
 
     /** @ngInject */
-    function OrdersController($state, Statuses, Orders)
+    function OrdersController($state, Statuses, Orders, orderFactory)
     {
         var vm = this;
+        var dispensaryId = 14;
 
         // Data
         vm.orders = Orders.data;
@@ -104,5 +105,11 @@
         {
             $state.go('app.e-commerce.orders.detail', {id: id});
         }
+
+        orderFactory.getOrdersByDispensary(dispensaryId).then(
+                function(data) {
+                    vm.dispensaryOrders = data;
+                }
+            );
     }
 })();
