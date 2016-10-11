@@ -12,7 +12,8 @@
         var service = {
             addOrder: addOrder,
             getAllOrders: getAllOrders,
-            getByOrder: getByOrder,
+            getOrdersByDispensary: getOrdersByDispensary, 
+            getByOrderId: getByOrderId,
             updateOrder: updateOrder
         };
 
@@ -55,7 +56,24 @@
              return defer.promise;
         }
 
-        function getByOrder(id) {
+        function getOrdersByDispensary(dispensaryId) {
+          var defer = $q.defer();
+
+          $http.get(apiUrl + '/dispensaries/' + dispensaryId + '/orders/')
+              .then(
+                   function(response) {
+                        defer.resolve(response.data);
+                   },
+                   function(error) {
+                        defer.reject(error);
+                        toastr.error('Error getting order detail', 'Error');
+                   }
+              );
+
+          return defer.promise;
+        }
+
+        function getByOrderId(id) {
              var defer = $q.defer();
 
              $http.get(apiUrl + '/orders/' + id)

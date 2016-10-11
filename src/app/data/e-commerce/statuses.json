@@ -2,13 +2,18 @@
     "data": [
         {
             "id": 1,
-            "name": "Delivered",
-            "color": "md-green-800-bg"
+            "name": "Pending",
+            "color": "md-yellow-500-bg"
         },
         {
             "id": 2,
-            "name": "Canceled",
+            "name": "Cancelled",
             "color": "md-pink-500-bg"
+        },
+        {
+            "id": 3,
+            "name": "Delivered",
+            "color": "md-green-800-bg"
         }
     ]
 }
