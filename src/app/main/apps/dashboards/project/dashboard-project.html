@@ -47,7 +47,7 @@
                                 </div>
 
                                 <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
-                                    <span class="h4 secondary-text text-truncate">Montly Sales To-Date:</span>
+                                    <span class="h4 secondary-text text-truncate">Monthly Sales To-Date:</span>
                                     <span class="h4 ml-8">${{vm.widget3.currentMonthSales}}</span>
                                 </div>
                             </ms-widget-front>
@@ -270,7 +270,7 @@
                                     <div class="text-boxed red-bg white-fg m-0">{{vm.widget12.drivers.length}}
                                         Drivers Total
                                     </div>
-                                    <md-button class="md-raised text-boxed blue-bg white-fg m-o hover" ng-click="">Add Driver</md-button>
+                                    <md-button class="md-raised text-boxed blue-bg white-fg m-o hover" ng-click="vm.addDriver(newDriver)">Add Driver</md-button>
                                 </div>
 
                                 <table class="dataTable row-border hover" datatable="ng"
@@ -304,7 +304,7 @@
                                             </th>
                                     </thead>
                                     <tbody>
-                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.widget11.customers">
+                                        <tr ui-sref="app.pages_profile_driver({patientId: vm.patientId })" ng-repeat="row in vm.widget11.customers">
                                             <td><img class="avatar" ng-if="$index === 0"
                                                      ng-src="assets/images/avatars/{{cell}}">
                                                 <span ng-if="$index != 0">
