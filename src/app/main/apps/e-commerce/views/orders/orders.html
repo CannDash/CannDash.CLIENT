@@ -80,9 +80,8 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody> 
-                    
-                        <tr ng-repeat="row in vm.dispensaryOrders.order">
+                    <tbody>     
+                        <tr ng-repeat="row in ::vm.dispensaryOrders.order">
                             <td>{{row.orderId}}</td>
                             <td>{{row.driverId}}</td>
                             <td>{{row.customerFirstName}} {{row.customerFirstName}} </td>

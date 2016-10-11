@@ -5,7 +5,7 @@
         .module('cannDash')
         .factory('dispensaryProductFactory', dispensaryProductFactory);
 
-    dispensaryProductFactory.$inject = ['$http', '$q', 'toastr', ];
+    dispensaryProductFactory.$inject = ['$http', '$q', 'toastr'];
 
     /* @ngInject */
     function dispensaryProductFactory($http, $q, toastr) {

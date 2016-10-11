@@ -22,11 +22,11 @@
 
                   dispensaryProductFactory.getDispensaryProducts(wProductsUrl).then(
                        function (data) {
-                            vm.products = data;
+                            vm.products = data.categories;
                        }
                   );
              }
-        );
+        ); 
 
         vm.dtInstance = {};
         vm.dtOptions = {
