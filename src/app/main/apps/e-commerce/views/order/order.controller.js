@@ -1,5 +1,4 @@
-(function ()
-{
+(function() {
     'use strict';
 
     angular
@@ -7,8 +6,7 @@
         .controller('OrderController', OrderController);
 
     /** @ngInject */
-    function OrderController($state, Statuses, uiGmapGoogleMapApi, Order)
-    {
+    function OrderController($state, $stateParams, Statuses, uiGmapGoogleMapApi, Order, orderFactory) {
         var vm = this;
 
         // Data
@@ -16,28 +14,24 @@
         vm.statuses = Statuses.data;
         vm.dtInstance = {};
         vm.dtOptions = {
-            dom       : 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
-            columnDefs: [
-                {
-                    // Target the id column
-                    targets: 0,
-                    width  : '72px'
-                },
-                {
-                    // Target the image column
-                    targets   : 1,
-                    filterable: false,
-                    sortable  : false,
-                    width     : '80px'
-                },
-                {
-                    // Target the actions column
-                    targets           : 5,
-                    responsivePriority: 1,
-                    filterable        : false,
-                    sortable          : false
-                }
-            ],
+            dom: 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+            columnDefs: [{
+                // Target the id column
+                targets: 0,
+                width: '72px'
+            }, {
+                // Target the image column
+                targets: 1,
+                filterable: false,
+                sortable: false,
+                width: '80px'
+            }, {
+                // Target the actions column
+                targets: 5,
+                responsivePriority: 1,
+                filterable: false,
+                sortable: false
+            }],
             pagingType: 'simple',
             lengthMenu: [10, 20, 30, 50, 100],
             pageLength: 20,
@@ -46,10 +40,38 @@
 
         vm.newStatus = '';
 
+        activate();
+
+        function activate() {
+            orderFactory.getByOrderId($stateParams.id).then(
+                function(orderFromServer) {
+                    vm.order = orderFromServer;
+                }
+            );
+        }
+
         // Methods
         vm.gotoOrders = gotoOrders;
         vm.gotoProductDetail = gotoProductDetail;
         vm.updateStatus = updateStatus;
+        vm.getAddressFromOrder = getAddressFromOrder;
+        vm.getStatusText = getStatusText;
+
+        function getAddressFromOrder(order) {
+            return order.street + ' ' + order.city + ' ' + order.state + ' ' + order.zipCode;
+        }
+
+
+
+        function getStatusText() {
+            if (vm.order.orderStatus === 1) {
+                    return '<span class="status {{status.color}} md-yellow-500-bg">Pending</span>';
+                } else if (vm.order.orderStatus === 2) {
+                    return '<span class="status {{status.color}} md-pink-500-bg">Cancelled</span>'; 
+                } else { 
+                    return '<span class="status {{status.color}} md-green-800-bg">Delivered</span>'; 
+                }
+            }
 
         //////////
 
@@ -59,36 +81,33 @@
         // to convert addresses into latitude and longitude
         // but because Google's policies, we are faking it for
         // the demo
-        uiGmapGoogleMapApi.then(function (maps)
-        {
-            vm.shippingAddressMap = {
-                center: {
-                    latitude : -34.397,
-                    longitude: 150.644
-                },
-                marker: {
-                    id: 'shippingAddress'
-                },
-                zoom  : 8
-            };
+        uiGmapGoogleMapApi.then(function(maps) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': getAddressFromOrder(vm.order) }, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    // console.log(results[0].geometry);
+                    vm.deliveryAddressMap = {
+                        center: {
+                            latitude: results[0].geometry.location.lat(),
+                            longitude: results[0].geometry.location.lng()
+                        },
+                        marker: {
+                            id: 'deliveryAddress'
+                        },
+                        zoom: 13
+                    };
+                } else {
+                    console.log('Geocode was not successful for the following reason: ' + status);
+                }
+            });
 
-            vm.invoiceAddressMap = {
-                center: {
-                    latitude : -34.397,
-                    longitude: 150.644
-                },
-                marker: {
-                    id: 'invoiceAddress'
-                },
-                zoom  : 8
-            };
+
         });
 
         /**
          * Initialize
          */
-        function init()
-        {
+        function init() {
             // Select the correct order from the data.
             // This is an unnecessary step for a real world app
             // because normally, you would request the product
@@ -99,10 +118,8 @@
             // it.
             var id = $state.params.id;
 
-            for ( var i = 0; i < vm.order.length; i++ )
-            {
-                if ( vm.order[i].id === parseInt(id) )
-                {
+            for (var i = 0; i < vm.order.length; i++) {
+                if (vm.order[i].id === parseInt(id)) {
                     vm.order = vm.order[i];
                     break;
                 }
@@ -113,8 +130,7 @@
         /**
          * Go to orders page
          */
-        function gotoOrders()
-        {
+        function gotoOrders() {
             $state.go('app.e-commerce.orders');
         }
 
@@ -122,9 +138,8 @@
          * Go to product page
          * @param id
          */
-        function gotoProductDetail(id)
-        {
-            $state.go('app.e-commerce.products.detail', {id: id});
+        function gotoProductDetail(id) {
+            $state.go('app.e-commerce.products.detail', { id: id });
         }
 
         /**
@@ -132,22 +147,18 @@
          *
          * @param id
          */
-        function updateStatus(id)
-        {
-            if ( !id )
-            {
+        function updateStatus(id) {
+            if (!id) {
                 return;
             }
 
-            for ( var i = 0; i < vm.statuses.length; i++ )
-            {
-                if ( vm.statuses[i].id === parseInt(id) )
-                {
+            for (var i = 0; i < vm.statuses.length; i++) {
+                if (vm.statuses[i].id === parseInt(id)) {
                     vm.order.status.unshift({
-                        id   : vm.statuses[i].id,
-                        name : vm.statuses[i].name,
+                        id: vm.statuses[i].id,
+                        name: vm.statuses[i].name,
                         color: vm.statuses[i].color,
-                        date : moment().format('YYYY/MM/DD HH:mm:ss')
+                        date: moment().format('YYYY/MM/DD HH:mm:ss')
                     });
 
                     break;
