@@ -64,15 +64,15 @@
     "widget5": {
         "title": "Sales Summary",
         "ranges": {
-            "TW": "This Month",
-            "LW": "Last Month",
-            "2W": "2 Months Ago"
+            "TW": "This Week",
+            "LW": "Last Week",
+            "W2": "2 Weeks Ago"
         },
         "mainChart": [
             {
                 "key": "Daily Orders",
                 "values": {
-                    "2W": [
+                    "W2": [
                         {"x": "Mon", "y": 9},
                         {"x": "Tue", "y": 12},
                         {"x": "Wed", "y": 9},
@@ -104,7 +104,7 @@
             {
                 "key": "Daily Sales",
                 "values": {
-                    "2W": [
+                    "W2": [
                         {"x": "Mon", "y": 37},
                         {"x": "Tue", "y": 32},
                         {"x": "Wed", "y": 39},

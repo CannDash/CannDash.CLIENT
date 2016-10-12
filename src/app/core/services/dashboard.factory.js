@@ -11,6 +11,7 @@
     function dashboardFactory($http, $q, toastr, apiUrl) {
         var service = {
             getDashboardData : getDashboardData
+
         };
         return service;
 
@@ -27,7 +28,7 @@
                     },
                     function(error) {
                         defer.reject(error);
-                        toastr.error('Getting dispensary admin dashboard from database failed', 'Error');
+                        toastr.error('Getting dispensary dashboard data from database failed', 'Error');
                     }
                 );
         
