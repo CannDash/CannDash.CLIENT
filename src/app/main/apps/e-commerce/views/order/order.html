@@ -11,13 +11,13 @@
 
             <div layout="column" layout-align="start start">
                 <div class="h2">
-                    <span translate="EC.ORDER">Order</span>
-                    <span>{{vm.order.reference}}</span>
+                    <span>Order #:</span>
+                    <span>{{vm.order.orderId}}</span>
                 </div>
 
                 <div class="subtitle secondary-text">
-                    <span translate="EC.FROM">from</span>
-                    <span>{{vm.order.customer.firstName}} {{vm.order.customer.lastName}}</span>
+                    <span>from</span>
+                    <span>{{vm.order.customerInfo.firstName}} {{vm.order.customerInfo.lastName}}</span>
                 </div>
             </div>
         </div>
@@ -28,10 +28,10 @@
     <div class="content">
 
         <md-tabs md-dynamic-height>
-
+            <!-- Order Details -->
             <md-tab>
                 <md-tab-label>
-                    <span translate="EC.ORDER_DETAILS">Order Details</span>
+                    <span>Order Details</span>
                 </md-tab-label>
 
                 <md-tab-body>
@@ -45,77 +45,60 @@
                             <table class="simple" ms-responsive-table>
                                 <thead>
                                     <tr>
-                                        <th translate="EC.NAME">Name</th>
-                                        <th translate="EC.EMAIL">Email</th>
-                                        <th translate="EC.PHONE">Phone</th>
-<!--                                         <th translate="EC.COMPANY">Company</th> -->
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
                                             <div layout="row" layout-align="start center">
-                                                <img class="avatar" ng-src="{{vm.order.customer.avatar}}">
-                                                <span class="name text-nowrap">{{vm.order.customer.firstName}} {{vm.order.customer.lastName}}</span>
+                                                <span class="name text-nowrap">{{vm.order.customerInfo.firstName}} {{vm.order.customerInfo.lastName}}</span>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="email">{{vm.order.customer.email}}</span>
+                                            <span class="email">{{vm.order.customerInfo.email}}</span>
                                         </td>
                                         <td>
-                                            <span class="phone">{{vm.order.customer.phone}}</span>
+                                            <span class="phone">{{vm.order.customerInfo.phone}}</span>
                                         </td>
-<!--                                         <td>
-                                            <span class="phone">{{vm.order.customer.company}}</span>
-                                        </td> -->
-                                        <td></td>
+                                        <td>
+                                            <span class="quantity">{{vm.order.itemQuantity}} items</span>
+                                        </td>
+                                        <td>
+                                            <span class="total">${{vm.order.totalCost}}</span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
 
-                            <md-tabs class="addresses">
-                                <md-tab>
-                                    <md-tab-label>
-                                        <span>Delivery Address</span>
-                                    </md-tab-label>
-                                    <md-tab-body>
-                                        <div class="address">{{vm.order.customer.invoiceAddress}}</div>
-                                        <ui-gmap-google-map center="vm.invoiceAddressMap.center"
-                                                            zoom="vm.invoiceAddressMap.zoom">
-                                            <ui-gmap-marker coords="vm.invoiceAddressMap.center"
-                                                            idkey="vm.invoiceAddressMap.marker.id"></ui-gmap-marker>
-                                        </ui-gmap-google-map>
-                                    </md-tab-body>
-                                </md-tab>
-                            </md-tabs>
-
-                        </div>
-                    </div>
-
+                    <!-- Order Status -->
                     <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
                         <div class="pb-16" layout="row" layout-align="start center">
                             <md-icon md-font-icon="icon-clock" class="m-0 mr-16"></md-icon>
-                            <div class="h2 secondary-text" translate="EC.ORDER_STATUS">Order Status</div>
+                            <div class="h2 secondary-text">Order Status</div>
                         </div>
                         <table class="simple" ms-responsive-table>
                             <thead>
                                 <tr>
-                                    <th translate="EC.STATUS">Status</th>
-                                    <th translate="EC.UPDATED_ON">Updated On</th>
+                                    <th>Status</th>
+                                    <th>Updated On</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="status in vm.order.status">
-                                    <td>
-                                        <span class="status {{status.color}}">{{status.name}}</span>
+                                <tr>
+                                    <td ng-bind-html="vm.getStatusText(vm.order.orderStatus)">
                                     </td>
-                                    <td>
-                                        {{status.date}}
+                                    <td class="date">
+                                        {{vm.order.orderDate | date:'h:mma on MM/dd/yy'}}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-
+                        <!-- Update Status -->
                         <div class="update-status" layout="row" layout-align="start center">
                             <md-input-container flex>
                                 <label>Select a status</label>
@@ -132,42 +115,28 @@
                             </md-button>
                         </div>
                     </div>
+                            <!-- Google Map Address Tab -->
+                            <md-tabs class="addresses">
+                                <md-tab>
+                                    <md-tab-label>
+                                        <span>Delivery Address</span>
+                                    </md-tab-label>
+                                    <md-tab-body>
+                                        <div class="address">{{vm.getAddressFromOrder(vm.order)}}</div>
+                                        <ui-gmap-google-map center="vm.deliveryAddressMap.center"
+                                                            zoom="vm.deliveryAddressMap.zoom">
+                                            <ui-gmap-marker coords="vm.deliveryAddressMap.center"
+                                                            idkey="vm.deliveryAddressMap.marker.id"></ui-gmap-marker>
+                                        </ui-gmap-google-map>
+                                    </md-tab-body>
+                                </md-tab>
+                            </md-tabs>
 
-<!--                     <div class="order-detail-form-container payments md-background-bg md-whiteframe-1dp">
-                        <div class="pb-16" layout="row" layout-align="start center">
-                            <md-icon md-font-icon="icon-cash" class="m-0 mr-16"></md-icon>
-                            <div class="h2 secondary-text" translate="EC.PAYMENT">Payment</div>
                         </div>
-                        <table class="simple" ms-responsive-table>
-                            <thead>
-                                <tr>
-                                    <th translate="EC.TRANSACTION_ID">TransactionID</th>
-                                    <th translate="EC.PAYMENT_METHOD">Payment Method</th>
-                                    <th translate="EC.AMOUNT">Amount</th>
-                                    <th translate="EC.DATE">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="payment in vm.order.payment">
-                                    <td>
-                                        {{payment.transactionId}}
-                                    </td>
-                                    <td>
-                                        {{payment.method}}
-                                    </td>
-                                    <td>
-                                        {{payment.amount}}
-                                    </td>
-                                    <td>
-                                        {{payment.date}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> -->
+                    </div>
                 </md-tab-body>
             </md-tab>
-
+<!-- 
             <md-tab>
                 <md-tab-label>
                     <span translate="EC.PRODUCTS_ORDERED">Products Ordered</span>
@@ -231,8 +200,7 @@
                         </table>
                     </div>
                 </md-tab-body>
-            </md-tab>
-
+            </md-tab> -->
         </md-tabs>
 
     </div>

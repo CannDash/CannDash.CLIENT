@@ -52,16 +52,16 @@
         {
             vm.simpleMap = {
                 center: {
-                    latitude : -34.397,
-                    longitude: 150.644
+                    latitude : 32.715,
+                    longitude: -117.16108
                 },
                 zoom  : 8
             };
 
             vm.satelliteMap = {
                 center : {
-                    latitude : -34.397,
-                    longitude: 150.644
+                    latitude : 32.715,
+                    longitude: -117.16108
                 },
                 zoom   : 8,
                 options: {
@@ -71,8 +71,8 @@
 
             vm.terrainMap = {
                 center : {
-                    latitude : -34.397,
-                    longitude: 150.644
+                    latitude : 32.715,
+                    longitude: -117.16108
                 },
                 zoom   : 8,
                 options: {
@@ -82,30 +82,30 @@
 
             vm.simpleMarkerMap = {
                 center: {
-                    latitude : -25.363882,
-                    longitude: 131.044922
+                    latitude : 32.715,
+                    longitude: -117.16108
                 },
                 zoom  : 8,
                 marker: {
                     id    : 0,
                     coords: {
-                        latitude : -25.363882,
-                        longitude: 131.044922
+                        latitude : 32.715,
+                        longitude: -117.16108
                     }
                 }
             };
 
             vm.customMarkerMap = {
                 center: {
-                    latitude : -25.363882,
-                    longitude: 131.044922
+                    latitude : 32.715,
+                    longitude: -117.16108
                 },
                 zoom  : 8,
                 marker: {
                     id     : 0,
                     coords : {
-                        latitude : -25.363882,
-                        longitude: 131.044922
+                        latitude : 32.715,
+                        longitude: -117.16108
                     },
                     options: {
                         icon: {
