@@ -38,9 +38,8 @@
 
             <!-- CONTENT -->
             <div class="content fullpage-datatable" layout="column" flex>
-
                 <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
-                       dt-options="vm.dispensaryOrders.dtOptions">
+                       dt-options="vm.dtOptions">
                     <thead>
                         <tr>
                             <th class="secondary-text">
@@ -83,13 +82,17 @@
                     <tbody>     
                         <tr ng-repeat="row in ::vm.dispensaryOrders.order">
                             <td>{{row.orderId}}</td>
-                            <td>{{row.driverId}}</td>
-                            <td>{{row.customerFirstName}} {{row.customerFirstName}} </td>
+                            <td>
+                                {{row.driverInfo.firstName || "n/a"}} {{row.driverInfo.lastName || "n/a"}}
+                            </td>
+                            <td>
+                                {{row.customerInfo.firstName || "n/a"}} {{row.customerInfo.lastName || "n/a"}} 
+                            </td>
                             <td>${{row.totalCost}}</td>
-                            <td>{{order.status}}</td>
+                            <td>{{row.orderStatus}}</td>
                             <td class="date">{{row.orderDate | date:'h:mma on MM/dd/yy'}}</td>
                             <td>
-                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoOrderDetail(order.id)" aria-label="Order details"
+                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoOrderDetail(row.orderId)" aria-label="Order details"
                                            translate translate-attr-aria-label="EC.ORDER_DETAILS">
                                     <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
                                 </md-button>
