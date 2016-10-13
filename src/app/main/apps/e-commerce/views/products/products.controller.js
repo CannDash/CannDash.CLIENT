@@ -28,6 +28,14 @@
              }
         ); 
 
+        // weedMapsFactory.getAllData().then(
+            // function(response) {
+            //         vm.products = response.data;
+            //     },
+            //     function(error) {
+            //          console.log(error);
+            //     });
+
         vm.dtInstance = {};
         vm.dtOptions = {
             dom         : 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
@@ -69,7 +77,7 @@
                     }
                 },
                 {
-                    // Target the status column
+                    // Target In Stock column
                     targets   : 6,
                     filterable: false,
                     render    : function (data, type)

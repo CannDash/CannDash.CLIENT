@@ -64,9 +64,9 @@
     "widget5": {
         "title": "Sales Summary",
         "ranges": {
-            "TW": "This Month",
-            "LW": "Last Month",
-            "2W": "2 Months Ago"
+            "TW": "This Week",
+            "LW": "Last Week",
+            "2W": "2 Weeks Ago"
         },
         "mainChart": [
             {
