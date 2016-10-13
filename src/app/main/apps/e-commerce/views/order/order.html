@@ -85,7 +85,7 @@
                             <thead>
                                 <tr>
                                     <th>Status</th>
-                                    <th>Updated On</th>
+                                    <th>Order Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,15 +102,14 @@
                         <div class="update-status" layout="row" layout-align="start center">
                             <md-input-container flex>
                                 <label>Select a status</label>
-                                <md-select ng-model="vm.newStatus">
-                                    <md-option ng-repeat="status in vm.statuses" value="{{status.id}}">
-                                        {{status.name}}
+                                <md-select ng-model="vm.order.orderStatus">
+                                    <md-option ng-repeat="status in vm.statuses" value="{{status.id}}" ng-bind-html="vm.getStatusText(status.id)">
                                     </md-option>
                                 </md-select>
                             </md-input-container>
 
-                            <md-button class="md-raised md-accent" ng-click="vm.updateStatus(vm.newStatus)"
-                                       ng-disabled="!vm.newStatus">
+                            <md-button class="md-raised md-accent" ng-click="vm.updateStatus(vm.order)"
+                                       ng-disabled="!vm.updateStatus">
                                 Update Status
                             </md-button>
                         </div>
