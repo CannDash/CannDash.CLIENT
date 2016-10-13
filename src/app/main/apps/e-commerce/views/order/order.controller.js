@@ -63,15 +63,20 @@
 
 
 
-        function getStatusText() {
-            if (vm.order.orderStatus === 1) {
+        function getStatusText(orderStatus) {
+            var status = parseInt(orderStatus);
+
+            switch(status) {
+                case 1:
                     return '<span class="status {{status.color}} md-yellow-500-bg">Pending</span>';
-                } else if (vm.order.orderStatus === 2) {
+                case 2:
                     return '<span class="status {{status.color}} md-pink-500-bg">Cancelled</span>'; 
-                } else { 
+                case 3:
                     return '<span class="status {{status.color}} md-green-800-bg">Delivered</span>'; 
-                }
+                default:
+                    break;
             }
+        }
 
         //////////
 
@@ -147,23 +152,24 @@
          *
          * @param id
          */
-        function updateStatus(id) {
-            if (!id) {
-                return;
-            }
+        function updateStatus(order) {
+            // if (!id) {
+            //     return;
+            // }
 
-            for (var i = 0; i < vm.statuses.length; i++) {
-                if (vm.statuses[i].id === parseInt(id)) {
-                    vm.order.status.unshift({
-                        id: vm.statuses[i].id,
-                        name: vm.statuses[i].name,
-                        color: vm.statuses[i].color,
-                        date: moment().format('YYYY/MM/DD HH:mm:ss')
-                    });
+            // for (var i = 0; i < vm.statuses.length; i++) {
+            //     if (vm.statuses[i].id === parseInt(id)) {
+            //         vm.order.orderStatus.unshift({
+            //             id: vm.statuses[i].id,
+            //             name: vm.statuses[i].name,
+            //             color: vm.statuses[i].color,
+            //             date: moment().format('YYYY/MM/DD HH:mm:ss')
+            //         });
+            // }
+                orderFactory.updateOrder(order);
+                
 
-                    break;
-                }
-            }
-        }
+            }  
+        // }
     }
 })();
