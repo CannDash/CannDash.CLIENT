@@ -22,7 +22,7 @@
 
             <div class="search" layout="row" layout-align="start center" flex>
                 <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
-                <input id="searchKeyword" class="search-input" type="text" placeholder="Search" flex>
+                <input id="searchKeyword" class="search-input" type="text" placeholder="Search" ng-model="searchKeyword" flex>
             </div>
         </div>
         <!-- / CONTENT HEADER -->
@@ -41,11 +41,6 @@
                        dt-options="vm.dtOptions">
                     <thead>
                         <tr>
-                            <!-- <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">ID</span>
-                                </div>
-                            </th> -->
                             <th class="secondary-text colAlign">
                                 <div class="table-header">
                                     <span class="column-title">Image</span>
@@ -63,43 +58,17 @@
                             </th>
                             <th class="secondary-text">
                                 <div class="table-header">
-                                    <span class="column-title">In Stock</span>
+                                    <span class="column-title">Price per 8th</span>
                                 </div>
                             </th>
-                            <!-- <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Price (1/4)</span>
-                                </div>
-                            </th> -->
-                            <!-- <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Quantity</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Edit</span>
-                                </div>
-                            </th> -->
                         </tr>
                     </thead>
                     <tbody ng-repeat="category in vm.products">
-                        <tr ng-repeat="product in category.items  | filter: searchKeyword ">
-                            <!-- <td>{{product.id}}</td> -->
-                            <!-- <td><img class="product-image" ng-src="{{product.image}}" width="75px" length="75px"></td> -->
+                        <tr ng-repeat="product in category.items  | filter: searchKeyword">
                             <td width="5%"><img src="{{product.thumb_image_url}}" width="75px" length="75px"></td>
                             <td width="80%">{{product.name}}</td>
                             <td width="5%">{{category.title}}</td>
                             <td width="5%">{{product.prices.eighth | currency:undefined:0}}</td>
-                            <!-- <td width="5%">{{product.prices.quarter | currency:undefined:0}}</td> -->
-                            <!-- <td>{{product.instock}}</td> -->
-                            <!-- <td>{{product.active}}</td> -->
-                            <!-- <td>
-                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoProductDetail(product.id)" aria-label="Product details"
-                                           translate translate-attr-aria-label="EC.PRODUCT_DETAILS">
-                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
-                                </md-button>
-                            </td> -->
                         </tr>
                     </tbody>
                 </table>
