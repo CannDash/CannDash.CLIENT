@@ -12,18 +12,17 @@
             <div class="white-fg" layout="column" layout-align="start start">
                 <div class="h1" layout="row" layout-align="start center">
                     <md-icon md-font-icon="icon-cart-outline"></md-icon>
-                    <span translate="EC.ORDERS">Orders</span>
+                    <span>Orders</span>
                 </div>
                 <div class="order-count secondary-text">
-                    <span translate="EC.TOTAL_ORDERS">Total orders:</span>
+                    <span>Total orders:</span>
                     <span>{{vm.dispensaryOrders.order.length}}</span>
                 </div>
             </div>
 
             <div class="search" layout="row" layout-align="start center" flex>
                 <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
-                <input id="e-commerce-products-search" class="search-input" type="text" placeholder="Search"
-                       translate translate-attr-placeholder="EC.SEARCH" flex>
+                	<input id="e-commerce-products-search" class="search-input" type="text" placeholder="Search" flex>
                 <md-button class="md-raised text-boxed green-bg white-fg m-o hover" ng-click="vm.createNewOrder()">New Order</md-button>     
             </div>
         </div>
@@ -88,8 +87,7 @@
                             <td>{{row.orderStatus}}</td>
                             <td class="date">{{row.orderDate | date:'h:mma on MM/dd/yy'}}</td>
                             <td>
-                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoOrderDetail(row.orderId)" aria-label="Order details"
-                                           translate translate-attr-aria-label="EC.ORDER_DETAILS">
+                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoOrderDetail(row.orderId)" aria-label="Order details">
                                     <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
                                 </md-button>
                             </td>

@@ -1,0 +1,160 @@
+<div id="e-commerce-order" class="page-layout simple tabbed" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <md-button class="goto-orders-button md-icon-button" aria-label="Go to orders"
+                       ui-sref="app.e-commerce.orders">
+                <md-icon md-font-icon="icon-arrow-left"></md-icon>
+            </md-button>
+
+            <div layout="column" layout-align="start start">
+                <div class="h2">
+                    <span>Order #:</span>
+                    <span>{{vm.order.orderId}}</span>
+                </div>
+
+                <div class="subtitle secondary-text">
+                    <span>from</span>
+                    <span>{{vm.order.customerInfo.firstName}} {{vm.order.customerInfo.lastName}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+        
+        <md-tabs md-dynamic-height>
+            <!-- Order Details -->
+            <md-tab>
+                <md-tab-label>
+                    <span>Order Details</span>
+                </md-tab-label>
+
+                <md-tab-body>
+					<div class="order-detail-form-container customer md-background-bg md-whiteframe-1dp">
+						<div class="pb-16" layout="row" layout-align="start center">
+						    <md-icon md-font-icon="icon-cart" class="m-0 mr-16"></md-icon>
+						    <div class="h2 secondary-text">New Order</div>
+						</div>
+						<table class="simple" ms-responsive-table> 
+							<thead> 
+								<tr> 
+	                                <th>Product</th>
+	                                <th>Qty</th>
+	                                <th>Cost</th>									
+								</tr>							
+							</thead>
+							<tbody>
+								<tr ng-repeat="product in vm.order.products"> 
+									<td>
+										<md-content md-theme="docs-dark" layout-gt-md="row" layout-padding="">
+											<md-input-container>
+												
+												<md-autocomplete flex required
+										            md-input-name="Product"
+										            md-no-cache="false"
+										            md-selected-item="product.product"
+										            md-search-text="vm.searchText"
+										            md-items="product in vm.products"
+										            md-item-text="product.name"
+										            md-require-match
+										            md-floating-label="Product Name">
+										          <md-item-template>
+											</md-input-container>
+										</md-content>
+									</td>
+									<td>										
+										<md-content md-theme="docs-dark" layout-gt-md="row" layout-padding="">
+											<md-input-container>
+												<label>Quantity</label>
+												<input required ng-model="" type="number"></input> 
+											</md-input-container>
+										</md-content></td>	
+									<td>										
+										<md-content md-theme="docs-dark" layout-gt-md="row" layout-padding="">
+											<md-input-container>
+												<label >Cost</label>
+												<input required ng-model=""></input> 
+											</md-input-container>
+										</md-content></td>								
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td>
+										<md-button class="md-raised blue-bg white-fg m-o hover" ng-click="">Add Product</md-button> 
+									</td>
+									<td></td>
+									<td ng-model="">Total Cost</td>
+								</tr>
+							</tfoot>
+						</table>
+			            <md-content md-theme="docs-dark" layout-gt-md="row" layout-padding="">
+					      <div>
+					        <md-input-container>
+					          <label >Assign Driver</label>
+					          <input required ng-model="">
+					        </md-input-container>
+					    </md-content>
+
+					    <md-content layout-padding="">
+						    <div>
+						        <form name="userForm">
+							        <div layout-gt-sm="row">
+							          <md-input-container class="md-block" flex-gt-sm="">
+							            <label>Patient Name</label>
+							            <input required ng-model="">
+							          </md-input-container>
+							        </div>
+
+							        <md-input-container class="md-block">
+							          <label>Address</label>
+							          <input required ng-model="">
+							        </md-input-container>
+
+							        <md-input-container md-no-float="" class="md-block">
+							          <input required ng-model="" placeholder="Address 2">
+							        </md-input-container>
+
+							        <div layout-gt-sm="row">
+							          <md-input-container class="md-block" flex-gt-sm="">
+							            <label>City</label>
+							            <input required ng-model="">
+							          </md-input-container>
+
+							          <md-input-container class="md-block" flex-gt-sm="">
+							            <label>State</label>
+							            <md-select ng-model="">
+							              <md-option required ng-repeat="state in states" value="{{state.abbrev}}">
+							                {{state.abbrev}}
+							              </md-option>
+							            </md-select>
+							          </md-input-container>
+
+							          <md-input-container class="md-block" flex-gt-sm="">
+							            <label>Postal Code</label>
+							            <input required name="postalCode" ng-model="user.postalCode" placeholder="12345" required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+
+							            <div ng-messages="userForm.postalCode.$error" role="alert" multiple="">
+							              <div ng-message="required" class="my-message">You must supply a postal code.</div>
+							              <div ng-message="pattern" class="my-message">Please enter a valid postal code.
+							              </div>
+							              <div ng-message="md-maxlength" class="my-message">
+							                Don't use the long version silly...we don't need to be that specific...
+							              </div>
+							            </div>
+							          </md-input-container>
+							        </div>
+
+							        <md-input-container class="md-block">
+							          <label>Delivery Notes</label>
+							          <textarea ng-model="" md-maxlength="150" rows="5" md-select-on-focus=""></textarea>
+							        </md-input-container>				
+							      </form>
+							</div>			
+					</div>
+	</div>
+</div>

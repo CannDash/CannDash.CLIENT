@@ -108,7 +108,7 @@
          */
         function createNewOrder() {
         	var order = {};
-	        $state.go('app.e-commerce.orders.edit', { order: order });   
+	        $state.go('app.e-commerce.edit', { order: order });   
 	    }     	
     }
 })();

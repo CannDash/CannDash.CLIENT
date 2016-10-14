@@ -98,12 +98,12 @@
 	                },
 	                bodyClass: 'e-commerce'
 	            })
-            .state('app.e-commerce.orders.edit', {
+            .state('app.e-commerce.edit', {
                 url      : '/edit-order',
                 params	: { order : null },
                 views    : {
                     'content@app': {
-                        templateUrl: 'app/main/apps/e-commerce/views/order/edit.order.html',
+                        templateUrl: 'app/main/apps/e-commerce/views/edit/edit.order.html',
                         controller : 'EditOrderController as vm'
                     }
                 },
