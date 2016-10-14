@@ -26,22 +26,6 @@
                 abstract: true,
                 url     : '/dispensary'
             })
-            .state('app.e-commerce.dashboard', {
-                url      : '/dashboard',
-                views    : {
-                    'content@app': {
-                        templateUrl: 'app/main/apps/e-commerce/views/dashboard/dashboard.html',
-                        controller : 'DashboardEcommerceController as vm'
-                    }
-                },
-                resolve  : {
-                    Dashboard: function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.dashboard@get');
-                    }
-                },
-                bodyClass: 'ecommerce'
-            })
             .state('app.e-commerce.products', {
                 url      : '/products',
                 views    : {
@@ -58,22 +42,22 @@
                 },
                 bodyClass: 'e-commerce'
             })
-            .state('app.e-commerce.products.detail', {
-                url      : '/:id',
-                views    : {
-                    'content@app': {
-                        templateUrl: 'app/main/apps/e-commerce/views/product/product.html',
-                        controller : 'ProductController as vm'
-                    }
-                },
-                resolve  : {
-                    Product: function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.product@get');
-                    }
-                },
-                bodyClass: 'e-commerce'
-            })
+	            .state('app.e-commerce.products.detail', {
+	                url      : '/:id',
+	                views    : {
+	                    'content@app': {
+	                        templateUrl: 'app/main/apps/e-commerce/views/product/product.html',
+	                        controller : 'ProductController as vm'
+	                    }
+	                },
+	                resolve  : {
+	                    Product: function (msApi)
+	                    {
+	                        return msApi.resolve('e-commerce.product@get');
+	                    }
+	                },
+	                bodyClass: 'e-commerce'
+	            })
             .state('app.e-commerce.orders', {
                 url      : '/orders',
                 views    : {
@@ -94,27 +78,27 @@
                 },
                 bodyClass: 'e-commerce'
             })
-            .state('app.e-commerce.orders.detail', {
-                url      : '/:id',
-                views    : {
-                    'content@app': {
-                        templateUrl: 'app/main/apps/e-commerce/views/order/order.html',
-                        controller : 'OrderController as vm'
-                    }
-                },
-                resolve  : {
-                    Order   : function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.order@get');
-                    },
-                    Statuses: function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.statuses@get');
-                    }
-                },
-                bodyClass: 'e-commerce'
-            })
-            .state('app.e-commerce.orders.edit.detail', {
+	            .state('app.e-commerce.orders.detail', {
+	                url      : '/:id',
+	                views    : {
+	                    'content@app': {
+	                        templateUrl: 'app/main/apps/e-commerce/views/order/order.html',
+	                        controller : 'OrderController as vm'
+	                    }
+	                },
+	                resolve  : {
+	                    Order   : function (msApi)
+	                    {
+	                        return msApi.resolve('e-commerce.order@get');
+	                    },
+	                    Statuses: function (msApi)
+	                    {
+	                        return msApi.resolve('e-commerce.statuses@get');
+	                    }
+	                },
+	                bodyClass: 'e-commerce'
+	            })
+            .state('app.e-commerce.orders.edit', {
                 url      : '/edit-order',
                 params	: { order : null },
                 views    : {
