@@ -68,6 +68,7 @@
         // Methods
         vm.getOrderStatus = getOrderStatus;
         vm.gotoOrderDetail = gotoOrderDetail;
+        vm.createNewOrder = createNewOrder;
 
         //////////
 
@@ -100,6 +101,14 @@
             }
         );
 
-
+        /**
+         * Go to new order detail
+         *
+         * @param id
+         */
+        function createNewOrder() {
+        	var order = {};
+	        $state.go('app.e-commerce.orders.edit.detail', { order: order });   
+	    }     	
     }
 })();

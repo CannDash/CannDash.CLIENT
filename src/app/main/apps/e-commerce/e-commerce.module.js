@@ -113,6 +113,27 @@
                     }
                 },
                 bodyClass: 'e-commerce'
+            })
+            .state('app.e-commerce.orders.edit.detail', {
+                url      : '/edit-order',
+                params	: { order : null },
+                views    : {
+                    'content@app': {
+                        templateUrl: 'app/main/apps/e-commerce/views/order/edit.order.html',
+                        controller : 'EditOrderController as vm'
+                    }
+                },
+                resolve  : {
+                    Order   : function (msApi)
+                    {
+                        return msApi.resolve('e-commerce.order@get');
+                    },
+                    Statuses: function (msApi)
+                    {
+                        return msApi.resolve('e-commerce.statuses@get');
+                    }
+                },
+                bodyClass: 'e-commerce'
             });
 
         // Translation
