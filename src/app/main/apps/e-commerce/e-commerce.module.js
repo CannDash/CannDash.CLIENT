@@ -78,27 +78,27 @@
                 },
                 bodyClass: 'e-commerce'
             })
-	            .state('app.e-commerce.orders.detail', {
-	                url      : '/:id',
-	                views    : {
-	                    'content@app': {
-	                        templateUrl: 'app/main/apps/e-commerce/views/order/order.html',
-	                        controller : 'OrderController as vm'
-	                    }
-	                },
-	                resolve  : {
-	                    Order   : function (msApi)
-	                    {
-	                        return msApi.resolve('e-commerce.order@get');
-	                    },
-	                    Statuses: function (msApi)
-	                    {
-	                        return msApi.resolve('e-commerce.statuses@get');
-	                    }
-	                },
-	                bodyClass: 'e-commerce'
-	            })
-            .state('app.e-commerce.edit', {
+            .state('app.e-commerce.order', {
+                url      : '/order/:id',
+                views    : {
+                    'content@app': {
+                        templateUrl: 'app/main/apps/e-commerce/views/order/order.html',
+                        controller : 'OrderController as vm'
+                    }
+                },
+                resolve  : {
+                    Order   : function (msApi)
+                    {
+                        return msApi.resolve('e-commerce.order@get');
+                    },
+                    Statuses: function (msApi)
+                    {
+                        return msApi.resolve('e-commerce.statuses@get');
+                    }
+                },
+                bodyClass: 'e-commerce'
+            })
+            .state('app.e-commerce.edit-order', {
                 url      : '/edit-order',
                 params	: { order : null },
                 views    : {

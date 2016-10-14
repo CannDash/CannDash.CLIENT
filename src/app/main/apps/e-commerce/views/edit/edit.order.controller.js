@@ -5,18 +5,20 @@
         .module('app.e-commerce')
         .controller('EditOrderController', EditOrderController);
 
-    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory'];
+    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory', 'dispensaryProductFactory'];
 
     /* @ngInject */
-    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory) {
+    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory) {
         var vm = this;
+        var wProductsUrl = null;
+
         vm.order = {};
         vm.order.products = [];
-
+        vm.categories = [];
 
         activate();
 		addProduct();
-		
+
         ////////////////
 
         function activate() {
@@ -27,7 +29,7 @@
 
 	                  dispensaryProductFactory.getDispensaryProducts(wProductsUrl).then(
 	                       function (data) {
-	                            vm.products = data.categories;
+	                            vm.categories = data.categories;
 	                       }
 	                  );
 	             }
