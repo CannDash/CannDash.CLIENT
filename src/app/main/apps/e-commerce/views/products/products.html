@@ -12,19 +12,17 @@
             <div class="white-fg" layout="column" layout-align="start start">
                 <div class="h1" layout="row" layout-align="start center">
                     <md-icon md-font-icon="icon-cube-outline"></md-icon>
-                    <span translate="EC.PRODUCTS">Products</span>
+                    <span>Products</span>
                 </div>
                 <div class="product-count secondary-text">
-                    <span translate="EC.TOTAL_PRODUCTS">Total products:</span>
+                    <span>Total products:</span>
                     <span>{{vm.products.length}}</span>
                 </div>
             </div>
 
             <div class="search" layout="row" layout-align="start center" flex>
                 <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
-                <input id="e-commerce-products-search" class="search-input" type="text" placeholder="Search"
-                       translate translate-attr-placeholder="EC.SEARCH" flex>
-            <md-button class="md-raised text-boxed green-bg white-fg m-o hover" ng-click="">New Product</md-button>
+                <input id="searchKeyword" class="search-input" type="text" placeholder="Search" ng-model="searchKeyword" flex>
             </div>
         </div>
         <!-- / CONTENT HEADER -->
@@ -39,21 +37,16 @@
             <!-- CONTENT -->
             <div class="content fullpage-datatable" layout="column" flex>
 
-                <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                <table class="dataTable row-border hover" dt-instance="vm.dtInstance"
                        dt-options="vm.dtOptions">
                     <thead>
                         <tr>
-                            <th class="secondary-text">
+                            <th class="secondary-text colAlign">
                                 <div class="table-header">
-                                    <span class="column-title">ID</span>
+                                    <span class="column-title">Image</span>
                                 </div>
                             </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title"></span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
+                            <th class="secondary-text colAlign">
                                 <div class="table-header">
                                     <span class="column-title">Name</span>
                                 </div>
@@ -65,41 +58,17 @@
                             </th>
                             <th class="secondary-text">
                                 <div class="table-header">
-                                    <span class="column-title">Price</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Quantity</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">In Stock</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Edit</span>
+                                    <span class="column-title">Price per 8th</span>
                                 </div>
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr ng-repeat="product in ::vm.products">
-                            <td>{{product.id}}</td>
-                            <td><img class="product-image" ng-src="{{product.image}}"></td>
-                            <td>{{product.name}}</td>
-                            <td>{{product.category}}</td>
-                            <td>{{product.price}}</td>
-                            <td>{{product.quantity}}</td>
-                            <td>{{product.active}}</td>
-                            <td>
-                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoProductDetail(product.id)" aria-label="Product details"
-                                           translate translate-attr-aria-label="EC.PRODUCT_DETAILS">
-                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
-                                </md-button>
-                            </td>
+                    <tbody ng-repeat="category in vm.products">
+                        <tr ng-repeat="product in category.items  | filter: searchKeyword">
+                            <td width="5%"><img src="{{product.thumb_image_url}}" width="75px" length="75px"></td>
+                            <td width="80%">{{product.name}}</td>
+                            <td width="5%">{{category.title}}</td>
+                            <td width="5%">{{product.prices.eighth | currency:undefined:0}}</td>
                         </tr>
                     </tbody>
                 </table>

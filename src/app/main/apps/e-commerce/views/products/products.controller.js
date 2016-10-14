@@ -69,7 +69,7 @@
                     }
                 },
                 {
-                    // Target the status column
+                    // Target In Stock column
                     targets   : 6,
                     filterable: false,
                     render    : function (data, type)
