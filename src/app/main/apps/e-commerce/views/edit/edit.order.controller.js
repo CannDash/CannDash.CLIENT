@@ -16,8 +16,11 @@
         vm.order.products = [];
         vm.categories = [];
 
+        vm.addProduct = addProduct;
+
         activate();
 		addProduct();
+		createOrder();
 
         ////////////////
 
@@ -39,7 +42,7 @@
         }
 
        	function createOrder() {
-       		if (vm.order.id == undefined || null) {
+       		if (vm.order.id === undefined || null) {
 		        orderFactory.addOrder(vm.order).then(
 		            function(id) {
 		                vm.newOrder = id;
@@ -49,7 +52,11 @@
 	    }
 
 	    function addProduct() {
-	    	vm.order.products.push({ product : undefined, qty : 0 });
+	    	vm.order.products.push({ category : undefined, product : undefined, qty : 0 });
 	    }
+
+	    vm.onCategorySelected = function(product) {
+			product.products = product.category.items;
+	    };
     }
 })();

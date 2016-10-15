@@ -7734,7 +7734,7 @@ md-tooltip {
 .layout-padding > .flex,
 .layout-padding > .flex-gt-sm,
 .layout-padding > .flex-md {
-  padding: 8px; }
+  padding: 0px; }
 
 .layout-padding-gt-md > *,
 .layout-padding-lg > *,

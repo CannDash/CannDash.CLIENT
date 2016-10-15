@@ -24,7 +24,7 @@
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content">
+    <div class="content" layout-phone="column" flex>
         
         <md-tabs md-dynamic-height>
             <!-- Order Details -->
@@ -39,70 +39,9 @@
 						    <md-icon md-font-icon="icon-cart" class="m-0 mr-16"></md-icon>
 						    <div class="h2 secondary-text">New Order</div>
 						</div>
-						<table class="simple" ms-responsive-table> 
-							<thead> 
-								<tr> 
-									<th>Category</th>
-	                                <th>Product Name</th>
-	                                <th>Qty</th>
-	                                <th>Cost</th>									
-								</tr>							
-							</thead>
-							<tbody>
-								<tr ng-repeat="product in vm.order.products"> 
-									<td>										
-										<md-select ng-model="product.category" layout-gt-md="row" layout-padding="" aria-label="Select">
-											<md-options ng-repeat="category.title as category in vm.categories" users">
-												<label>Category</label>
-												<input required type="text"></input> 
-											</md-options>
-										</<md-select>	
-									</td>	
-									<td>
-										<md-content layout-gt-md="row" layout-padding="">
-											<md-input-container>												
-												<md-autocomplete flex required
-										            md-input-name="Product"
-										            md-no-cache="false"
-										            md-selected-item="product.product"
-										            md-search-text="vm.product.name"
-										            md-items="product in vm.products"
-										            md-item-text="product.category.items.name"
-										            md-require-match
-										            md-floating-label="Product Name">
-										          <md-item-template>
-											</md-input-container>
-										</md-content>
-									</td>
-									<td>										
-										<md-content layout-gt-md="row" layout-padding="">
-											<md-input-container>
-												<label>Quantity</label>
-												<input required type="number"></input> 
-											</md-input-container>
-										</md-content> 
-									</td>	
-									<td>										
-										<md-content layout-gt-md="row" layout-padding="">
-											<md-input-container>
-												<label >Cost</label>
-												<input required ></input> 
-											</md-input-container>
-										</md-content> 
-									</td>								
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<td>
-										<md-button class="md-raised blue-bg white-fg m-o hover" ng-click="">Add Product</md-button> 
-									</td>
-									<td></td>
-									<td ng-model="">Total Cost</td>
-								</tr>
-							</tfoot>
-						</table>
-			            <md-content layout-gt-md="row" layout-padding="">
+
+						<!-- Driver -->
+			            <md-content layout-gt-md="row">
 					      <div>
 					        <md-input-container>
 					          <label >Assign Driver</label>
@@ -110,8 +49,9 @@
 					        </md-input-container>
 					    </md-content>
 
+						<!-- Patient -->
 					    <md-content layout-padding="">
-						    <div>
+						    <div table-responsive-vertical>
 						        <form name="userForm">
 							        <div layout-gt-sm="row">
 							          <md-input-container class="md-block" flex-gt-sm="">
@@ -130,31 +70,34 @@
 							        </md-input-container>
 
 							        <div layout-gt-sm="row">
-							          <md-input-container class="md-block" flex-gt-sm="">
-							            <label>City</label>
-							            <input required ng-model="">
-							          </md-input-container>
+								      <md-input-container class="md-block" flex-gt-sm="">
+								        <label>City</label>
+								        <input required ng-model="">
+								      </md-input-container>
+
+								      <md-input-container class="md-block" flex-gt-sm="">
+								        <label>State</label>
+								        <md-select required ng-model="">
+								          <md-option ng-repeat="state in states" value="CA">
+								            CA
+								          </md-option>
+								        </md-select>
+								      </md-input-container>
 
 							          <md-input-container class="md-block" flex-gt-sm="">
-							            <label>State</label>
-							            <md-select ng-model="">
-							              <md-option required ng-repeat="state in states" value="{{state.abbrev}}">
-							                {{state.abbrev}}
-							              </md-option>
-							            </md-select>
-							          </md-input-container>
-
-							          <md-input-container class="md-block" flex-gt-sm="">
-							            <label>Postal Code</label>
-							            <input required name="postalCode" ng-model="user.postalCode" placeholder="12345" required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+							            <label>Zip Code</label>
+							            <input required name="zipCode" ng-model="user.postalCode" required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
 
 							            <div ng-messages="userForm.postalCode.$error" role="alert" multiple="">
-							              <div ng-message="required" class="my-message">You must supply a postal code.</div>
-							              <div ng-message="pattern" class="my-message">Please enter a valid postal code.
-							              </div>
-							              <div ng-message="md-maxlength" class="my-message">
-							                Don't use the long version silly...we don't need to be that specific...
-							              </div>
+											<div ng-message="required" class="my-message">
+												You must supply a postal code.
+											</div>
+											<div ng-message="pattern" class="my-message">
+												Please enter a valid postal code.
+											</div>
+											<div ng-message="md-maxlength" class="my-message">
+												Don't use the long version.
+											</div>
 							            </div>
 							          </md-input-container>
 							        </div>
@@ -162,9 +105,90 @@
 							        <md-input-container class="md-block">
 							          <label>Delivery Notes</label>
 							          <textarea ng-model="" md-maxlength="150" rows="5" md-select-on-focus=""></textarea>
-							        </md-input-container>				
-							      </form>
-							</div>			
+							        </md-input-container>			
+							    </form>
+
+								<!-- Product table -->
+								<table class="dataTable order-product-table" ms-responsive-table> 
+									<thead> 
+										<tr> 
+											<th width="5%">Category</th>
+			                                <th width="20%">Product</th>
+			                                <th width="20%">Qty</th>
+			                                <th width="20%">Cost</th>									
+										</tr>							
+									</thead>
+									<tbody>
+										<tr ng-repeat="product in vm.order.products"> 
+											<td>										
+												<md-select ng-model="product.category" layout-gt-md="row" layout-padding="" aria-label="Select" ng-change="vm.onCategorySelected(product)">
+													<md-option ng-repeat="category in vm.categories"
+														ng-value="{{category}}">
+														{{category.title}}
+													</md-option>
+												</md-select>
+											</td>	
+											<td>
+												<md-content layout-gt-md="row" layout-padding="">
+													<md-input-container>												
+															<md-autocomplete flex required
+													            md-input-name="Product"
+													            md-no-cache="false"
+													            md-input-minlength="1"
+													            md-selected-item="product.product"
+													            md-search-text=" vm.searchText"
+													            md-items="prod in product.products"
+													            md-item-text="prod.name"
+													            md-require-match
+													            md-floating-label="Product">
+													            	<span md-highlight-text="searchText">{{prod.name}}</span>
+													        </md-autocomplete>												   
+													</md-input-container>
+												</md-content>
+											</td>
+											<td>										
+												<md-content layout-gt-md="row" layout-padding="">
+													<md-input-container>
+														<label>Qty</label>
+														<input aria-label="amount" required type="number" step="1"><span id="currency-custom" flex>{{amount | currency:"USD$":0}}</span></input> 
+													</md-input-container>
+												</md-content> 
+											</td>	
+											<td>										
+												<md-content layout-gt-md="row" layout-padding="">
+													<md-input-container>
+														<label>Cost</label>
+														<input required ></input> 
+													</md-input-container>
+												</md-content> 
+											</td>								
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td>
+												<!-- Add product button button -->
+												<md-button class="md-raised blue-bg white-fg m-o hover" ng-click="vm.addProduct()" layout-align="end center">
+													Add Product
+												</md-button> 
+											</td>
+											<td></td>
+											<td></td>
+											<td ng-model="">Total Cost</td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+
+							<!-- Submit button -->
+							<md-input-container layout="row" layout-align="end center">
+					        	<md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" ng-click="">
+					        		Submit
+					        	</md-button>
+					        </md-input-container>	
+
+						</md-content>		
 					</div>
+				
 	</div>
 </div>
