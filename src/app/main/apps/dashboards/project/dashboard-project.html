@@ -47,13 +47,8 @@
                                 </div>
 
                                 <div class="p-16 grey-50-bg border-top" layout="row" layout-align="start center">
-<<<<<<< HEAD
-                                    <span class="h4 secondary-text text-truncate">Montly Sales:</span>
-                                    <span class="h4 ml-8">${{vm.widget3.currentMonthSales}}</span>
-=======
                                     <span class="h4 secondary-text text-truncate">Montly Sales To-Date:</span>
                                     <span class="h4 ml-8">${{vm.dashData.currentMonthSales}}</span>
->>>>>>> 0f6275a1472924b0b65ca6d768a8cf178438a411
                                 </div>
                             </ms-widget-front>
                             <!-- / Front -->
@@ -228,7 +223,7 @@
                                             </th>
                                     </thead>
                                     <tbody>
-                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.customerData.customers">
+                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.driverData.drivers">
                                             <td>
                                                 <div class="avatar-wrapper">
                                                      <img src="assets/images/avatars/profile.jpg" class="avatar"/>

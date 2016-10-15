@@ -17,7 +17,8 @@
         vm.order = {};
         vm.order.products = [];
         vm.categories = [];
-        
+
+
         // Methods
         vm.addProduct = addProduct;
         // vm.onCategorySelected = onCategorySelected;
@@ -46,6 +47,11 @@
 	             }
 	        ); 
 
+            dispensaryFactory.getByDispensaryDrivers(dispensaryId).then(
+	            function(data) {
+	                vm.driverData = data;
+	            }
+	        );
 
         }
 
@@ -86,7 +92,13 @@
 	    	// Taking the first perameter in the vm.order and in each iteration calling function(p) to 
 			// return the total cost for the product...iterating through the products array and 
 			// keeping a running total of all the calls in the products array.
-	    	return _.sumBy(vm.order.products, function(p) {return p.quantity * p.price.price})	//jshint ignore:line
+			// Check to see if quanity or unit has not been filled if so return zero to that product row
+			// otherwise return the quantity multiplied by the price of that unit.
+	    	 	return _.sumBy(vm.order.products,	//jshint ignore:line
+							function(p) {
+								if (!p.quantity || !p.price) return 0;	//jshint ignore:line
+									return p.quantity * p.price.price 	//jshint ignore:line
+							})	//jshint ignore:line
 	    };
     }
 })();
