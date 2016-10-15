@@ -136,7 +136,7 @@
 													<md-autocomplete flex required
 														md-input-name="Product" + $index
 														md-no-cache="false"
-														md-min-length="3"
+														md-min-length="1"
 														md-selected-item="productRow.product"
 														md-search-text="productRow.searchText"
 														md-items="product in vm.getProductMatches(productRow)"
@@ -187,10 +187,7 @@
 											<td></td>
 											<td></td>
 											<td>
-												<!-- Taking the first perameter in the vm.order and in each iteration calling function(p) to 
-												// return the total cost for the product...iterating through the products array and 
-												// keeping a running total of all the calls in the products array. -->
-												{{ vm.calculateTotal | currency:"USD$":0}}
+												{{ vm.calculateTotal() | currency:"USD$":0}}
 											</td>
 										</tr>
 									</tfoot>

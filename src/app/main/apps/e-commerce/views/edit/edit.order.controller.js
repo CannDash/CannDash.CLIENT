@@ -11,13 +11,21 @@
     function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory) {
         var vm = this;
         var wProductsUrl = null;
+
+        // Data
         vm.price = [];
         vm.order = {};
         vm.order.products = [];
         vm.categories = [];
-
+        
+        // Methods
         vm.addProduct = addProduct;
+        // vm.onCategorySelected = onCategorySelected;
+        // vm.getProductMatches = getProductMatches;
+        // vm.onProductSelected = onProductSelected;
+        // vm.calculateTotal = calculateTotal;
 
+        // Initialize
         activate();
 		addProduct();
 		createOrder();
@@ -61,21 +69,24 @@
 
 	    vm.getProductMatches = function(productRow) {
 			var searchTextLower = productRow.searchText.toLowerCase();
-			return _.filter(productRow.products,
-				function (p) {return p.name.toLowerCase().indexOf(searchTextLower) >= 0})		
+			return _.filter(productRow.products,	//jshint ignore:line
+				function (p) {return p.name.toLowerCase().indexOf(searchTextLower) >= 0}) 	//jshint ignore:line	
 		};
 
 		vm.onProductSelected = function(productRow) {
 			productRow.prices = [];
-			const product = productRow.product;
-			const prices = product.prices;
+			const product = productRow.product;	//jshint ignore:line
+			const prices = product.prices;	//jshint ignore:line
 			
-			for (var unit in prices)
-				productRow.prices.push({unit: unit, price: prices[unit]})
+			for (var unit in prices)	//jshint ignore:line
+				productRow.prices.push({unit: unit, price: prices[unit]})	//jshint ignore:line
 	    };
 
 	    vm.calculateTotal = function() {
-	    	return _.sumBy(vm.order.products, function(p) {return p.quantity * p.price.price})
+	    	// Taking the first perameter in the vm.order and in each iteration calling function(p) to 
+			// return the total cost for the product...iterating through the products array and 
+			// keeping a running total of all the calls in the products array.
+	    	return _.sumBy(vm.order.products, function(p) {return p.quantity * p.price.price})	//jshint ignore:line
 	    };
     }
 })();
