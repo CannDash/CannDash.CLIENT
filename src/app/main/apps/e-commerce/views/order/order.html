@@ -46,7 +46,6 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Email</th>
                                         <th>Phone</th>
                                         <th>Quantity</th>
                                         <th>Total</th>
@@ -58,9 +57,6 @@
                                             <div layout="row" layout-align="start center">
                                                 <span class="name text-nowrap">{{vm.order.customerInfo.firstName}} {{vm.order.customerInfo.lastName}}</span>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <span class="email">{{vm.order.customerInfo.email}}</span>
                                         </td>
                                         <td>
                                             <span class="phone">{{vm.order.customerInfo.phone}}</span>
@@ -79,7 +75,7 @@
                     <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
                         <div class="pb-16" layout="row" layout-align="start center">
                             <md-icon md-font-icon="icon-clock" class="m-0 mr-16"></md-icon>
-                            <div class="h2 secondary-text">Order Status</div>
+                            <div class="h2 secondary-text">Delivery Status</div>
                         </div>
                         <table class="simple" ms-responsive-table>
                             <thead>

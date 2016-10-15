@@ -45,7 +45,7 @@
 					      <div>
 					        <md-input-container>
 					          <label >Assign Driver</label>
-					          <input required ng-model="">
+					          <input required >
 					        </md-input-container>
 					    </md-content>
 
@@ -56,28 +56,28 @@
 							        <div layout-gt-sm="row">
 							          <md-input-container class="md-block" flex-gt-sm="">
 							            <label>Patient Name</label>
-							            <input required ng-model="">
+							            <input required >
 							          </md-input-container>
 							        </div>
 
 							        <md-input-container class="md-block">
 							          <label>Address</label>
-							          <input required ng-model="">
+							          <input required >
 							        </md-input-container>
 
 							        <md-input-container md-no-float="" class="md-block">
-							          <input required ng-model="" placeholder="Address 2">
+							          <input required  placeholder="Address 2">
 							        </md-input-container>
 
 							        <div layout-gt-sm="row">
 								      <md-input-container class="md-block" flex-gt-sm="">
 								        <label>City</label>
-								        <input required ng-model="">
+								        <input required >
 								      </md-input-container>
 
 								      <md-input-container class="md-block" flex-gt-sm="">
 								        <label>State</label>
-								        <md-select required ng-model="">
+								        <md-select required ng-model="vm.order.state" >
 								          <md-option ng-repeat="state in states" value="CA">
 								            CA
 								          </md-option>
@@ -104,7 +104,8 @@
 
 							        <md-input-container class="md-block">
 							          <label>Delivery Notes</label>
-							          <textarea ng-model="" md-maxlength="150" rows="5" md-select-on-focus=""></textarea>
+							          <textarea  md-maxlength="150" rows="5" md-select-on-focus=""
+									  	ng-model="vm.order.deliveryNodes"></textarea>
 							        </md-input-container>			
 							    </form>
 
@@ -115,13 +116,15 @@
 											<th width="5%">Category</th>
 			                                <th width="20%">Product</th>
 			                                <th width="20%">Qty</th>
+			                                <th width="20%">Units</th>			               
 			                                <th width="20%">Cost</th>									
 										</tr>							
 									</thead>
 									<tbody>
-										<tr ng-repeat="product in vm.order.products"> 
+										<tr ng-repeat="productRow in vm.order.products">
 											<td>										
-												<md-select ng-model="product.category" layout-gt-md="row" layout-padding="" aria-label="Select" ng-change="vm.onCategorySelected(product)">
+												<md-select ng-model="productRow.category" layout-gt-md="row" layout-padding="" aria-label="Select"
+													ng-change="vm.onCategorySelected(productRow)">
 													<md-option ng-repeat="category in vm.categories"
 														ng-value="{{category}}">
 														{{category.title}}
@@ -130,20 +133,21 @@
 											</td>	
 											<td>
 												<md-content layout-gt-md="row" layout-padding="">
-													<md-input-container>												
-															<md-autocomplete flex required
-													            md-input-name="Product"
-													            md-no-cache="false"
-													            md-input-minlength="1"
-													            md-selected-item="product.product"
-													            md-search-text=" vm.searchText"
-													            md-items="prod in product.products"
-													            md-item-text="prod.name"
-													            md-require-match
-													            md-floating-label="Product">
-													            	<span md-highlight-text="searchText">{{prod.name}}</span>
-													        </md-autocomplete>												   
-													</md-input-container>
+													<md-autocomplete flex required
+														md-input-name="Product" + $index
+														md-no-cache="false"
+														md-min-length="3"
+														md-selected-item="productRow.product"
+														md-search-text="productRow.searchText"
+														md-items="product in vm.getProductMatches(productRow)"
+														md-item-text="product.name"
+														md-require-match
+														md-selected-item-change="vm.onProductSelected(productRow)"
+														md-floating-label="Product">
+														<span md-highlight-text="productRow.searchText">
+															{{product.name}}
+														</span>
+													</md-autocomplete>
 												</md-content>
 											</td>
 											<td>										
@@ -155,10 +159,18 @@
 												</md-content> 
 											</td>	
 											<td>										
+												<md-select ng-model="productRow.price" layout-gt-md="row" layout-padding="" aria-label="Select">
+													<md-option ng-repeat="price in productRow.prices"
+														ng-value="{{price}}">
+														{{price.unit}}: {{price.price | currency}}
+													</md-option>
+												</md-select>
+											</td>	
+											<td>										
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
 														<label>Cost</label>
-														<input required ></input> 
+														<input required >{{  }}</input> 
 													</md-input-container>
 												</md-content> 
 											</td>								
@@ -174,7 +186,7 @@
 											</td>
 											<td></td>
 											<td></td>
-											<td ng-model="">Total Cost</td>
+											<td >Total Cost</td>
 										</tr>
 									</tfoot>
 								</table>

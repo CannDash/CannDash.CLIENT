@@ -11,7 +11,7 @@
     function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory) {
         var vm = this;
         var wProductsUrl = null;
-
+        vm.price = [];
         vm.order = {};
         vm.order.products = [];
         vm.categories = [];
@@ -57,6 +57,21 @@
 
 	    vm.onCategorySelected = function(product) {
 			product.products = product.category.items;
+	    };
+
+	    vm.getProductMatches = function(productRow) {
+			var searchTextLower = productRow.searchText.toLowerCase();
+			return _.filter(productRow.products,
+				function (p) {return p.name.toLowerCase().indexOf(searchTextLower) >= 0})		
+		};
+
+		vm.onProductSelected = function(productRow) {
+			productRow.prices = [];
+			const product = productRow.product;
+			const prices = product.prices;
+			
+			for (unit in prices)
+				productRow.prices.push({unit: unit, price: prices[unit]})
 	    };
     }
 })();
