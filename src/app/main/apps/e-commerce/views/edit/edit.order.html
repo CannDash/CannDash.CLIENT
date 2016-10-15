@@ -14,10 +14,10 @@
                     <span>{{vm.order.items}}</span>
                 </div>
 
-                <div class="subtitle secondary-text">
+<!--                 <div class="subtitle secondary-text">
                     <span>from</span>
                     <span>{{vm.order.customerInfo.firstName}} {{vm.order.customerInfo.lastName}}</span>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -154,7 +154,7 @@
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
 														<label>Qty</label>
-														<input aria-label="amount" required type="number" step="1"><span id="currency-custom" flex>{{amount | currency:"USD$":0}}</span></input> 
+														<input ng-model="productRow.quantity" aria-label="amount" required type="number" step="1"><span id="currency-custom" flex>{{amount | currency:"USD$":0}}</span></input> 
 													</md-input-container>
 												</md-content> 
 											</td>	
@@ -170,7 +170,7 @@
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
 														<label>Cost</label>
-														<input required >{{  }}</input> 
+														<input required >{{ productRow.quantity *  productRow.price.price | currency:"USD$":0 }}</input> 
 													</md-input-container>
 												</md-content> 
 											</td>								
@@ -186,7 +186,12 @@
 											</td>
 											<td></td>
 											<td></td>
-											<td >Total Cost</td>
+											<td>
+												<!-- Taking the first perameter in the vm.order and in each iteration calling function(p) to 
+												// return the total cost for the product...iterating through the products array and 
+												// keeping a running total of all the calls in the products array. -->
+												{{ vm.calculateTotal | currency:"USD$":0}}
+											</td>
 										</tr>
 									</tfoot>
 								</table>

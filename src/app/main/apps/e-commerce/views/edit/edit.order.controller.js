@@ -70,8 +70,12 @@
 			const product = productRow.product;
 			const prices = product.prices;
 			
-			for (unit in prices)
+			for (var unit in prices)
 				productRow.prices.push({unit: unit, price: prices[unit]})
+	    };
+
+	    vm.calculateTotal = function() {
+	    	return _.sumBy(vm.order.products, function(p) {return p.quantity * p.price.price})
 	    };
     }
 })();
