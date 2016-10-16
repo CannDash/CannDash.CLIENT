@@ -3809,7 +3809,7 @@ md-select {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  margin: 20px 0 26px 0; }
+  margin: 20px 0 39px 0; }
   md-select[required].ng-invalid:not(.md-no-asterisk) .md-select-value span:first-child:after, md-select.ng-required.ng-invalid:not(.md-no-asterisk) .md-select-value span:first-child:after {
     content: ' *';
     font-size: 13px;
@@ -3853,10 +3853,10 @@ md-input-container.md-input-has-value .md-select-value > span:not(.md-select-ico
   position: relative;
   box-sizing: content-box;
   min-width: 64px;
-  min-height: 26px;
+/*   min-height: 26px; */
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-          flex-grow: 1; }
+  -webkit-flex-grow: 1;}
+          /* flex-grow: 0; } */
   .md-select-value > span:not(.md-select-icon) {
     max-width: 100%;
     -webkit-box-flex: 1;
@@ -7734,7 +7734,7 @@ md-tooltip {
 .layout-padding > .flex,
 .layout-padding > .flex-gt-sm,
 .layout-padding > .flex-md {
-  padding: 8px; }
+  padding: 0px; }
 
 .layout-padding-gt-md > *,
 .layout-padding-lg > *,

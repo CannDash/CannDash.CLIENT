@@ -153,23 +153,7 @@
          * @param id
          */
         function updateStatus(order) {
-            // if (!id) {
-            //     return;
-            // }
-
-            // for (var i = 0; i < vm.statuses.length; i++) {
-            //     if (vm.statuses[i].id === parseInt(id)) {
-            //         vm.order.orderStatus.unshift({
-            //             id: vm.statuses[i].id,
-            //             name: vm.statuses[i].name,
-            //             color: vm.statuses[i].color,
-            //             date: moment().format('YYYY/MM/DD HH:mm:ss')
-            //         });
-            // }
-                orderFactory.updateOrder(order);
-                
-
-            }  
-        // }
+                orderFactory.updateOrder(order);             
+            }
     }
 })();

@@ -68,6 +68,7 @@
         // Methods
         vm.getOrderStatus = getOrderStatus;
         vm.gotoOrderDetail = gotoOrderDetail;
+        vm.createNewOrder = createNewOrder;
 
         //////////
 
@@ -91,7 +92,7 @@
          * @param id
          */
         function gotoOrderDetail(id) {
-            $state.go('app.e-commerce.orders.detail', { id: id });
+            $state.go('app.e-commerce.order', { id: id });
         }
 
         orderFactory.getOrdersByDispensary(dispensaryId).then(
@@ -100,6 +101,14 @@
             }
         );
 
-
+        /**
+         * Go to new order detail
+         *
+         * @param id
+         */
+        function createNewOrder() {
+        	var order = {};
+	        $state.go('app.e-commerce.edit-order', { order: order });   
+	    }     	
     }
 })();
