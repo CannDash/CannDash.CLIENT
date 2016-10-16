@@ -32,7 +32,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error adding order', 'Error');
+                            toastr.error('Error adding order: ' + error.message, 'Error');
                        }
                   );
 

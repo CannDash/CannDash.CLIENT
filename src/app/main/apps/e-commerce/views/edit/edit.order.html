@@ -41,53 +41,66 @@
 
 						<!-- Select Driver -->
 			            <md-content layout-gt-md="row">			          
-					        <md-select required ng-model="vm.order.driver" layout-gt-md="row" aria-label="Assign Driver" placeholder="Assign Driver">
-								<md-option ng-repeat="driver in vm.driverData.drivers" ng-value="{{driver}}">
-									{{driver.firstName}} {{driver.lastName}}
-								</md-option>
-							</md-select>
+					        <div table-responsive-vertical>
+						        <form name="assignDriverForm">
+						        	<md-content layout-gt-md="row" layout-padding="">
+								        <md-select required ng-model="vm.driver" layout-gt-md="row" aria-label="Assign Driver" placeholder="Assign Driver">
+											<md-option ng-repeat="driver in vm.driverData | orderBy : 'firstName' " ng-value="{{driver}}">
+												{{ driver.firstName + ' ' + driver.lastName }}
+											</md-option>
+										</md-select>
+									</md-content>
+								<form>
+							<div>
 						</md-content>
 
 						<!-- Select Patient -->
 					    <md-content layout-padding="">
 						    <div table-responsive-vertical>
-						        <form name="userForm">	<!-- Select Patient form -->
-							        <div layout-gt-sm="row">
-							          <md-input-container class="md-block" flex-gt-sm="">
-							            <label>Patient Name</label>
-							            <input required >
-							          </md-input-container>
-							        </div>
-
+						        <form name="patientOrderForm">	<!-- Select Patient form -->
+										<md-autocomplete flex required
+											md-input-name="Patient"
+											md-no-cache="false"
+											md-min-length="1"
+											md-selected-item="vm.patient"
+											md-search-text="patient.searchText"
+											md-items="patient in vm.getPatientMatches(patient)"
+											md-item-text="patient.firstName + ' ' + patient.lastName"
+											md-require-match
+											md-selected-item-change="vm.onPatientSelected(patient)"
+											md-floating-label="Patient"
+											md-autoselect >
+											<span md-highlight-text="patient.searchText">
+												{{ patient.firstName + ' ' + patient.lastName }}
+											</span>
+										</md-autocomplete>
+									<!-- Address -->
 							        <md-input-container class="md-block">
 							          <label>Address</label>
-							          <input required >
+							          <input required ng-model="vm.order.address">
 							        </md-input-container>
-
+									<!-- Apt/Unit# -->
 							        <md-input-container md-no-float="" class="md-block">
-							          <input required  placeholder="Address 2">
+							          <input placeholder="Apt/Unit#" ng-model="vm.order.unitNo">
 							        </md-input-container>
-
+									
+									<!-- City -->
 							        <div layout-gt-sm="row">
 								      <md-input-container class="md-block" flex-gt-sm="">
 								        <label>City</label>
-								        <input required >
+								        <input required ng-model="vm.order.city">
 								      </md-input-container>
-
+									  <!-- State -->
 								      <md-input-container class="md-block" flex-gt-sm="">
 								        <label>State</label>
-								        <md-select required ng-model="vm.order.state" >
-								          <md-option ng-repeat="state in states" value="CA">
-								            CA
-								          </md-option>
-								        </md-select>
+								        <input required ng-model="vm.order.state">
 								      </md-input-container>
-
+									  <!-- Zip Code -->
 							          <md-input-container class="md-block" flex-gt-sm="">
-							            <label>Zip Code</label>
-							            <input required name="zipCode" ng-model="user.postalCode" required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+							            <label>Zip</label>
+							            <input required name="zip" ng-model="vm.order.zipCode" required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
 
-							            <div ng-messages="userForm.postalCode.$error" role="alert" multiple="">
+							            <div ng-messages="patientOrderForm.postalCode.$error" role="alert" multiple="">
 											<div ng-message="required" class="my-message">
 												You must supply a postal code.
 											</div>
@@ -100,11 +113,11 @@
 							            </div>
 							          </md-input-container>
 							        </div>
-
+									<!-- Delivery Notes -->
 							        <md-input-container class="md-block">
 							          <label>Delivery Notes</label>
 							          <textarea  md-maxlength="150" rows="5" md-select-on-focus=""
-									  	ng-model="vm.order.deliveryNodes"></textarea>
+									  	ng-model="vm.order.deliveryNotes"></textarea>
 							        </md-input-container>			
 							    </form>	<!-- Select Patient form -->
 
@@ -120,11 +133,11 @@
 										</tr>							
 									</thead>
 									<tbody>
-										<tr ng-repeat="productRow in vm.order.products">
+										<tr ng-repeat="productRow in vm.products">
 											<td style="min-width:40px">										
 												<md-select ng-model="productRow.category" layout-gt-md="row" layout-padding="" aria-label="Select"
 													ng-change="vm.onCategorySelected(productRow)">
-													<md-option ng-repeat="category in vm.categories" ng-value="{{category}}">
+													<md-option ng-repeat="category in vm.categories | orderBy : 'title' " ng-value="{{category}}">
 														{{category.title}}
 													</md-option>
 												</md-select>
@@ -199,7 +212,7 @@
 
 							<!-- Submit order button -->
 							<md-input-container layout="row" layout-align="end center">
-					        	<md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" ng-click="">
+					        	<md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" ng-click="vm.addOrder()">
 					        		Submit
 					        	</md-button>
 					        </md-input-container>	
