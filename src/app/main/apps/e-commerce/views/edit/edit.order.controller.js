@@ -5,10 +5,10 @@
         .module('app.e-commerce')
         .controller('EditOrderController', EditOrderController);
 
-    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory', 'dispensaryProductFactory'];
+    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory', 'dispensaryProductFactory', '$state', '$stateParams'];
 
     /* @ngInject */
-    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory) {
+    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory, $state, $stateParams) {
         var vm = this;
         var wProductsUrl = null;
 
@@ -29,11 +29,11 @@
         function activate() {
 	        // Initialize data immediately
 	        var dispensaryId = 266;
-	        vm.order = { 
-	        	dispensaryId : dispensaryId
-	        };
-	        vm.price = [];
-	        vm.products = [];
+	        vm.order = $stateParams.order || 
+		        { 
+		        	dispensaryId : dispensaryId
+		        };
+	        vm.productRows = [];
 	        vm.categories = [];
 
 	        dispensaryFactory.getByDispensary(dispensaryId).then(
@@ -64,31 +64,59 @@
         }
 
 	    function addProduct() {
-	    	vm.products.push({ category : undefined, product : undefined, qty : 0 });
+	    	vm.productRows.push({ category : undefined, product : undefined, qty : 0 });
 	    }
 
 	    function addOrder() {
             var defer = $q.defer();	   
-            // If ...
-            if (vm.driver) vm.order.driverId = vm.driver.driverId;			//jshint ignore:line
+            			
             // If ...
             if (vm.patient) vm.order.customerId = vm.patient.customerId;	//jshint ignore:line
 
 			const products = vm.order.productOrders = [];					//jshint ignore:line
-			for (var product in vm.products)								//jshint ignore:line
-				products.push({												//jshint ignore:line
-					productId: product.productId,	
-					orderQty: product.quantity,	
-					unitPrice: product.unit.price,	
-					total: product.quantity * product.unit.price  
-				});	
+			
+			// Iterate over the vm.product rows array that user entered in the order.
+			// 
+			vm.productRows.forEach(
+				function(productRow) {								//jshint ignore:line
+					products.push({												//jshint ignore:line
+						productId: productRow.product.id,
+						productName: productRow.product.name,
+						categoryId: productRow.product.category_id,	//jshint ignore:line
+						categoryName: productRow.product.category_name,	//jshint ignore:line
+						orderQty: productRow.quantity,	
+						unitPrice: productRow.price.price,	
+						total: productRow.quantity * productRow.price.price  
+					})	//jshint ignore:line
+				});
 
-	    	orderFactory.addOrder(vm.order).then(
-	    		function(data) {
-	    			$state.go('app.e-commerce.orders');						//jshint ignore:line
-				}	
-	    	);		
-    	};																	//jshint ignore:line
+			// Iterate over the products object above, and return the orderQty for each item
+			vm.order.itemQuantity = _.sumBy(products, 	//jshint ignore:line
+										function(o) { 
+											return o.orderQty; 
+									});
+			
+			// Iterate over the products object above, and return the total for each item 
+			vm.order.totalCost = _.sumBy(products, 	//jshint ignore:line
+										function(o) { 
+											return o.total; 
+									});
+
+	    	if (vm.order.orderId)
+	    		orderFactory.updateOrder(vm.order)	//jshint ignore:line
+			    	.then(
+			    		function(data) {
+			    			$state.go('app.e-commerce.orders');						//jshint ignore:line
+						}	
+			    	);	
+
+		    else 
+		    	orderFactory.addOrder(vm.order).then(	//jshint ignore:line
+		    		function(data) {
+		    			$state.go('app.e-commerce.orders');						//jshint ignore:line
+					}	
+		    	);		
+	    	};																	//jshint ignore:line
 
 	    vm.onCategorySelected = function(product) {
 			product.products = product.category.items;
@@ -113,7 +141,7 @@
 		vm.onPatientSelected = function(patient) {
 			const order = vm.order;						//jshint ignore:line
 
-			order.address = patient.street;
+			order.street = patient.street;
 			order.unitNo = patient.unitNo;
 			order.city = patient.city;
 			order.state = patient.state;
@@ -137,7 +165,7 @@
 			// keeping a running total of all the calls in the products array.
 			// Check to see if quanity or unit has not been filled if so return zero to that product row
 			// otherwise return the quantity multiplied by the price of that unit.
-	    	 	return _.sumBy(vm.products,	//jshint ignore:line
+	    	 	return _.sumBy(vm.productRows,	//jshint ignore:line
 							function(p) {
 								if (!p.quantity || !p.price) return 0;	//jshint ignore:line
 									return p.quantity * p.price.price 	//jshint ignore:line

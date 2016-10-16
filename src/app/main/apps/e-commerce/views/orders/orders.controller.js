@@ -8,7 +8,7 @@
     /** @ngInject */
     function OrdersController($state, Statuses, Orders, orderFactory) {
         var vm = this;
-        var dispensaryId = 14;
+        var dispensaryId = 266;
 
         // Data
         vm.orders = Orders.data;

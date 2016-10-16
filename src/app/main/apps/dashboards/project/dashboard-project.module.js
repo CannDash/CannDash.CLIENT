@@ -34,7 +34,7 @@
         });
 
         // Api
-        msApiProvider.register('dashboard.project', ['http://canndashdeveloperapi.azurewebsites.net/api/dashboard/14']);
+        msApiProvider.register('dashboard.project', ['http://canndashdeveloperapi.azurewebsites.net/api/dashboard/266']);
     }
 
 })();

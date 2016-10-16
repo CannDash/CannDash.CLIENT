@@ -44,7 +44,7 @@
 					        <div table-responsive-vertical>
 						        <form name="assignDriverForm">
 						        	<md-content layout-gt-md="row" layout-padding="">
-								        <md-select required ng-model="vm.driver" layout-gt-md="row" aria-label="Assign Driver" placeholder="Assign Driver">
+								        <md-select required ng-model="vm.order.driver" layout-gt-md="row" aria-label="Assign Driver" placeholder="Assign Driver">
 											<md-option ng-repeat="driver in vm.driverData | orderBy : 'firstName' " ng-value="{{driver}}">
 												{{ driver.firstName + ' ' + driver.lastName }}
 											</md-option>
@@ -77,7 +77,7 @@
 									<!-- Address -->
 							        <md-input-container class="md-block">
 							          <label>Address</label>
-							          <input required ng-model="vm.order.address">
+							          <input required ng-model="vm.order.street">
 							        </md-input-container>
 									<!-- Apt/Unit# -->
 							        <md-input-container md-no-float="" class="md-block">
@@ -133,7 +133,7 @@
 										</tr>							
 									</thead>
 									<tbody>
-										<tr ng-repeat="productRow in vm.products">
+										<tr ng-repeat="productRow in vm.productRows">
 											<td style="min-width:40px">										
 												<md-select ng-model="productRow.category" layout-gt-md="row" layout-padding="" aria-label="Select"
 													ng-change="vm.onCategorySelected(productRow)">
