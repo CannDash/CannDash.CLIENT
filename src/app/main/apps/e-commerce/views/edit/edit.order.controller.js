@@ -53,14 +53,14 @@
 	            function(data) {
 	                vm.drivers = 
 	                	_.filter(data.drivers, 								//jshint ignore:line
-	                		function(d) {return d.driverCheckIn});
+	                		function(d) {return d.driverCheckIn});	//jshint ignore:line
 
 	                if (vm.order.driverId)
-						vm.order.driver =
-							_.find(data.drivers,
+						vm.order.driver =						//jshint ignore:line
+							_.find(data.drivers,				//jshint ignore:line
 								function(d) {
-									return d.driverId == vm.order.driverId
-								})
+									return d.driverId == vm.order.driverId		//jshint ignore:line
+								})												//jshint ignore:line
 				//jshint ignore:line
 	            }
 	        );
@@ -78,16 +78,16 @@
             				product: {
             					id: order.productId,
             					name: order.productName,
-            					category_id: order.categoryId,
-            					category_name: order.categoryName
-            				},
+            					category_id: order.categoryId,				//jshint ignore:line
+            					category_name: order.category_name	//jshint ignore:line
+            				},	
             				quantity: order.orderQty,
             				price: {
             					unit: order.price.unit,
             					price: order.price.price
             				}
-           				})
-            		})
+           				})	//jshint ignore:line
+            		})	//jshint ignore:line
             }
         }
 
