@@ -33,7 +33,7 @@
 		        { 
 		        	dispensaryId : dispensaryId
 		        };
-		    if (vm.order.customerInfo) vm.order.customer = vm.order.customerInfo;
+		    if (vm.order.customerInfo) vm.order.customer = vm.order.customerInfo;		//jshint ignore:line
 	        vm.productRows = [];
 	        vm.categories = [];
 
