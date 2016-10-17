@@ -197,8 +197,7 @@
 
             // If there is a query, filter the navigation;
             // otherwise we will return the entire navigation
-            // list. Not exactly a good thing to do but it's
-            // for demo purposes.
+            // list. Not exactly a good thing to do.
             if ( query )
             {
                 navigation = navigation.filter(function (item)

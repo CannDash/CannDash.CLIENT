@@ -91,6 +91,7 @@
             }
         }
 
+        // Functions for buttons
 	    function addProduct() {
 	    	vm.productRows.push({ category : undefined, product : undefined, qty : 0 });
 	    }
@@ -104,7 +105,6 @@
 			const products = vm.order.productOrders = [];					//jshint ignore:line
 			
 			// Iterate over the vm.product rows array that user entered in the order.
-			// 
 			vm.productRows.forEach(
 				function(productRow) {								//jshint ignore:line
 					products.push({												//jshint ignore:line
@@ -147,6 +147,7 @@
 		    	);		
 	    	};																	//jshint ignore:line
 
+	    // Functions for text autocomplete boxes, dropdown menus & form fields
 	    vm.onCategorySelected = function(product) {
 			product.products = product.category.items;
 	    };

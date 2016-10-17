@@ -27,10 +27,10 @@
 
             // Apps
             'app.dashboards',
-            'app.e-commerce',
+            'app.e-commerce'
 
             // Pages
-            'app.pages',
+            // 'app.pages',
 
         ]);
 })();
