@@ -33,6 +33,7 @@
 		        { 
 		        	dispensaryId : dispensaryId
 		        };
+		    if (vm.order.customerInfo) vm.order.customer = vm.order.customerInfo;
 	        vm.productRows = [];
 	        vm.categories = [];
 
@@ -50,17 +51,44 @@
 
             dispensaryFactory.getByDispensaryDrivers(dispensaryId).then(
 	            function(data) {
-	                vm.driverData = 
+	                vm.drivers = 
 	                	_.filter(data.drivers, 								//jshint ignore:line
-	                		function(d) {return d.driverCheckIn});			//jshint ignore:line
+	                		function(d) {return d.driverCheckIn});
+
+	                if (vm.order.driverId)
+						vm.order.driver =
+							_.find(data.drivers,
+								function(d) {
+									return d.driverId == vm.order.driverId
+								})
+				//jshint ignore:line
 	            }
 	        );
 
 	        dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
                 function(data) {
-                    vm.customerData = data.customers;
+                    vm.customers = data.customers;
 	            }
             );
+
+            if (vm.order.productOrders) {
+            	vm.order.productOrders.forEach(
+            		function(order) {
+            			vm.productRows.push({ 
+            				product: {
+            					id: order.productId,
+            					name: order.productName,
+            					category_id: order.categoryId,
+            					category_name: order.categoryName
+            				},
+            				quantity: order.orderQty,
+            				price: {
+            					unit: order.price.unit,
+            					price: order.price.price
+            				}
+           				})
+            		})
+            }
         }
 
 	    function addProduct() {
@@ -70,7 +98,7 @@
 	    function addOrder() {
             var defer = $q.defer();	   
             			
-            // If ...
+            // If does not exist, create order anyway 
             if (vm.patient) vm.order.customerId = vm.patient.customerId;	//jshint ignore:line
 
 			const products = vm.order.productOrders = [];					//jshint ignore:line
@@ -89,6 +117,7 @@
 						total: productRow.quantity * productRow.price.price  
 					})	//jshint ignore:line
 				});
+
 
 			// Iterate over the products object above, and return the orderQty for each item
 			vm.order.itemQuantity = _.sumBy(products, 	//jshint ignore:line
@@ -132,7 +161,7 @@
 		vm.getPatientMatches = function(patient) {
 			var searchTextLower = patient.searchText.toLowerCase();
 			
-			return _.filter(vm.customerData,													//jshint ignore:line
+			return _.filter(vm.customers,													//jshint ignore:line
 				function (p) {
 					return (p.firstName + p.lastName).toLowerCase().indexOf(searchTextLower) >= 0 //jshint ignore:line
 				}) 																				//jshint ignore:line

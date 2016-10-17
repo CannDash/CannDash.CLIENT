@@ -96,12 +96,13 @@
              $http.put(apiUrl + '/orders/' + order.orderId, order)
                   .then(
                        function() {
-                            defer.resolve();
+                            defer.resolve(); 
                             toastr.success('Successfully updated order', 'Saved');
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error updating order', 'Error');
+                            toastr.error('Error updating order: ' + error.data.exceptionMessage, 'Error');
+                            console.error('Error updating order: ' + error.data.exceptionMessage);
                        }
                   );
 

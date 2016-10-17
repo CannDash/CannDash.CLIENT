@@ -7,17 +7,13 @@
                        ui-sref="app.e-commerce.orders">
                 <md-icon md-font-icon="icon-arrow-left"></md-icon>
             </md-button>
-
-            <div layout="column" layout-align="start start">
+            <div layout="column" layout-align="start center">
                 <div class="h2">
-                    <span>New Order Form</span>
+                    <span>{{vm.order.orderId ? 'Edit Order' : 'New Order'}}</span>
                     <span>{{vm.order.items}}</span>
                 </div>
-<!--                 <div class="subtitle secondary-text">
-                    <span>from</span>
-                    <span>{{vm.order.customerInfo.firstName}} {{vm.order.customerInfo.lastName}}</span>
-                </div> -->
             </div>
+
         </div>
     </div>
     <!-- / HEADER -->
@@ -36,7 +32,7 @@
 					<div class="order-detail-form-container customer md-background-bg md-whiteframe-1dp">
 						<div class="pb-16" layout="row" layout-align="start center">
 						    <md-icon md-font-icon="icon-cart" class="m-0 mr-16"></md-icon>
-						    <div class="h2 secondary-text">New Order</div>
+						    <div class="h2 secondary-text">{{vm.order.orderId ? 'Edit Order' : 'New Order'}}</div>
 						</div>
 
 						<!-- Select Driver -->
@@ -44,8 +40,10 @@
 					        <div table-responsive-vertical>
 						        <form name="assignDriverForm">
 						        	<md-content layout-gt-md="row" layout-padding="">
-								        <md-select required ng-model="vm.order.driver" layout-gt-md="row" aria-label="Assign Driver" placeholder="Assign Driver">
-											<md-option ng-repeat="driver in vm.driverData | orderBy : 'firstName' " ng-value="{{driver}}">
+								        <md-select required ng-model="vm.order.driver" layout-gt-md="row"
+								        	ng-model-options="{trackBy: '$value.driverId'}"
+											aria-label="Assign Driver" placeholder="Assign Driver">
+											<md-option ng-repeat="driver in vm.drivers | orderBy : 'firstName' " ng-value="{{driver}}">
 												{{ driver.firstName + ' ' + driver.lastName }}
 											</md-option>
 										</md-select>
@@ -58,11 +56,11 @@
 					    <md-content layout-padding="">
 						    <div table-responsive-vertical>
 						        <form name="patientOrderForm">	<!-- Select Patient form -->
-										<md-autocomplete flex required
+										<md-autocomplete flex required 
 											md-input-name="Patient"
 											md-no-cache="false"
 											md-min-length="1"
-											md-selected-item="vm.patient"
+											md-selected-item="vm.order.customer"
 											md-search-text="patient.searchText"
 											md-items="patient in vm.getPatientMatches(patient)"
 											md-item-text="patient.firstName + ' ' + patient.lastName"
@@ -166,7 +164,9 @@
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
 														<label>Qty</label>
-														<input ng-model="productRow.quantity" aria-label="amount" required type="number" step="1"><span id="currency-custom" flex>{{amount | currency:"USD$":0}}</span></input> 
+														<input ng-model="productRow.quantity" aria-label="amount" required type="number" step="1">
+															<span id="currency-custom" flex>{{amount | currency:"USD$":0}}</span>
+														</input> 
 													</md-input-container>
 												</md-content> 
 											</td>	

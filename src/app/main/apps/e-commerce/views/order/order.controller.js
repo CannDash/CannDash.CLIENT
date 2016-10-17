@@ -6,10 +6,12 @@
         .controller('OrderController', OrderController);
 
     /** @ngInject */
-    function OrderController($state, $stateParams, Statuses, uiGmapGoogleMapApi, Order, orderFactory) {
+    function OrderController(
+        $state, $stateParams, Statuses, uiGmapGoogleMapApi, Order, orderFactory, driverFactory) {
         var vm = this;
 
         // Data
+        vm.driverInfo = {};
         vm.order = Order.data;
         vm.statuses = Statuses.data;
         vm.dtInstance = {};
@@ -46,6 +48,10 @@
             orderFactory.getByOrderId($stateParams.id).then(
                 function(orderFromServer) {
                     vm.order = orderFromServer;
+                    driverFactory.getByDriverId(vm.order.driverId).then(
+                        function(driver) {
+                            vm.driver = driver;
+                        });
                 }
             );
         }
@@ -56,12 +62,18 @@
         vm.updateStatus = updateStatus;
         vm.getAddressFromOrder = getAddressFromOrder;
         vm.getStatusText = getStatusText;
+        vm.getDriverFromOrder = getDriverFromOrder;
+
+
+        ///////////////////
 
         function getAddressFromOrder(order) {
             return order.street + ' ' + order.city + ' ' + order.state + ' ' + order.zipCode;
         }
 
-
+        function getDriverFromOrder(order) {
+            return order.driverId;
+        }
 
         function getStatusText(orderStatus) {
             var status = parseInt(orderStatus);
@@ -82,10 +94,7 @@
 
         init();
 
-        // Normally, you would need Google Maps Geocoding API
-        // to convert addresses into latitude and longitude
-        // but because Google's policies, we are faking it for
-        // the demo
+        // Google maps API
         uiGmapGoogleMapApi.then(function(maps) {
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({ 'address': getAddressFromOrder(vm.order) }, function(results, status) {
