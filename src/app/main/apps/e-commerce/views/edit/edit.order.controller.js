@@ -5,10 +5,10 @@
         .module('app.e-commerce')
         .controller('EditOrderController', EditOrderController);
 
-    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory', 'dispensaryProductFactory', '$state', '$stateParams'];
+    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory', 'dispensaryProductFactory', '$state', '$stateParams', 'productOrderFactory'];
 
     /* @ngInject */
-    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory, $state, $stateParams) {
+    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory, $state, $stateParams, productOrderFactory) {
         var vm = this;
         var wProductsUrl = null;
 
@@ -140,12 +140,40 @@
 			    	);	
 
 		    else 
-		    	orderFactory.addOrder(vm.order).then(	//jshint ignore:line
-		    		function(data) {
-		    			$state.go('app.e-commerce.orders');						//jshint ignore:line
-					}	
-		    	);		
+			var newOrder = vm.order;									//jshint ignore:line
+              newOrder.driverId = vm.order.driver.driverId;				//jshint ignore:line
+              newOrder.customerId = vm.order.customer.customerId;		//jshint ignore:line
+              // Temporary code for Dispensary Id; value coming from $stateParams, until we get OAuth and roles setup for it.
+              newOrder.dispensaryId = vm.order.customer.dispensaryId; 	//jshint ignore:line
+              var orderItems = vm.order.productOrders;
+              delete newOrder.customer;					//jshint ignore:line
+              delete newOrder.driver;					//jshint ignore:line
+              delete newOrder.productOrders;			//jshint ignore:line
+                orderFactory.addOrder(newOrder).then(   //jshint ignore:line
+                    function(newOrder) {
+                         var promises = [];
+                         //Iterates over productRows to post each individual item related to the order.
+                         for (var i = 0; i < orderItems.length; i++) {
+                                   var orderItem = orderItems[i];
+                                   orderItem.orderId = newOrder.orderId;
+                                   promises.push(productOrderFactory.addProductOrder(orderItem));
+                         }
+                         //Collects the promises for all the order item posts
+                         $q.all(promises).then(function(orderItems) {
+                                 toastr.success('Successfully added order with items', 'Saved');
+                         });
+                        $state.go('app.e-commerce.orders');                     //jshint ignore:line
+                    }
+                );
+
+		   //  	orderFactory.addOrder(vm.order).then(	//jshint ignore:line
+		   //  		function(data) {
+		   //  			$state.go('app.e-commerce.orders');						//jshint ignore:line
+					// }	
+		   //  	);		
 	    	};																	//jshint ignore:line
+
+
 
 	    // Functions for text autocomplete boxes, dropdown menus & form fields
 	    vm.onCategorySelected = function(product) {

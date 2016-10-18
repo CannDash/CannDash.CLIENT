@@ -48,6 +48,7 @@
             orderFactory.getByOrderId($stateParams.id).then(
                 function(orderFromServer) {
                     vm.order = orderFromServer;
+                    vm.products = orderFromServer.productOrder;
                     driverFactory.getByDriverId(vm.order.driverId).then(
                         function(driver) {
                             vm.driver = driver;
