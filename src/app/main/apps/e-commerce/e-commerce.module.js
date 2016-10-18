@@ -12,7 +12,8 @@
                 'textAngular',
                 'uiGmapgoogle-maps',
                 'xeditable',
-                'ui.bootstrap'
+                'ui.bootstrap',
+                'ngBootbox'
             ]
         )
         .config(config);

@@ -5,10 +5,33 @@
         .module('app.e-commerce')
         .controller('EditOrderController', EditOrderController);
 
-    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory', 'dispensaryProductFactory', '$state', '$stateParams', 'productOrderFactory'];
+    EditOrderController.$inject = [
+    	'$http', 
+    	'$q', 
+    	'toastr', 
+    	'apiUrl', 
+    	'orderFactory', 
+    	'dispensaryFactory', 
+    	'dispensaryProductFactory', 
+    	'$state', 
+    	'$stateParams', 
+    	'productOrderFactory', 
+    	'$ngBootbox'];
 
     /* @ngInject */
-    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory, $state, $stateParams, productOrderFactory) {
+    function EditOrderController(
+    	$http, 
+    	$q, 
+    	toastr, 
+    	apiUrl, 
+    	orderFactory, 
+    	dispensaryFactory, 
+    	dispensaryProductFactory, 
+    	$state, 
+    	$stateParams, 
+    	productOrderFactory, 
+    	$ngBootbox) {
+
         var vm = this;
         var wProductsUrl = null;
 
@@ -126,7 +149,8 @@
 									});
 			
 			// Iterate over the products object above, and return the total for each item 
-			vm.order.totalCost = _.sumBy(products, 	//jshint ignore:line
+			// vm.order.totalOrderCost
+			vm.order.totalOrderSale = _.sumBy(products, 	//jshint ignore:line
 										function(o) { 
 											return o.total; 
 									});

@@ -12,7 +12,8 @@
             'uiGmapgoogle-maps',
             'textAngular',
             'xeditable',
-
+            'ngBootbox',
+            
             // Core
             'app.core',
 
@@ -27,7 +28,7 @@
 
             // Apps
             'app.dashboards',
-            'app.e-commerce'
+            'app.e-commerce',
 
             // Pages
             // 'app.pages',
