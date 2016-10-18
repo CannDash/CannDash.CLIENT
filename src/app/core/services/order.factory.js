@@ -12,7 +12,7 @@
         var service = {
             addOrder: addOrder,
             getAllOrders: getAllOrders,
-            getOrdersByDispensary: getOrdersByDispensary, 
+            getOrdersByDispensary: getOrdersByDispensary,
             getByOrderId: getByOrderId,
             updateOrder: updateOrder
         };
@@ -28,7 +28,7 @@
                   .then(
                        function(response) {
                             defer.resolve(response.data);
-                            toastr.success('Successfully added order', 'Saved');
+                         //    toastr.success('Successfully added order', 'Saved');
                        },
                        function(error) {
                             defer.reject(error);
@@ -96,7 +96,7 @@
              $http.put(apiUrl + '/orders/' + order.orderId, order)
                   .then(
                        function() {
-                            defer.resolve(); 
+                            defer.resolve();
                             toastr.success('Successfully updated order', 'Saved');
                        },
                        function(error) {

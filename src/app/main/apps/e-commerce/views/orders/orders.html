@@ -23,7 +23,7 @@
             <div class="search" layout="row" layout-align="start center" flex>
                 <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
                 	<input id="e-commerce-products-search" class="search-input" type="text" placeholder="Search" flex>
-                <md-button class="md-raised text-boxed green-bg white-fg m-o hover" ng-click="vm.createNewOrder()">New Order</md-button>     
+                <md-button class="md-raised text-boxed green-bg white-fg m-o hover" ng-click="vm.createNewOrder()">New Order</md-button>
             </div>
         </div>
         <!-- / CONTENT HEADER -->
@@ -74,14 +74,15 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>     
+                    <tbody>
                         <tr ng-repeat="row in ::vm.dispensaryOrders.order">
                             <td>{{row.orderId}}</td>
+                            <!-- <td>{{row.dispensaryOrderNo}}</td> -->
                             <td>
                                 {{row.driverInfo.firstName || "n/a"}} {{row.driverInfo.lastName || "n/a"}}
                             </td>
                             <td>
-                                {{row.customerInfo.firstName || "n/a"}} {{row.customerInfo.lastName || "n/a"}} 
+                                {{row.customerInfo.firstName || "n/a"}} {{row.customerInfo.lastName || "n/a"}}
                             </td>
                             <td>${{row.totalCost}}</td>
                             <td>{{row.orderStatus}}</td>

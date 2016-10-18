@@ -5,10 +5,10 @@
         .module('app.e-commerce')
         .controller('EditOrderController', EditOrderController);
 
-    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory', 'dispensaryProductFactory', '$state', '$stateParams'];
+    EditOrderController.$inject = ['$http', '$q', 'toastr', 'apiUrl', 'orderFactory', 'dispensaryFactory', 'dispensaryProductFactory','productOrderFactory', '$state', '$stateParams'];
 
     /* @ngInject */
-    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory, $state, $stateParams) {
+    function EditOrderController($http, $q, toastr, apiUrl, orderFactory, dispensaryFactory, dispensaryProductFactory, productOrderFactory, $state, $stateParams) {
         var vm = this;
         var wProductsUrl = null;
 
@@ -29,8 +29,8 @@
         function activate() {
 	        // Initialize data immediately
 	        var dispensaryId = 266;
-	        vm.order = $stateParams.order || 
-		        { 
+	        vm.order = $stateParams.order ||
+		        {
 		        	dispensaryId : dispensaryId
 		        };
 		    if (vm.order.customerInfo) vm.order.customer = vm.order.customerInfo;		//jshint ignore:line
@@ -47,11 +47,11 @@
 	                       }
 	                  );
 	             }
-	        ); 
+	        );
 
             dispensaryFactory.getByDispensaryDrivers(dispensaryId).then(
 	            function(data) {
-	                vm.drivers = 
+	                vm.drivers =
 	                	_.filter(data.drivers, 								//jshint ignore:line
 	                		function(d) {return d.driverCheckIn});	//jshint ignore:line
 
@@ -74,13 +74,13 @@
             if (vm.order.productOrders) {
             	vm.order.productOrders.forEach(
             		function(order) {
-            			vm.productRows.push({ 
+            			vm.productRows.push({
             				product: {
             					id: order.productId,
             					name: order.productName,
             					category_id: order.categoryId,				//jshint ignore:line
             					category_name: order.category_name	//jshint ignore:line
-            				},	
+            				},
             				quantity: order.orderQty,
             				price: {
             					unit: order.price.unit,
@@ -97,13 +97,13 @@
 	    }
 
 	    function addOrder() {
-            var defer = $q.defer();	   
-            			
-            // If does not exist, create order anyway 
+          //   var defer = $q.defer();
+
+            // If does not exist, create order anyway
             if (vm.patient) vm.order.customerId = vm.patient.customerId;	//jshint ignore:line
 
 			const products = vm.order.productOrders = [];					//jshint ignore:line
-			
+
 			// Iterate over the vm.product rows array that user entered in the order.
 			vm.productRows.forEach(
 				function(productRow) {								//jshint ignore:line
@@ -112,23 +112,23 @@
 						productName: productRow.product.name,
 						categoryId: productRow.product.category_id,	//jshint ignore:line
 						categoryName: productRow.product.category_name,	//jshint ignore:line
-						orderQty: productRow.quantity,	
-						unitPrice: productRow.price.price,	
-						total: productRow.quantity * productRow.price.price  
+						orderQty: productRow.quantity,
+						unitPrice: productRow.price.price,
+						total: productRow.quantity * productRow.price.price
 					})	//jshint ignore:line
 				});
 
 
 			// Iterate over the products object above, and return the orderQty for each item
 			vm.order.itemQuantity = _.sumBy(products, 	//jshint ignore:line
-										function(o) { 
-											return o.orderQty; 
+										function(o) {
+											return o.orderQty;
 									});
-			
-			// Iterate over the products object above, and return the total for each item 
+
+			// Iterate over the products object above, and return the total for each item
 			vm.order.totalCost = _.sumBy(products, 	//jshint ignore:line
-										function(o) { 
-											return o.total; 
+										function(o) {
+											return o.total;
 									});
 
 	    	if (vm.order.orderId)
@@ -136,15 +136,39 @@
 			    	.then(
 			    		function(data) {
 			    			$state.go('app.e-commerce.orders');						//jshint ignore:line
-						}	
-			    	);	
+						}
+			    	);
 
-		    else 
-		    	orderFactory.addOrder(vm.order).then(	//jshint ignore:line
-		    		function(data) {
+		    else
+              var newOrder = vm.order;
+              newOrder.driverId = vm.order.driver.driverId;
+              newOrder.customerId = vm.order.customer.customerId;
+              var orderItems = vm.order.productOrders;
+              delete newOrder.customer;
+              delete newOrder.driver;
+              delete newOrder.productOrders;
+
+
+		    	orderFactory.addOrder(newOrder).then(	//jshint ignore:line
+		    		function(newOrder) {
+                         var promises = [];
+
+                         //Iterates over productRows to post each individual item related to the order.
+                         for (var i = 0; i < orderItems.length; i++) {
+                                   var orderItem = orderItems[i];
+                                   orderItem.orderId = newOrder.orderId;
+
+                                   promises.push(productOrderFactory.addProductOrder(orderItem));
+                         }
+
+                         //Collects the promises for all the order item posts
+                         $q.all(promises).then(function(orderItems) {
+                                 toastr.success('Successfully added order with items', 'Saved');
+                         });
+
 		    			$state.go('app.e-commerce.orders');						//jshint ignore:line
-					}	
-		    	);		
+					}
+		    	);
 	    	};																	//jshint ignore:line
 
 	    // Functions for text autocomplete boxes, dropdown menus & form fields
@@ -154,14 +178,14 @@
 
 	    vm.getProductMatches = function(productRow) {
 			var searchTextLower = productRow.searchText.toLowerCase();
-			
+
 			return _.filter(productRow.products,											//jshint ignore:line
-				function (p) {return p.name.toLowerCase().indexOf(searchTextLower) >= 0}) 	//jshint ignore:line	
+				function (p) {return p.name.toLowerCase().indexOf(searchTextLower) >= 0}) 	//jshint ignore:line
 		};
 
 		vm.getPatientMatches = function(patient) {
 			var searchTextLower = patient.searchText.toLowerCase();
-			
+
 			return _.filter(vm.customers,													//jshint ignore:line
 				function (p) {
 					return (p.firstName + p.lastName).toLowerCase().indexOf(searchTextLower) >= 0 //jshint ignore:line
@@ -175,23 +199,23 @@
 			order.unitNo = patient.unitNo;
 			order.city = patient.city;
 			order.state = patient.state;
-			order.zipCode = patient.zipCode;	
+			order.zipCode = patient.zipCode;
 			order.deliveryNotes = patient.deliveryNotes;
  	    };
 
 		vm.onProductSelected = function(productRow) {
 			productRow.prices = [];
-			
+
 			const product = productRow.product;	//jshint ignore:line
 			const prices = product.prices;	//jshint ignore:line
-			
+
 			for (var unit in prices)	//jshint ignore:line
 				productRow.prices.push({unit: unit, price: prices[unit]})	//jshint ignore:line
 	    };
 
 	    vm.calculateTotal = function() {
-	    	// Taking the first perameter in the vm.order and in each iteration calling function(p) to 
-			// return the total cost for the product...iterating through the products array and 
+	    	// Taking the first perameter in the vm.order and in each iteration calling function(p) to
+			// return the total cost for the product...iterating through the products array and
 			// keeping a running total of all the calls in the products array.
 			// Check to see if quanity or unit has not been filled if so return zero to that product row
 			// otherwise return the quantity multiplied by the price of that unit.
