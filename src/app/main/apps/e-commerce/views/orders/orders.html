@@ -76,7 +76,7 @@
                     </thead>
                     <tbody>     
                         <tr ng-repeat="row in ::vm.dispensaryOrders.order | orderBy : '-orderDate': true ">
-                            <td>{{row.orderId}}</td>
+                            <td>{{row.dispensaryOrderNo}}</td>
                             <td>
                                 {{row.driverInfo.firstName || "n/a"}} {{row.driverInfo.lastName || "n/a"}}
                             </td>
