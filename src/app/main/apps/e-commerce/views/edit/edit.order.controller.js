@@ -125,6 +125,7 @@
             // If does not exist, create order anyway 
             if (vm.patient) vm.order.customerId = vm.patient.customerId;	//jshint ignore:line
 
+            // Constant variable products object to hold array of productOrder line items
 			const products = vm.order.productOrders = [];					//jshint ignore:line
 			
 			// Iterate over the vm.product rows array that user entered in the order.
@@ -133,14 +134,14 @@
 					products.push({												//jshint ignore:line
 						productId: productRow.product.id,
 						productName: productRow.product.name,
-						categoryId: productRow.product.category_id,	//jshint ignore:line
+						menuCategoryId: productRow.product.category_id,	//jshint ignore:line
 						categoryName: productRow.product.category_name,	//jshint ignore:line
 						orderQty: productRow.quantity,	
-						unitPrice: productRow.price.price,	
-						total: productRow.quantity * productRow.price.price  
+						units: productRow.price.unit,
+						price: productRow.price.price,	
+						totalSale: productRow.quantity * productRow.price.price  
 					})	//jshint ignore:line
 				});
-
 
 			// Iterate over the products object above, and return the orderQty for each item
 			vm.order.itemQuantity = _.sumBy(products, 	//jshint ignore:line
@@ -180,6 +181,16 @@
                          for (var i = 0; i < orderItems.length; i++) {
                                    var orderItem = orderItems[i];
                                    orderItem.orderId = newOrder.orderId;
+
+                                   //orderItem.orderQty = orderItem.quantity;//?
+                                   //orderItem.unitPrice = orderItem.price.price;//?
+                                   // orderItem.discount = //?
+                                   // orderItem.totalSale = //?
+
+
+                                   // delete orderItem.price;
+
+
                                    promises.push(productOrderFactory.addProductOrder(orderItem));
                          }
                          //Collects the promises for all the order item posts

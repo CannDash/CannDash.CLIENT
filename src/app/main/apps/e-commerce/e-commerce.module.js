@@ -100,7 +100,7 @@
                 bodyClass: 'e-commerce'
             })
             .state('app.e-commerce.edit-order', {
-                url      : '/edit-order',
+                url      : '/edit-order/:id',
                 params	: { order : null },
                 views    : {
                     'content@app': {

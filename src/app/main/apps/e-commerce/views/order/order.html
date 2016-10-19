@@ -88,19 +88,19 @@
                                     <th>Price</th>
                                 </tr>
                             </thead>
-                            <tbody ng-repeat="category in vm.products">
-                                <tr ng-repeat="product in category.items  | filter: searchKeyword">
+                            <tbody>
+                                <tr ng-repeat="product in vm.order.productOrders">
                                     <td class="category">
-                                        {{vm.product.category.title}}
+                                        {{product.categoryName}}
                                     </td>
                                     <td class="name">
-                                        {{vm.product.name}}
+                                        {{product.productName}}
                                     </td>
                                     <td class="unit">
-                                        {{vm.product.unit}}
+                                        {{product.units}}
                                     </td>
                                     <td class="price">
-                                        {{vm.product.prices.price}}
+                                        {{product.price | currency}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -246,3 +246,5 @@
     <!-- / CONTENT -->
 
 </div>
+
+<pre>{{vm.order | json}}</pre>
