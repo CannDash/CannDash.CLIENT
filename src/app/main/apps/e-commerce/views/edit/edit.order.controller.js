@@ -30,7 +30,8 @@
     	$state, 
     	$stateParams, 
     	productOrderFactory, 
-    	$ngBootbox) {
+    	$ngBootbox) 
+    {
 
         var vm = this;
         var wProductsUrl = null;
@@ -84,7 +85,6 @@
 								function(d) {
 									return d.driverId == vm.order.driverId		//jshint ignore:line
 								})												//jshint ignore:line
-				//jshint ignore:line
 	            }
 	        );
 
@@ -112,12 +112,15 @@
            				})	//jshint ignore:line
             		})	//jshint ignore:line
             }
-        }
+        } // activate() function
+
+        /////////
 
         // Functions for buttons
 	    function addProduct() {
 	    	vm.productRows.push({ category : undefined, product : undefined, qty : 0 });
 	    }
+
 
 	    function addOrder() {
             var defer = $q.defer();	   
@@ -139,7 +142,7 @@
 						orderQty: productRow.quantity,	
 						units: productRow.price.unit,
 						price: productRow.price.price,	
-						totalSale: productRow.quantity * productRow.price.price  
+						totalOrderSale: productRow.quantity * productRow.price.price  
 					})	//jshint ignore:line
 				});
 
@@ -153,7 +156,7 @@
 			// vm.order.totalOrderCost
 			vm.order.totalOrderSale = _.sumBy(products, 	//jshint ignore:line
 										function(o) { 
-											return o.total; 
+											return o.totalOrderSale; 
 									});
 
 	    	if (vm.order.orderId)
@@ -163,52 +166,23 @@
 			    			$state.go('app.e-commerce.orders');						//jshint ignore:line
 						}	
 			    	);	
+		    else {
+				var newOrder = vm.order;									//jshint ignore:line
+				newOrder.driverId = vm.order.driver.driverId;				//jshint ignore:line
+				newOrder.customerId = vm.order.customer.customerId;		//jshint ignore:line
+				// Temporary code for Dispensary Id; value coming from $stateParams, until we get OAuth and roles setup for it.
+				newOrder.dispensaryId = vm.order.customer.dispensaryId; 	//jshint ignore:line
+				delete newOrder.customer;					//jshint ignore:line
+				delete newOrder.driver;					//jshint ignore:line
+				orderFactory.addOrder(newOrder).then(   //jshint ignore:line
+					function () {
+						$state.go('app.e-commerce.orders');                     //jshint ignore:line
+					}
+				);														//jshint ignore:line
+	    	}	
+	    }	// addOrder() function
 
-		    else 
-			var newOrder = vm.order;									//jshint ignore:line
-              newOrder.driverId = vm.order.driver.driverId;				//jshint ignore:line
-              newOrder.customerId = vm.order.customer.customerId;		//jshint ignore:line
-              // Temporary code for Dispensary Id; value coming from $stateParams, until we get OAuth and roles setup for it.
-              newOrder.dispensaryId = vm.order.customer.dispensaryId; 	//jshint ignore:line
-              var orderItems = vm.order.productOrders;
-              delete newOrder.customer;					//jshint ignore:line
-              delete newOrder.driver;					//jshint ignore:line
-              delete newOrder.productOrders;			//jshint ignore:line
-                orderFactory.addOrder(newOrder).then(   //jshint ignore:line
-                    function(newOrder) {
-                         var promises = [];
-                         //Iterates over productRows to post each individual item related to the order.
-                         for (var i = 0; i < orderItems.length; i++) {
-                                   var orderItem = orderItems[i];
-                                   orderItem.orderId = newOrder.orderId;
-
-                                   //orderItem.orderQty = orderItem.quantity;//?
-                                   //orderItem.unitPrice = orderItem.price.price;//?
-                                   // orderItem.discount = //?
-                                   // orderItem.totalSale = //?
-
-
-                                   // delete orderItem.price;
-
-
-                                   promises.push(productOrderFactory.addProductOrder(orderItem));
-                         }
-                         //Collects the promises for all the order item posts
-                         $q.all(promises).then(function(orderItems) {
-                                 toastr.success('Successfully added order with items', 'Saved');
-                         });
-                        $state.go('app.e-commerce.orders');                     //jshint ignore:line
-                    }
-                );
-
-		   //  	orderFactory.addOrder(vm.order).then(	//jshint ignore:line
-		   //  		function(data) {
-		   //  			$state.go('app.e-commerce.orders');						//jshint ignore:line
-					// }	
-		   //  	);		
-	    	};																	//jshint ignore:line
-
-
+	    ///////
 
 	    // Functions for text autocomplete boxes, dropdown menus & form fields
 	    vm.onCategorySelected = function(product) {
@@ -265,4 +239,5 @@
 							})	//jshint ignore:line
 	    };
     }
+
 })();

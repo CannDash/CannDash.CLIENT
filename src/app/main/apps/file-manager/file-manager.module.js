@@ -33,10 +33,10 @@
         });
 
         // Translation
-        $translatePartialLoaderProvider.addPart('app/main/apps/file-manager');
+        $translatePartialLoaderProvider.addPart('');
 
         // Api
-        msApiProvider.register('fileManager.documents', ['app/data/file-manager/documents.json']);
+        msApiProvider.register('');
 
         // Navigation
         msNavigationServiceProvider.saveItem('apps.file-manager', {

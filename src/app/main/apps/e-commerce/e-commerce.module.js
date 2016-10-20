@@ -100,7 +100,7 @@
                 bodyClass: 'e-commerce'
             })
             .state('app.e-commerce.edit-order', {
-                url      : '/edit-order/:id',
+                url      : '/edit-order/:id',           // need orderId to pass through with this state!!
                 params	: { order : null },
                 views    : {
                     'content@app': {
@@ -122,16 +122,16 @@
             });
 
         // Translation
-        $translatePartialLoaderProvider.addPart('app/main/apps/e-commerce');
+        // $translatePartialLoaderProvider.addPart('app/main/apps/e-commerce');
 
         // Api
-        msApiProvider.register('e-commerce.dashboard', ['app/data/e-commerce/dashboard.json']);
-        msApiProvider.register('e-commerce.inventory', ['app/data/e-commerce/products.json']);
-        msApiProvider.register('e-commerce.products', ['app/data/e-commerce/products.json']);
-        msApiProvider.register('e-commerce.product', ['app/data/e-commerce/product.json']);
+        // msApiProvider.register('e-commerce.dashboard', ['']);
+        // msApiProvider.register('e-commerce.inventory', ['']);
+        msApiProvider.register('e-commerce.products', ['']);
+        // msApiProvider.register('e-commerce.product', ['']);
         msApiProvider.register('e-commerce.orders', ['app/data/e-commerce/orders.json']);
         msApiProvider.register('e-commerce.statuses', ['app/data/e-commerce/statuses.json']);
-        msApiProvider.register('e-commerce.order', ['app/data/e-commerce/order.json']);
+        msApiProvider.register('e-commerce.order', ['app/data/e-commerce/orders.json']);
 
         // Navigation
         msNavigationServiceProvider.saveItem('apps.e-commerce', {
@@ -141,7 +141,7 @@
         });
 
         msNavigationServiceProvider.saveItem('apps.e-commerce.orders', {
-            title: 'Orders',
+            title: 'All Orders',
             state: 'app.e-commerce.orders'
         });
 

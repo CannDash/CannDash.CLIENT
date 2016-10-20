@@ -12,7 +12,7 @@
 
         // Data
         vm.driverInfo = {};
-        vm.order = Order.data;
+        vm.order = [];
         vm.statuses = Statuses.data;
         vm.dtInstance = {};
         vm.dtOptions = {
@@ -162,7 +162,12 @@
          * @param id
          */
         function updateStatus(order) {
-                orderFactory.updateOrder(order);             
+             var currentOrder = vm.order;
+             delete currentOrder.driverInfo;
+             delete currentOrder.customerInfo;
+             delete currentOrder.productOrders;
+
+                orderFactory.updateOrder(currentOrder);
             }
     }
 })();

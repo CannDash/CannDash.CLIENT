@@ -10,7 +10,9 @@
             <div layout="column" layout-align="start center">
                 <div class="h2">
                     <span>{{vm.order.orderId ? 'Edit Order' : 'New Order'}}</span>
-                    <span>{{vm.order.items}}</span>
+                </div>
+                <div class="subtitle secondary-text">
+                    <span>{{vm.order.productOrders.length}} {{vm.order.orderId ? 'items in cart' : ''}}</span>
                 </div>
             </div>
 
@@ -133,6 +135,7 @@
 									<tbody>
 										<tr ng-repeat="productRow in vm.productRows">
 											<td style="min-width:40px">										
+												<!-- Category dropdown menu -->
 												<md-select ng-model="productRow.category" layout-gt-md="row" layout-padding="" aria-label="Select"
 													ng-change="vm.onCategorySelected(productRow)">
 													<md-option ng-repeat="category in vm.categories | orderBy : 'title' " ng-value="{{category}}">
@@ -141,6 +144,7 @@
 												</md-select>
 											</td>	
 											<td>
+												<!-- Product text box -->
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-autocomplete flex required
 														md-input-name="Product" + $index
@@ -161,6 +165,7 @@
 												</md-content>
 											</td>
 											<td style="min-width:90px">										
+												<!-- Quantity dropdown menu -->
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
 														<label>Qty</label>
@@ -171,6 +176,7 @@
 												</md-content> 
 											</td>	
 											<td>										
+												<!-- Price auto-populate box -->
 												<md-select ng-model="productRow.price" layout-gt-md="row" layout-padding="" aria-label="Select">
 													<md-option ng-repeat="price in productRow.prices"
 														ng-value="{{price}}">
@@ -180,9 +186,9 @@
 											</td>	
 											<td>										
 												<md-content layout-gt-md="row" layout-padding="">
-													<md-input-container>														
-														<span>															
-																{{ productRow.quantity *  productRow.price.price | currency:"$":0 }}															
+													<md-input-container>	
+														<span>
+																{{ productRow.quantity *  productRow.price.price | currency:"$":0 }}		
 														</span> 
 													</md-input-container>
 												</md-content> 

@@ -23,7 +23,7 @@
                 width: '72px'
             }, {
                 // Target the status column
-                targets: 4,
+                targets: 5,
                 render: function(data, type) {
                     if (type === 'display') {
                         var orderStatus = vm.getOrderStatus(data);

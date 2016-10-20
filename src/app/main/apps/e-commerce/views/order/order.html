@@ -11,7 +11,7 @@
             <div layout="column" layout-align="start start">
                 <div class="h2">
                     <span>Order Number :</span>
-                    <span>{{vm.order.orderId}}</span>
+                    <span>{{vm.order.dispensaryOrderNo}}</span>
                 </div>
 
                 <div class="subtitle secondary-text">
@@ -67,7 +67,7 @@
                                             <span class="quantity">{{vm.order.itemQuantity}} items</span>
                                         </td>
                                         <td>
-                                            <span class="total">${{vm.order.totalOrderSale}}</span>
+                                            <span class="total">{{vm.order.totalOrderSale | currency}}</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -175,76 +175,8 @@
                     </div>
                 </md-tab-body>
             </md-tab>
-<!-- 
-            <md-tab>
-                <md-tab-label>
-                    <span translate="EC.PRODUCTS_ORDERED">Products Ordered</span>
-                </md-tab-label>
-
-                <md-tab-body>
-                    <div class="order-detail-form-container products md-background-bg md-whiteframe-1dp">
-                        <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
-                               dt-options="vm.dtOptions">
-                            <thead>
-                                <tr>
-                                    <th class="secondary-text">
-                                        <div class="table-header">
-                                            <span class="column-title">ID</span>
-                                        </div>
-                                    </th>
-                                    <th class="secondary-text">
-                                        <div class="table-header">
-                                            <span class="column-title">Image</span>
-                                        </div>
-                                    </th>
-                                    <th class="secondary-text">
-                                        <div class="table-header">
-                                            <span class="column-title">Name</span>
-                                        </div>
-                                    </th>
-                                    <th class="secondary-text">
-                                        <div class="table-header">
-                                            <span class="column-title">Price</span>
-                                        </div>
-                                    </th>
-                                    <th class="secondary-text">
-                                        <div class="table-header">
-                                            <span class="column-title">Quantity</span>
-                                        </div>
-                                    </th>
-                                    <th class="secondary-text">
-                                        <div class="table-header">
-                                            <span class="column-title">Details</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="product in ::vm.order.products">
-                                    <td>{{product.id}}</td>
-                                    <td><img class="product-image" ng-src="{{product.image}}"></td>
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.price}}</td>
-                                    <td>{{product.quantity}}</td>
-                                    <td>
-                                        <md-button class="edit-button md-icon-button"
-                                                   ng-click="vm.gotoProductDetail(product.id)"
-                                                   aria-label="Product details"
-                                                   translate translate-attr-aria-label="EC.PRODUCT_DETAILS">
-                                            <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
-                                        </md-button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </md-tab-body>
-            </md-tab> -->
         </md-tabs>
-
     </div>
     <!-- / CONTENT -->
-
 </div>
-
-<pre>{{vm.order | json}}</pre>
+<!-- <pre>{{vm.order | json}}</pre> -->

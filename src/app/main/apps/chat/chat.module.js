@@ -36,9 +36,9 @@
 
         // Api
         // Contacts data must be alphabatically ordered.
-        msApiProvider.register('chat.contacts', ['app/data/chat/contacts.json']);
-        msApiProvider.register('chat.chats', ['app/data/chat/chats/:id.json']);
-        msApiProvider.register('chat.user', ['app/data/chat/user.json']);
+        msApiProvider.register('chat.contacts', ['']);
+        msApiProvider.register('chat.chats', ['']);
+        msApiProvider.register('chat.user', ['']);
 
         // Navigation
         msNavigationServiceProvider.saveItem('apps.chat', {

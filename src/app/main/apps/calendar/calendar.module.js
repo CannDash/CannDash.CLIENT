@@ -27,7 +27,7 @@
         });
 
         // Translation
-        $translatePartialLoaderProvider.addPart('app/main/apps/calendar');
+        $translatePartialLoaderProvider.addPart('');
 
         // Navigation
         msNavigationServiceProvider.saveItem('apps.calendar', {

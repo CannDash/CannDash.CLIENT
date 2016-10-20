@@ -39,6 +39,11 @@
                         <tr>
                             <th class="secondary-text">
                                 <div class="table-header">
+                                    <span class="column-title">Date</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
                                     <span class="column-title">ID</span>
                                 </div>
                             </th>
@@ -64,18 +69,14 @@
                             </th>
                             <th class="secondary-text">
                                 <div class="table-header">
-                                    <span class="column-title">Date</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
                                     <span class="column-title">Details</span>
                                 </div>
                             </th>
                         </tr>
                     </thead>
                     <tbody>     
-                        <tr ng-repeat="row in ::vm.dispensaryOrders.order | orderBy : '-orderDate': true ">
+                        <tr ng-repeat="row in ::vm.dispensaryOrders.order | orderBy : '-orderDate'">
+                            <td class="date">{{row.orderDate | date:'MM/dd/yy h:mma'}}</td>
                             <td>{{row.dispensaryOrderNo}}</td>
                             <td>
                                 {{row.driverInfo.firstName || "n/a"}} {{row.driverInfo.lastName || "n/a"}}
@@ -85,7 +86,6 @@
                             </td>
                             <td>${{row.totalOrderSale}}</td> 
                             <td>{{row.orderStatus}}</td>
-                            <td class="date">{{row.orderDate | date:'MM/dd/yy h:mma'}}</td>
                             <td>
                                 <md-button class="edit-button md-icon-button" ng-click="vm.gotoOrderDetail(row.orderId)" aria-label="Order details">
                                     <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
