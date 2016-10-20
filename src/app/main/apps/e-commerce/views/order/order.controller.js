@@ -167,7 +167,11 @@
              delete currentOrder.customerInfo;
              delete currentOrder.productOrders;
 
-                orderFactory.updateOrder(currentOrder);
-            }
-    }
+                $state.go('app.e-commerce.orders');                     //jshint ignore:line
+
+                orderFactory.updateOrder(currentOrder); 
+                
+
+        }   
+    }               
 })();
