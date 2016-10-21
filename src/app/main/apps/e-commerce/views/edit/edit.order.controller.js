@@ -57,7 +57,7 @@
 		        { 
 		        	dispensaryId : dispensaryId
 		        };
-		    if (vm.order.customerInfo) vm.order.customer = vm.order.customerInfo;		//jshint ignore:line
+		    if (vm.order.customerInfo) vm.order.customer = vm.order.customerInfo;	//jshint ignore:line
 	        vm.productRows = [];
 	        vm.categories = [];
 
@@ -76,12 +76,12 @@
             dispensaryFactory.getByDispensaryDrivers(dispensaryId).then(
 	            function(data) {
 	                vm.drivers = 
-	                	_.filter(data.drivers, 								//jshint ignore:line
-	                		function(d) {return d.driverCheckIn});	//jshint ignore:line
+	                	_.filter(data.drivers, 									//jshint ignore:line
+	                		function(d) {return d.driverCheckIn});				//jshint ignore:line
 
 	                if (vm.order.driverId)
-						vm.order.driver =						//jshint ignore:line
-							_.find(data.drivers,				//jshint ignore:line
+						vm.order.driver =										//jshint ignore:line
+							_.find(data.drivers,								//jshint ignore:line
 								function(d) {
 									return d.driverId == vm.order.driverId		//jshint ignore:line
 								})												//jshint ignore:line
@@ -102,15 +102,15 @@
             					id: order.productId,
             					name: order.productName,
             					category_id: order.categoryId,				//jshint ignore:line
-            					category_name: order.category_name	//jshint ignore:line
+            					category_name: order.category_name			//jshint ignore:line
             				},	
             				quantity: order.orderQty,
             				price: {
             					unit: order.price.unit,
             					price: order.price.price
             				}
-           				})	//jshint ignore:line
-            		})	//jshint ignore:line
+           				})													//jshint ignore:line
+            		})														//jshint ignore:line
             }
         } // activate() function
 
@@ -121,19 +121,18 @@
 	    	vm.productRows.push({ category : undefined, product : undefined, qty : 0 });
 	    }
 
-
 	    function addOrder() {
             var defer = $q.defer();	   
             			
             // If does not exist, create order anyway 
-            if (vm.patient) vm.order.customerId = vm.patient.customerId;	//jshint ignore:line
+            if (vm.patient) vm.order.customerId = vm.patient.customerId;		//jshint ignore:line
 
             // Constant variable products object to hold array of productOrder line items
-			const products = vm.order.productOrders = [];					//jshint ignore:line
+			const products = vm.order.productOrders = [];						//jshint ignore:line
 			
 			// Iterate over the vm.product rows array that user entered in the order.
 			vm.productRows.forEach(
-				function(productRow) {								//jshint ignore:line
+				function(productRow) {											//jshint ignore:line
 					products.push({												//jshint ignore:line
 						productId: productRow.product.id,
 						productName: productRow.product.name,
@@ -147,20 +146,19 @@
 				});
 
 			// Iterate over the products object above, and return the orderQty for each item
-			vm.order.itemQuantity = _.sumBy(products, 	//jshint ignore:line
+			vm.order.itemQuantity = _.sumBy(products, 								//jshint ignore:line
 										function(o) { 
 											return o.orderQty; 
 									});
 			
 			// Iterate over the products object above, and return the total for each item 
-			// vm.order.totalOrderCost
-			vm.order.totalOrderSale = _.sumBy(products, 	//jshint ignore:line
+			vm.order.totalOrderSale = _.sumBy(products, 							//jshint ignore:line
 										function(o) { 
 											return o.totalOrderSale; 
 									});
 
 	    	if (vm.order.orderId)
-	    		orderFactory.updateOrder(vm.order)	//jshint ignore:line
+	    		orderFactory.updateOrder(vm.order)									//jshint ignore:line
 			    	.then(
 			    		function(data) {
 			    			$state.go('app.e-commerce.orders');						//jshint ignore:line
@@ -169,16 +167,16 @@
 		    else {
 				var newOrder = vm.order;									//jshint ignore:line
 				newOrder.driverId = vm.order.driver.driverId;				//jshint ignore:line
-				newOrder.customerId = vm.order.customer.customerId;		//jshint ignore:line
-				// Temporary code for Dispensary Id; value coming from $stateParams, until we get OAuth and roles setup for it.
+				newOrder.customerId = vm.order.customer.customerId;			//jshint ignore:line
+				// Temp code for Dispensary Id; value coming from $stateParams, until OAuth/roles setup
 				newOrder.dispensaryId = vm.order.customer.dispensaryId; 	//jshint ignore:line
-				delete newOrder.customer;					//jshint ignore:line
-				delete newOrder.driver;					//jshint ignore:line
-				orderFactory.addOrder(newOrder).then(   //jshint ignore:line
+				delete newOrder.customer;									//jshint ignore:line
+				delete newOrder.driver;										//jshint ignore:line
+				orderFactory.addOrder(newOrder).then(   					//jshint ignore:line
 					function () {
 						$state.go('app.e-commerce.orders');                     //jshint ignore:line
 					}
-				);														//jshint ignore:line
+				);																//jshint ignore:line
 	    	}	
 	    }	// addOrder() function
 
@@ -192,21 +190,22 @@
 	    vm.getProductMatches = function(productRow) {
 			var searchTextLower = productRow.searchText.toLowerCase();
 			
-			return _.filter(productRow.products,											//jshint ignore:line
-				function (p) {return p.name.toLowerCase().indexOf(searchTextLower) >= 0}) 	//jshint ignore:line	
+			return _.filter(productRow.products,									//jshint ignore:line
+				function (p) {
+					return p.name.toLowerCase().indexOf(searchTextLower) >= 0})	//jshint ignore:line	
 		};
 
 		vm.getPatientMatches = function(patient) {
 			var searchTextLower = patient.searchText.toLowerCase();
 			
-			return _.filter(vm.customers,													//jshint ignore:line
+			return _.filter(vm.customers,										//jshint ignore:line
 				function (p) {
 					return (p.firstName + p.lastName).toLowerCase().indexOf(searchTextLower) >= 0 //jshint ignore:line
-				}) 																				//jshint ignore:line
+				}) 																//jshint ignore:line
 		};
 
 		vm.onPatientSelected = function(patient) {
-			const order = vm.order;						//jshint ignore:line
+			const order = vm.order;												//jshint ignore:line
 
 			order.street = patient.street;
 			order.unitNo = patient.unitNo;
@@ -219,10 +218,10 @@
 		vm.onProductSelected = function(productRow) {
 			productRow.prices = [];
 			
-			const product = productRow.product;	//jshint ignore:line
-			const prices = product.prices;	//jshint ignore:line
+			const product = productRow.product;								//jshint ignore:line
+			const prices = product.prices;									//jshint ignore:line
 			
-			for (var unit in prices)	//jshint ignore:line
+			for (var unit in prices)										//jshint ignore:line
 				productRow.prices.push({unit: unit, price: prices[unit]})	//jshint ignore:line
 	    };
 
@@ -232,11 +231,11 @@
 			// keeping a running total of all the calls in the products array.
 			// Check to see if quanity or unit has not been filled if so return zero to that product row
 			// otherwise return the quantity multiplied by the price of that unit.
-	    	 	return _.sumBy(vm.productRows,	//jshint ignore:line
-							function(p) {
-								if (!p.quantity || !p.price) return 0;	//jshint ignore:line
-									return p.quantity * p.price.price 	//jshint ignore:line
-							})	//jshint ignore:line
+    	 	return _.sumBy(vm.productRows,							//jshint ignore:line
+						function(p) {
+							if (!p.quantity || !p.price) return 0;	//jshint ignore:line
+								return p.quantity * p.price.price 	//jshint ignore:line
+						})											//jshint ignore:line
 	    };
     }
 
