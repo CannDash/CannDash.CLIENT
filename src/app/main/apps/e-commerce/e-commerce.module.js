@@ -80,7 +80,7 @@
                 bodyClass: 'e-commerce'
             })
             .state('app.e-commerce.order', {
-                url      : '/order/:id',
+                url      : '/order/',
                 views    : {
                     'content@app': {
                         templateUrl: 'app/main/apps/e-commerce/views/order/order.html',
@@ -121,12 +121,7 @@
                 bodyClass: 'e-commerce'
             });
 
-        // Translation
-        // $translatePartialLoaderProvider.addPart('app/main/apps/e-commerce');
-
         // Api
-        // msApiProvider.register('e-commerce.dashboard', ['']);
-        // msApiProvider.register('e-commerce.inventory', ['']);
         msApiProvider.register('e-commerce.products', ['']);
         // msApiProvider.register('e-commerce.product', ['']);
         msApiProvider.register('e-commerce.orders', ['app/data/e-commerce/orders.json']);

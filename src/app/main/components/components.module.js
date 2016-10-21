@@ -14,8 +14,7 @@
             'app.components.price-tables',
             'app.components.tables.simple-table',
             'app.components.tables.datatable',
-            'app.components.widgets',
-            'app.components.material-docs'
+            'app.components.widgets'
         ])
         .config(config);
 

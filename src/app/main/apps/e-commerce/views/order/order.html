@@ -16,7 +16,7 @@
 
                 <div class="subtitle secondary-text">
                     <span>Patient :</span>
-                    <span>{{vm.order.customerInfo.firstName}} {{vm.order.customerInfo.lastName}}</span>
+                    <span>{{vm.order.customer.firstName}} {{vm.order.customer.lastName}}</span>
                 </div>
             </div>
         </div>
@@ -57,11 +57,11 @@
                                     <tr>
                                         <td>
                                             <div layout="row" layout-align="start center">
-                                                <span class="name text-nowrap">{{vm.order.customerInfo.firstName}} {{vm.order.customerInfo.lastName}}</span>
+                                                <span class="name text-nowrap">{{vm.order.customer.firstName}} {{vm.order.customer.lastName}}</span>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="phone">{{vm.order.customerInfo.phone}}</span>
+                                            <span class="phone">{{vm.order.customer.phone}}</span>
                                         </td>
                                         <td>
                                             <span class="quantity">{{vm.order.itemQuantity}} items</span>
@@ -132,7 +132,7 @@
                                     </td>
                                     <td class="driver">
                                         <div layout="row" layout-align="start center">
-                                            <span class="name text-nowrap">{{vm.driver.firstName}}  {{vm.driver.lastName}}</span>
+                                            <span class="name text-nowrap">{{vm.order.driver.firstName}}  {{vm.order.driver.lastName}}</span>
                                         </div>
                                     </td>
                                 </tr>

@@ -10,12 +10,9 @@
             <div layout="column" layout-align="start center">
                 <div class="h2">
                     <span>{{vm.order.orderId ? 'Edit Order' : 'New Order'}}</span>
-                </div>
-                <div class="subtitle secondary-text">
-                    <span>{{vm.order.productOrders.length}} {{vm.order.orderId ? 'items in cart' : ''}}</span>
+                    <span>{{vm.order.items}}</span>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- / HEADER -->
@@ -133,62 +130,63 @@
 										</tr>							
 									</thead>
 									<tbody>
-										<tr ng-repeat="productRow in vm.productRows">
-											<td style="min-width:40px">										
-												<!-- Category dropdown menu -->
-												<md-select ng-model="productRow.category" layout-gt-md="row" layout-padding="" aria-label="Select"
-													ng-change="vm.onCategorySelected(productRow)">
-													<md-option ng-repeat="category in vm.categories | orderBy : 'title' " ng-value="{{category}}">
-														{{category.title}}
+										<tr ng-repeat="productOrder in vm.order.productOrders">
+											<td style="min-width:40px">
+												<md-select ng-model="productOrder.category" layout-gt-md="row" layout-padding="" aria-label="Select"
+                                                    ng-model-options="{trackBy: '$value.id'}"
+													ng-change="vm.onCategorySelected(productOrder)">
+													<md-option ng-repeat="category in vm.categories | orderBy : 'title'"
+                                                        ng-value="{{category}}">
+														{{category.name}}
 													</md-option>
 												</md-select>
 											</td>	
 											<td>
-												<!-- Product text box -->
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-autocomplete flex required
-														md-input-name="Product" + $index
+														md-input-name="{{'product' + $index}}"
 														md-no-cache="false"
 														md-min-length="1"
-														md-selected-item="productRow.product"
-														md-search-text="productRow.searchText"
-														md-items="product in vm.getProductMatches(productRow)"
+														md-selected-item="productOrder.product"
+														md-search-text="productOrder.searchText"
+														md-items="product in vm.getProductMatches(productOrder)"
 														md-item-text="product.name"
 														md-require-match
-														md-selected-item-change="vm.onProductSelected(productRow)"
+														md-selected-item-change="vm.onProductSelected(productOrder)"
 														md-floating-label="Product"
-														mmd-menu-class = "autocomplete-custom-template">
-														<span md-highlight-text="productRow.searchText">
+														mmd-menu-class="autocomplete-custom-template">
+														<span md-highlight-text="productOrder.searchText">
 															{{product.name}}
 														</span>
 													</md-autocomplete>
 												</md-content>
 											</td>
 											<td style="min-width:90px">										
-												<!-- Quantity dropdown menu -->
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
 														<label>Qty</label>
-														<input ng-model="productRow.quantity" aria-label="amount" required type="number" step="1">
+														<input ng-model="productOrder.orderQty" aria-label="amount" required type="number" step="1">
 															<span id="currency-custom" flex>{{amount | currency:"USD$":0}}</span>
 														</input> 
 													</md-input-container>
 												</md-content> 
 											</td>	
-											<td>										
-												<!-- Price auto-populate box -->
-												<md-select ng-model="productRow.price" layout-gt-md="row" layout-padding="" aria-label="Select">
-													<md-option ng-repeat="price in productRow.prices"
-														ng-value="{{price}}">
-														{{price.unit}}: {{price.price | currency}}
+											<td>
+												<md-select ng-model="productOrder.unitPrice"
+                                                    ng-model-options="{trackBy: '$value.unit'}"
+                                                    ng-change="vm.onUnitPriceSelected(productOrder)"
+                                                    layout-gt-md="row" layout-padding="" aria-label="Select">
+													<md-option ng-repeat="unitPrice in productOrder.unitPrices"
+                                                        ng-value="{{unitPrice}}">
+														{{unitPrice.unit}}: {{unitPrice.price | currency}}
 													</md-option>
 												</md-select>
 											</td>	
 											<td>										
 												<md-content layout-gt-md="row" layout-padding="">
-													<md-input-container>	
-														<span>
-																{{ productRow.quantity *  productRow.price.price | currency:"$":0 }}		
+													<md-input-container>														
+														<span>															
+															{{ productOrder.orderQty * productOrder.price | currency:"$":0 }}
 														</span> 
 													</md-input-container>
 												</md-content> 
@@ -218,13 +216,13 @@
 
 							<!-- Submit order button -->
 							<md-input-container layout="row" layout-align="end center">
-					        	<md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" ng-click="vm.addOrder()">
+					        	<md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" ng-click="vm.onSubmit()">
 					        		Submit
 					        	</md-button>
 					        </md-input-container>	
 
 						</md-content>	<!-- Select Patient -->	
 					</div>
-				
+                </md-tab-body>
 	</div>
 </div>
