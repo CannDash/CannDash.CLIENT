@@ -6,11 +6,12 @@
         .controller('OrderController', OrderController);
 
     /** @ngInject */
-    function OrderController($state, $stateParams, Statuses, uiGmapGoogleMapApi, Order, orderFactory) {
+    function OrderController(
+        $state, $stateParams, Statuses, uiGmapGoogleMapApi, orderFactory) {
         var vm = this;
 
         // Data
-        vm.order = Order.data;
+        vm.order = [];
         vm.statuses = Statuses.data;
         vm.dtInstance = {};
         vm.dtOptions = {
@@ -44,8 +45,11 @@
 
         function activate() {
             orderFactory.getByOrderId($stateParams.id).then(
-                function(orderFromServer) {
-                    vm.order = orderFromServer;
+                function(data) {
+                    vm.order = data.order;
+                    vm.order.customer = data.customer;
+                    vm.order.driver = data.driver;
+                    fetchGoogleMap();
                 }
             );
         }
@@ -56,12 +60,18 @@
         vm.updateStatus = updateStatus;
         vm.getAddressFromOrder = getAddressFromOrder;
         vm.getStatusText = getStatusText;
+        vm.getDriverFromOrder = getDriverFromOrder;
+
+
+        ///////////////////
 
         function getAddressFromOrder(order) {
             return order.street + ' ' + order.city + ' ' + order.state + ' ' + order.zipCode;
         }
 
-
+        function getDriverFromOrder(order) {
+            return order.driverId;
+        }
 
         function getStatusText(orderStatus) {
             var status = parseInt(orderStatus);
@@ -82,32 +92,29 @@
 
         init();
 
-        // Normally, you would need Google Maps Geocoding API
-        // to convert addresses into latitude and longitude
-        // but because Google's policies, we are faking it for
-        // the demo
-        uiGmapGoogleMapApi.then(function(maps) {
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ 'address': getAddressFromOrder(vm.order) }, function(results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                    // console.log(results[0].geometry);
-                    vm.deliveryAddressMap = {
-                        center: {
-                            latitude: results[0].geometry.location.lat(),
-                            longitude: results[0].geometry.location.lng()
-                        },
-                        marker: {
-                            id: 'deliveryAddress'
-                        },
-                        zoom: 13
-                    };
-                } else {
-                    console.log('Geocode was not successful for the following reason: ' + status);
-                }
+        function fetchGoogleMap() {
+            // Google maps API
+            uiGmapGoogleMapApi.then(function (maps) {
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'address': getAddressFromOrder(vm.order)}, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        // console.log(results[0].geometry);
+                        vm.deliveryAddressMap = {
+                            center: {
+                                latitude: results[0].geometry.location.lat(),
+                                longitude: results[0].geometry.location.lng()
+                            },
+                            marker: {
+                                id: 'deliveryAddress'
+                            },
+                            zoom: 13
+                        };
+                    } else {
+                        console.log('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
             });
-
-
-        });
+        }
 
         /**
          * Initialize
@@ -117,6 +124,10 @@
             // This is an unnecessary step for a real world app
             // because normally, you would request the product
             // with its id and you would get only one product.
+            // For demo purposes, we are grabbing the entire
+            // json file which have more than one product details
+            // and then hand picking the requested product from
+            // it.
             var id = $state.params.id;
 
             for (var i = 0; i < vm.order.length; i++) {
@@ -149,7 +160,15 @@
          * @param id
          */
         function updateStatus(order) {
-                orderFactory.updateOrder(order);             
-            }
-    }
+             var currentOrder = vm.order;
+             delete currentOrder.productOrders;
+
+                $state.go('app.e-commerce.orders');                     //jshint ignore:line
+
+                orderFactory.updateOrder(currentOrder); 
+                
+
+        }   
+    }               
 })();
+

@@ -80,7 +80,7 @@
                 bodyClass: 'e-commerce'
             })
             .state('app.e-commerce.order', {
-                url      : '/order/',
+                url      : '/order/:id',
                 views    : {
                     'content@app': {
                         templateUrl: 'app/main/apps/e-commerce/views/order/order.html',

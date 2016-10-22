@@ -87,7 +87,7 @@
         }
 
         /**
-         * Go to order detail
+         * Go to product detail
          *
          * @param id
          */
@@ -102,12 +102,13 @@
         );
 
         /**
-         * Create new order
+         * Go to new order detail
          *
          * @param id
          */
         function createNewOrder() {
-        	$state.go('app.e-commerce.edit-order');   
-	    }     	
+            $state.go('app.e-commerce.edit-order');
+        }       
     }
 })();
+

@@ -49,7 +49,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting orders', 'Error');
+                            toastr.error('Error getting all orders: ' + error.message, 'Error');
                        }
                   );
 
@@ -66,7 +66,7 @@
                    },
                    function(error) {
                         defer.reject(error);
-                        toastr.error('Error getting order detail', 'Error');
+                        toastr.error('Error getting dispensary orders: ' + error.message, 'Error');
                    }
               );
 
@@ -83,7 +83,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting order detail', 'Error');
+                            toastr.error('Error getting order by ID: ' + error.message, 'Error');
                        }
                   );
 
