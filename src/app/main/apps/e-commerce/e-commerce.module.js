@@ -100,7 +100,7 @@
                 bodyClass: 'e-commerce'
             })
             .state('app.e-commerce.edit-order', {
-                url      : '/edit-order/:id',           // need orderId to pass through with this state!!
+                url      : '/edit-order/:id',   // need orderId to pass through with this state!!
                 params	: { order : null },
                 views    : {
                     'content@app': {
@@ -123,7 +123,7 @@
 
         // Api
         msApiProvider.register('e-commerce.products', ['']);
-        // msApiProvider.register('e-commerce.product', ['']);
+        msApiProvider.register('e-commerce.product', ['']);
         msApiProvider.register('e-commerce.orders', ['app/data/e-commerce/orders.json']);
         msApiProvider.register('e-commerce.statuses', ['app/data/e-commerce/statuses.json']);
         msApiProvider.register('e-commerce.order', ['app/data/e-commerce/orders.json']);

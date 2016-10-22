@@ -154,6 +154,7 @@
 	                          orderQty: p.orderQty,
 	                          price: p.price,
 	                          units: p.units,
+	                          discount: p.discount,
 	                          totalSale: p.orderQty * p.price
 	                      };
 	                  });
@@ -176,14 +177,14 @@
 				orderFactory.updateOrder(order)	//jshint ignore:line
 					.then(
 						function () {
-							$state.go('app.e-commerce.orders');						//jshint ignore:line
+							$state.go('app.e-commerce.orders');		//jshint ignore:line
 						}
 					);
 
 			else {
 				orderFactory.addOrder(order).then(   //jshint ignore:line
 					function () {
-						$state.go('app.e-commerce.orders');                     //jshint ignore:line
+						$state.go('app.e-commerce.orders');          //jshint ignore:line
 					}
 				);
 			}
@@ -220,7 +221,7 @@
 		vm.getPatientMatches = function(patient) {
 			var searchTextLower = patient.searchText.toLowerCase();
 			
-			return _.filter(vm.customers,													//jshint ignore:line
+			return _.filter(vm.customers,		//jshint ignore:line
 				function (p) {
 					return (p.firstName + p.lastName).toLowerCase().indexOf(searchTextLower) >= 0 //jshint ignore:line
 				});																			//jshint ignore:line
@@ -240,12 +241,13 @@
 		vm.onProductSelected = function(productOrder) {
 			if (!productOrder.product) return;	//jshint ignore:line
 
-			productOrder.prices = [];	//jshint ignore:line
+			productOrder.prices = [];	
 			const product = productOrder.product;	//jshint ignore:line
-			const prices = product.prices;	//jshint ignore:line
+			const prices = product.prices;			//jshint ignore:line
+            
             productOrder.unitPrices = [];
-            for (var price in prices)			//jshint ignore:line
-                productOrder.unitPrices.push({	//jshint ignore:line
+            for (var price in prices)				//jshint ignore:line
+                productOrder.unitPrices.push({		//jshint ignore:line
                     unit: price,
                     price: prices[price]
                 });

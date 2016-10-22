@@ -3,17 +3,15 @@
 
     angular
         .module('app.e-commerce')
-        .controller('OrdersController', OrdersController);
+        .controller('OrderController', OrderController);
 
     /** @ngInject */
-    function OrdersController($state, Statuses, Orders, orderFactory) {
+    function OrderController($state, $stateParams, Statuses, uiGmapGoogleMapApi, Order, orderFactory) {
         var vm = this;
-        var dispensaryId = 266;
 
         // Data
-        vm.orders = Orders.data;
+        vm.order = Order.data;
         vm.statuses = Statuses.data;
-
         vm.dtInstance = {};
         vm.dtOptions = {
             dom: 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
@@ -22,92 +20,136 @@
                 targets: 0,
                 width: '72px'
             }, {
-                // Target the status column
-                targets: 5,
-                render: function(data, type) {
-                    if (type === 'display') {
-                        var orderStatus = vm.getOrderStatus(data);
-                        if (orderStatus) {
-                            return '<span class="status ' + orderStatus.color + '">' + orderStatus.name + '</span>';
-                        } else {
-                            return '<span class="status md-yellow-500-bg">Pending</span>';
-                        }
-                    }
-
-                    if (type === 'filter') {
-                        return vm.getOrderStatus(data);
-                    }
-
-                    return data;
-                }
+                // Target the image column
+                targets: 1,
+                filterable: false,
+                sortable: false,
+                width: '80px'
             }, {
                 // Target the actions column
-                targets: 6,
+                targets: 5,
                 responsivePriority: 1,
                 filterable: false,
                 sortable: false
             }],
-            initComplete: function() {
-                var api = this.api(),
-                    searchBox = angular.element('body').find('#e-commerce-products-search');
-
-                // Bind an external input as a table wide search box
-                if (searchBox.length > 0) {
-                    searchBox.on('keyup', function(event) {
-                        api.search(event.target.value).draw();
-                    });
-                }
-            },
             pagingType: 'simple',
             lengthMenu: [10, 20, 30, 50, 100],
             pageLength: 20,
-            scrollY: 'auto',
             responsive: true
         };
 
+        vm.newStatus = '';
+
+        activate();
+
+        function activate() {
+            orderFactory.getByOrderId($stateParams.id).then(
+                function(orderFromServer) {
+                    vm.order = orderFromServer;
+                }
+            );
+        }
+
         // Methods
-        vm.getOrderStatus = getOrderStatus;
-        vm.gotoOrderDetail = gotoOrderDetail;
-        vm.createNewOrder = createNewOrder;
+        vm.gotoOrders = gotoOrders;
+        vm.gotoProductDetail = gotoProductDetail;
+        vm.updateStatus = updateStatus;
+        vm.getAddressFromOrder = getAddressFromOrder;
+        vm.getStatusText = getStatusText;
+
+        function getAddressFromOrder(order) {
+            return order.street + ' ' + order.city + ' ' + order.state + ' ' + order.zipCode;
+        }
+
+
+
+        function getStatusText(orderStatus) {
+            var status = parseInt(orderStatus);
+
+            switch(status) {
+                case 1:
+                    return '<span class="status {{status.color}} md-yellow-500-bg">Pending</span>';
+                case 2:
+                    return '<span class="status {{status.color}} md-pink-500-bg">Cancelled</span>'; 
+                case 3:
+                    return '<span class="status {{status.color}} md-green-800-bg">Delivered</span>'; 
+                default:
+                    break;
+            }
+        }
 
         //////////
 
+        init();
+
+        // Normally, you would need Google Maps Geocoding API
+        // to convert addresses into latitude and longitude
+        // but because Google's policies, we are faking it for
+        // the demo
+        uiGmapGoogleMapApi.then(function(maps) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': getAddressFromOrder(vm.order) }, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    // console.log(results[0].geometry);
+                    vm.deliveryAddressMap = {
+                        center: {
+                            latitude: results[0].geometry.location.lat(),
+                            longitude: results[0].geometry.location.lng()
+                        },
+                        marker: {
+                            id: 'deliveryAddress'
+                        },
+                        zoom: 13
+                    };
+                } else {
+                    console.log('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+
+
+        });
+
         /**
-         * Get order status
-         *
-         * @param id
-         * @returns {*}
+         * Initialize
          */
-        function getOrderStatus(id) {
-            for (var i = 0; i < vm.statuses.length; i++) {
-                if (vm.statuses[i].id === parseInt(id)) {
-                    return vm.statuses[i];
+        function init() {
+            // Select the correct order from the data.
+            // This is an unnecessary step for a real world app
+            // because normally, you would request the product
+            // with its id and you would get only one product.
+            var id = $state.params.id;
+
+            for (var i = 0; i < vm.order.length; i++) {
+                if (vm.order[i].id === parseInt(id)) {
+                    vm.order = vm.order[i];
+                    break;
                 }
             }
+            // END - Select the correct product from the data
         }
 
         /**
-         * Go to product detail
+         * Go to orders page
+         */
+        function gotoOrders() {
+            $state.go('app.e-commerce.orders');
+        }
+
+        /**
+         * Go to product page
+         * @param id
+         */
+        function gotoProductDetail(id) {
+            $state.go('app.e-commerce.products.detail', { id: id });
+        }
+
+        /**
+         * Update order status
          *
          * @param id
          */
-        function gotoOrderDetail(id) {
-            $state.go('app.e-commerce.order', { id: id });
-        }
-
-        orderFactory.getOrdersByDispensary(dispensaryId).then(
-            function(data) {
-                vm.dispensaryOrders = data;
+        function updateStatus(order) {
+                orderFactory.updateOrder(order);             
             }
-        );
-
-        /**
-         * Go to new order detail
-         *
-         * @param id
-         */
-        function createNewOrder() {
-            $state.go('app.e-commerce.edit-order');   
-        }       
     }
 })();

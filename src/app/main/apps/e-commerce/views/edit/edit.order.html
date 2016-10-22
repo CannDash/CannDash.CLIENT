@@ -117,7 +117,7 @@
 									  	ng-model="vm.order.deliveryNotes"></textarea>
 							        </md-input-container>			
 							    </form>	<!-- Select Patient form -->
-
+							<form>
 								<!-- Select Products, Units & Quantity -->
 								<table class="dataTable order-product-table" ms-responsive-table> 
 									<thead> 
@@ -126,12 +126,13 @@
 			                                <th width="60%">Product</th>
 			                                <th width="10%">Qty</th>
 			                                <th width="10%">Units</th>			               
-			                                <th width="9%">Price</th>									
+			                                <th width="14%">Discount</th>	
+			                                <th width="5%">Price</th>									
 										</tr>							
 									</thead>
 									<tbody>
 										<tr ng-repeat="productOrder in vm.order.productOrders">
-											<td style="min-width:40px">
+											<td style="max-width:20px">
 												<md-select ng-model="productOrder.category" layout-gt-md="row" layout-padding="" aria-label="Select"
                                                     ng-model-options="{trackBy: '$value.id'}"
 													ng-change="vm.onCategorySelected(productOrder)">
@@ -171,7 +172,7 @@
 													</md-input-container>
 												</md-content> 
 											</td>	
-											<td>
+											<td style="min-width:40px">
 												<md-select ng-model="productOrder.unitPrice"
                                                     ng-model-options="{trackBy: '$value.unit'}"
                                                     ng-change="vm.onUnitPriceSelected(productOrder)"
@@ -181,11 +182,21 @@
 														{{unitPrice.unit}}: {{unitPrice.price | currency}}
 													</md-option>
 												</md-select>
-											</td>	
+											</td>
+											<td style="min-width:90px">
+												<md-input-container>
+													<label>Discount</label>
+													<input ng-model="productOrder.discount" layout-gt-md="row" layout-padding="" aria-label="Discount" ng-repeat="discount in productOrder.discounts" type="number" ng-value="{{discount}}">
+															<span id="discount" flex>
+																{{ discount | currency:"$":0 }}
+															</span>
+													</input>
+												</md-input-container>
+											</td>		
 											<td>										
 												<md-content layout-gt-md="row" layout-padding="">
-													<md-input-container>														
-														<span>															
+													<md-input-container>
+														<span>			
 															{{ productOrder.orderQty * productOrder.price | currency:"$":0 }}
 														</span> 
 													</md-input-container>
@@ -204,6 +215,7 @@
 											<td></td>
 											<td></td>
 											<td></td>
+											<td></td>
 											<td>
 												<h1 class="md-display-1">
 													{{ vm.calculateTotal() | currency:"$":0}}
@@ -213,6 +225,7 @@
 									</tfoot>
 								</table>
 							</div>
+						</form>
 
 							<!-- Submit order button -->
 							<md-input-container layout="row" layout-align="end center">

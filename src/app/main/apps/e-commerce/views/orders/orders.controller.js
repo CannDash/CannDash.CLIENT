@@ -87,7 +87,7 @@
         }
 
         /**
-         * Go to product detail
+         * Go to order detail
          *
          * @param id
          */
@@ -102,7 +102,7 @@
         );
 
         /**
-         * Go to new order detail
+         * Create new order
          *
          * @param id
          */
