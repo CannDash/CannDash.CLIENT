@@ -17,9 +17,15 @@
         vm.dtInstance = {};
         vm.dtOptions = {
             dom: 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+            order: [[0, 'desc']],
             columnDefs: [{
-                // Target the id column
+                // Target the date column
                 targets: 0,
+                width: '72px',
+                type: 'date'
+            }, {
+                // Target the ID column
+                targets: 1,
                 width: '72px'
             }, {
                 // Target the status column

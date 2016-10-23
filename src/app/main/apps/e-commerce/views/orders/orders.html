@@ -75,8 +75,8 @@
                         </tr>
                     </thead>
                     <tbody>     
-                        <tr ng-repeat="row in ::vm.dispensaryOrders.order | orderBy: '-orderDate' : true ">
-                            <td class="date">{{row.orderDate | date:'MM/dd/yy h:mma'}}</td>
+                        <tr ng-repeat="row in ::vm.dispensaryOrders.order">
+                            <td class="date" data-order="{{row.orderDate}}">{{row.orderDate | date:'MM/dd/yy h:mma'}}</td>
                             <td>{{row.dispensaryOrderNo}}</td>
                             <td>
                                 {{row.driverInfo.firstName || "n/a"}} {{row.driverInfo.lastName || "n/a"}}
