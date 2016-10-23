@@ -136,9 +136,7 @@
             delete currentOrder.productOrders;
 
             orderFactory.updateOrder(currentOrder); 
-
             $state.go('app.e-commerce.orders');                     //jshint ignore:line
-            $state.reload();
             $state.reload();
         }   
 
