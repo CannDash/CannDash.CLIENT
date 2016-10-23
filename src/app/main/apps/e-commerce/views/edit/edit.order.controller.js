@@ -201,7 +201,30 @@
             //vm.order.productOrders.splice(vm.order.productOrders.indexOf(product));
         };
 
+  //       vm.backToOrderDetail = function(orderId) {
+  //       	$state.go('app.e-commerce.order', { orderId: orderId });
 
+  //       	orderFactory.getByOrderId(orderId).then(
+	 //            function(data) {
+	 //                vm.dispensaryOrders = data.orderId;
+	 //            }
+  //           );
+		// };
+
+		/**
+         * Go to order detail
+         */
+        function gotoOrderDetail(id) {
+            $state.go('app.e-commerce.order', { id: id });
+        }
+	    
+		    var dispensaryId = 266;
+	        
+	        orderFactory.getOrdersByDispensary(dispensaryId).then(
+	            function(data) {
+	                vm.dispensaryOrders = data;
+	            }
+	        );
         ///////////////
 
 

@@ -74,9 +74,6 @@
 
         /**
          * Get order status
-         *
-         * @param id
-         * @returns {*}
          */
         function getOrderStatus(id) {
             for (var i = 0; i < vm.statuses.length; i++) {
@@ -87,9 +84,7 @@
         }
 
         /**
-         * Go to product detail
-         *
-         * @param id
+         * Go to order detail
          */
         function gotoOrderDetail(id) {
             $state.go('app.e-commerce.order', { id: id });
@@ -102,9 +97,7 @@
         );
 
         /**
-         * Go to new order detail
-         *
-         * @param id
+         * Create new order
          */
         function createNewOrder() {
             $state.go('app.e-commerce.edit-order');

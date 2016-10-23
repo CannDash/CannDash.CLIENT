@@ -3,7 +3,7 @@
     <!-- HEADER -->
     <div class="header md-accent-bg" layout="row" layout-align="start center">
         <div class="white-fg" layout="row" layout-align="start center" flex>
-            <md-button class="goto-orders-button md-icon-button" aria-label="Go to orders"
+            <md-button class="goto-orders-button md-icon-button" aria-label="All Orders"
                        ui-sref="app.e-commerce.orders">
                 <md-icon md-font-icon="icon-arrow-left"></md-icon>
             </md-button>
@@ -15,12 +15,13 @@
                     <span>{{vm.order.productOrders.length}} {{vm.order.orderId ? 'item(s) in cart' : ''}}</span>
                 </div>
             </div>
-            <div flex></div>
-            <div>
-				<md-button class="edit-button md-icon-button" ui-sref="app.e-commerce.order({orderId: vm.order})" aria-label="Order details">
+<!--             <div flex></div>
+            <div> -->
+            	<!-- Back to order detail (button) -->           
+				<!-- 	<md-button class="edit-button md-icon-button" ng-model="vm.order" ui-sref="app.e-commerce.order({order: vm.order.orderId})" aria-label="Order Details">
 					<md-icon md-font-icon="icon-cart" class="s16"></md-icon>
 				</md-button>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- / HEADER -->
