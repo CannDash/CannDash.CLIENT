@@ -35,6 +35,7 @@
 
         var vm = this;
         var wProductsUrl = null;
+        var previousPatient = null;
 
         // Initialize
         activate();
@@ -121,7 +122,7 @@
                     vm.customers = data.customers;
 
                     if (vm.order.customerId)
-                        vm.order.customer =	//jshint ignore:line
+                        previousPatient = vm.order.customer =	//jshint ignore:line
                             _.find(	//jshint ignore:line
                                 data.customers,
                                 function(c) {
@@ -260,13 +261,14 @@
 
 		vm.onPatientSelected = function(patient) {
 			const order = vm.order;		//jshint ignore:line				
+            if (!patient || patient == previousPatient) return;
+            previousPatient = patient;
 
 			order.street = patient.street;
 			order.unitNo = patient.unitNo;
 			order.city = patient.city;
 			order.state = patient.state;
 			order.zipCode = patient.zipCode;	
-			order.deliveryNotes = patient.deliveryNotes;
  	    };
 
 		vm.onProductSelected = function(productOrder) {
@@ -301,3 +303,4 @@
 	    };
     }
 })();
+
