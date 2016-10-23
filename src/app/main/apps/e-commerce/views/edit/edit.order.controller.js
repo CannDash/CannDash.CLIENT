@@ -226,8 +226,9 @@
 	    vm.onCategorySelected = function(productOrder) {
             productOrder.product = productOrder.orderQty = productOrder.price =
                 productOrder.menuCategoryId = productOrder.products = null;
+            // 
             if (!productOrder.category) return;	//jshint ignore:line
-
+            //
             productOrder.menuCategoryId = productOrder.category.id;
 			productOrder.products =
 				_.map(	//jshint ignore:line
@@ -247,7 +248,8 @@
 			
 			return _.filter(productOrder.products,		//jshint ignore:line
 				function (p) {
-					return p.name.toLowerCase().indexOf(searchTextLower) >= 0}); //jshint ignore:line	
+					return p.name.toLowerCase()
+							.indexOf(searchTextLower) >= 0}); //jshint ignore:line	
 		};
 
 		vm.getPatientMatches = function() {
@@ -255,15 +257,19 @@
 			
 			return _.filter(vm.customers,	//jshint ignore:line				
 				function (p) {
-					return (p.firstName + p.lastName).toLowerCase().indexOf(searchTextLower) >= 0 //jshint ignore:line
+					return (p.firstName + p.lastName)
+							.toLowerCase()
+							.indexOf(searchTextLower) >= 0 //jshint ignore:line
 				});																			
 		};
 
 		vm.onPatientSelected = function(patient) {
 			const order = vm.order;		//jshint ignore:line				
-            if (!patient || patient == previousPatient) return;
+            
+            if (!patient || patient == previousPatient) 	//jshint ignore:line
+            	return;	//jshint ignore:line
+            
             previousPatient = patient;
-
 			order.street = patient.street;
 			order.unitNo = patient.unitNo;
 			order.city = patient.city;
@@ -276,7 +282,9 @@
 
 			const product = productOrder.product;	//jshint ignore:line
 			const prices = product.prices;			//jshint ignore:line
+            
             productOrder.unitPrices = [];
+            
             for (var price in prices)				//jshint ignore:line
                 productOrder.unitPrices.push({		//jshint ignore:line
                     unit: price,
@@ -298,7 +306,7 @@
     	 	return _.sumBy(vm.order.productOrders,	//jshint ignore:line
 				function(p) {
 					if (!p.orderQty || !p.price) return 0;		//jshint ignore:line
-						return (p.orderQty * p.price) - p.discount; 	
+					return (p.orderQty * p.price) - (p.discount || 0); 	
 				});	
 	    };
     }
