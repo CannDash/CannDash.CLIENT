@@ -197,21 +197,10 @@
 			}
 		};
 
-
 		vm.deleteOrderItem = function(product) {
 			_.pull(vm.order.productOrders, product);	//jshint ignore:line
             //vm.order.productOrders.splice(vm.order.productOrders.indexOf(product));
         };
-
-  //       vm.backToOrderDetail = function(orderId) {
-  //       	$state.go('app.e-commerce.order', { orderId: orderId });
-
-  //       	orderFactory.getByOrderId(orderId).then(
-	 //            function(data) {
-	 //                vm.dispensaryOrders = data.orderId;
-	 //            }
-  //           );
-		// };
 
 		/**
          * Go to order detail
@@ -227,6 +216,8 @@
 	                vm.dispensaryOrders = data;
 	            }
 	        );
+
+
         ///////////////
 
 
@@ -302,11 +293,11 @@
 			// keeping a running total of all the calls in the products array.
 			// Check to see if quanity or unit has not been filled if so return zero to that product row
 			// otherwise return the quantity multiplied by the price of that unit.
-	    	 	return _.sumBy(vm.order.productOrders,	//jshint ignore:line
-					function(p) {
-						if (!p.orderQty || !p.price) return 0;		//jshint ignore:line
-							return (p.orderQty * p.price) - p.discount; 	
-					});	
+    	 	return _.sumBy(vm.order.productOrders,	//jshint ignore:line
+				function(p) {
+					if (!p.orderQty || !p.price) return 0;		//jshint ignore:line
+						return (p.orderQty * p.price) - p.discount; 	
+				});	
 	    };
     }
 })();

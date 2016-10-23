@@ -137,9 +137,9 @@
 
             orderFactory.updateOrder(currentOrder); 
 
-            $state.go('app.e-commerce.order');                     //jshint ignore:line
-
-            // $state.reload();
+            $state.go('app.e-commerce.orders');                     //jshint ignore:line
+            $state.reload();
+            $state.reload();
         }   
 
         function getAddressFromOrder(order) {

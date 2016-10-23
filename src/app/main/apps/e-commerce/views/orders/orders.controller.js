@@ -28,7 +28,8 @@
                     if (type === 'display') {
                         var orderStatus = vm.getOrderStatus(data);
                         if (orderStatus) {
-                            return '<span class="status ' + orderStatus.color + '">' + orderStatus.name + '</span>';
+                            return '<span class="status ' + orderStatus.color + '">' + 
+                                                            orderStatus.name + '</span>';
                         } else {
                             return '<span class="status md-yellow-500-bg">Pending</span>';
                         }
