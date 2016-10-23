@@ -14,6 +14,6 @@
                 'ngMaterial',
                 'pascalprecht.translate',
                 'ui.router',
-                'toastr'
+                'toastr',
             ]);
 })();

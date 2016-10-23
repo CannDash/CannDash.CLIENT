@@ -6,9 +6,12 @@
         .controller('OrdersController', OrdersController);
 
     /** @ngInject */
-    function OrdersController($state, Statuses, Orders, orderFactory) {
+    function OrdersController($state, Statuses, Orders, orderFactory, signalRHubProxyFactory) {
         var vm = this;
-        var dispensaryId = 14;
+
+        //Properties
+        var dispensaryId = 51;//266
+        vm.dispensaryId = dispensaryId; //Need to insure dispensaryId is coming through stateParams
 
         // Data
         vm.orders = Orders.data;
@@ -98,6 +101,7 @@
         orderFactory.getOrdersByDispensary(dispensaryId).then(
             function(data) {
                 vm.dispensaryOrders = data;
+                signalRHubProxyFactory.startSignalR(vm.dispensaryId);
             }
         );
 
@@ -108,7 +112,25 @@
          */
         function createNewOrder() {
         	var order = {};
-	        $state.go('app.e-commerce.edit-order', { order: order });   
-	    }     	
+	        $state.go('app.e-commerce.edit-order', { order: order });
+	    }
+
+         // signalr client functions for displaying new or updates to orders
+         signalRHubProxyFactory.on('addNewOrder', function(newOrder){
+              vm.dispensaryOrders.push(newOrder);
+         });
+
+         signalRHubProxyFactory.on('updateOrder', function(updateOrder){
+               var array = vm.dispensaryOrders;
+               for(var i = array.length-1; i >= 0; i--)
+               {
+                    if (array[i].orderId === updateOrder.orderId)
+                    {
+                         array.splice(i, 1);
+                         vm.$apply();
+                    }
+               }
+         });
+
     }
 })();
