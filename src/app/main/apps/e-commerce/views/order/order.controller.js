@@ -163,11 +163,9 @@
              var currentOrder = vm.order;
              delete currentOrder.productOrders;
 
-                $state.go('app.e-commerce.orders');                     //jshint ignore:line
+               // $state.go('app.e-commerce.orders');                     //jshint ignore:line
 
                 orderFactory.updateOrder(currentOrder); 
-                
-
         }   
     }               
 })();

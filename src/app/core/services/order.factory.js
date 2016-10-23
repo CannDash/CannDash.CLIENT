@@ -14,7 +14,7 @@
             getAllOrders: getAllOrders,
             getOrdersByDispensary: getOrdersByDispensary, 
             getByOrderId: getByOrderId,
-            updateOrder: updateOrder
+            updateOrder: updateOrder,
         };
 
         return service;

@@ -9,11 +9,18 @@
             </md-button>
             <div layout="column" layout-align="start center">
                 <div class="h2">
-                    <span>{{vm.order.orderId ? 'Edit Order' : 'New Order'}}</span>
-                    <span>{{vm.order.items}}</span>
+                    <span>{{vm.order.orderId ? 'Edit Order' : 'New Order'}} : {{vm.order.dispensaryOrderNo}}</span>
+                </div>
+                <div class="subtitle secondary-text">
+                    <span>{{vm.order.productOrders.length}} {{vm.order.orderId ? 'item(s) in cart' : ''}}</span>
                 </div>
             </div>
-
+            <div flex></div>
+            <div>
+				<md-button class="edit-button md-icon-button" ui-sref="app.e-commerce.order({orderId: vm.order})" aria-label="Order details">
+					<md-icon md-font-icon="icon-cart" class="s16"></md-icon>
+				</md-button>
+            </div>
         </div>
     </div>
     <!-- / HEADER -->
@@ -72,14 +79,15 @@
 												{{ patient.firstName + ' ' + patient.lastName }}
 											</span>
 										</md-autocomplete>
-									<!-- Address -->
+									<!-- Street -->
 							        <md-input-container class="md-block">
-							          <label>Address</label>
+							          <label>Street</label>
 							          <input required ng-model="vm.order.street">
 							        </md-input-container>
 									<!-- Apt/Unit# -->
 							        <md-input-container md-no-float="" class="md-block">
-							          <input placeholder="Apt/Unit#" ng-model="vm.order.unitNo">
+							          <label>Apt/Unit#</label>
+							          <input ng-model="vm.order.unitNo">
 							        </md-input-container>
 									
 									<!-- City -->
@@ -127,11 +135,14 @@
 			                                <th width="60%">Product</th>
 			                                <th width="10%">Qty</th>
 			                                <th width="10%">Units</th>			               
-			                                <th width="9%">Price</th>									
+                                    		<th width="10%">Discount</th>
+			                                <th width="9%">Price</th>	
+                                    		<th width="1%"></th>				                                								
 										</tr>							
 									</thead>
-									<tbody>
+									<tbody>										
 										<tr ng-repeat="productOrder in vm.order.productOrders">
+											<!-- Category -->
 											<td style="min-width:40px">
 												<md-select ng-model="productOrder.category" layout-gt-md="row" layout-padding="" aria-label="Select"
                                                     ng-model-options="{trackBy: '$value.id'}"
@@ -141,7 +152,8 @@
 														{{category.name}}
 													</md-option>
 												</md-select>
-											</td>	
+											</td>
+											<!-- Product -->	
 											<td>
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-autocomplete flex required
@@ -162,36 +174,57 @@
 													</md-autocomplete>
 												</md-content>
 											</td>
+											<!-- Quantity -->
 											<td style="min-width:90px">										
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
-														<label>Qty</label>
-														<input ng-model="productOrder.orderQty" aria-label="amount" required type="number" step="1">
-															<span id="currency-custom" flex>{{amount | currency:"USD$":0}}</span>
+														<input ng-model="productOrder.orderQty" aria-label="Qty" required type="number" step="1">
+															<span id="currency-custom" flex>{{ amount }}</span>
 														</input> 
 													</md-input-container>
 												</md-content> 
-											</td>	
-											<td>
+											</td>
+											<!-- Units -->	
+											<td style="min-width:90px">
 												<md-select ng-model="productOrder.unitPrice"
                                                     ng-model-options="{trackBy: '$value.unit'}"
                                                     ng-change="vm.onUnitPriceSelected(productOrder)"
-                                                    layout-gt-md="row" layout-padding="" aria-label="Select">
+                                                    layout-gt-md="row" layout-padding="" aria-label="Units">
+                                                    <label>Units</label>
 													<md-option ng-repeat="unitPrice in productOrder.unitPrices"
                                                         ng-value="{{unitPrice}}">
 														{{unitPrice.unit}}: {{unitPrice.price | currency}}
 													</md-option>
 												</md-select>
+											</td>
+											<!-- Discount -->
+											<td style="min-width:20px">										
+												<md-content layout-gt-md="row" layout-padding="">
+													<md-input-container>
+														<input ng-model="productOrder.discount" aria-label="discount" type="number">
+															<span id="discount" flex>{{ productOrder.discount | currency }}</span>
+														</input> 
+													</md-input-container>
+												</md-content> 
 											</td>	
+											<!-- Price -->	
 											<td>										
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>														
 														<span>															
-															{{ productOrder.orderQty * productOrder.price | currency:"$":0 }}
+															{{ (productOrder.orderQty * productOrder.price) - discount | currency:"$":0 }}
 														</span> 
 													</md-input-container>
 												</md-content> 
-											</td>								
+											</td>
+											<!-- Delete button -->
+											<td>
+			                                    <md-button ng-bootbox-confirm="Are you sure you want to delete this?"  ng-bootbox-confirm-action="vm.deleteOrderItem(productOrder)">
+			                                        <md-icon md-font-icon="icon-delete" type="button" aria-label="Delete" >
+			                                        	
+			                                        </md-icon>
+			                                    </md-button>
+                                    		</td>								
 										</tr>
 									</tbody>
 									<tfoot>
@@ -205,6 +238,9 @@
 											<td></td>
 											<td></td>
 											<td></td>
+											<td></td>											
+											<td></td>
+											<!-- Total Sale Price -->
 											<td>
 												<h1 class="md-display-1">
 													{{ vm.calculateTotal() | currency:"$":0}}
