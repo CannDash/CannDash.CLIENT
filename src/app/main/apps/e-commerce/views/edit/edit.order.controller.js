@@ -149,7 +149,9 @@
                     productOrder.productId = productOrder.product.id;
                     productOrder.productName = productOrder.product.name;
                     productOrder.discount = productOrder.discount;
-                    productOrder.totalSale = (productOrder.orderQty * productOrder.price) - productOrder.discount;
+                    productOrder.totalSale = 
+                    	(productOrder.orderQty * productOrder.price) -
+                    	 	(productOrder.discount || 0);
                     delete productOrder.products;
                     delete productOrder.product;
                     productOrder.categoryName = productOrder.category.name;
