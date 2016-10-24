@@ -3,8 +3,7 @@
     <!-- HEADER -->
     <div class="header md-accent-bg" layout="row" layout-align="start center">
         <div class="white-fg" layout="row" layout-align="start center" flex>
-            <md-button class="goto-orders-button md-icon-button" aria-label="Back to all patients"
-                       ng-click="vm.goToPatients()">
+            <md-button class="goto-orders-button md-icon-button" aria-label="Back to all patients" ui-sref="app.e-commerce.patients"">
                 <md-icon md-font-icon="icon-arrow-left"></md-icon>
             </md-button>
 
@@ -17,14 +16,14 @@
 
                 <div class="subtitle secondary-text">
                     <span>
-                        {{vm.customerData.customer.firstName}} {{vm.customerData.customer.flastName}}
+                        {{vm.patient.firstName}} {{vm.patient.lastName}}
                     </span>
                 </div>
             </div>
         </div>
         <div class="search" layout="column" layout-align="end end" flex>
             <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
-                        ui-sref="app.e-commerce.edit-patient({patient: vm.customer})">
+                        ui-sref="app.e-commerce.edit-patient({patient: vm.patient})">
                         Edit Patient
             </md-button>     
         </div>

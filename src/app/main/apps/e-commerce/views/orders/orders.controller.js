@@ -91,24 +91,23 @@
         }
 
         /**
+         * Create new order
+         */
+        function createNewOrder() {
+            $state.go('app.e-commerce.edit-order');
+        }  
+
+        /**
          * Go to order detail
          */
         function gotoOrderDetail(id) {
             $state.go('app.e-commerce.order', { id: id });
         }
-
-        orderFactory.getOrdersByDispensary(dispensaryId).then(
-            function(data) {
-                vm.dispensaryOrders = data;
-            }
-        );
-
-        /**
-         * Create new order
-         */
-        function createNewOrder() {
-            $state.go('app.e-commerce.edit-order');
-        }       
+            orderFactory.getOrdersByDispensary(dispensaryId).then(
+                function(data) {
+                    vm.dispensaryOrders = data;
+                }
+            );
     }
 })();
 

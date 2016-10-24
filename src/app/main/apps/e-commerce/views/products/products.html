@@ -37,16 +37,16 @@
             <!-- CONTENT -->
             <div class="content fullpage-datatable" layout="column" flex>
 
-                <table class="dataTable row-border hover" dt-instance="vm.dtInstance"
+                <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
                        dt-options="vm.dtOptions">
                     <thead>
                         <tr>
-                            <th class="secondary-text colAlign">
+                            <th class="secondary-text">
                                 <div class="table-header">
                                     <span class="column-title">Image</span>
                                 </div>
                             </th>
-                            <th class="secondary-text colAlign">
+                            <th class="secondary-text">
                                 <div class="table-header">
                                     <span class="column-title">Name</span>
                                 </div>
@@ -63,12 +63,12 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody ng-repeat="category in vm.products">
-                        <tr ng-repeat="product in category.items  | filter: searchKeyword">
-                            <td width="5%"><img src="{{product.thumb_image_url}}" width="75px" length="75px"></td>
-                            <td width="80%">{{product.name}}</td>
-                            <td width="5%">{{category.title}}</td>
-                            <td width="5%">{{product.prices.eighth | currency:undefined:0}}</td>
+                    <tbody>
+                        <tr ng-repeat="product in vm.products  | filter: searchKeyword">
+                            <td><img src="{{product.thumb_image_url}}" width="75px" length="75px"></td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.category_name}}</td>
+                            <td>{{product.prices.eighth | currency:undefined:0}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -83,3 +83,4 @@
     <!-- / CENTER -->
 
 </div>
+

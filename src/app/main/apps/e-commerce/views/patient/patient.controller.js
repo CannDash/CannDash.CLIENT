@@ -15,12 +15,20 @@
         // Data
         vm.patient = [];
 
+
+        // Methods
+        vm.goToPatients = goToPatients;
+
         activate();
 
         ////////////////
 
         function activate() {
         	
+        }
+
+        function goToPatients() {
+            $state.go('app.e-commerce.patients');
         }
     }
 })();

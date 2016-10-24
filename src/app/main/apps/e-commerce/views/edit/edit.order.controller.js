@@ -122,10 +122,10 @@
 	        dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
                 function(data) {
                     vm.customers =
-						_.map(
+						_.map(	//jshint ignore:line
 							data,
 							function (c) {
-								const customer = c.customer;
+								const customer = c.customer;	//jshint ignore:line
 								customer.address = c.address;
 								return customer;
 							});
