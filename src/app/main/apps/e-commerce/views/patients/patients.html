@@ -33,9 +33,9 @@
 
             <!-- CONTENT -->
             <div class="content">
-              <!--   <md-tabs md-dynamic-height>
- -->                    <!-- PATIENTS -->
-                  <!--   <md-tab label="Patients"> -->
+<!--                 <md-tabs md-dynamic-height> -->
+                    <!-- PATIENTS -->
+<!--                     <md-tab label="Patients"> -->
 
                         <!-- PATIENT WIDGET GROUP -->
                         <div class="widget-group" layout="row" flex="100" layout-wrap>
@@ -60,7 +60,7 @@
                                     <table class="dataTable row-border hover" datatable="ng"
                                            dt-options="vm.customerData.dtOptions">
                                         <thead>
-                                                <th></th>
+                                                <!-- <th></th> -->
                                                 <th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Name</span>
@@ -73,14 +73,14 @@
                                                 </th>
                                                 <th class="secondary-text">
                                                     <div class="table-header">
-                                                        <span class="column-title">MMIC Expiration</span>
+                                                        <span class="column-title">MMIC Exp.</span>
                                                     </div>
                                                 </th>
-                                                <th class="secondary-text">
+<!--                                                 <th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Email</span>
                                                     </div>
-                                                </th>
+                                                </th> -->
                                                 <th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Phone</span>
@@ -93,30 +93,30 @@
                                                 </th>    
                                         </thead>
                                         <tbody>
-                                            <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.driverData.drivers">
-                                                <td>
+                                            <tr ui-sref="app.e-commerce.patient({patientId: vm.patientId })" ng-repeat="row in vm.customerData">
+<!--                                                 <td>
                                                     <div class="avatar-wrapper">
                                                          <img src="assets/images/avatars/profile.jpg" class="avatar"/>
                                                     </div>
-                                                </td>
+                                                </td> -->
                                                 <td>
                                                     <div layout="row" layout-align="start center">
                                                         <span class="name text-nowrap">
-                                                            {{row.firstName}} {{row.lastName}}
+                                                            {{row.customer.firstName}} {{row.customer.lastName}}
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    {{ row.mmicId }}
+                                                    {{ row.customer.mmicId }}
                                                 </td>
                                                 <td>
-                                                    {{ row.mmicExpiration }}
+                                                    {{ row.customer.mmicExpiration | date:'MM/dd/yy h:mma' }}
                                                 </td>
+<!--                                                 <td>
+                                                    {{ row.customer.email }}
+                                                </td> -->
                                                 <td>
-                                                    {{ row.email }}
-                                                </td>
-                                                <td>
-                                                    {{ row.phone }}
+                                                    {{ row.customer.phone }}
                                                 </td>
                                                 <td>
                                                     <md-button class="edit-button md-icon-button" 
@@ -131,8 +131,8 @@
                                 </ms-widget-front>   <!-- / Front -->
                             </ms-widget>   <!-- / PATIENT WIDGET 11 -->
                         </div>  <!-- / PATIENT WIDGET GROUP -->
-                 <!--    </md-tab>
-                </md-tabs> -->
+                    <!-- </md-tab> -->
+                <!-- </md-tabs> -->
             </div>  <!-- / CONTENT -->
         </div>  <!-- CONTENT CARD -->
     </div>  <!-- CENTER -->
