@@ -11,6 +11,9 @@
         var vm = this;
         var dispensaryId = 266;
 
+        // Data
+        vm.customerData = {};
+
         // Methods
         vm.createNewPatient = createNewPatient;
 
