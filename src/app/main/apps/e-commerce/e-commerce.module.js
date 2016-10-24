@@ -166,6 +166,27 @@
                     }
                 },
                 bodyClass: 'e-commerce'
+            })
+            // Edit patient
+            .state('app.e-commerce.edit-patient', {
+                url      : '/patient/:id',
+                views    : {
+                    'content@app': {
+                        templateUrl: 'app/main/apps/e-commerce/views/patient-edit/patient-edit.html',
+                        controller : 'EditPatientController as vm'
+                    }
+                },
+                resolve  : {
+                    Order   : function (msApi)
+                    {
+                        return msApi.resolve('e-commerce.order@get');
+                    },
+                    Statuses: function (msApi)
+                    {
+                        return msApi.resolve('e-commerce.statuses@get');
+                    }
+                },
+                bodyClass: 'e-commerce'
             });
 
         // Api

@@ -37,6 +37,19 @@
          */
         function createNewPatient() {
             $state.go('app.e-commerce.edit-patient');
-        }   
+        }  
+
+
+        /**
+         * Go to patient detail
+         */
+        function gotoPatientDetail(id) {
+            $state.go('app.e-commerce.patient', { id: id });
+        }
+            dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
+                function(data) {
+                    vm.patientDetail = data;
+                }
+            ); 
     }
 })();

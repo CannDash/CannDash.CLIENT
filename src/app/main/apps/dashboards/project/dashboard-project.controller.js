@@ -1,20 +1,16 @@
 (function ()
 {
     'use strict';
-
     angular
         .module('app.dashboards.project')
         .controller('DashboardProjectController', DashboardProjectController);
-
     /** @ngInject */
     function DashboardProjectController($scope, $interval, $mdSidenav, DashboardData, dashboardFactory, dispensaryFactory)
     {
         var vm = this;
-        var dispensaryId = 14;
-
+        var dispensaryId = 266;
         // Data
         vm.dashboardData = DashboardData;
-
         // Widget 5
         vm.salesCharts = {
             title       : vm.dashboardData.stackBarGraph.title,
@@ -41,11 +37,11 @@
                         duration    : 250,
                         x           : function (d)
                         {
-                            return d.salesDay;
+                            return d.x;
                         },
                         y           : function (d)
                         {
-                            return d.sales;
+                            return d.y;
                         },
                         yAxis       : {
                             tickFormat: function (d)
@@ -79,7 +75,6 @@
             changeRange : function (range)
             {
                 vm.salesCharts.currentRange = range;
-
                 /**
                  * Update main chart data by iterating through the
                  * chart dataset and separately adding every single
@@ -100,34 +95,32 @@
                 {
                     vm.salesCharts.mainChart.data[index] = {
                         key   : chartData.key,
+                    //     nonStackable: false,
                         values: chartData.values[range.toLowerCase()]
                     };
                 });
-
                 /**
                  * Do the same thing for the supporting widgets but they
                  * only have 1 dataset so we can do [0] without needing to
                  * iterate through in their data arrays
                  */
-                angular.forEach(vm.dashboardData.stackBarGraph.supporting, function (widget, name)
-                {
-                    vm.salesCharts.supporting.widgets[name].chart.data[0] = {
-                        key   : widget.chart.key,
-                        values: widget.chart.values[range.toLowerCase()]
-                    };
-                });
+               //  angular.forEach(vm.dashboardData.stackBarGraph.supporting, function (widget, name)
+               //  {
+               //      vm.salesCharts.supporting.widgets[name].chart.data[0] = {
+               //          key   : widget.chart.key,
+               //          values: widget.chart.values[range.toLowerCase()]
+               //      };
+               //  });
             },
             init        : function ()
             {
                 // Run this function once to initialize widget
-
                 /**
                  * Update the range for the first time
                  */
                 vm.salesCharts.changeRange('TW');
             }
         };
-
         // Now widget
         vm.nowWidget = {
             now   : {
@@ -152,29 +145,20 @@
                 };
             }
         };
-
         // Weather widget
         vm.weatherWidget = vm.dashboardData.weatherWidget;
-
         // Methods
         vm.toggleSidenav = toggleSidenav;
         vm.selectProject = selectProject;
-
-
         // Initialize Sales Charts for the dashboard
         vm.salesCharts.init();
-
-
         // Now widget ticker
         vm.nowWidget.ticker();
-
         var nowWidgetTicker = $interval(vm.nowWidget.ticker, 1000);
-
         $scope.$on('$destroy', function ()
         {
             $interval.cancel(nowWidgetTicker);
         });
-
         /**
          * Toggle sidenav
          *
@@ -184,7 +168,6 @@
         {
             $mdSidenav(sidenavId).toggle();
         }
-
         /**
          * Select project
          */
@@ -192,24 +175,20 @@
         {
             vm.selectedProject = project;
         }
-
         dashboardFactory.getDashboardData(dispensaryId).then(
                 function(data) {
                    vm.dashData = data;
                 }
             );
-
         dispensaryFactory.getByDispensaryDrivers(dispensaryId).then(
                 function(data) {
                     vm.driverData = data;
                 }
             );
-
         dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
                 function(data) {
                     vm.customerData = data;
                 }
             );
     }
-
 })();
