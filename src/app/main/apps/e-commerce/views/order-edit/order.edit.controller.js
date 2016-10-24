@@ -284,7 +284,7 @@
 
 			previousPatient = patient;
 			var address = patient.address;
-			if (address) copyAddressToOrder(address, vm.order);
+			if (address) copyAddressToOrder(address, vm.order);	//jshint ignore:line
 
 			fetchCustomerAddresses();
  	    };

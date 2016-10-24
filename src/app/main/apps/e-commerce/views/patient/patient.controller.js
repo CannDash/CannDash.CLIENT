@@ -5,10 +5,21 @@
         .module('app.e-commerce')
         .controller('PatientController', PatientController);
 
-    PatientController.$inject = ['$state', '$stateParams', 'dispensaryFactory', 'customerFactory'];
+    PatientController.$inject = [
+        '$state', 
+        '$stateParams', 
+        'dispensaryFactory', 
+        'customerFactory'
+        ];
 
     /* @ngInject */
-    function PatientController($state, $stateParams, dispensaryFactory, customerFactory) {
+    function PatientController(
+        $state, 
+        $stateParams, 
+        dispensaryFactory, 
+        customerFactory) 
+    {
+
         var vm = this;
         var dispensaryId = 266;       
         
@@ -27,6 +38,9 @@
         	
         }
 
+        /**
+         * Go to patients grid
+         */
         function goToPatients() {
             $state.go('app.e-commerce.patients');
         }

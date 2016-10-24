@@ -10,22 +10,16 @@
             <div layout="column" layout-align="start start">
                 <div class="h2">
                     <span>
-                        Patient Details
+                        {{vm.customer.customerId ? 'Edit Patient' : 'New Patient'}} 
                     </span>
                 </div>
 
                 <div class="subtitle secondary-text">
                     <span>
-                        {{vm.patient.firstName}} {{vm.patient.lastName}}
+                        {{vm.customer.firstName}} {{vm.customer.lastName}}
                     </span>
                 </div>
             </div>
-        </div>
-        <div class="search" layout="column" layout-align="end end" flex>
-            <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
-                        ui-sref="app.e-commerce.edit-patient({patient: vm.patient})">
-                        Edit Patient
-            </md-button>     
         </div>
     </div>
     <!-- / HEADER -->
@@ -35,9 +29,9 @@
         <md-tabs md-dynamic-height>
             <!-- Patient Details tab -->
             <md-tab>
-                <md-tab-label>
+                <!-- <md-tab-label>
                     <span>Patient Details</span>
-                </md-tab-label>
+                </md-tab-label> -->
 
                 <md-tab-body>
                     <div class="order-detail-form-container customer md-background-bg md-whiteframe-1dp">
@@ -197,6 +191,14 @@
                                     </tbody>
                                 </table>                        
                             </div>  <!-- Medical Info -->
+                            
+                            <!-- Submit order button -->
+                            <md-input-container layout="row" layout-align="end center">
+                                <md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" 
+                                            ng-click="vm.onSubmit()">
+                                    Submit
+                                </md-button>
+                            </md-input-container>   
 
                         </div>  <!-- Main card div -->
                     </div>
