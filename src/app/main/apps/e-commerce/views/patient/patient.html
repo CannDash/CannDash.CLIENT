@@ -1,0 +1,209 @@
+<div id="e-commerce-order" class="page-layout simple tabbed" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <md-button class="goto-orders-button md-icon-button" aria-label="Back to all patients"
+                       ng-click="vm.goToPatients()">
+                <md-icon md-font-icon="icon-arrow-left"></md-icon>
+            </md-button>
+
+            <div layout="column" layout-align="start start">
+                <div class="h2">
+                    <span>
+                        Patient Details
+                    </span>
+                </div>
+
+                <div class="subtitle secondary-text">
+                    <span>
+                        {{vm.patient.firstName}} {{vm.patient.lastName}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="search" layout="column" layout-align="end end" flex>
+            <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
+                        ui-sref="app.e-commerce.edit-patient({patient: vm.patient})">
+                        Edit Patient
+            </md-button>     
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+        <md-tabs md-dynamic-height>
+            <!-- Patient Details tab -->
+            <md-tab>
+                <md-tab-label>
+                    <span>Patient Details</span>
+                </md-tab-label>
+
+                <md-tab-body>
+                    <div class="order-detail-form-container customer md-background-bg md-whiteframe-1dp">
+                        <div class="pb-16" layout="row" layout-align="start center">
+                            <md-icon md-font-icon="icon-account" class="m-0 mr-16"></md-icon>
+                            <div class="h2 secondary-text">General Info</div>
+                        </div>
+                        <!-- Main card div -->
+                        <div class="customer">
+                            <!-- General -->
+                            <table class="simple" ms-responsive-table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Age</th>
+                                        <th>D.O.B</th>                                        
+                                        <th>Driver's License #</th>  
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div layout="row" layout-align="start center">
+                                                <span class="name text-nowrap">
+                                                    {{vm.patient.firstName}} {{vm.patient.lastName}}
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="total">
+                                                {{ vm.patient.gender }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="total">
+                                                {{ vm.patient.age }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="total">
+                                                {{ vm.patient.dateOfBirth }}
+                                            </span>
+                                        </td>                                        
+                                    </tr>
+                                </tbody>
+                            </table>    <!-- General -->
+
+                            <!-- Contact -->
+                            <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
+                                <div class="pb-16" layout="row" layout-align="start center">
+                                    <md-icon md-font-icon="icon-phone" class="m-0 mr-16"></md-icon>
+                                    <div class="h2 secondary-text">Contact</div>
+                                </div>
+                                <table class="simple" ms-responsive-table>
+                                    <thead>
+                                        <tr>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="patient in vm.customers">
+                                            <td>
+                                                <span class="phone">
+                                                    {{ vm.patient.phone }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="quantity">
+                                                    {{ vm.patient.email }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>   
+                            </div>  <!-- Contact -->
+
+                            <!-- Address -->
+                            <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
+                                <div class="pb-16" layout="row" layout-align="start center">
+                                    <md-icon md-font-icon="icon-home" class="m-0 mr-16"></md-icon>
+                                    <div class="h2 secondary-text">Address(s)</div>
+                                    <div flex></div>
+                                    <!-- Add address button -->
+                                    <md-button class="md-raised blue-bg white-fg m-o hover" 
+                                                ng-click="vm.addAddress()" layout-align="end center">
+                                        Add Address
+                                    </md-button> 
+                                </div>
+                                <table class="simple" ms-responsive-table>
+                                    <thead>
+                                        <tr>
+                                            <th>Street</th>
+                                            <th>Apt/Unit#</th>
+                                            <th>City/State/ZIP</th>
+                                            <th>Notes</th>                                                                         
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="patient in vm.customers">
+                                            <td>
+                                                <span class="street">
+                                                    {{ vm.patient.street }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="unitNo">
+                                                    {{ vm.patient.unitNo }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="city">
+                                                    {{ vm.patient.city }}, {{ vm.patient.state }} {{ vm.patient.zipCode }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="deliveryNotes">
+                                                    {{ vm.patient.deliveryNotes }}
+                                                </span>
+                                            </td>                                                                                
+                                        </tr>                               
+                                    </tbody>
+                                </table>   
+                            </div>  <!-- Address -->
+
+                            <!-- Medical Info -->
+                            <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
+                                <div class="pb-16" layout="row" layout-align="start center">
+                                    <md-icon md-font-icon="icon-account-box" class="m-0 mr-16"></md-icon>
+                                    <div class="h2 secondary-text">Medical</div>
+                                </div>
+                                <table class="simple" ms-responsive-table>
+                                    <thead>
+                                        <tr>
+                                            <th width="5%">Doctor Letter</th>
+                                            <th width="45%">Medical Reason</th>
+                                            <th width="10%">MMIC ID#</th>
+                                            <th width="10%">MMIC Expiration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="patient in vm.customers">
+                                            <td class="category">
+                                                {{patient.doctorLetter}}
+                                            </td>
+                                            <td class="name">
+                                                {{patient.medicalReason}}
+                                            </td>
+                                            <td class="unit">
+                                                {{patient.mmicId}}
+                                            </td>
+                                            <td class="price">
+                                                {{patient.mmicExpiration}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>                        
+                            </div>  <!-- Medical Info -->
+
+                        </div>  <!-- Main card div -->
+                    </div>
+                </md-tab-body>
+            </md-tab>   <!-- Patient Details tab -->
+        </md-tabs>
+    </div> <!-- / CONTENT -->
+</div>
+<!-- <pre>{{vm.order | json}}</pre> -->
