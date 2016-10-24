@@ -27,7 +27,7 @@
                   .then(
                        function(response) {
                             defer.resolve(response.data);
-                            toastr.success('Successfully added product order', 'Saved');
+                            // toastr.success('Successfully added product order', 'Saved');
                        },
                        function(error) {
                             defer.reject(error);

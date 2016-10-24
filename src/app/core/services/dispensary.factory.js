@@ -14,6 +14,7 @@
             getByDispensary: getByDispensary,
             getByDispensaryCustomers: getByDispensaryCustomers,
             getByDispensaryDrivers: getByDispensaryDrivers,
+            getByDispensaryDriverNames: getByDispensaryDriverNames,
             getByDispensaryInventory: getByDispensaryInventory,
             getByDispensaryOrders: getByDispensaryOrders
         };
@@ -32,7 +33,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error adding dispensary', 'Error');
+                            toastr.error('Error adding dispensary: ' + error.message, 'Error');
                        }
                   );
 
@@ -49,7 +50,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting dispensary detail', 'Error');
+                            toastr.error('Error getting dispensary by ID: ' + error.message, 'Error');
                        }
                   );
 
@@ -66,7 +67,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting dispensary customers', 'Error');
+                            toastr.error('Error getting dispensary customers: ' + error.message, 'Error');
                        }
                   );
 
@@ -83,7 +84,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting dispensary drivers', 'Error');
+                            toastr.error('Error getting dispensary drivers: ' + error.message, 'Error');
                        }
                   );
 
@@ -100,11 +101,28 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting dispensory inventory', 'Error');
+                            toastr.error('Error getting dispensory inventory: ' + error.message, 'Error');
                        }
                   );
 
              return defer.promise;
+        }
+
+        function getByDispensaryDriverNames(id) {
+            var defer = $q.defer();
+
+            $http.get(apiUrl + '/dispensaries/' + id + '/driverNames')
+                .then(
+                    function(response) {
+                        defer.resolve(response.data);
+                    },
+                    function(error) {
+                        defer.reject(error);
+                        toastr.error('Error getting dispensary driver names: ' + error.message, 'Error');
+                    }
+                );
+
+            return defer.promise;
         }
 
         function getByDispensaryOrders(id) {
@@ -117,7 +135,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting dispensory orders', 'Error');
+                            toastr.error('Error getting dispensory orders: ' + error.message, 'Error');
                        }
                   );
 

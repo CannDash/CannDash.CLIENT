@@ -8,7 +8,7 @@
     /** @ngInject */
     function OrdersController($state, Statuses, Orders, orderFactory) {
         var vm = this;
-        var dispensaryId = 14;
+        var dispensaryId = 266;
 
         // Data
         vm.orders = Orders.data;
@@ -17,18 +17,25 @@
         vm.dtInstance = {};
         vm.dtOptions = {
             dom: 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+            order: [[0, 'desc']],
             columnDefs: [{
-                // Target the id column
+                // Target the date column
                 targets: 0,
+                width: '72px',
+                type: 'date'
+            }, {
+                // Target the ID column
+                targets: 1,
                 width: '72px'
             }, {
                 // Target the status column
-                targets: 4,
+                targets: 5,
                 render: function(data, type) {
                     if (type === 'display') {
                         var orderStatus = vm.getOrderStatus(data);
                         if (orderStatus) {
-                            return '<span class="status ' + orderStatus.color + '">' + orderStatus.name + '</span>';
+                            return '<span class="status ' + orderStatus.color + '">' + 
+                                                            orderStatus.name + '</span>';
                         } else {
                             return '<span class="status md-yellow-500-bg">Pending</span>';
                         }
@@ -74,9 +81,6 @@
 
         /**
          * Get order status
-         *
-         * @param id
-         * @returns {*}
          */
         function getOrderStatus(id) {
             for (var i = 0; i < vm.statuses.length; i++) {
@@ -87,9 +91,7 @@
         }
 
         /**
-         * Go to product detail
-         *
-         * @param id
+         * Go to order detail
          */
         function gotoOrderDetail(id) {
             $state.go('app.e-commerce.order', { id: id });
@@ -102,13 +104,11 @@
         );
 
         /**
-         * Go to new order detail
-         *
-         * @param id
+         * Create new order
          */
         function createNewOrder() {
-        	var order = {};
-	        $state.go('app.e-commerce.edit-order', { order: order });   
-	    }     	
+            $state.go('app.e-commerce.edit-order');
+        }       
     }
 })();
+

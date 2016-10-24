@@ -13,7 +13,8 @@
       addCustomer: addCustomer,
       getAllCustomers: getAllCustomers,
       getByCustomer: getByCustomer,
-      updateCustomer: updateCustomer
+      updateCustomer: updateCustomer,
+      getCustomerAddresses: getCustomerAddresses
     };
 
     return service;
@@ -69,6 +70,22 @@
           function(error) {
             defer.reject(error);
             toastr.error('Error getting customer detail', 'Error');
+          }
+        );
+
+      return defer.promise;
+    }
+
+    function getCustomerAddresses(customerId) {
+      var defer = $q.defer();
+      // Pass in customerID to this APi url
+      $http.get(apiUrl + '/customer/addresses/' + customerId ).then(
+          function(response) {
+            defer.resolve(response.data);
+          },
+          function(error) {
+            defer.reject(error);
+            toastr.error('Error getting customer addresses: ' + error.message, 'Error');
           }
         );
 

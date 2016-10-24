@@ -54,7 +54,7 @@
         msApiProvider.register('profile.about', ['app/data/profile/about.json']);
 
         // Navigation
-        msNavigationServiceProvider.saveItem('pages.profile', {
+        msNavigationServiceProvider.saveItem('pages_profile_patient', {
             title : 'Patient Details',
             icon  : 'icon-account',
             state : 'app.pages_profile',

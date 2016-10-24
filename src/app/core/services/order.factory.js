@@ -14,7 +14,7 @@
             getAllOrders: getAllOrders,
             getOrdersByDispensary: getOrdersByDispensary, 
             getByOrderId: getByOrderId,
-            updateOrder: updateOrder
+            updateOrder: updateOrder,
         };
 
         return service;
@@ -28,7 +28,7 @@
                   .then(
                        function(response) {
                             defer.resolve(response.data);
-                            toastr.success('Successfully added order', 'Saved');
+                            // toastr.success('Successfully added order', 'Saved');
                        },
                        function(error) {
                             defer.reject(error);
@@ -49,7 +49,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting orders', 'Error');
+                            toastr.error('Error getting all orders: ' + error.message, 'Error');
                        }
                   );
 
@@ -66,7 +66,7 @@
                    },
                    function(error) {
                         defer.reject(error);
-                        toastr.error('Error getting order detail', 'Error');
+                        toastr.error('Error getting dispensary orders: ' + error.message, 'Error');
                    }
               );
 
@@ -83,7 +83,7 @@
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error getting order detail', 'Error');
+                            toastr.error('Error getting order by ID: ' + error.message, 'Error');
                        }
                   );
 
@@ -96,12 +96,13 @@
              $http.put(apiUrl + '/orders/' + order.orderId, order)
                   .then(
                        function() {
-                            defer.resolve();
+                            defer.resolve(); 
                             toastr.success('Successfully updated order', 'Saved');
                        },
                        function(error) {
                             defer.reject(error);
-                            toastr.error('Error updating order', 'Error');
+                            toastr.error('Error updating order: ' + error.data.exceptionMessage, 'Error');
+                            console.error('Error updating order: ' + error.data.exceptionMessage);
                        }
                   );
 

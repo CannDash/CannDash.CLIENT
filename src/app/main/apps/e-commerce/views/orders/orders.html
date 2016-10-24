@@ -22,8 +22,12 @@
 
             <div class="search" layout="row" layout-align="start center" flex>
                 <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
-                	<input id="e-commerce-products-search" class="search-input" type="text" placeholder="Search" flex>
-                <md-button class="md-raised text-boxed green-bg white-fg m-o hover" ng-click="vm.createNewOrder()">New Order</md-button>     
+                    <input id="e-commerce-products-search" class="search-input" type="text" 
+                            placeholder="Search" flex>
+                <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
+                    ng-click="vm.createNewOrder()">
+                        New Order
+                </md-button>     
             </div>
         </div>
         <!-- / CONTENT HEADER -->
@@ -37,6 +41,11 @@
                        dt-options="vm.dtOptions">
                     <thead>
                         <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Date</span>
+                                </div>
+                            </th>
                             <th class="secondary-text">
                                 <div class="table-header">
                                     <span class="column-title">ID</span>
@@ -64,11 +73,6 @@
                             </th>
                             <th class="secondary-text">
                                 <div class="table-header">
-                                    <span class="column-title">Date</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
                                     <span class="column-title">Details</span>
                                 </div>
                             </th>
@@ -76,18 +80,29 @@
                     </thead>
                     <tbody>     
                         <tr ng-repeat="row in ::vm.dispensaryOrders.order">
-                            <td>{{row.orderId}}</td>
-                            <td>
-                                {{row.driverInfo.firstName || "n/a"}} {{row.driverInfo.lastName || "n/a"}}
+                            <td class="date" data-order="{{row.orderDate}}">
+                                {{row.orderDate | date:'MM/dd/yy h:mma'}}
                             </td>
                             <td>
-                                {{row.customerInfo.firstName || "n/a"}} {{row.customerInfo.lastName || "n/a"}} 
+                                {{row.dispensaryOrderNo}}
                             </td>
-                            <td>${{row.totalCost}}</td>
-                            <td>{{row.orderStatus}}</td>
-                            <td class="date">{{row.orderDate | date:'h:mma on MM/dd/yy'}}</td>
                             <td>
-                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoOrderDetail(row.orderId)" aria-label="Order details">
+                                {{row.driverInfo.firstName || "n/a"}} 
+                                {{row.driverInfo.lastName || "n/a"}}
+                            </td>
+                            <td>
+                                {{row.customerInfo.firstName || "n/a"}} 
+                                {{row.customerInfo.lastName || "n/a"}} 
+                            </td>
+                            <td>
+                                ${{row.totalOrderSale}}
+                            </td> 
+                            <td>
+                                {{row.orderStatus}}
+                            </td>
+                            <td>
+                                <md-button class="edit-button md-icon-button" 
+                                ng-click="vm.gotoOrderDetail(row.orderId)" aria-label="Order details">
                                     <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
                                 </md-button>
                             </td>
