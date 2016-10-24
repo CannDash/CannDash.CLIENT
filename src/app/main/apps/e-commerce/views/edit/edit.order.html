@@ -1,39 +1,48 @@
+<!-- MAIN COLUMN DIV -->
 <div id="e-commerce-order" class="page-layout simple tabbed" layout="column">
 
     <!-- HEADER -->
     <div class="header md-accent-bg" layout="row" layout-align="start center">
         <div class="white-fg" layout="row" layout-align="start center" flex>
-            <md-button class="goto-orders-button md-icon-button" aria-label="All Orders"
-                       ui-sref="app.e-commerce.orders">
+            <md-button class="goto-orders-button md-icon-button" 
+            			aria-label="All Orders" ui-sref="app.e-commerce.orders">
                 <md-icon md-font-icon="icon-arrow-left"></md-icon>
             </md-button>
             <div layout="column" layout-align="start center">
                 <div class="h2">
-                    <span>{{vm.order.orderId ? 'Edit Order' : 'New Order'}} : {{vm.order.dispensaryOrderNo}}</span>
+                    <span>
+                    	{{vm.order.orderId ? 'Edit Order' : 'New Order'}} : 
+                    	{{vm.order.dispensaryOrderNo}}
+                    </span>
                 </div>
                 <div class="subtitle secondary-text">
-                    <span>{{vm.order.productOrders.length}} {{vm.order.orderId ? 'item(s) in cart' : ''}}</span>
+                    <span>
+                    	{{vm.order.productOrders.length}} 
+                    	{{vm.order.orderId ? 'item(s) in cart' : ''}}
+                    </span>
                 </div>
             </div>
         </div>
     </div>
     <!-- / HEADER -->
 
-    <!-- CONTENT -->
-    <div class="content" layout-phone="column" flex>
-        
+    <!-- CONTENT DIV -->
+    <div class="content" layout-phone="column" flex>    
         <md-tabs md-dynamic-height>
             <!-- Order Details -->
             <md-tab>
                 <md-tab-label>
                     <span>Order Details</span>
                 </md-tab-label>
-
+				<!-- Order Detail body tab -->
                 <md-tab-body>
+                	<!-- Order Detail form div -->
 					<div class="order-detail-form-container customer md-background-bg md-whiteframe-1dp">
 						<div class="pb-16" layout="row" layout-align="start center">
 						    <md-icon md-font-icon="icon-cart" class="m-0 mr-16"></md-icon>
-						    <div class="h2 secondary-text">{{vm.order.orderId ? 'Edit Order' : 'New Order'}}</div>
+						    <div class="h2 secondary-text">
+						    	{{vm.order.orderId ? 'Edit Order' : 'New Order'}}
+						    </div>
 						</div>
 
 						<!-- Select Driver -->
@@ -44,17 +53,19 @@
 								        <md-select required ng-model="vm.order.driver" layout-gt-md="row"
 								        	ng-model-options="{trackBy: '$value.driverId'}"
 											aria-label="Assign Driver" placeholder="Assign Driver">
-											<md-option ng-repeat="driver in vm.drivers | orderBy : 'firstName' " ng-value="{{driver}}">
+											<md-option ng-repeat="driver in vm.drivers | orderBy : 'firstName' " 
+														ng-value="{{driver}}">
 												{{ driver.firstName + ' ' + driver.lastName }}
 											</md-option>
 										</md-select>
 									</md-content>
 								<form>
 							<div>
-						</md-content>
+						</md-content>	<!-- Select Driver -->
 
 						<!-- Select Patient -->
 					    <md-content layout-padding="">
+					    	<!-- Patient Div -->
 						    <div table-responsive-vertical>
 
 						    	<!-- Select Patient form -->
@@ -71,21 +82,19 @@
 											md-selected-item-change="vm.onPatientSelected(patient)"
 											md-floating-label="Patient"
 											md-autoselect >
-											<span md-highlight-text="vm.patientSearchText">
-												{{ patient.firstName + ' ' + patient.lastName }}
-											</span>
+												<span md-highlight-text="vm.patientSearchText">
+													{{ patient.firstName + ' ' + patient.lastName }}
+												</span>
 										</md-autocomplete>
 
 									<!-- Select address -->
-									<!-- <md-content layout-gt-md="row" layout-padding=""> -->
-								        <md-select required ng-model="vm.order.street" layout-gt-md="row"
-								        	ng-model-options="{trackBy: '$value.customerId'}"
-											aria-label="Select Address" placeholder="Select Address">
-											<md-option ng-repeat="street in vm.streets" ng-value="{{street}}">
-												{{ vm.order.street}}
-											</md-option>
-										</md-select>
-									<!-- </md-content> -->
+							        <md-select required ng-model="vm.order.street" layout-gt-md="row"
+							        	ng-model-options="{trackBy: '$value.customerId'}"
+										aria-label="Select Address" placeholder="Select Address">
+										<md-option ng-repeat="street in vm.streets" ng-value="{{street}}">
+											{{ vm.order.street}}
+										</md-option>
+									</md-select>
 
 									<!-- Street -->
 							        <md-input-container class="md-block">
@@ -99,34 +108,37 @@
 							          <input ng-model="vm.order.unitNo">
 							        </md-input-container>
 									
-									<!-- City -->
+									<!-- City/State/Zip div -->
 							        <div layout-gt-sm="row">
-								      <md-input-container class="md-block" flex-gt-sm="">
-								        <label>City</label>
-								        <input required ng-model="vm.order.city">
-								      </md-input-container>
-									  <!-- State -->
-								      <md-input-container class="md-block" flex-gt-sm="">
-								        <label>State</label>
-								        <input required ng-model="vm.order.state">
-								      </md-input-container>
-									  <!-- Zip Code -->
-							          <md-input-container class="md-block" flex-gt-sm="">
-							            <label>Zip</label>
-							            <input required name="zip" ng-model="vm.order.zipCode" required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
-							            <div ng-messages="patientOrderForm.postalCode.$error" role="alert" multiple="">
-											<div ng-message="required" class="my-message">
-												You must supply a postal code.
-											</div>
-											<div ng-message="pattern" class="my-message">
-												Please enter a valid postal code.
-											</div>
-											<div ng-message="md-maxlength" class="my-message">
-												Don't use the long version.
-											</div>
-							            </div>
-							          </md-input-container>
-							        </div>
+										<!-- City -->
+										<md-input-container class="md-block" flex-gt-sm="">
+											<label>City</label>
+											<input required ng-model="vm.order.city">
+										</md-input-container>
+										<!-- State -->
+										<md-input-container class="md-block" flex-gt-sm="">
+											<label>State</label>
+											<input required ng-model="vm.order.state">
+										</md-input-container>
+										<!-- Zip Code -->
+										<md-input-container class="md-block" flex-gt-sm="">
+											<label>Zip</label>
+											<input required name="zip" ng-model="vm.order.zipCode" 
+											required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+											<div ng-messages="patientOrderForm.postalCode.$error" 
+													role="alert" multiple="">
+												<div ng-message="required" class="my-message">
+													You must supply a postal code.
+												</div>
+												<div ng-message="pattern" class="my-message">
+													Please enter a valid postal code.
+												</div>
+												<div ng-message="md-maxlength" class="my-message">
+													Don't use the long version.
+												</div>
+											</div>	<!-- Zip div -->
+										</md-input-container>
+									</div>	<!-- City/State/Zip div -->
 
 									<!-- Delivery Notes -->
 							        <md-input-container class="md-block">
@@ -136,6 +148,7 @@
 							        </md-input-container>	
 
 							    </form>	<!-- Select Patient form -->
+
 
 								<!-- Select Products, Units & Quantity -->
 								<table class="dataTable order-product-table" ms-responsive-table> 
@@ -154,7 +167,8 @@
 										<tr ng-repeat="productOrder in vm.order.productOrders">
 											<!-- Category -->
 											<td style="min-width:40px">
-												<md-select ng-model="productOrder.category" layout-gt-md="row" layout-padding="" aria-label="Select"
+												<md-select ng-model="productOrder.category" 
+												layout-gt-md="row" layout-padding="" aria-label="Select"
                                                     ng-model-options="{trackBy: '$value.id'}"
 													ng-change="vm.onCategorySelected(productOrder)">
 													<md-option ng-repeat="category in vm.categories | orderBy : 'title'"
@@ -188,7 +202,8 @@
 											<td style="min-width:90px">										
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
-														<input ng-model="productOrder.orderQty" aria-label="Qty" required type="number" step="1">
+														<input ng-model="productOrder.orderQty" aria-label="Qty" 
+														required type="number" step="1">
 															<span id="currency-custom" flex>{{ amount }}</span>
 														</input> 
 													</md-input-container>
@@ -211,8 +226,11 @@
 											<td style="min-width:20px">										
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>
-														<input ng-model="productOrder.discount" aria-label="$0" type="number" step="1">
-															<span id="discount" flex>{{ productOrder.discount | currency }}</span>
+														<input ng-model="productOrder.discount" aria-label="$0" 
+																type="number" step="1">
+															<span id="discount" flex>
+																{{ productOrder.discount | currency }}
+															</span>
 														</input> 
 													</md-input-container>
 												</md-content> 
@@ -222,7 +240,10 @@
 												<md-content layout-gt-md="row" layout-padding="">
 													<md-input-container>														
 														<span>															
-															{{ (productOrder.orderQty * productOrder.price) - discount | currency:"$":0 }}
+															{{ 
+																(productOrder.orderQty * productOrder.price) 
+																- discount | currency:"$":0 
+															}}
 														</span> 
 													</md-input-container>
 												</md-content> 
@@ -230,18 +251,20 @@
 											<!-- Delete button -->
 											<td>
 			                                    <md-button ng-click="vm.deleteOrderItem(productOrder)">
-			                                        <md-icon md-font-icon="icon-delete" type="button" aria-label="Delete" >
-			                                        	
+			                                        <md-icon md-font-icon="icon-delete" type="button" 
+			                                        			aria-label="Delete" >	
 			                                        </md-icon>
 			                                    </md-button>
                                     		</td>								
 										</tr>
 									</tbody>
-									<tfoot>
+									<!-- Product list footer -->
+									<tfoot>	
 										<tr>
 											<td>
 												<!-- Add product to order -->
-												<md-button class="md-raised blue-bg white-fg m-o hover" ng-click="vm.addProduct()" layout-align="end center">
+												<md-button class="md-raised blue-bg white-fg m-o hover" 
+															ng-click="vm.addProduct()" layout-align="end center">
 													Add Product
 												</md-button> 
 											</td>
@@ -257,19 +280,20 @@
 												</h1>
 											</td>
 										</tr>
-									</tfoot>
-								</table>
-							</div>
+									</tfoot>	<!-- Product list footer -->
+								</table>	<!-- Select Products, Units & Quantity -->
+						
+								<!-- Submit order button -->
+								<md-input-container layout="row" layout-align="end center">
+						        	<md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" 
+						        				ng-click="vm.onSubmit()">
+						        		Submit
+						        	</md-button>
+						        </md-input-container>	
 
-							<!-- Submit order button -->
-							<md-input-container layout="row" layout-align="end center">
-					        	<md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" ng-click="vm.onSubmit()">
-					        		Submit
-					        	</md-button>
-					        </md-input-container>	
-
+							</div>	<!-- Patient div -->	
 						</md-content>	<!-- Select Patient -->	
-					</div>
-                </md-tab-body>
-	</div>
-</div>
+					</div>	<!-- Order Detail form div -->
+                </md-tab-body>	<!-- Order Detail body tab -->
+	</div>	<!-- CONTENT DIV -->
+</div>	<!-- MAIN COLUMN DIV -->
