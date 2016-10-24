@@ -88,11 +88,13 @@
 										</md-autocomplete>
 
 									<!-- Select address -->
-							        <md-select required ng-model="vm.order.street" layout-gt-md="row"
-							        	ng-model-options="{trackBy: '$value.customerId'}"
-										aria-label="Select Address" placeholder="Select Address">
-										<md-option ng-repeat="street in vm.streets" ng-value="{{street}}">
-											{{ vm.order.street}}
+							        <md-select required ng-model="vm.address" layout-gt-md="row"
+							        	ng-model-options="{trackBy: '$value.customerAddressId'}"
+										aria-label="Select Address" placeholder="Select Address"
+										ng-change="vm.onAddressSelected()">
+										<md-option ng-repeat="address in vm.customerAddresses"
+											ng-value="{{address}}">
+											{{address.street}} {{address.unitNo}} / {{address.city}}, {{address.state}} {{address.zipCode}}
 										</md-option>
 									</md-select>
 
@@ -149,7 +151,6 @@
 
 							    </form>	<!-- Select Patient form -->
 
-
 								<!-- Select Products, Units & Quantity -->
 								<table class="dataTable order-product-table" ms-responsive-table> 
 									<thead> 
@@ -160,7 +161,7 @@
 			                                <th width="10%">Units</th>			               
                                     		<th width="10%">Discount</th>
 			                                <th width="9%">Price</th>	
-                                    		<th width="1%"></th>				                                								
+                                    		<th width="1%"></th>	
 										</tr>							
 									</thead>
 									<tbody>										
