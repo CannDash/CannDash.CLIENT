@@ -280,12 +280,11 @@
             if (!patient || patient == previousPatient) 	//jshint ignore:line
             	return;	//jshint ignore:line
             
-            previousPatient = patient;
-			order.street = patient.address.street;
-			order.unitNo = patient.address.unitNo;
-			order.city = patient.address.city;
-			order.state = patient.address.state;
-			order.zipCode = patient.address.zipCode;
+            vm.order.customerId = vm.order.customer.customerId; 
+
+			previousPatient = patient;
+			var address = patient.address;
+			if (address) copyAddressToOrder(address, vm.order);
 
 			fetchCustomerAddresses();
  	    };
@@ -324,23 +323,25 @@
 	    };
 
 		function fetchCustomerAddresses() {
+			vm.customerAddresses = null;
 			customerFactory.getCustomerAddresses(vm.order.customerId).then(
 				function (addresses) {
 					vm.customerAddresses = addresses;
 				});
 		}
 
-		vm.onAddressSelected = function() {
-			const address = vm.address;	//jshint ignore:line
-			if (!address) return;	//jshint ignore:line
-
-			const order = vm.order;	//jshint ignore:line
+		function copyAddressToOrder(address, order) {
 			order.street = address.street;
 			order.unitNo = address.unitNo;
 			order.city = address.city;
 			order.state = address.state;
 			order.zipCode = address.zipCode;
 			order.deliveryNotes = address.deliveryNotes;
+		}
+
+		vm.onAddressSelected = function() {
+			const address = vm.address;
+			if (address) copyAddressToOrder(address, vm.order);
 		};
     }
 })();
