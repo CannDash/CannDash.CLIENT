@@ -12,7 +12,8 @@
     	'apiUrl', 
     	'orderFactory', 
     	'dispensaryFactory', 
-    	'dispensaryProductFactory', 
+    	'dispensaryProductFactory',
+		'customerFactory',
     	'$state', 
     	'$stateParams', 
     	'productOrderFactory', 
@@ -26,7 +27,8 @@
     	apiUrl, 
     	orderFactory, 
     	dispensaryFactory, 
-    	dispensaryProductFactory, 
+    	dispensaryProductFactory,
+		customerFactory,
     	$state, 
     	$stateParams, 
     	productOrderFactory, 
@@ -119,15 +121,24 @@
 
 	        dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
                 function(data) {
-                    vm.customers = data.customers;
+                    vm.customers =
+						_.map(
+							data,
+							function (c) {
+								const customer = c.customer;
+								customer.address = c.address;
+								return customer;
+							});
 
-                    if (vm.order.customerId)
-                        previousPatient = vm.order.customer =	//jshint ignore:line
-                            _.find(	//jshint ignore:line
-                                data.customers,
-                                function(c) {
-                                    return c.customerId == vm.order.customerId;	//jshint ignore:line
-                                });
+                    if (vm.order.customerId) {
+						previousPatient = vm.order.customer =	//jshint ignore:line
+							_.find(	//jshint ignore:line
+								vm.customers,
+								function (c) {
+									return c.customerId == vm.order.customerId;	//jshint ignore:line
+								});
+						fetchCustomerAddresses();
+					}
 	            }
             );
         }
@@ -269,12 +280,13 @@
             if (!patient || patient == previousPatient) 	//jshint ignore:line
             	return;	//jshint ignore:line
             
-            previousPatient = patient;
-			order.street = patient.street;
-			order.unitNo = patient.unitNo;
-			order.city = patient.city;
-			order.state = patient.state;
-			order.zipCode = patient.zipCode;	
+            vm.order.customerId = vm.order.customer.customerId; 
+
+			previousPatient = patient;
+			var address = patient.address;
+			if (address) copyAddressToOrder(address, vm.order);
+
+			fetchCustomerAddresses();
  	    };
 
 		vm.onProductSelected = function(productOrder) {
@@ -309,6 +321,29 @@
 					return (p.orderQty * p.price) - (p.discount || 0); 	
 				});	
 	    };
+
+		function fetchCustomerAddresses() {
+			vm.customerAddresses = null;
+			customerFactory.getCustomerAddresses(vm.order.customerId).then(
+				function (addresses) {
+					vm.customerAddresses = addresses;
+				});
+		}
+
+		function copyAddressToOrder(address, order) {
+			order.street = address.street;
+			order.unitNo = address.unitNo;
+			order.city = address.city;
+			order.state = address.state;
+			order.zipCode = address.zipCode;
+			order.deliveryNotes = address.deliveryNotes;
+		}
+
+		vm.onAddressSelected = function() {
+			const address = vm.address;
+			if (address) copyAddressToOrder(address, vm.order);
+		};
     }
 })();
+
 

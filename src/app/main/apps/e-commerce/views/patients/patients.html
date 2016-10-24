@@ -1,0 +1,139 @@
+<div id="e-commerce-orders" class="page-layout carded fullwidth" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-account"></md-icon>
+                    <span>Patients Grid</span>
+                </div>
+            </div>
+
+            <div class="search" layout="row" layout-align="start center" flex>
+                <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
+                    <input id="e-commerce-products-search" class="search-input" type="text" 
+                            placeholder="Search" flex>
+                <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
+                    ng-click="vm.createNewOrder()">
+                        New Order
+                </md-button>     
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <!-- CONTENT -->
+            <div class="content">
+              <!--   <md-tabs md-dynamic-height>
+ -->                    <!-- PATIENTS -->
+                  <!--   <md-tab label="Patients"> -->
+
+                        <!-- PATIENT WIDGET GROUP -->
+                        <div class="widget-group" layout="row" flex="100" layout-wrap>
+
+                            <!-- PATIENT WIDGET 11 -->
+                            <ms-widget layout="row" flex="100">
+
+                                <!-- Front -->
+                                <ms-widget-front class="white-bg">
+
+                                    <div class="p-24 mb-8 border-bottom" layout="row" layout-align="space-between center">
+                                        <div class="h2">Patients</div>
+                                        <div class="text-boxed red-bg white-fg m-0">
+                                            {{vm.customerData.customers.length}} Patients Total
+                                        </div>
+                                        <md-button class="md-raised text-boxed blue-bg white-fg m-o hover" 
+                                                    ng-click="createNewPatient()">
+                                                    Add Patient
+                                        </md-button>
+                                    </div>
+                                    <div>
+                                    <table class="dataTable row-border hover" datatable="ng"
+                                           dt-options="vm.customerData.dtOptions">
+                                        <thead>
+                                                <th></th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Name</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">MMIC#</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">MMIC Expiration</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Email</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Phone</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Details</span>
+                                                    </div>
+                                                </th>    
+                                        </thead>
+                                        <tbody>
+                                            <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.driverData.drivers">
+                                                <td>
+                                                    <div class="avatar-wrapper">
+                                                         <img src="assets/images/avatars/profile.jpg" class="avatar"/>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div layout="row" layout-align="start center">
+                                                        <span class="name text-nowrap">
+                                                            {{row.firstName}} {{row.lastName}}
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    {{ row.mmicId }}
+                                                </td>
+                                                <td>
+                                                    {{ row.mmicExpiration }}
+                                                </td>
+                                                <td>
+                                                    {{ row.email }}
+                                                </td>
+                                                <td>
+                                                    {{ row.phone }}
+                                                </td>
+                                                <td>
+                                                    <md-button class="edit-button md-icon-button" 
+                                                    ng-click="vm.gotoPatientDetail(row.orderId)" aria-label="Patient details">
+                                                        <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+                                                    </md-button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </ms-widget-front>   <!-- / Front -->
+                            </ms-widget>   <!-- / PATIENT WIDGET 11 -->
+                        </div>  <!-- / PATIENT WIDGET GROUP -->
+                 <!--    </md-tab>
+                </md-tabs> -->
+            </div>  <!-- / CONTENT -->
+        </div>  <!-- CONTENT CARD -->
+    </div>  <!-- CENTER -->
+</div>
