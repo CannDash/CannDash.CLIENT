@@ -3,9 +3,9 @@
 
     angular
         .module('app.e-commerce')
-        .controller('EditOrderController', EditOrderController);
+        .controller('EditPatientController', EditPatientController);
 
-    EditOrderController.$inject = [
+    EditPatientController.$inject = [
     	'$http', 
     	'$q', 
     	'toastr', 
@@ -19,7 +19,7 @@
     	'$ngBootbox'];
 
     /* @ngInject */
-    function EditOrderController(
+    function EditPatientController(
     	$http, 
     	$q, 
     	toastr, 
@@ -30,8 +30,8 @@
 		customerFactory,
     	$state, 
     	$stateParams, 
-    	$ngBootbox
-    	){
+    	$ngBootbox)
+    {
 
         var vm = this;
         var wProductsUrl = null;
@@ -68,9 +68,6 @@
 	                vm.patientDetail = data;
 	            }
 	        );
-
-
-        ///////////////
     }
 })();
 

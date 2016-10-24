@@ -109,7 +109,7 @@
                 params	: { order : null },
                 views    : {
                     'content@app': {
-                        templateUrl: 'app/main/apps/e-commerce/views/edit/edit.order.html',
+                        templateUrl: 'app/main/apps/e-commerce/views/order-edit/order.edit.html',
                         controller : 'EditOrderController as vm'
                     }
                 },
@@ -134,16 +134,16 @@
                         controller : 'PatientsController as vm'
                     }
                 },
-                resolve  : {
-                    Order   : function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.order@get');
-                    },
-                    Statuses: function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.statuses@get');
-                    }
-                },
+                // resolve  : {
+                //     Order   : function (msApi)
+                //     {
+                //         return msApi.resolve('e-commerce.order@get');
+                //     },
+                //     Statuses: function (msApi)
+                //     {
+                //         return msApi.resolve('e-commerce.statuses@get');
+                //     }
+                // },
                 bodyClass: 'e-commerce'
             })
             // Patient detail
@@ -155,37 +155,37 @@
                         controller : 'PatientController as vm'
                     }
                 },
-                resolve  : {
-                    Order   : function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.order@get');
-                    },
-                    Statuses: function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.statuses@get');
-                    }
-                },
+                // resolve  : {
+                //     Order   : function (msApi)
+                //     {
+                //         return msApi.resolve('e-commerce.order@get');
+                //     },
+                //     Statuses: function (msApi)
+                //     {
+                //         return msApi.resolve('e-commerce.statuses@get');
+                //     }
+                // },
                 bodyClass: 'e-commerce'
             })
             // Edit patient
             .state('app.e-commerce.edit-patient', {
-                url      : '/patient/:id',
+                url      : '/edit-patient/:id',
                 views    : {
                     'content@app': {
                         templateUrl: 'app/main/apps/e-commerce/views/patient-edit/patient-edit.html',
                         controller : 'EditPatientController as vm'
                     }
                 },
-                resolve  : {
-                    Order   : function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.order@get');
-                    },
-                    Statuses: function (msApi)
-                    {
-                        return msApi.resolve('e-commerce.statuses@get');
-                    }
-                },
+                // resolve  : {
+                //     Order   : function (msApi)
+                //     {
+                //         return msApi.resolve('e-commerce.order@get');
+                //     },
+                //     Statuses: function (msApi)
+                //     {
+                //         return msApi.resolve('e-commerce.statuses@get');
+                //     }
+                // },
                 bodyClass: 'e-commerce'
             });
 
