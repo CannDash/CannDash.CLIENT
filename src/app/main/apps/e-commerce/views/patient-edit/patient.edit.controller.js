@@ -37,6 +37,11 @@
         var wProductsUrl = null;
         var previousPatient = null;
 
+        // Methods
+        vm.gotoPatientDetail = gotoPatientDetail;
+        vm.goToPatients = goToPatients;
+        vm.onSubmit = onSubmit;
+
         // Initialize
         activate();
 
@@ -46,7 +51,8 @@
 	        // Initialize data immediately
 	        var dispensaryId = 266;
 
-            const patientId = $stateParams.patientId;
+            const patientId = $stateParams.patientId;     //jshint ignore:line
+
             customerFactory.getByCustomer(patientId).then(
                 function(customer) {
                     vm.customer = customer;
@@ -61,11 +67,6 @@
 
         ///////////////
 
-        // Functions for buttons
-	    vm.onSubmit = function () {
-            
-		};
-
 		/**
          * Go to patient detail
          */
@@ -76,8 +77,15 @@
         /**
          * Go to patients grid
          */
-        vm.goToPatients = function() {
+        function goToPatients() {
             $state.go('app.e-commerce.patients');
+        }
+
+        /**
+         * Submit new patient button
+         */
+        function onSubmit() {
+            
         }
     }
 })();
