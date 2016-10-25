@@ -7,35 +7,23 @@
         .controller('PatientsController', PatientsController);
 
     /** @ngInject */
-    function PatientsController(
-            $state, 
-            dispensaryFactory, 
-            customerFactory) 
-    {
-
+    function PatientsController($state, dispensaryFactory) {
         var vm = this;
         var dispensaryId = 266;
 
         // Data
         vm.customerData = {};
+
+        // Methods
+        vm.createNewPatient = createNewPatient;
+
         vm.dtInstance = {};
-        
-        // Options for pagination
         vm.dtOptions = {
             dom         : 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
-            columnDefs  : [
-                {
-                    // Target the image column
-                    targets   : 0,
-                    filterable: false,
-                    sortable  : false,
-                    width     : '80px'
-                },
-            ],
             initComplete: function ()
             {
                 var api = this.api(),
-                    searchBox = angular.element('body').find('#e-commerce-patients-search');
+                    searchBox = angular.element('body').find('#e-commerce-products-search');
 
                 // Bind an external input as a table wide search box
                 if ( searchBox.length > 0 )
@@ -52,11 +40,6 @@
             scrollY     : 'auto',
             responsive  : true
         };
-
-
-        // Methods
-        vm.createNewPatient = createNewPatient;
-
 
         // Initialize
         activate();
@@ -77,18 +60,12 @@
          */
         function createNewPatient() {
             $state.go('app.e-commerce.edit-patient');
-        }  
-
-        /**
-         * Go to patient detail
-         */
-        function gotoPatientDetail(id) {
-            $state.go('app.e-commerce.patient', { id: id });
         }
-            dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
-                function(data) {
-                    vm.patientDetail = data;
-                }
-            ); 
+
+        vm.gotoPatientDetail = function(patientId)
+        {
+            $state.go('app.e-commerce.patient', {patientId: patientId});
+        }
     }
 })();
+

@@ -1,69 +1,95 @@
-#patients {
+#e-commerce-patients {
 
-    > .center {
+    .center {
 
-        > .header {
-            height: 160px;
-            min-height: 160px;
-            max-height: 160px;
-            padding-bottom: 0;
+        .header {
+            height: 136px !important;
+            min-height: 136px !important;
+            max-height: 136px !important;
+            padding: 24px 0;
 
-            .selected-project {
-                background: rgba(0, 0, 0, 0.12);
-                color: #FFFFFF;
-                padding: 8px 16px;
-                height: 40px;
-                line-height: 24px;
-                font-size: 16px;
+            .h1 {
+                md-icon {
+                    margin-right: 12px;
+                }
             }
 
-            .project-selector {
-                margin-left: 1px;
-                border-radius: 0;
-                background: rgba(0, 0, 0, 0.12);
+            .patient-count {
+                margin: 6px 0 0 36px;
+            }
 
-                md-icon {
+            .search {
+                position: relative;
+                padding-left: 24px;
+                max-width: 480px;
+
+                .search-icon {
+                    margin: 0 -24px 0 0;
+                }
+
+                .search-input {
+                    margin: 0 0 0 32px;
+                    background: none;
+                    font-size: 16px;
+                    line-height: 40px;
+                    height: 40px;
                     color: #FFFFFF;
+                    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+                    transition: border-color 300ms ease;
+
+                    &:focus {
+                        border-color: rgba(255, 255, 255, 1);
+                    }
+
+                    &::-webkit-input-placeholder {
+                        color: rgba(255, 255, 255, 0.5);
+                    }
                 }
             }
         }
 
-        > .content {
+        .content {
             background: none;
             padding: 0;
 
-            > md-tabs {
+            .dataTables_wrapper {
 
-                > md-tabs-wrapper {
-                    background: #FFFFFF;
-                    box-shadow: $whiteframe-shadow-1dp;
-                    padding: 0 24px;
+                .dataTables_scrollHead {
+                    min-height: 64px;
 
-                    md-tabs-canvas {
-                        height: 56px;
+                    table {
 
-                        md-pagination-wrapper {
-                            height: 56px;
-                        }
-
-                        .md-tab {
-                            padding: 16px 24px;
-                            text-transform: none;
+                        th {
+                            padding-top: 20px;
+                            padding-bottom: 20px;
                         }
                     }
                 }
 
-                &:not(.md-dynamic-height) {
+                .dataTables_scrollBody {
 
-                    md-tabs-content-wrapper {
-                        top: 56px;
+                    .product-image {
+                        width: 52px;
+                        height: 52px;
+                        border: 1px solid rgba(0, 0, 0, 0.12);
                     }
-                }
 
-                > md-tabs-content-wrapper {
+                    .quantity-indicator {
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 4px;
+                        margin-right: 8px;
 
-                    md-tab-content {
-                        padding: 12px;
+                        & + div {
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                    }
+
+                    .edit-button {
+                        margin: 0;
                     }
                 }
             }

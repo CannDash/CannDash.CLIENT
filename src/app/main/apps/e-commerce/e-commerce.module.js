@@ -149,6 +149,7 @@
             // Patient detail
             .state('app.e-commerce.patient', {
                 url      : '/patient/:id',
+                params  : { patientId : null },
                 views    : {
                     'content@app': {
                         templateUrl: 'app/main/apps/e-commerce/views/patient/patient.html',
