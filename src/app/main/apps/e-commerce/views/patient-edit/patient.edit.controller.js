@@ -45,6 +45,18 @@
         function activate() {
 	        // Initialize data immediately
 	        var dispensaryId = 266;
+
+            const patientId = $stateParams.patientId;
+            customerFactory.getByCustomer(patientId).then(
+                function(customer) {
+                    vm.customer = customer;
+
+                    customerFactory.getCustomerAddresses(patientId).then(
+                        function (addresses) {
+                            vm.addresses = addresses;
+                        });
+                }
+            );
         }
 
         ///////////////
@@ -57,17 +69,16 @@
 		/**
          * Go to patient detail
          */
-        function gotoPatientDetail(id) {
-            $state.go('app.e-commerce.patient', { id: id });
+        function gotoPatientDetail() {
+            $state.go('app.e-commerce.patient', { patientId: vm.customer.customerId });
         }
-	    
-		    var dispensaryId = 266;
-	        
-	        orderFactory.getOrdersByDispensary(dispensaryId).then(
-	            function(data) {
-	                vm.patientDetail = data;
-	            }
-	        );
+
+        /**
+         * Go to patients grid
+         */
+        vm.goToPatients = function() {
+            $state.go('app.e-commerce.patients');
+        }
     }
 })();
 

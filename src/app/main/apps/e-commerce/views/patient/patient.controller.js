@@ -8,7 +8,6 @@
     PatientController.$inject = [
         '$state', 
         '$stateParams', 
-        'dispensaryFactory', 
         'customerFactory'
         ];
 
@@ -16,15 +15,10 @@
     function PatientController(
         $state, 
         $stateParams, 
-        dispensaryFactory, 
-        customerFactory) 
+        customerFactory)
     {
 
         var vm = this;
-        var dispensaryId = 266;       
-        
-        // Data
-        vm.patientDetail = [];
 
         // Methods
         vm.goToPatients = goToPatients;
@@ -33,37 +27,18 @@
 
         ////////////////
 
-        function activate() {       	
-            dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
-                function(data) {
-                    vm.customers =
-                        _.map(  //jshint ignore:line
-                            data,
-                            function (c) {
-                                const customer = c.customer;    //jshint ignore:line
-                                customer.address = c.address;
-                                return customer;
-                            });
+        function activate() {
+            const patientId = $stateParams.patientId;
+            customerFactory.getByCustomer(patientId).then(
+                function(customer) {
+                    vm.customer = customer;
 
-                    if (vm.patientDetail.customerId) {
-                        previousPatient = vm.order.customer =   //jshint ignore:line
-                            _.find( //jshint ignore:line
-                                vm.customers,
-                                function (c) {
-                                    return c.customerId == vm.patientDetail.customerId; //jshint ignore:line
-                                });
-                        fetchCustomerAddresses();
-                    }
+                    customerFactory.getCustomerAddresses(patientId).then(
+                        function (addresses) {
+                            vm.addresses = addresses;
+                        });
                 }
             );
-        }
-
-        function fetchCustomerAddresses() {
-            vm.customerAddresses = null;
-            customerFactory.getCustomerAddresses(vm.patientDetail.customerId).then(
-                function (addresses) {
-                    vm.customerAddresses = addresses;
-                });
         }
 
         /**
