@@ -340,10 +340,8 @@
 		}
 
 		vm.onAddressSelected = function() {
-			const address = vm.address;
-			if (address) copyAddressToOrder(address, vm.order);
+			const address = vm.address;	//jshint ignore:line
+			if (address) copyAddressToOrder(address, vm.order);	//jshint ignore:line
 		};
     }
 })();
-
-
