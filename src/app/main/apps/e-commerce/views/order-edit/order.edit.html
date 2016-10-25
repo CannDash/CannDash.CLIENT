@@ -46,22 +46,24 @@
 						</div>
 
 						<!-- Select Driver -->
-			            <md-content layout-gt-md="row">			          
-					        <div table-responsive-vertical>
-						        <form name="assignDriverForm">
-						        	<md-content layout-gt-md="row" layout-padding="">
-								        <md-select required ng-model="vm.order.driver" layout-gt-md="row"
-								        	ng-model-options="{trackBy: '$value.driverId'}"
+			            <md-content layout-padding>
+							<div table-responsive-vertical>
+								<form name="assignDriverForm">
+									<md-input-container>
+										<label>Driver</label>
+										<md-select required ng-model="vm.order.driver"
+											ng-model-options="{trackBy: '$value.driverId'}"
 											aria-label="Assign Driver" placeholder="Assign Driver">
-											<md-option ng-repeat="driver in vm.drivers | orderBy : 'firstName' " 
-														ng-value="{{driver}}">
+											<md-option ng-repeat="driver in vm.drivers | orderBy : 'firstName' "
+												ng-value="{{driver}}">
 												{{ driver.firstName + ' ' + driver.lastName }}
 											</md-option>
 										</md-select>
-									</md-content>
-								<form>
-							<div>
-						</md-content>	<!-- Select Driver -->
+									</md-input-container>
+								</form>
+							</div>
+						</md-content>
+						<!-- Select Driver -->
 
 						<!-- Select Patient -->
 					    <md-content layout-padding="">
@@ -88,15 +90,18 @@
 										</md-autocomplete>
 
 									<!-- Select address -->
-							        <md-select required ng-model="vm.address" layout-gt-md="row"
-							        	ng-model-options="{trackBy: '$value.customerAddressId'}"
-										aria-label="Select Address" placeholder="Select Address"
-										ng-change="vm.onAddressSelected()">
-										<md-option ng-repeat="address in vm.customerAddresses"
-											ng-value="{{address}}">
-											{{address.street}} {{address.unitNo}} / {{address.city}}, {{address.state}} {{address.zipCode}}
-										</md-option>
-									</md-select>
+							        <md-input-container>
+										<label>Patient Addresses</label>
+										<md-select ng-model="vm.address"
+											ng-model-options="{trackBy: '$value.customerAddressId'}"
+											aria-label="Patient Addresses"
+											ng-change="vm.onAddressSelected()">
+											<md-option ng-repeat="address in vm.customerAddresses"
+												ng-value="{{address}}">
+												{{address.street}} {{address.unitNo}} / {{address.city}}, {{address.state}} {{address.zipCode}}
+											</md-option>
+										</md-select>
+									</md-input-container>
 
 									<!-- Street -->
 							        <md-input-container class="md-block">
