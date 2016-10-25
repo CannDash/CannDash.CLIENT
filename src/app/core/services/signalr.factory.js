@@ -56,7 +56,7 @@
                 connection.start()
                      .done(function () {
                           console.log('Now connected, connection ID=' + connection.id);
-                          await proxy.invoke('subscribe', {dispensaryId: dispensaryId})
+                          proxy.invoke('subscribe', {dispensaryId: dispensaryId})
                               .done(function () {console.log ('Invocation of Subscribe succeeded');})
                               .fail(function (error) {console.log('Invocation of Subscribe failed. Error: ' + error);})
                      })

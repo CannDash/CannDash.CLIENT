@@ -15,5 +15,6 @@
                 'pascalprecht.translate',
                 'ui.router',
                 'toastr',
+                'SignalR',
             ]);
 })();

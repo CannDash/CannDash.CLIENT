@@ -1,136 +1,165 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app.e-commerce')
-        .controller('OrdersController', OrdersController);
+  angular
+    .module('app.e-commerce')
+    .controller('OrdersController', OrdersController);
 
-    /** @ngInject */
-    function OrdersController($state, Statuses, Orders, orderFactory, signalRHubProxyFactory) {
-        var vm = this;
+  /** @ngInject */
+  function OrdersController($state, Statuses, Orders, orderFactory, orderHub, $scope) {
+    var vm = this;
 
-        //Properties
-        var dispensaryId = 51;//266
-        vm.dispensaryId = dispensaryId; //Need to insure dispensaryId is coming through stateParams
+    //Properties
+    var dispensaryId = 51; //266
+    vm.dispensaryId = dispensaryId; //Need to insure dispensaryId is coming through stateParams
 
-        // Data
-        vm.orders = Orders.data;
-        vm.statuses = Statuses.data;
+    // Data
+    vm.orders = Orders.data;
+    vm.statuses = Statuses.data;
 
-        vm.dtInstance = {};
-        vm.dtOptions = {
-            dom: 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
-            columnDefs: [{
-                // Target the id column
-                targets: 0,
-                width: '72px'
-            }, {
-                // Target the status column
-                targets: 4,
-                render: function(data, type) {
-                    if (type === 'display') {
-                        var orderStatus = vm.getOrderStatus(data);
-                        if (orderStatus) {
-                            return '<span class="status ' + orderStatus.color + '">' + orderStatus.name + '</span>';
-                        } else {
-                            return '<span class="status md-yellow-500-bg">Pending</span>';
-                        }
-                    }
-
-                    if (type === 'filter') {
-                        return vm.getOrderStatus(data);
-                    }
-
-                    return data;
-                }
-            }, {
-                // Target the actions column
-                targets: 6,
-                responsivePriority: 1,
-                filterable: false,
-                sortable: false
-            }],
-            initComplete: function() {
-                var api = this.api(),
-                    searchBox = angular.element('body').find('#e-commerce-products-search');
-
-                // Bind an external input as a table wide search box
-                if (searchBox.length > 0) {
-                    searchBox.on('keyup', function(event) {
-                        api.search(event.target.value).draw();
-                    });
-                }
-            },
-            pagingType: 'simple',
-            lengthMenu: [10, 20, 30, 50, 100],
-            pageLength: 20,
-            scrollY: 'auto',
-            responsive: true
-        };
-
-        // Methods
-        vm.getOrderStatus = getOrderStatus;
-        vm.gotoOrderDetail = gotoOrderDetail;
-        vm.createNewOrder = createNewOrder;
-
-        //////////
-
-        /**
-         * Get order status
-         *
-         * @param id
-         * @returns {*}
-         */
-        function getOrderStatus(id) {
-            for (var i = 0; i < vm.statuses.length; i++) {
-                if (vm.statuses[i].id === parseInt(id)) {
-                    return vm.statuses[i];
-                }
+    vm.dtInstance = {};
+    vm.dtOptions = {
+      dom: 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
+      columnDefs: [{
+        // Target the id column
+        targets: 0,
+        width: '72px'
+      }, {
+        // Target the status column
+        targets: 4,
+        render: function(data, type) {
+          if (type === 'display') {
+            var orderStatus = vm.getOrderStatus(data);
+            if (orderStatus) {
+              return '<span class="status ' + orderStatus.color + '">' + orderStatus.name + '</span>';
+            } else {
+              return '<span class="status md-yellow-500-bg">Pending</span>';
             }
+          }
+
+          if (type === 'filter') {
+            return vm.getOrderStatus(data);
+          }
+
+          return data;
         }
+      }, {
+        // Target the actions column
+        targets: 6,
+        responsivePriority: 1,
+        filterable: false,
+        sortable: false
+      }],
+      initComplete: function() {
+        var api = this.api(),
+          searchBox = angular.element('body').find('#e-commerce-products-search');
 
-        /**
-         * Go to product detail
-         *
-         * @param id
-         */
-        function gotoOrderDetail(id) {
-            $state.go('app.e-commerce.order', { id: id });
+        // Bind an external input as a table wide search box
+        if (searchBox.length > 0) {
+          searchBox.on('keyup', function(event) {
+            api.search(event.target.value).draw();
+          });
         }
+      },
+      pagingType: 'simple',
+      lengthMenu: [10, 20, 30, 50, 100],
+      pageLength: 20,
+      scrollY: 'auto',
+      responsive: true
+    };
 
-        orderFactory.getOrdersByDispensary(dispensaryId).then(
-            function(data) {
-                vm.dispensaryOrders = data;
-                signalRHubProxyFactory.startSignalR(vm.dispensaryId);
-            }
-        );
+    // Methods
+    vm.getOrderStatus = getOrderStatus;
+    vm.gotoOrderDetail = gotoOrderDetail;
+    vm.createNewOrder = createNewOrder;
 
-        /**
-         * Go to new order detail
-         *
-         * @param id
-         */
-        function createNewOrder() {
-        	var order = {};
-	        $state.go('app.e-commerce.edit-order', { order: order });
-	    }
+    activate();
 
-         // signalr client functions for displaying new or updates to orders
-         signalRHubProxyFactory.on('addNewOrder', function(newOrder){
+    //////////
+
+    // signalr client functions for displaying new or updates to orders
+    function activate() {
+         $scope.$on('orderCreated', function(event, newOrder) {
               vm.dispensaryOrders.push(newOrder);
          });
 
-         signalRHubProxyFactory.on('updateOrder', function(updateOrder){
-               var array = vm.dispensaryOrders;
-               for(var i = array.length-1; i >= 0; i--)
-               {
-                    if (array[i].orderId === updateOrder.orderId)
-                    {
-                         array.splice(i, 1);
-                         vm.$apply();
-                    }
-               }
+         $scope.$on('orderUpdated', function(event, orderUpdate){
+              var array = vm.dispensaryOrders;
+              for (var i = array.length - 1; i >= 0; i--) {
+                if (array[i].orderId === orderUpdate.orderId) {
+                   array.splice(i, 1);
+                }
+              }
          });
 
+         orderHub.subscribe(vm.dispensaryId);
     }
+
+    /**
+     * Get order status
+     *
+     * @param id
+     * @returns {*}
+     */
+    function getOrderStatus(id) {
+      for (var i = 0; i < vm.statuses.length; i++) {
+        if (vm.statuses[i].id === parseInt(id)) {
+          return vm.statuses[i];
+        }
+      }
+    }
+
+    /**
+     * Go to product detail
+     *
+     * @param id
+     */
+    function gotoOrderDetail(id) {
+      $state.go('app.e-commerce.order', {
+        id: id
+      });
+    }
+
+    orderFactory.getOrdersByDispensary(dispensaryId).then(
+      function(data) {
+        vm.dispensaryOrders = data;
+      }
+    );
+
+    /**
+     * Go to new order detail
+     *
+     * @param id
+     */
+    function createNewOrder() {
+      var order = {};
+      $state.go('app.e-commerce.edit-order', {
+        order: order
+      });
+    }
+  }
 })();
+
+// var orderHub = new OrderHub({
+//   orderCreated: function(order) {
+//     vm.dispensaryOrders.push(newOrder);
+//     $scope.$apply();
+//   },
+//   orderUpdated: function(order) {
+//     var array = vm.dispensaryOrders;
+//     for (var i = array.length - 1; i >= 0; i--) {
+//       if (array[i].orderId === updateOrder.orderId) {
+//         array.splice(i, 1);
+//         $scope.$apply();
+//       }
+//     }
+//   }
+// });
+// orderHub.promise.done(function() {
+//   console.log('connected, lets do this');
+//   orderHub.subscribe(vm.dispensaryId).then(function() {
+//        console.log('success');
+//   }, function() {
+//        console.log('error');
+//   });
+// });
