@@ -65,7 +65,16 @@
       $http.get(apiUrl + '/customers/' + id )
         .then(
           function(response) {
-            defer.resolve(response.data);
+            const customer = response.data;
+
+            if (customer.dateOfBirth) {
+                customer.dateOfBirth = new Date(customer.dateOfBirth);
+            }
+
+            if (customer.mmicExpiration) {
+                customer.mmicExpiration = new Date(customer.mmicExpiration);
+            }
+            defer.resolve(customer);
           },
           function(error) {
             defer.reject(error);

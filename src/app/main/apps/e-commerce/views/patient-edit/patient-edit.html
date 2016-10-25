@@ -65,10 +65,9 @@
                                     <div layout="row" layout-align="start center">                         
                                         <md-input-container class="md-block" flex>
                                             <label>Gender</label>
-                                            <md-select ng-model="vm.customer.gender" 
-                                            md-selected-text="getSelectedText()" class="md-block" aria-label="Gender" flex>
-                                                <md-option>Male</md-option>
-                                                <md-option>Female</md-option>
+                                            <md-select ng-model="vm.customer.gender">
+                                                <md-option value="Male">Male</md-option>
+                                                <md-option value="Female">Female</md-option>
                                             </md-select>
                                         </md-input-container>
 
@@ -77,8 +76,9 @@
                                           <input required ng-model="vm.customer.age" maxlength="2">
                                         </md-input-container>
                                     </div>
+
                                     <div layout="row" layout-align="start center">  
-                                        <md-input-container class="md-block" flex-gt-xs>
+                                        <md-input-container class="md-block" flex>
                                           <label>D.O.B.</label>
                                           <md-datepicker  required ng-model="vm.customer.dateOfBirth"></md-datepicker>
                                         </md-input-container>
