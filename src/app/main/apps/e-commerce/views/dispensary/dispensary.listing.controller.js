@@ -3,14 +3,27 @@
 
     angular
         .module('cannDash')
-        .controller('DispensaryListingController', DispensaryListingController);
+        .controller(
+            'DispensaryListingController', 
+            DispensaryListingController
+        );
 
-    DispensaryListingController.$inject = ['$http', '$q', 'wpUrl', 'dispensaryListingFactory'];
+    DispensaryListingController.$inject = [
+        '$http', 
+        '$q', 
+        'wpUrl', 
+        'dispensaryListingFactory'];
 
     /* @ngInject */
-    function DispensaryListingController($http, $q, wpUrl, dispensaryListingFactory) {
+    function DispensaryListingController(
+            $http, 
+            $q, 
+            wpUrl, 
+            dispensaryListingFactory) 
+    {
+
         var vm = this;
-        vm.listings = [];
+        vm.dispensaries = [];
 
         activate();
 
@@ -19,7 +32,7 @@
         function activate() {
         	dispensaryListingFactory.getAllListings().then(
                 function(response) {
-                    angular.extend(vm.listings.name, response);
+                    angular.extend(vm.dispensaries.name, response);
                 });
 
         }

@@ -65,7 +65,7 @@
       $http.get(apiUrl + '/customers/' + id )
         .then(
           function(response) {
-            const customer = response.data;
+            const customer = response.data; //jshint ignore:line
 
             if (customer.dateOfBirth) {
                 customer.dateOfBirth = new Date(customer.dateOfBirth);

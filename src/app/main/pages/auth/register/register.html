@@ -9,23 +9,16 @@
 
             <form name="registerForm" novalidate>
                 <md-input-container class="md-block" md-no-float>
-                    <!-- <input name="username" ng-model="vm.form.dispensaryName" placeholder="Dispensary Name" required> -->
-                    <md-select class="input-group project-dropdown" ng-model="vm.dispensaries" aria-label="CREATE MY ACCOUNT">
-                        <md-optgroup label="Dispensaries List">
-                            <md-option ng-value="Dispensaries List" required placeholder="Dispensary Name" ng-options="option.name for option in vm.dispensaries" ng-repeat="dispensary in vm.dispensaries">{{ }}</md-option>
+                    <md-select class="input-group project-dropdown" ng-model="vm.dispensary" aria-label="Select Your Dispensary" ng-change="vm.dispensaries(dispensaries)">
+                        <md-optgroup label="Select your dispensary">
+                            <md-option ng-value="{{ dispensary }}" required placeholder="Dispensary Name" ng-repeat="dispensary in vm.dispensaries  | orderBy: 'name' ">
+                               <img src="{{ dispensary.avatar_url }}" width="40px" height="40px"></img>
+                               {{ dispensary.name + ' (' + dispensary.city + ') '  + 'Ph#: ' + dispensary.phone_number + ' ID: ' + dispensary.id }}
+                            </md-option>
                     </md-select>
                     <div ng-messages="registerForm.username.$error" role="alert">
                         <div ng-message="required">
-                            <span>Dispensary name is required</span>
-                        </div>
-                    </div>
-                </md-input-container>
-
-                <md-input-container class="md-block" md-no-float>
-                    <input name="username" ng-model="vm.form.username" placeholder="Username"  required>
-                    <div ng-messages="registerForm.username.$error" role="alert">
-                        <div ng-message="required">
-                            <span>Username field is required</span>
+                            <span>Selecting a Dispensary is required</span>
                         </div>
                     </div>
                 </md-input-container>
