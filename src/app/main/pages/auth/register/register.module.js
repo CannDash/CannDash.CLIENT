@@ -7,7 +7,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, msNavigationServiceProvider)
+    function config($stateProvider)
     {
         // State
         $stateProvider.state('app.pages_auth_register', {

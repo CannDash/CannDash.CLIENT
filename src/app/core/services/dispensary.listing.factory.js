@@ -19,7 +19,7 @@
         function getAllListings() {
 	 		var defer = $q.defer();
 		
-			$http.get(wpUrl + '/')
+			$http.get(wpUrl)
 				.then(
 					function(response) {
 						defer.resolve(response.data);

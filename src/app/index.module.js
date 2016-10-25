@@ -23,9 +23,6 @@
             // Toolbar
             'app.toolbar',
 
-            // Quick Panel
-            // 'app.quick-panel',
-
             // Apps
             'app.dashboards',
             'app.e-commerce',
