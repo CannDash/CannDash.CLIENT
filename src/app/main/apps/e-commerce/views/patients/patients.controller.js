@@ -23,7 +23,7 @@
             initComplete: function ()
             {
                 var api = this.api(),
-                    searchBox = angular.element('body').find('#e-commerce-products-search');
+                    searchBox = angular.element('body').find('#e-commerce-patients-search');
 
                 // Bind an external input as a table wide search box
                 if ( searchBox.length > 0 )

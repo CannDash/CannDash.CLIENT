@@ -25,7 +25,7 @@
         </div>
         <div class="search" layout="column" layout-align="end end" flex>
             <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
-                        ui-sref="app.e-commerce.edit-patient({ customerId : vm.patientDetail })">
+                        ui-sref="app.e-commerce.edit-patient({ patientId : vm.customer.customerId })">
                         Edit Patient
             </md-button>     
         </div>
@@ -65,26 +65,31 @@
                                         <td>
                                             <div layout="row" layout-align="start center">
                                                 <span class="name text-nowrap">
-                                                    {{ vm.patientDetail.customer.firstName }} 
-                                                    {{ vm.patientDetail.customer.lastName }}
+                                                    {{ vm.customer.firstName }} 
+                                                    {{ vm.customer.lastName }}
                                                 </span>
                                             </div>
                                         </td>
                                         <td>
                                             <span class="total">
-                                                {{ vm.patientDetail.customer.gender }}
+                                                {{ vm.customer.gender }}
                                             </span>
                                         </td>
                                         <td>
                                             <span class="total">
-                                                {{ vm.patientDetail.customer.age }}
+                                                {{ vm.customer.age }}
                                             </span>
                                         </td>
                                         <td>
                                             <span class="total">
-                                                {{ vm.patientDetail.customer.dateOfBirth }}
+                                                {{ vm.customer.dateOfBirth | date:'MM/dd/yy'  }}
                                             </span>
                                         </td>                                        
+                                        <td>
+                                            <span class="total">
+                                                {{ vm.customer.driversLicense  }}
+                                            </span>
+                                        </td>   
                                     </tr>
                                 </tbody>
                             </table>    <!-- General -->
@@ -106,12 +111,12 @@
                                         <tr>
                                             <td>
                                                 <span class="phone">
-                                                    {{ vm.patientDetail.customer.phone }}
+                                                    {{ vm.customer.phone }}
                                                 </span>
                                             </td>
                                             <td>
                                                 <span class="quantity">
-                                                    {{ vm.patientDetail.customer.email }}
+                                                    {{ vm.customer.email }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -125,11 +130,6 @@
                                     <md-icon md-font-icon="icon-home" class="m-0 mr-16"></md-icon>
                                     <div class="h2 secondary-text">Address(s)</div>
                                     <div flex></div>
-                                    <!-- Add address button -->
-                                    <md-button class="md-raised blue-bg white-fg m-o hover" 
-                                                ng-click="vm.addAddress()" layout-align="end center">
-                                        Add Address
-                                    </md-button> 
                                 </div>
                                 <table class="simple" ms-responsive-table>
                                     <thead>
@@ -141,27 +141,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr ng-repeat="address in vm.addresses">
                                             <td>
                                                 <span class="street">
-                                                    {{ vm.patientDetail.address.street }}
+                                                    {{ address.street }}
                                                 </span>
                                             </td>
                                             <td>
                                                 <span class="unitNo">
-                                                    {{ vm.patientDetail.address.unitNo }}
+                                                    {{ address.unitNo }}
                                                 </span>
                                             </td>
                                             <td>
                                                 <span class="city">
-                                                    {{ vm.patientDetail.address.city }}, 
-                                                    {{ vm.patientDetail.address.state }} 
-                                                    {{ vm.patientDetail.address.zipCode }}
+                                                    {{ address.city }},
+                                                    {{ address.state }}
+                                                    {{ address.zipCode }}
                                                 </span>
                                             </td>
                                             <td>
                                                 <span class="deliveryNotes">
-                                                    {{ vm.patientDetail.address.deliveryNotes }}
+                                                    {{ address.deliveryNotes }}
                                                 </span>
                                             </td>                                                                                
                                         </tr>                               
@@ -187,16 +187,16 @@
                                     <tbody>
                                         <tr>
                                             <td class="category">
-                                                {{ vm.patientDetail.customer.doctorLetter }}
+                                                {{ vm.customer.doctorLetter }}
                                             </td>
                                             <td class="name">
-                                                {{ vm.patientDetail.customer.medicalReason }}
+                                                {{ vm.customer.medicalReason }}
                                             </td>
                                             <td class="unit">
-                                                {{ vm.patientDetail.customer.mmicId }}
+                                                {{ vm.customer.mmicId }}
                                             </td>
                                             <td class="price">
-                                                {{ vm.patientDetail.customer.mmicExpiration }}
+                                                {{ vm.customer.mmicExpiration | date:'MM/dd/yy'  }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -211,4 +211,3 @@
 
     </div> <!-- / CONTENT -->
 </div>
-<pre>{{vm.patientDetail.customer| json}}</pre>

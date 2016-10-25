@@ -3,20 +3,22 @@
     <!-- HEADER -->
     <div class="header md-accent-bg" layout="row" layout-align="start center">
         <div class="white-fg" layout="row" layout-align="start center" flex>
-            <md-button class="goto-orders-button md-icon-button" aria-label="Back to all patients" ui-sref="app.e-commerce.patients"">
+            <md-button class="goto-orders-button md-icon-button" aria-label="Back to all patients"
+                       ng-click="vm.goToPatients()">
                 <md-icon md-font-icon="icon-arrow-left"></md-icon>
             </md-button>
 
             <div layout="column" layout-align="start start">
                 <div class="h2">
                     <span>
-                        {{vm.customer.customerId ? 'Edit Patient' : 'New Patient'}} 
+                        Patient Details
                     </span>
                 </div>
 
                 <div class="subtitle secondary-text">
                     <span>
-                        {{vm.customer.firstName}} {{vm.customer.lastName}}
+                        {{ vm.customer.firstName }} 
+                        {{ vm.customer.lastName }}
                     </span>
                 </div>
             </div>
@@ -25,13 +27,13 @@
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content">
+    <div class="content" layout-phone="column" flex> 
         <md-tabs md-dynamic-height>
             <!-- Patient Details tab -->
             <md-tab>
-                <!-- <md-tab-label>
+                <md-tab-label>
                     <span>Patient Details</span>
-                </md-tab-label> -->
+                </md-tab-label>
 
                 <md-tab-body>
                     <div class="order-detail-form-container customer md-background-bg md-whiteframe-1dp">
@@ -39,77 +41,71 @@
                             <md-icon md-font-icon="icon-account" class="m-0 mr-16"></md-icon>
                             <div class="h2 secondary-text">General Info</div>
                         </div>
-                        <!-- Main card div -->
-                        <div class="customer">
-                            <!-- General -->
-                            <table class="simple" ms-responsive-table>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Age</th>
-                                        <th>D.O.B</th>                                        
-                                        <th>D.L.#</th>  
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div layout="row" layout-align="start center">
-                                                <span class="name text-nowrap">
-                                                    {{vm.patient.firstName}} {{vm.patient.lastName}}
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="total">
-                                                {{ vm.patient.gender }}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="total">
-                                                {{ vm.patient.age }}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="total">
-                                                {{ vm.patient.dateOfBirth }}
-                                            </span>
-                                        </td>                                        
-                                    </tr>
-                                </tbody>
-                            </table>    <!-- General -->
 
-                            <!-- Contact -->
-                            <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
-                                <div class="pb-16" layout="row" layout-align="start center">
-                                    <md-icon md-font-icon="icon-phone" class="m-0 mr-16"></md-icon>
-                                    <div class="h2 secondary-text">Contact</div>
+                    <md-content layout-gt-md="row"> 
+
+                        <md-content layout-padding="">
+                            <!-- Main card div -->
+                            <div table-responsive-vertical class="customer">
+                                <!-- General -->
+                                <form name="assignDriverForm">
+                                    <md-content layout-gt-lg="row" layout-padding="">
+                                        <div layout="row" layout-align="start center">
+                                            <md-input-container class="md-block" flex>
+                                              <label>First name</label>
+                                              <input required ng-model="vm.customer.firstName">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex>
+                                              <label>Last name</label>
+                                              <input required ng-model="vm.customer.lastName">      
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="row" layout-align="start center">                         
+                                            <md-input-container class="md-block" flex>
+                                              <label>Gender</label>
+                                              <input required ng-model="vm.customer.gender">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex>
+                                              <label>Age</label>
+                                              <input required ng-model="vm.customer.age">
+                                            </md-input-container>
+                                        </div>
+                                        <div layout="row" layout-align="start center">  
+                                            <md-input-container class="md-block" flex>
+                                              <label>D.O.B.</label>
+                                              <input required ng-model="vm.customer.dateOfBirth">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex>
+                                              <label>D.L.#</label>
+                                              <input required ng-model="vm.customer.driversLicense">
+                                            </md-input-container>
+                                        </div>  
+                                    </md-content>                                                        
+                                </form>    <!-- General -->
+
+                                <!-- Contact -->
+                                <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
+                                    <div class="pb-16" layout="row" layout-align="start center">
+                                        <md-icon md-font-icon="icon-phone" class="m-0 mr-16"></md-icon>
+                                        <div class="h2 secondary-text">Contact</div>
+                                    </div>
+                                    <md-content layout-gt-md="row" layout-padding="">
+                                        <div layout="row" layout-align="center center">
+                                            <md-input-container class="md-block" flex>
+                                              <label>Phone</label>
+                                              <input required ng-model="vm.customer.phone">
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex>
+                                              <label>Email</label>
+                                              <input required ng-model="vm.customer.email">
+                                            </md-input-container>
+                                        </div>  <!-- Contact -->
+                                    </md-content>
                                 </div>
-                                <table class="simple" ms-responsive-table>
-                                    <thead>
-                                        <tr>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="patient in vm.customers">
-                                            <td>
-                                                <span class="phone">
-                                                    {{ vm.patient.phone }}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span class="quantity">
-                                                    {{ vm.patient.email }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>   
-                            </div>  <!-- Contact -->
+                            </div>
+                        </md-content>
 
+                        <md-content layout-padding="">
                             <!-- Address -->
                             <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
                                 <div class="pb-16" layout="row" layout-align="start center">
@@ -132,32 +128,40 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="patient in vm.customers">
+                                        <tr ng-repeat="address in vm.addresses">
                                             <td>
-                                                <span class="street">
-                                                    {{ vm.patient.street }}
-                                                </span>
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="vm.addresses.street">
+                                                </md-input-container>
                                             </td>
                                             <td>
-                                                <span class="unitNo">
-                                                    {{ vm.patient.unitNo }}
-                                                </span>
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="vm.addresses.unitNo">
+                                                </md-input-container>
                                             </td>
                                             <td>
-                                                <span class="city">
-                                                    {{ vm.patient.city }}, {{ vm.patient.state }} {{ vm.patient.zipCode }}
-                                                </span>
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="vm.addresses.city">
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="vm.addresses.state">
+                                                </md-input-container>
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="vm.addresses.zipCode">
+                                                </md-input-container>                                       
                                             </td>
                                             <td>
-                                                <span class="deliveryNotes">
-                                                    {{ vm.patient.deliveryNotes }}
-                                                </span>
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="vm.addresses.deliveryNotes">
+                                                </md-input-container>
                                             </td>                                                                                
                                         </tr>                               
                                     </tbody>
                                 </table>   
                             </div>  <!-- Address -->
+                        </md-content>
 
+                        <md-content layout-padding="">
                             <!-- Medical Info -->
                             <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
                                 <div class="pb-16" layout="row" layout-align="start center">
@@ -174,37 +178,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="patient in vm.customers">
+                                        <tr>
                                             <td class="category">
-                                                {{patient.doctorLetter}}
+                                                {{ vm.customer.doctorLetter }}
                                             </td>
                                             <td class="name">
-                                                {{patient.medicalReason}}
+                                                {{ vm.customer.medicalReason }}
                                             </td>
                                             <td class="unit">
-                                                {{patient.mmicId}}
+                                                {{ vm.customer.mmicId }}
                                             </td>
                                             <td class="price">
-                                                {{patient.mmicExpiration}}
+                                                {{ vm.customer.mmicExpiration | date:'MM/dd/yy'  }}
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>                        
                             </div>  <!-- Medical Info -->
-                            
-                            <!-- Submit order button -->
-                            <md-input-container layout="row" layout-align="end center">
-                                <md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" 
-                                            ng-click="vm.onSubmit()">
-                                    Submit
-                                </md-button>
-                            </md-input-container>   
-
-                        </div>  <!-- Main card div -->
-                    </div>
+                        </md-content>
+                    </md-content>
+                    </div>  <!-- Main card div -->
                 </md-tab-body>
             </md-tab>   <!-- Patient Details tab -->
         </md-tabs>
     </div> <!-- / CONTENT -->
 </div>
-<!-- <pre>{{vm.order | json}}</pre> -->

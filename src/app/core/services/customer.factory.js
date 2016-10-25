@@ -62,7 +62,7 @@
     function getByCustomer(id) {
       var defer = $q.defer();
       // Pass in dispensaryID to this APi url
-      $http.get(apiUrl + '/dispensaries/customers' + id )
+      $http.get(apiUrl + '/customers/' + id )
         .then(
           function(response) {
             defer.resolve(response.data);
