@@ -1,4 +1,4 @@
-<div id="e-commerce-order" class="page-layout simple tabbed" layout="column">
+<div id="e-commerce-patient" class="page-layout simple tabbed" layout="column">
 
     <!-- HEADER -->
     <div class="header md-accent-bg" layout="row" layout-align="start center">
@@ -17,14 +17,15 @@
 
                 <div class="subtitle secondary-text">
                     <span>
-                        {{vm.customerData.customer.firstName}} {{vm.customerData.customer.lastName}}
+                        {{ vm.customer.firstName }} 
+                        {{ vm.customer.lastName }}
                     </span>
                 </div>
             </div>
         </div>
         <div class="search" layout="column" layout-align="end end" flex>
             <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
-                        ui-sref="app.e-commerce.edit-patient({patient: vm.customer})">
+                        ui-sref="app.e-commerce.edit-patient({ customerId : vm.patientDetail })">
                         Edit Patient
             </md-button>     
         </div>
@@ -64,23 +65,24 @@
                                         <td>
                                             <div layout="row" layout-align="start center">
                                                 <span class="name text-nowrap">
-                                                    {{vm.patient.firstName}} {{vm.patient.lastName}}
+                                                    {{ vm.patientDetail.customer.firstName }} 
+                                                    {{ vm.patientDetail.customer.lastName }}
                                                 </span>
                                             </div>
                                         </td>
                                         <td>
                                             <span class="total">
-                                                {{ vm.patient.gender }}
+                                                {{ vm.patientDetail.customer.gender }}
                                             </span>
                                         </td>
                                         <td>
                                             <span class="total">
-                                                {{ vm.patient.age }}
+                                                {{ vm.patientDetail.customer.age }}
                                             </span>
                                         </td>
                                         <td>
                                             <span class="total">
-                                                {{ vm.patient.dateOfBirth }}
+                                                {{ vm.patientDetail.customer.dateOfBirth }}
                                             </span>
                                         </td>                                        
                                     </tr>
@@ -101,15 +103,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="patient in vm.customers">
+                                        <tr>
                                             <td>
                                                 <span class="phone">
-                                                    {{ vm.patient.phone }}
+                                                    {{ vm.patientDetail.customer.phone }}
                                                 </span>
                                             </td>
                                             <td>
                                                 <span class="quantity">
-                                                    {{ vm.patient.email }}
+                                                    {{ vm.patientDetail.customer.email }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -139,25 +141,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="patient in vm.customers">
+                                        <tr>
                                             <td>
                                                 <span class="street">
-                                                    {{ vm.patient.street }}
+                                                    {{ vm.patientDetail.address.street }}
                                                 </span>
                                             </td>
                                             <td>
                                                 <span class="unitNo">
-                                                    {{ vm.patient.unitNo }}
+                                                    {{ vm.patientDetail.address.unitNo }}
                                                 </span>
                                             </td>
                                             <td>
                                                 <span class="city">
-                                                    {{ vm.patient.city }}, {{ vm.patient.state }} {{ vm.patient.zipCode }}
+                                                    {{ vm.patientDetail.address.city }}, 
+                                                    {{ vm.patientDetail.address.state }} 
+                                                    {{ vm.patientDetail.address.zipCode }}
                                                 </span>
                                             </td>
                                             <td>
                                                 <span class="deliveryNotes">
-                                                    {{ vm.patient.deliveryNotes }}
+                                                    {{ vm.patientDetail.address.deliveryNotes }}
                                                 </span>
                                             </td>                                                                                
                                         </tr>                               
@@ -181,18 +185,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="patient in vm.customers">
+                                        <tr>
                                             <td class="category">
-                                                {{patient.doctorLetter}}
+                                                {{ vm.patientDetail.customer.doctorLetter }}
                                             </td>
                                             <td class="name">
-                                                {{patient.medicalReason}}
+                                                {{ vm.patientDetail.customer.medicalReason }}
                                             </td>
                                             <td class="unit">
-                                                {{patient.mmicId}}
+                                                {{ vm.patientDetail.customer.mmicId }}
                                             </td>
                                             <td class="price">
-                                                {{patient.mmicExpiration}}
+                                                {{ vm.patientDetail.customer.mmicExpiration }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -204,6 +208,7 @@
                 </md-tab-body>
             </md-tab>   <!-- Patient Details tab -->
         </md-tabs>
+
     </div> <!-- / CONTENT -->
 </div>
-<!-- <pre>{{vm.order | json}}</pre> -->
+<pre>{{vm.patientDetail.customer| json}}</pre>
