@@ -229,9 +229,7 @@
 	            }
 	        );
 
-
         ///////////////
-
 
 	    // Functions for text autocomplete boxes, dropdown menus & form fields
 	    vm.onCategorySelected = function(productOrder) {
