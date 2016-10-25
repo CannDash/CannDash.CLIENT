@@ -3,11 +3,11 @@
     background: url('/assets/images/backgrounds/home-background.jpg') no-repeat;
     background-size: cover;
 
-    #coming-soon-form-wrapper {
+    #homepage-form-wrapper {
         flex: 1 0 auto;
         padding: 32px;
 
-        #coming-soon-form {
+        #homepage-form {
             max-width: 384px;
             background: rgba(225, 225, 225, .8);
             text-align: center;
@@ -86,12 +86,12 @@
 // RESPONSIVE
 @media screen and (max-width: $layout-breakpoint-xs) {
 
-    #coming-soon {
+    #homepage {
 
-        #coming-soon-form-wrapper {
+        #homepage-form-wrapper {
             padding: 16px;
 
-            #coming-soon-form {
+            #homepage-form {
                 width: 100%;
 
                 .top {

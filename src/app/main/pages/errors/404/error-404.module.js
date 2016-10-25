@@ -7,7 +7,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider)
+    function config($stateProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider.state('app.pages_errors_error-404', {
@@ -23,22 +23,6 @@
                 }
             },
             bodyClass: 'error-404'
-        });
-
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/pages/errors/404');
-
-        // Navigation
-        msNavigationServiceProvider.saveItem('pages.errors', {
-            title : 'Errors',
-            icon  : 'icon-alert',
-            weight: 3
-        });
-
-        msNavigationServiceProvider.saveItem('pages.errors.error-404', {
-            title : '404',
-            state : 'app.pages_errors_error-404',
-            weight: 1
         });
     }
 

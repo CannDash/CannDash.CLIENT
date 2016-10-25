@@ -6,4 +6,5 @@ coverage/
 .tmp/
 dist/
 src/app/core/values/values.js
-
+src/app/index.api.js
+src/app/index.config.js

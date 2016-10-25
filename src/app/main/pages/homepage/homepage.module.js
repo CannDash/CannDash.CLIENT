@@ -12,7 +12,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider)
+    function config($stateProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider.state('app.pages_homepage', {
@@ -28,17 +28,6 @@
                 }
             },
             bodyClass: 'homepage'
-        });
-
-        // Translation
-        $translatePartialLoaderProvider.addPart('');
-
-        // Navigation
-        msNavigationServiceProvider.saveItem('pages.homepage', {
-            title : 'Home Page',
-            icon  : 'icon-home',
-            state : 'app.pages_homepage',
-            weight: 1
         });
     }
 
