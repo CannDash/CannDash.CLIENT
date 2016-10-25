@@ -19,7 +19,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider)
+    function config($stateProvider, msApiProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider
@@ -134,16 +134,6 @@
                         controller : 'PatientsController as vm'
                     }
                 },
-                // resolve  : {
-                //     Order   : function (msApi)
-                //     {
-                //         return msApi.resolve('e-commerce.order@get');
-                //     },
-                //     Statuses: function (msApi)
-                //     {
-                //         return msApi.resolve('e-commerce.statuses@get');
-                //     }
-                // },
                 bodyClass: 'e-commerce'
             })
             // Patient detail
@@ -156,16 +146,6 @@
                         controller : 'PatientController as vm'
                     }
                 },
-                // resolve  : {
-                //     Order   : function (msApi)
-                //     {
-                //         return msApi.resolve('e-commerce.order@get');
-                //     },
-                //     Statuses: function (msApi)
-                //     {
-                //         return msApi.resolve('e-commerce.statuses@get');
-                //     }
-                // },
                 bodyClass: 'e-commerce'
             })
             // Edit patient
@@ -177,16 +157,6 @@
                         controller : 'EditPatientController as vm'
                     }
                 },
-                // resolve  : {
-                //     Order   : function (msApi)
-                //     {
-                //         return msApi.resolve('e-commerce.order@get');
-                //     },
-                //     Statuses: function (msApi)
-                //     {
-                //         return msApi.resolve('e-commerce.statuses@get');
-                //     }
-                // },
                 bodyClass: 'e-commerce'
             });
 
@@ -220,7 +190,7 @@
         });       
 
         msNavigationServiceProvider.saveItem('apps.e-commerce.patient', {
-            title: 'Patient Detail',
+            title: 'Patient Info',
             state: 'app.e-commerce.patient'
         });       
     }

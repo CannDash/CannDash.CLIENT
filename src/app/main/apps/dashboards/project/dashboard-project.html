@@ -171,169 +171,7 @@
                     </div>
                     <!-- / BAR GRAPH GROUP -->
                 </md-tab>
-
-                <!-- PATIENTS -->
-                <md-tab label="Patients">
-
-                    <!-- PATIENT WIDGET GROUP -->
-                    <div class="widget-group" layout="row" flex="100" layout-wrap>
-
-                        <!-- PATIENT WIDGET 11 -->
-                        <ms-widget layout="row" flex="100">
-
-                            <!-- Front -->
-                            <ms-widget-front class="white-bg">
-
-                                <div class="p-24 mb-8 border-bottom" layout="row" layout-align="space-between center">
-                                    <div class="h2">Patients</div>
-                                    <div class="text-boxed red-bg white-fg m-0">{{vm.customerData.customers.length}}
-                                        Patients Total
-                                    </div>
-                                    <md-button class="md-raised text-boxed blue-bg white-fg m-o hover" ng-click="addPatient()">Add Patient</md-button>
-                                </div>
-
-                                <table class="dataTable row-border hover" datatable="ng"
-                                       dt-options="vm.customerData.dtOptions">
-                                    <thead>
-                                            <th></th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">Name</span>
-                                                </div>
-                                            </th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">Address</span>
-                                                </div>
-                                            </th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">City/Sate/Zip</span>
-                                                </div>
-                                            </th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">Email</span>
-                                                </div>
-                                            </th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">Phone</span>
-                                                </div>
-                                            </th>
-                                    </thead>
-                                    <tbody>
-                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.driverData.drivers">
-                                            <td>
-                                                <div class="avatar-wrapper">
-                                                     <img src="assets/images/avatars/profile.jpg" class="avatar"/>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                {{row.firstName}} {{row.lastName}}
-                                            </td>
-                                            <td>{{row.street}} {{row.unitNo}}</td>
-                                            <td>
-                                                {{row.city}}, {{row.state}} {{row.zipCode}}
-                                            </td>
-                                            <td>{{row.email}}</td>
-                                            <td>{{row.phone}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </ms-widget-front>
-                            <!-- / Front -->
-
-                        </ms-widget>
-                        <!-- / PATIENT WIDGET 11 -->
-
-                    </div>
-                    <!-- / PATIENT WIDGET GROUP -->
-                </md-tab>
-
-                <!-- DRIVERS -->
-                <md-tab label="Drivers">
-
-                    <!-- DRIVERS WIDGET GROUP -->
-                    <div class="widget-group" layout="row" flex="100" layout-wrap>
-
-                        <!-- DRIVERS WIDGET 12 -->
-                        <ms-widget layout="row" flex="100">
-
-                            <!-- Front -->
-                            <ms-widget-front class="white-bg">
-
-                                <div class="p-24 mb-8 border-bottom" layout="row" layout-align="space-between center">
-                                    <div class="h2">Drivers</div>
-                                    <div class="text-boxed red-bg white-fg m-0">{{vm.driverData.drivers.length}}
-                                        Drivers Total
-                                    </div>
-                                    <md-button class="md-raised text-boxed blue-bg white-fg m-o hover" ng-click="">Add Driver</md-button>
-                                </div>
-
-                                <table class="dataTable row-border hover" datatable="ng"
-                                       dt-options="vm.customerData.dtOptions">
-                                    <thead>
-                                            <th></th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">Name</span>
-                                                </div>
-                                            </th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">DL #</span>
-                                                </div>
-                                            </th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">Make/Model</span>
-                                                </div>
-                                            </th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">Email</span>
-                                                </div>
-                                            </th>
-                                            <th class="secondary-text">
-                                                <div class="table-header">
-                                                    <span class="column-title">Phone</span>
-                                                </div>
-                                            </th>
-                                    </thead>
-                                    <tbody>
-                                        <tr ui-sref="app.pages_profile_patient({patientId: vm.patientId })" ng-repeat="row in vm.customerData.customers">
-                                            <td>
-                                                 <div class="avatar-wrapper">
-                                                      <img src="assets/images/avatars/profile.jpg" class="avatar"/>
-                                                 </div>
-                                            </td>
-                                            <td>
-                                                {{row.firstName}} {{row.lastName}}
-                                            </td>
-                                            <td>{{row.driversLicense}}</td>
-                                            <td>
-                                                {{row.vehicleMake}} {{row.vehicleModel}}
-                                            </td>
-                                            <td>{{row.email}}</td>
-                                            <td>{{row.phone}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </ms-widget-front>
-                            <!-- / Front -->
-
-                        </ms-widget>
-                        <!-- / DRIVERS WIDGET 12 -->
-
-                    </div>
-                    <!-- / DRIVER WIDGET GROUP -->
-                </md-tab>
-
             </md-tabs>
-
         </div>
         <!-- / CONTENT -->
 
@@ -341,8 +179,7 @@
     <!-- / CENTER -->
 
     <!-- SIDENAV -->
-    <md-sidenav class="sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')" md-component-id="sidenav"
-                ms-scroll ms-sidenav-helper>
+    <md-sidenav class="sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')" md-component-id="sidenav" ms-scroll ms-sidenav-helper>
 
         <!-- SIDENAV GROUP -->
         <div class="widget-group">
@@ -357,28 +194,6 @@
                         <div class="h3">{{vm.nowWidget.now.weekDay}},
                             {{vm.nowWidget.now.hour}}:{{vm.nowWidget.now.minute}}:{{vm.nowWidget.now.second}}
                         </div>
-<!--                         <md-menu>
-                            <md-button class="md-icon-button" ng-click="$mdOpenMenu()" md-menu-origin
-                                       md-menu-align-target
-                                       aria-label="Options">
-                                <md-icon md-font-icon="icon-dots-vertical" class="icon"></md-icon>
-                            </md-button>
-
-                            <md-menu-content width="3">
-                                <md-menu-item>
-                                    <md-button ng-click="vm.nowWidget.dummyFunction()">
-                                        <md-icon md-font-icon="icon-refresh" class="icon"></md-icon>
-                                        Refresh
-                                    </md-button>
-                                </md-menu-item>
-                                <md-menu-item>
-                                    <md-button ng-click="vm.nowWidget.dummyFunction()">
-                                        <md-icon md-font-icon="icon-cog" class="icon"></md-icon>
-                                        Settings
-                                    </md-button>
-                                </md-menu-item>
-                            </md-menu-content>
-                        </md-menu> -->
                     </div>
 
                     <div class="p-16 pb-24" layout="column" layout-align="center center">
@@ -415,29 +230,6 @@
                             <md-icon md-font-icon="icon-map-marker" class="icon mr-8"></md-icon>
                             {{vm.weatherWidget.locations[vm.weatherWidget.currentLocation].name}}
                         </div>
-
-<!--                         <md-menu>
-                            <md-button class="md-icon-button" ng-click="$mdOpenMenu()" md-menu-origin
-                                       md-menu-align-target
-                                       aria-label="Options">
-                                <md-icon md-font-icon="icon-dots-vertical" class="icon"></md-icon>
-                            </md-button>
-
-                            <md-menu-content width="3">
-                                <md-menu-item>
-                                    <md-button ng-click="vm.nowWidget.dummyFunction()">
-                                        <md-icon md-font-icon="icon-refresh" class="icon"></md-icon>
-                                        Refresh
-                                    </md-button>
-                                </md-menu-item>
-                                <md-menu-item>
-                                    <md-button ng-click="vm.nowWidget.dummyFunction()">
-                                        <md-icon md-font-icon="icon-cog" class="icon"></md-icon>
-                                        Settings
-                                    </md-button>
-                                </md-menu-item>
-                            </md-menu-content>
-                        </md-menu> -->
                     </div>
 
                     <div class="p-16 pb-32" layout="column" layout-align="center center">
@@ -488,16 +280,8 @@
 
                     <md-divider></md-divider>
 
-                </ms-widget-front>
-                <!-- / Front -->
-
-            </ms-widget>
-            <!-- / WEATHER WIDGET -->
-
-        </div>
-        <!-- / WIDGET GROUP -->
-
-    </md-sidenav>
-    <!-- / SIDENAV -->
-
+                </ms-widget-front>   <!-- / Front -->                
+            </ms-widget> <!-- / WEATHER WIDGET -->
+        </div> <!-- / WIDGET GROUP -->
+    </md-sidenav> <!-- / SIDENAV -->
 </div>

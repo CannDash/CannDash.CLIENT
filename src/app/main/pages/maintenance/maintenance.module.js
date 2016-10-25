@@ -7,11 +7,11 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider)
+    function config($stateProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider.state('app.pages_maintenance', {
-            url      : '/pages/maintenance',
+            url      : '/maintenance',
             views    : {
                 'main@'                        : {
                     templateUrl: 'app/core/layouts/content-only.html',
@@ -23,17 +23,6 @@
                 }
             },
             bodyClass: 'maintenance'
-        });
-
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/pages/maintenance');
-
-        // Navigation
-        msNavigationServiceProvider.saveItem('pages.maintenance', {
-            title : 'Maintenance',
-            icon  : 'icon-oil',
-            state : 'app.pages_maintenance',
-            weight: 5
         });
     }
 

@@ -7,11 +7,11 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider)
+    function config($stateProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider.state('app.pages_auth_forgot-password', {
-            url      : '/pages/auth/forgot-password',
+            url      : '/forgot-password',
             views    : {
                 'main@'                                 : {
                     templateUrl: 'app/core/layouts/content-only.html',
@@ -23,16 +23,6 @@
                 }
             },
             bodyClass: 'forgot-password'
-        });
-
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/pages/auth/forgot-password');
-
-        // Navigation
-        msNavigationServiceProvider.saveItem('pages.auth.forgot-password', {
-            title : 'Forgot Password',
-            state : 'app.pages_auth_forgot-password',
-            weight: 5
         });
     }
 

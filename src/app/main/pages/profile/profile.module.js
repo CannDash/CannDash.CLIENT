@@ -7,10 +7,10 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider)
+    function config($stateProvider, msApiProvider, msNavigationServiceProvider)
     {
         $stateProvider.state('app.pages_profile_patient', {
-            url      : '/admin/patient-details',
+            url      : '/dispensary/patient-profile',
             views    : {
                 'content@app': {
                     templateUrl: 'app/main/pages/profile/profile.html',
@@ -31,7 +31,7 @@
         });
 
         $stateProvider.state('app.pages_profile_driver', {
-            url      : '/admin/driver-details',
+            url      : '/dispensary/driver-profile',
             views    : {
                 'content@app': {
                     templateUrl: 'app/main/pages/profile/profile.html',
@@ -47,19 +47,9 @@
             bodyClass: 'profile'
         });
 
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/pages/profile');
-
         // Api
         msApiProvider.register('profile.about', ['app/data/profile/about.json']);
 
-        // Navigation
-        msNavigationServiceProvider.saveItem('pages_profile_patient', {
-            title : 'Patient Details',
-            icon  : 'icon-account',
-            state : 'app.pages_profile',
-            weight: 6
-        });
     }
 
 })();
