@@ -14,6 +14,8 @@
                 'ngMaterial',
                 'pascalprecht.translate',
                 'ui.router',
-                'toastr'
+                'toastr',
+                'auth0.auth0',
+                'angular-jwt',
             ]);
 })();
