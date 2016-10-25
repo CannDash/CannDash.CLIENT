@@ -85,9 +85,49 @@
          * Submit new patient button
          */
         function onSubmit() {
-            
+            var patient = vm.customer;
+
+            patient.forEach(
+                function (newPatient) {
+                    // Patient Info
+                    patient.customer.firstName = patient.customer.firstName;
+                    patient.customer.lastName = patient.customer.lastName; 
+                    patient.customer.gender = patient.customer.gender;
+                    patient.customer.age = patient.customer.age; 
+                    patient.customer.dateOfBirth = patient.customer.dateOfBirth;
+                    patient.customer.driversLicense = patient.customer.driversLicense;
+                    patient.customer.phone = patient.customer.phone;
+                    patient.customer.email = patient.customer.email;
+
+                    // Address Info
+                    patient.addresses.street = patient.addresses.street;
+                    patient.addresses.unitNo = patient.addresses.unitNo;
+                    patient.addresses.city = patient.addresses.city;
+                    patient.addresses.state = patient.addresses.state;
+                    patient.addresses.zipCode = patient.addresses.zipCode;
+                    patient.addresses.deliveryNotes = patient.addresses.deliveryNotes;
+
+                    // Medical Info   
+                    patient.customer.doctorLetter = patient.customer.doctorLetter; 
+                    patient.customer.medicalReason = patient.customer.medicalReason;
+                    patient.customer.mmicId = patient.customer.mmicId;
+                    patient.customer.mmicExpiration = patient.customer.mmicExpiration;        
+                });
+
+                if (patient.customerId)  //jshint ignore:line
+                    customerFactory.updatePatient(patient)     //jshint ignore:line
+                        .then(
+                            function () {
+                                $state.go('app.e-commerce.patients');                     
+                            }
+                        );
+                else {
+                    customerFactory.addPatient(patient).then(      //jshint ignore:line
+                        function () {
+                            $state.go('app.e-commerce.patients');                     
+                        }
+                    );
+                }
         }
     }
 })();
-
-
