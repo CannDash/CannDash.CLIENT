@@ -25,7 +25,7 @@
         </div>
         <div class="search" layout="column" layout-align="end end" flex>
             <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
-                        ui-sref="app.e-commerce.edit-patient({ patientId : vm.customer.customerId })">
+                        ui-sref="app.e-commerce.edit-patient({ id : vm.customer.customerId })">
                         Edit Patient
             </md-button>     
         </div>
@@ -141,7 +141,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="address in vm.addresses">
+                                        <tr ng-repeat="address in vm.customer.addresses">
                                             <td>
                                                 <span class="street">
                                                     {{ address.street }}

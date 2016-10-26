@@ -139,7 +139,6 @@
             // Patient detail
             .state('app.e-commerce.patient', {
                 url      : '/patient/:id',
-                params  : { patientId : null },
                 views    : {
                     'content@app': {
                         templateUrl: 'app/main/apps/e-commerce/views/patient/patient.html',
@@ -151,7 +150,6 @@
             // Edit patient
             .state('app.e-commerce.edit-patient', {
                 url      : '/edit-patient/:id',
-                params  : { patientId : null },
                 views    : {
                     'content@app': {
                         templateUrl: 'app/main/apps/e-commerce/views/patient-edit/patient-edit.html',

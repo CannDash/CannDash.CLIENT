@@ -11,7 +11,8 @@
                 </div>
 
                 <div class="toolbar">
-                    <md-button class="md-icon-button sidenav-toggle" ng-click="vm.toggleSidenav('sidenav')" hide-gt-md aria-label="Toggle sidenav">
+                    <md-button class="md-icon-button sidenav-toggle" ng-click="vm.toggleSidenav('sidenav')" 
+                    hide-gt-md aria-label="Toggle sidenav">
                         <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
                     </md-button>
                 </div>
@@ -31,7 +32,8 @@
                     <div class="widget-group" layout="row" flex="100" layout-wrap>
 
                         <!-- Today's Sales -->
-                        <ms-widget flippable="true" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+                        <ms-widget flippable="true" layout="column" flex="100" flex-gt-xs="50" 
+                        flex-gt-md="25">
 
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
@@ -56,7 +58,8 @@
                         <!-- / Today's Sales -->
 
                         <!-- Total Patients -->
-                        <ms-widget flippable="true" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+                        <ms-widget flippable="true" layout="column" flex="100" flex-gt-xs="50" 
+                        flex-gt-md="25">
 
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
@@ -81,7 +84,8 @@
                         <!-- / Total Patients -->
 
                         <!-- Drivers Working -->
-                        <ms-widget flippable="true" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+                        <ms-widget flippable="true" layout="column" flex="100" flex-gt-xs="50" 
+                        flex-gt-md="25">
 
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
@@ -106,7 +110,8 @@
                         <!-- / Drivers Working -->
 
                         <!-- Orders Completed Today-->
-                        <ms-widget flippable="true" layout="column" flex="100" flex-gt-xs="50" flex-gt-md="25">
+                        <ms-widget flippable="true" layout="column" flex="100" flex-gt-xs="50" 
+                        flex-gt-md="25">
 
                             <!-- Front -->
                             <ms-widget-front class="white-bg">
@@ -179,7 +184,8 @@
     <!-- / CENTER -->
 
     <!-- SIDENAV -->
-    <md-sidenav class="sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')" md-component-id="sidenav" ms-scroll ms-sidenav-helper>
+    <md-sidenav class="sidenav md-sidenav-right" md-is-locked-open="$mdMedia('gt-md')" 
+    md-component-id="sidenav" ms-scroll ms-sidenav-helper>
 
         <!-- SIDENAV GROUP -->
         <div class="widget-group">
@@ -247,9 +253,9 @@
 
                     <div class="grey-300-bg p-16" layout="row" layout-align="space-between center">
                         <div layout="row" layout-align="start center">
-                            <md-icon md-font-icon="icon-weather-windy" class="icon mr-8 s20"></md-icon>
+                            <img ng-src="http://openweathermap.org/img/w/{{weather.weatherInfo.weather[0].icon}}.png" class="icon mr-8 s20">
                             <span>
-                                {{vm.weatherWidget.locations[vm.weatherWidget.currentLocation].windSpeed[vm.weatherWidget.speedUnit]}}
+                                {{vm.weatherInfo.locations[vm.weatherInfo.currentLocation].windSpeed[vm.weatherInfo.speedUnit]}}
                             </span>
                             <span class="secondary-text ml-5">{{vm.weatherWidget.speedUnit}}</span>
                         </div>
@@ -278,6 +284,7 @@
                         </div>
                     </div>
 
+<pre> {{ weather.weatherInfo | json }} </pre>
                     <md-divider></md-divider>
 
                 </ms-widget-front>   <!-- / Front -->                

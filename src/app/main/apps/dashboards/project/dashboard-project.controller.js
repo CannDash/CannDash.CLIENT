@@ -4,13 +4,29 @@
     angular
         .module('app.dashboards.project')
         .controller('DashboardProjectController', DashboardProjectController);
+
+
+
     /** @ngInject */
-    function DashboardProjectController($scope, $interval, $mdSidenav, DashboardData, dashboardFactory, dispensaryFactory)
+    function DashboardProjectController(
+        $scope, 
+        $stateParams,
+        $interval, 
+        $mdSidenav, 
+        DashboardData, 
+        dashboardFactory, 
+        dispensaryFactory,
+        weatherFactory,
+        toastr)
     {
+        // Set View Model variables
         var vm = this;
         var dispensaryId = 266;
+
         // Data
         vm.dashboardData = DashboardData;
+        vm.city = ['San Diego'];
+
         // Widget 5
         vm.salesCharts = {
             title       : vm.dashboardData.stackBarGraph.title,
@@ -121,6 +137,7 @@
                 vm.salesCharts.changeRange('TW');
             }
         };
+
         // Now widget
         vm.nowWidget = {
             now   : {
@@ -145,13 +162,42 @@
                 };
             }
         };
+
         // Weather widget
         vm.weatherWidget = vm.dashboardData.weatherWidget;
+
         // Methods
         vm.toggleSidenav = toggleSidenav;
         vm.selectProject = selectProject;
-        // Initialize Sales Charts for the dashboard
+
+        // Initialize
         vm.salesCharts.init();
+        getWeather();
+        activate();
+
+        ////////////////
+
+        function activate() {
+            // Initialize data immediately
+            var dispensaryId = 266;
+            var city = ['San Diego'];
+            
+            const patientId = $stateParams.id;     //jshint ignore:line
+
+            vm.userLocation = {
+                dispensaryId: dispensaryId
+            };
+
+            weatherFactory.getWeather(city).then(
+                function(city) {
+                    vm.dispensaryLocation = city;
+                }
+            );
+        }
+
+        ///////////////
+               
+
         // Now widget ticker
         vm.nowWidget.ticker();
         var nowWidgetTicker = $interval(vm.nowWidget.ticker, 1000);
@@ -159,15 +205,30 @@
         {
             $interval.cancel(nowWidgetTicker);
         });
+
         /**
          * Toggle sidenav
-         *
-         * @param sidenavId
          */
         function toggleSidenav(sidenavId)
         {
             $mdSidenav(sidenavId).toggle();
         }
+
+        /**
+         * Get Weather
+         */
+        function getWeather(city) {
+            weatherFactory.getWeather(city).then(
+                function(data) {
+                    vm.weatherInfo = data;
+                },
+                function(error) {
+                    toastr.error(error);
+                }
+            );
+        }
+
+
         /**
          * Select project
          */
