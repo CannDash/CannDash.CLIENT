@@ -65,7 +65,7 @@
         vm.gotoPatientDetail = function(patientId)
         {
             $state.go('app.e-commerce.patient', {patientId: patientId});
-        }
+        };
     }
 })();
 

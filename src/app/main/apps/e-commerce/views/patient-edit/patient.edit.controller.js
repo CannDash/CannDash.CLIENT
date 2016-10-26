@@ -50,7 +50,22 @@
 
         function activate() {
 	        // Initialize data immediately
-	        var dispensaryId = 266;
+
+        }
+
+        ///////////////
+
+
+
+
+		/**
+         * Go to patient detail
+         */
+        function gotoPatientDetail() {
+            $state.go('app.e-commerce.patient', 
+                { patientId: vm.customer.customerId });
+            
+            var dispensaryId = 266;
 
             const patientId = $stateParams.patientId;     //jshint ignore:line
 
@@ -68,15 +83,6 @@
                         });
                 }
             );
-        }
-
-        ///////////////
-
-		/**
-         * Go to patient detail
-         */
-        function gotoPatientDetail() {
-            $state.go('app.e-commerce.patient', { patientId: vm.customer.customerId });
         }
 
         /**

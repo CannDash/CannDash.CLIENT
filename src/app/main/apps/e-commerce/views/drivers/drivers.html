@@ -12,11 +12,11 @@
             <div class="white-fg" layout="column" layout-align="start start">
                 <div class="h1" layout="row" layout-align="start center">
                     <md-icon md-font-icon="icon-account"></md-icon>
-                    <span>Patients Grid</span>
+                    <span>Drivers Grid</span>
                 </div>
                 <div class="product-count secondary-text">
-                    <span>Total patients:</span>
-                    <span>{{vm.customerData.length}}</span>
+                    <span>Total drivers:</span>
+                    <span>{{vm.driverData.length}}</span>
                 </div>
             </div>
 
@@ -25,8 +25,8 @@
                 <input id="e-commerce-patients-search" class="search-input" type="text"
                         placeholder="Search" flex />
                 <md-button class="md-raised text-boxed green-bg white-fg m-o hover"
-                    ng-click="vm.createNewPatient()">
-                        New Patient
+                    ng-click="vm.createNewDriver()">
+                        New Driver
                 </md-button>
             </div>
         </div>
@@ -47,19 +47,19 @@
                         </th>
                         <th class="secondary-text">
                             <div class="table-header">
-                                <span class="column-title">MMIC#</span>
+                                <span class="column-title">D.L.#</span>
                             </div>
                         </th>
                         <th class="secondary-text">
                             <div class="table-header">
-                                <span class="column-title">MMIC Exp.</span>
+                                <span class="column-title">Vehicle Color/Make/Model</span>
                             </div>
                         </th>
-<!--                                                 <th class="secondary-text">
+                        <th class="secondary-text">
                             <div class="table-header">
-                                <span class="column-title">Email</span>
+                                <span class="column-title">Insurance</span>
                             </div>
-                        </th> -->
+                        </th>
                         <th class="secondary-text">
                             <div class="table-header">
                                 <span class="column-title">Phone</span>
@@ -72,27 +72,31 @@
                         </th>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="row in vm.customerData">
+                        <tr ng-repeat="row in vm.driverData">
                             <td>
                                 <div layout="row" layout-align="start center">
                                     <span class="name text-nowrap">
-                                        {{ row.customer.firstName }} 
-                                        {{ row.customer.lastName }}
+                                        {{row.driver.firstName}} {{row.driver.lastName}}
                                     </span>
                                 </div>
                             </td>
                             <td>
-                                {{ row.customer.mmicId }}
+                                {{ row.driver.driversLicense }}
                             </td>
                             <td>
-                                {{ row.customer.mmicExpiration | date:'MM/dd/yy' }}
+                                {{ row.driver.vehicleColor }} 
+                                {{ row.driver.vehicleMake }}
+                                {{ row.driver.vehicleModel }}
                             </td>
                             <td>
-                                {{ row.customer.phone }}
+                                {{ row.driver.vehicleInsurance }}
+                            </td>
+                            <td>
+                                {{ row.driver.phone }}
                             </td>
                             <td>
                                 <md-button class="edit-button md-icon-button"
-                                ng-click="vm.gotoPatientDetail(row.customer.customerId)" aria-label="Patient details">
+                                ng-click="vm.gotoPatientDetail(row.driver.driverId)" aria-label="Driver details">
                                     <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
                                 </md-button>
                             </td>
