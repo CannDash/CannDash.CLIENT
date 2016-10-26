@@ -1,6 +1,6 @@
 <div id="register" class="flex-scrollable" layout="column" ms-scroll>
     <div id="register-form-wrapper" layout="column" layout-align="center center">
-        <div id="register-form" class="md-whiteframe-8dp">
+        <div id="register-form" class="md-whiteframe-10dp">
             <div class="logo md-accent-bg">
                 <span><img src="../favicon.ico" alt="CannDash Logo" style="width:135px; height:135px;"></span>
             </div>
@@ -8,12 +8,15 @@
             <div class="title">Create an account</div>
 
             <form name="registerForm" novalidate>
+
+                <!-- Dispensary Name -->
                 <md-input-container class="md-block" md-no-float>
-                    <md-select class="input-group project-dropdown" ng-model="vm.dispensary" aria-label="Select Your Dispensary" ng-change="vm.dispensaries(dispensaries)">
-                        <md-optgroup label="Select your dispensary">
+                    <md-select class="input-group project-dropdown" ng-model="vm.dispensary" aria-label="Select Your Dispensary">
+                        <label>Select Your Dispensary</label>
+                        <md-optgroup>
                             <md-option ng-value="{{ dispensary }}" required placeholder="Dispensary Name" ng-repeat="dispensary in vm.dispensaries  | orderBy: 'name' ">
                                <img src="{{ dispensary.avatar_url }}" width="40px" height="40px"></img>
-                               {{ dispensary.name + ' (' + dispensary.city + ') '  + 'Ph#: ' + dispensary.phone_number + ' ID: ' + dispensary.id }}
+                               {{ dispensary.name + ' (' + dispensary.city + ') ' + '  ID: ' + dispensary.id }}
                             </md-option>
                     </md-select>
                     <div ng-messages="registerForm.username.$error" role="alert">
@@ -23,8 +26,33 @@
                     </div>
                 </md-input-container>
 
+                <!-- WeedMaps ID -->
                 <md-input-container class="md-block" md-no-float>
-                    <input type="email" name="email" ng-model="vm.form.email" placeholder="Email"
+                    <input name="weedMapsId" ng-model="vm.dispensary.wmid" placeholder="WeedMaps ID" aria-label="Enter WeedMaps ID"  ng-value="{{ dispensary }}" required>
+                        {{ dispensary.wmid }}
+                    <div ng-messages="registerForm.dispensary.$error" 
+                    role="alert"> 
+                        <div ng-message="required">
+                            <span>Enter your ID from the dropdown menu above</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- UserID -->
+                <md-input-container class="md-block" md-no-float>
+                    <input name="usernameId" ng-model="vm.dispensary.id" placeholder="User ID" aria-label="Enter User ID"  ng-value="{{ dispensary }}" required>
+                        {{ dispensary.id }}
+                    <div ng-messages="registerForm.dispensary.$error" 
+                    role="alert"> 
+                        <div ng-message="required">
+                            <span>Enter your ID from the dropdown menu above</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- Email -->
+                <md-input-container class="md-block" md-no-float>
+                    <input type="email" name="email" ng-model="vm.dispensary.email" placeholder="Email"
                          ng-pattern="/^.+@.+\..+$/" required>
                     <div ng-messages="registerForm.email.$error" role="alert" multiple>
                         <div ng-message="required">
@@ -36,6 +64,7 @@
                     </div>
                 </md-input-container>
 
+                <!-- Password -->
                 <md-input-container class="md-block" md-no-float>
                     <input type="password" name="password" ng-model="vm.form.password" placeholder="Password" required>
                     <div ng-messages="registerForm.password.$error" role="alert">
@@ -45,6 +74,7 @@
                     </div>
                 </md-input-container>
 
+                <!-- Password Confirm -->
                 <md-input-container class="md-block" md-no-float>
                     <input type="password" name="passwordConfirm" ng-model="vm.form.passwordConfirm"
                            placeholder="Password (Confirm)" required>
@@ -55,6 +85,7 @@
                     </div>
                 </md-input-container>
 
+                <!-- Terms & Conditions -->
                 <div class="terms" layout="row" layout-align="center center">
                     <md-checkbox name="terms" ng-model="data.cb1" aria-label="I read and accept" required></md-checkbox>
                     <div layout="row" layout-sm="column" layout-align="start center">
@@ -63,11 +94,13 @@
                     </div>
                 </div>
 
+                <!-- Create Account button -->
                 <md-button type="submit" class="md-raised md-accent submit-button" aria-label="CREATE MY ACCOUNT" ng-disabled="registerForm.$invalid || registerForm.$pristine">
                     CREATE MY ACCOUNT
                 </md-button>
             </form>
 
+            <!-- Already have an account link -->
             <div class="login" layout="row" layout-xs="column" layout-align="center center">
                 <span class="text">Already have an account?</span>
                 <a class="md-accent-color" ui-sref="app.pages_auth_login">Log in</a>
