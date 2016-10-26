@@ -127,41 +127,63 @@
                                         <tr>
                                             <th>Street</th>
                                             <th>Apt/Unit#</th>
-                                            <th>City/State/ZIP</th>
-                                            <th>Notes</th>                                                                         
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>ZIP</th>
+                                            <th>Notes</th>
+                                            <th width="1%">Delete</th>             
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="address in vm.addresses">
-                                            <td>
+                                        <tr ng-repeat="address in vm.customer.addresses">
+                                            <td style="width: 30%">
                                                 <md-input-container class="md-block" flex>
-                                                    <input required ng-model="vm.addresses.street">
+                                                    <input required ng-model="address.street"
+                                                        placeholder="Street">
                                                 </md-input-container>
                                             </td>
-                                            <td>
+                                            <td style="width: 10%">
                                                 <md-input-container class="md-block" flex>
-                                                    <input required ng-model="vm.addresses.unitNo">
+                                                    <input required ng-model="address.unitNo"
+                                                        placeholder="Apt/Unit#">
                                                 </md-input-container>
                                             </td>
-                                            <td>
+                                            <td style="width: 15%">
                                                 <md-input-container class="md-block" flex>
-                                                    <input required ng-model="vm.addresses.city">
+                                                    <input required ng-model="address.city"
+                                                        placeholder="City">
                                                 </md-input-container>
-                                                <md-input-container class="md-block" flex>
-                                                    <input required ng-model="vm.addresses.state">
-                                                </md-input-container>
-                                                <md-input-container class="md-block" flex>
-                                                    <input required ng-model="vm.addresses.zipCode">
-                                                </md-input-container>                                       
                                             </td>
-                                            <td>
+                                            <td style="width: 10%">
                                                 <md-input-container class="md-block" flex>
-                                                    <input required ng-model="vm.addresses.deliveryNotes">
+                                                    <input required ng-model="address.state"
+                                                        placeholder="State">
                                                 </md-input-container>
-                                            </td>                                                                                
-                                        </tr>                               
+                                            </td>
+                                            <td style="width: 10%">
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="address.zipCode"
+                                                        placeholder="ZIP">
+                                                </md-input-container>
+                                            </td>
+                                            <td style="width: 25%">
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="address.deliveryNotes"
+                                                        placeholder="Notes">
+                                                </md-input-container>
+                                            </td>
+
+                                            <!-- Delete button -->
+                                            <td>
+                                                <md-button ng-click="vm.deleteAddress(address)">
+                                                    <md-icon md-font-icon="icon-delete" type="button" 
+                                                                aria-label="Delete" >   
+                                                    </md-icon>
+                                                </md-button>
+                                            </td>                                               
+                                        </tr>
                                     </tbody>
-                                </table>   
+                                </table>
                             </div>  <!-- Address -->
                       
                             <!-- Medical Info -->
@@ -192,8 +214,7 @@
 
                             <!-- Submit order button -->
                             <md-input-container layout="row" layout-align="end center">
-                                <md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" 
-                                            ng-click="vm.onSubmit()">
+                                <md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" ng-click="vm.onSubmit()">
                                     Submit
                                 </md-button>
                             </md-input-container>   

@@ -28,14 +28,14 @@
         ////////////////
 
         function activate() {
-            const patientId = $stateParams.patientId;
+            const patientId = $stateParams.id;
             customerFactory.getByCustomer(patientId).then(
                 function(customer) {
                     vm.customer = customer;
 
                     customerFactory.getCustomerAddresses(patientId).then(
                         function (addresses) {
-                            vm.addresses = addresses;
+                            vm.customer.addresses = addresses;
                         });
                 }
             );

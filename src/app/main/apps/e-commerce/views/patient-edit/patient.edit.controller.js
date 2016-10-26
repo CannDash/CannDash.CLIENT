@@ -42,6 +42,7 @@
         vm.goToPatients = goToPatients;
         vm.onSubmit = onSubmit;
         vm.addAddress = addAddress;
+        vm.deleteAddress = deleteAddress;
 
         // Initialize
         activate();
@@ -50,24 +51,9 @@
 
         function activate() {
 	        // Initialize data immediately
-
-        }
-
-        ///////////////
-
-
-
-
-		/**
-         * Go to patient detail
-         */
-        function gotoPatientDetail() {
-            $state.go('app.e-commerce.patient', 
-                { patientId: vm.customer.customerId });
-            
             var dispensaryId = 266;
 
-            const patientId = $stateParams.patientId;     //jshint ignore:line
+            const patientId = $stateParams.id;     //jshint ignore:line
 
             vm.customer = {
                 dispensaryId: dispensaryId
@@ -79,10 +65,19 @@
 
                     customerFactory.getCustomerAddresses(patientId).then(
                         function (addresses) {
-                            vm.addresses = addresses;
+                            vm.customer.addresses = addresses;
                         });
                 }
             );
+        }
+
+        ///////////////
+
+		/**
+         * Go to patient detail
+         */
+        function gotoPatientDetail() {
+            $state.go('app.e-commerce.patient', { id: vm.customer.customerId });
         }
 
         /**
@@ -97,6 +92,8 @@
          */
         function onSubmit() {
             var patient = vm.customer;
+            vm.customer.customerAddresses = vm.customer.addresses;
+            delete vm.customer.addresses;
 
                 if (patient.customerId) {
                     customerFactory.updateCustomer(patient)     //jshint ignore:line
@@ -118,7 +115,15 @@
          * Add address button
          */
         function addAddress() {
-            vm.addresses.push({customerId: vm.customer.customerId});
+            vm.customer.addresses.push({customerId: vm.customer.customerId});
         }
+
+        /**
+         * Delete address button
+         */
+        function deleteAddress(address) {
+            _.pull(vm.customer.addresses, address);    //jshint ignore:line
+        }
+        
     }
 })();
