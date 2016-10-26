@@ -6,13 +6,13 @@
     .module('cannDash')
     .service('authService', authService);
 
-  authService.$inject = ['angularAuth0', 'authManager', '$location'];
+  authService.$inject = ['angularAuth0', 'authManager', '$location', '$http', '$q'];
 
-  function authService(angularAuth0, authManager, $location) {
+  function authService(angularAuth0, authManager, $location, $http, $q) {
 
     function login(username, password, callback) {
       angularAuth0.login({
-        connection: 'Username-Password-Authentication',
+        connection: AUTHO_CONNECTION,
         responseType: 'token',
         email: username,
         password: password,
@@ -21,11 +21,24 @@
 
     function signup(username, password, callback) {
       angularAuth0.signup({
-        connection: 'Username-Password-Authentication',
+        connection: AUTHO_CONNECTION,
         responseType: 'token',
         email: username,
         password: password
       }, callback);
+    }
+
+    function reset(email, password, callback) {
+         var defer = $q.defer();
+         var data ={
+              'client_id': AUTH0_CLIENT_ID,
+              'email': email,
+              'password': password,
+              'connection': AUTHO_CONNECTION
+         }
+         $http.post('https://' + AUTH0_DOMAIN + '/dbconnections/change_password', data);
+
+         return defer.promise;
     }
 
     function googleLogin(callback) {
@@ -67,6 +80,7 @@
       login: login,
       logout: logout,
       authenticateAndGetProfile: authenticateAndGetProfile,
+      reset: reset,
       signup: signup,
       googleLogin: googleLogin
     }

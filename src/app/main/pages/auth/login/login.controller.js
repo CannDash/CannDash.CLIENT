@@ -6,9 +6,9 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  LoginController.$inject = ['authService'];
+  LoginController.$inject = ['authService', '$state'];
 
-   function LoginController(authService) {
+   function LoginController(authService, $state) {
 
      var vm = this;
 
@@ -19,11 +19,25 @@
        vm.message = 'loading...';
        vm.loading = true;
        authService.login(vm.user, vm.pass, function (err) {
-         if (err) {
-           vm.message = "something went wrong: " + err.message;
-           vm.loading = false;
-         }
-       });
+              if (err) {
+                vm.message = "something went wrong: " + err.message;
+                alert('Something went wrong: ' + err.message);
+                vm.loading = false;
+               }
+            });
+       };
+
+     vm.reset = function () {
+          //Show loading indicator
+          vm.message = 'loading...'
+          vm.loading = true;
+          authService.reset(vm.email, function (err) {
+               if (err) {
+                    vm.message = "something went wrong: " + err.message;
+                   alert('Something went wrong: ' + err.message);
+                   vm.loading = false;
+               }
+          })
      };
 
      vm.signup = function () {
