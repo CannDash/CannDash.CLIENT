@@ -7,7 +7,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, msNavigationServiceProvider)
+    function config($stateProvider, msNavigationServiceProvider, angularAuth0Provider)
     {
         // State
         $stateProvider.state('app.pages_auth_forgot-password', {
@@ -24,6 +24,5 @@
             },
             bodyClass: 'forgot-password'
         });
-    }
-
+   }
 })();

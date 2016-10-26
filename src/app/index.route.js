@@ -7,7 +7,7 @@
         .config(routeConfig);
 
     /** @ngInject */
-    function routeConfig($stateProvider, $urlRouterProvider, $locationProvider)
+    function routeConfig($stateProvider, $urlRouterProvider, $locationProvider, angularAuth0Provider)
     {
         $locationProvider.html5Mode(true);
 
@@ -34,6 +34,14 @@
             },
         };
         // END - Layout Style Switcher
+
+        //Initialization for the angular-auth0 library
+         angularAuth0Provider.init({
+           clientID: AUTH0_CLIENT_ID,
+           domain: AUTH0_DOMAIN,
+           callbackURL: AUTH0_CALLBACK_URL + '/dashboard',
+           callbackOnLocationHash: true
+         });
 
         // State definitions
         $stateProvider

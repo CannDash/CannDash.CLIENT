@@ -9,7 +9,7 @@
 
             <form name="loginForm" novalidate>
                 <md-input-container class="md-block" md-no-float>
-                    <input type="email" name="email" ng-model="vm.form.email" placeholder="Email" ng-pattern="/^.+@.+\..+$/" required>
+                    <input type="email" name="email" ng-model="vm.user" placeholder="Email" ng-pattern="/^.+@.+\..+$/" required>
                     <div ng-messages="loginForm.email.$error" role="alert" multiple>
                         <div ng-message="required">
                             <span>Email field is required</span>
@@ -21,7 +21,7 @@
                 </md-input-container>
 
                 <md-input-container class="md-block" md-no-float>
-                    <input type="password" name="password" ng-model="vm.form.password" placeholder="Password" required>
+                    <input type="password" name="password" ng-model="vm.pass" placeholder="Password" required>
                     <div ng-messages="loginForm.password.$error" role="alert">
                         <div ng-message="required">
                             <span>Password field is required</span>
@@ -38,7 +38,7 @@
                     <a ui-sref="app.pages_auth_forgot-password" class="forgot-password md-accent-color">Forgot Password?</a>
                 </div>
 
-                <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN" ng-disabled="loginForm.$invalid || loginForm.$pristine" ui-sref="app.dashboards_project">
+                <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN" ng-disabled="loginForm.$invalid || loginForm.$pristine" ng-click="vm.login()">
                     LOG IN
                 </md-button>
             </form>

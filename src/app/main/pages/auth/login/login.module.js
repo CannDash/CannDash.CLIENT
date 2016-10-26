@@ -9,7 +9,8 @@
     /** @ngInject */
     function config(
         $stateProvider,
-        msNavigationServiceProvider)
+        msNavigationServiceProvider,
+        angularAuth0Provider)
     {
         // State
         $stateProvider
