@@ -159,6 +159,17 @@
                     }
                 },
                 bodyClass: 'e-commerce'
+            })
+            // Drivers grid
+            .state('app.e-commerce.drivers', {
+                url      : '/drivers',   
+                views    : {
+                    'content@app': {
+                        templateUrl: 'app/main/apps/e-commerce/views/drivers/drivers.html',
+                        controller : 'DriversController as vm'
+                    }
+                },
+                bodyClass: 'e-commerce'
             });
 
         // Api
@@ -188,11 +199,11 @@
         msNavigationServiceProvider.saveItem('apps.e-commerce.patients', {
             title: 'Patients',
             state: 'app.e-commerce.patients'
-        });       
+        });      
 
-        msNavigationServiceProvider.saveItem('apps.e-commerce.patient', {
-            title: 'Patient Info',
-            state: 'app.e-commerce.patient'
-        });       
+        // msNavigationServiceProvider.saveItem('apps.e-commerce.drivers', {
+        //     title: 'Drivers',
+        //     state: 'app.e-commerce.drivers'
+        // });       
     }
 })();
