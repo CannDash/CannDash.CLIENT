@@ -134,6 +134,7 @@
                                 <table class="simple" ms-responsive-table>
                                     <thead>
                                         <tr>
+                                            <th>Primary</th>
                                             <th>Street</th>
                                             <th>Apt/Unit#</th>
                                             <th>City/State/ZIP</th>
@@ -142,6 +143,9 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="address in vm.customer.addresses">
+                                            <td style="width: 30%">
+                                                <md-icon md-font-set="icon icon-check" class="material-icons " ng-show="address.primaryAddress" style="font-size: 35px;"></md-icon>
+                                            </td>
                                             <td>
                                                 <span class="street">
                                                     {{ address.street }}
