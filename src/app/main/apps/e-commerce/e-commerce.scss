@@ -1,3 +1,12 @@
 #e-commerce {
-
+	.autocomplete-custom-template li {    
+	      min-width: 890px;
+	}
 }
+
+// Widen dropdown menu list for products in new order detail
+.md-virtual-repeat-container.md-autocomplete-suggestions-container {
+  width:650px !important;
+}
+
+

@@ -17,7 +17,7 @@
     {
         // State
         $stateProvider.state('app.dashboards_project', {
-            url      : '/dashboard-project',
+            url      : '/dashboard',
             views    : {
                 'content@app': {
                     templateUrl: 'app/main/apps/dashboards/project/dashboard-project.html',
@@ -34,7 +34,7 @@
         });
 
         // Api
-        msApiProvider.register('dashboard.project', ['app/data/dashboard/project/data.json']);
+        msApiProvider.register('dashboard.project', ['http://canndashdeveloperapi.azurewebsites.net/api/dashboard/266']);
     }
 
 })();

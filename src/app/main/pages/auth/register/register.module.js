@@ -7,11 +7,11 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider)
+    function config($stateProvider)
     {
         // State
         $stateProvider.state('app.pages_auth_register', {
-            url      : '/pages/auth/register',
+            url      : '/register',
             views    : {
                 'main@'                          : {
                     templateUrl: 'app/core/layouts/content-only.html',
@@ -23,16 +23,6 @@
                 }
             },
             bodyClass: 'register'
-        });
-
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/pages/auth/register');
-
-        // Navigation
-        msNavigationServiceProvider.saveItem('pages.auth.register', {
-            title : 'Register',
-            state : 'app.pages_auth_register',
-            weight: 3
         });
     }
 

@@ -1,0 +1,109 @@
+<div id="e-commerce-patients" class="page-layout carded fullwidth" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-account"></md-icon>
+                    <span>Drivers Grid</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total drivers:</span>
+                    <span>{{vm.driverData.length}}</span>
+                </div>
+            </div>
+
+            <div class="search" layout="row" layout-align="start center" flex>
+                <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
+                <input id="e-commerce-patients-search" class="search-input" type="text"
+                        placeholder="Search" flex />
+                <md-button class="md-raised text-boxed green-bg white-fg m-o hover"
+                    ng-click="vm.createNewDriver()">
+                        New Driver
+                </md-button>
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <!-- CONTENT -->
+            <div class="content fullpage-datatable" layout="column" flex>
+                <table class="dataTable row-border hover" datatable="ng"
+                       dt-options="vm.dtOptions">
+                    <thead>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Name</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">D.L.#</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Vehicle Color/Make/Model</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Insurance</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Phone</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Details</span>
+                            </div>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in vm.driverData">
+                            <td>
+                                <div layout="row" layout-align="start center">
+                                    <span class="name text-nowrap">
+                                        {{row.driver.firstName}} {{row.driver.lastName}}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                {{ row.driver.driversLicense }}
+                            </td>
+                            <td>
+                                {{ row.driver.vehicleColor }} 
+                                {{ row.driver.vehicleMake }}
+                                {{ row.driver.vehicleModel }}
+                            </td>
+                            <td>
+                                {{ row.driver.vehicleInsurance }}
+                            </td>
+                            <td>
+                                {{ row.driver.phone }}
+                            </td>
+                            <td>
+                                <md-button class="edit-button md-icon-button"
+                                ng-click="vm.gotoPatientDetail(row.driver.driverId)" aria-label="Driver details">
+                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+                                </md-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>  <!-- / CONTENT -->
+        </div>  <!-- CONTENT CARD -->
+    </div>  <!-- CENTER -->
+</div>

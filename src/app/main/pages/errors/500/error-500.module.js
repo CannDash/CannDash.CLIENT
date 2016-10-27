@@ -7,7 +7,7 @@
         .config(config);
 
     /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider)
+    function config($stateProvider, msNavigationServiceProvider)
     {
         // State
         $stateProvider.state('app.pages_errors_error-500', {
@@ -25,15 +25,6 @@
             bodyClass: 'error-500'
         });
 
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/pages/errors/500');
-
-        // Navigation
-        msNavigationServiceProvider.saveItem('pages.errors.error-500', {
-            title : '500',
-            state : 'app.pages_errors_error-500',
-            weight: 2
-        });
-    }
+     }
 
 })();

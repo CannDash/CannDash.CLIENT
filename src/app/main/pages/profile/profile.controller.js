@@ -7,15 +7,12 @@
         .controller('ProfileController', ProfileController);
 
     /** @ngInject */
-    function ProfileController(Timeline, About, PhotosVideos)
+    function ProfileController(About)
     {
         var vm = this;
 
         // Data
-        vm.posts = Timeline.posts;
-        vm.activities = Timeline.activities;
         vm.about = About.data;
-        vm.photosVideos = PhotosVideos.data;
 
         // Methods
 

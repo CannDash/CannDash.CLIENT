@@ -1,80 +1,109 @@
 <div id="register" class="flex-scrollable" layout="column" ms-scroll>
     <div id="register-form-wrapper" layout="column" layout-align="center center">
-        <div id="register-form" class="md-whiteframe-8dp">
+        <div id="register-form" class="md-whiteframe-10dp">
             <div class="logo md-accent-bg">
-                <span>F</span>
+                <span><img src="../favicon.ico" alt="CannDash Logo" style="width:135px; height:135px;"></span>
             </div>
 
-            <div class="title" translate="REGISTER.TITLE">Create an account</div>
+            <div class="title">Create an account</div>
 
             <form name="registerForm" novalidate>
+
+                <!-- Dispensary Name -->
                 <md-input-container class="md-block" md-no-float>
-                    <input name="username" ng-model="vm.form.username" placeholder="Name"
-                           translate translate-attr-placeholder="REGISTER.NAME"
-                           required>
+                    <md-select class="input-group project-dropdown" ng-model="vm.dispensary" aria-label="Select Your Dispensary">
+                        <label>Select Your Dispensary</label>
+                        <md-optgroup>
+                            <md-option ng-value="{{ dispensary }}" required placeholder="Dispensary Name" ng-repeat="dispensary in vm.dispensaries  | orderBy: 'name' ">
+                               <img src="{{ dispensary.avatar_url }}" width="40px" height="40px"></img>
+                               {{ dispensary.name + ' (' + dispensary.city + ') ' + '  ID: ' + dispensary.id }}
+                            </md-option>
+                    </md-select>
                     <div ng-messages="registerForm.username.$error" role="alert">
                         <div ng-message="required">
-                            <span translate="REGISTER.ERRORS.USERNAME_REQUIRED">Username field is required</span>
+                            <span>Selecting a Dispensary is required</span>
                         </div>
                     </div>
                 </md-input-container>
 
+                <!-- WeedMaps ID -->
                 <md-input-container class="md-block" md-no-float>
-                    <input type="email" name="email" ng-model="vm.form.email" placeholder="Email"
-                           translate translate-attr-placeholder="REGISTER.EMAIL"
-                           ng-pattern="/^.+@.+\..+$/" required>
+                    <input name="weedMapsId" ng-model="vm.dispensary.wmid" placeholder="WeedMaps ID" aria-label="Enter WeedMaps ID"  ng-value="{{ dispensary }}" required>
+                        {{ dispensary.wmid }}
+                    <div ng-messages="registerForm.dispensary.$error" 
+                    role="alert"> 
+                        <div ng-message="required">
+                            <span>Enter your ID from the dropdown menu above</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- UserID -->
+                <md-input-container class="md-block" md-no-float>
+                    <input name="usernameId" ng-model="vm.dispensary.id" placeholder="User ID" aria-label="Enter User ID"  ng-value="{{ dispensary }}" required>
+                        {{ dispensary.id }}
+                    <div ng-messages="registerForm.dispensary.$error" 
+                    role="alert"> 
+                        <div ng-message="required">
+                            <span>Enter your ID from the dropdown menu above</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <!-- Email -->
+                <md-input-container class="md-block" md-no-float>
+                    <input type="email" name="email" ng-model="vm.dispensary.email" placeholder="Email"
+                         ng-pattern="/^.+@.+\..+$/" required>
                     <div ng-messages="registerForm.email.$error" role="alert" multiple>
                         <div ng-message="required">
-                            <span translate="REGISTER.ERRORS.EMAIL_REQUIRED">Email field is required</span>
+                            <span>Email field is required</span>
                         </div>
                         <div ng-message="pattern">
-                            <span translate="REGISTER.ERRORS.EMAIL_MUST_VALID">Email must be a valid e-mail address</span>
+                            <span>Email must be a valid e-mail address</span>
                         </div>
                     </div>
                 </md-input-container>
 
+                <!-- Password -->
                 <md-input-container class="md-block" md-no-float>
-                    <input type="password" name="password" ng-model="vm.form.password" placeholder="Password"
-                           translate translate-attr-placeholder="REGISTER.PASSWORD"
-                           required>
+                    <input type="password" name="password" ng-model="vm.form.password" placeholder="Password" required>
                     <div ng-messages="registerForm.password.$error" role="alert">
                         <div ng-message="required">
-                            <span translate="REGISTER.ERRORS.PASSWORD_REQUIRED">Password field is required</span>
+                            <span>Password field is required</span>
                         </div>
                     </div>
                 </md-input-container>
 
+                <!-- Password Confirm -->
                 <md-input-container class="md-block" md-no-float>
                     <input type="password" name="passwordConfirm" ng-model="vm.form.passwordConfirm"
-                           placeholder="Password (Confirm)"
-                           translate translate-attr-placeholder="REGISTER.PASSWORD_CONFIRM"
-                           required>
+                           placeholder="Password (Confirm)" required>
                     <div ng-messages="registerForm.passwordConfirm.$error" role="alert">
                         <div ng-message="required">
-                            <span translate="REGISTER.ERRORS.PASSWORD_CONFIRM_REQUIRED">Password (Confirm) field is required</span>
+                            <span>Password (Confirm) field is required</span>
                         </div>
                     </div>
                 </md-input-container>
 
+                <!-- Terms & Conditions -->
                 <div class="terms" layout="row" layout-align="center center">
                     <md-checkbox name="terms" ng-model="data.cb1" aria-label="I read and accept" required></md-checkbox>
                     <div layout="row" layout-sm="column" layout-align="start center">
-                        <span translate="REGISTER.READ_ACCEPT">I read and accept</span>
-                        <a href="#" class="md-accent-color" translate="REGISTER.TERMS_COND">terms and conditions</a>
+                        <span>I read and accept</span>
+                        <a href="#" class="md-accent-color">terms and conditions</a>
                     </div>
                 </div>
 
-                <md-button type="submit" class="md-raised md-accent submit-button" aria-label="CREATE MY ACCOUNT"
-                           ng-disabled="registerForm.$invalid || registerForm.$pristine"
-                           translate="REGISTER.CREATE_ACCOUNT"
-                           translate-attr-aria-label="REGISTER.CREATE_ACCOUNT">
+                <!-- Create Account button -->
+                <md-button type="submit" class="md-raised md-accent submit-button" aria-label="CREATE MY ACCOUNT" ng-disabled="registerForm.$invalid || registerForm.$pristine">
                     CREATE MY ACCOUNT
                 </md-button>
             </form>
 
+            <!-- Already have an account link -->
             <div class="login" layout="row" layout-xs="column" layout-align="center center">
-                <span class="text" translate="REGISTER.ALREADY_HAVE">Already have an account?</span>
-                <a class="link" ui-sref="app.pages_auth_login" translate="REGISTER.LOGIN">Log in</a>
+                <span class="text">Already have an account?</span>
+                <a class="md-accent-color" ui-sref="app.pages_auth_login">Log in</a>
             </div>
         </div>
     </div>

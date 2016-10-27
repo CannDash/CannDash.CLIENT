@@ -12,37 +12,40 @@
             <div class="white-fg" layout="column" layout-align="start start">
                 <div class="h1" layout="row" layout-align="start center">
                     <md-icon md-font-icon="icon-cart-outline"></md-icon>
-                    <span translate="EC.ORDERS">Orders</span>
+                    <span>Orders</span>
                 </div>
                 <div class="order-count secondary-text">
-                    <span translate="EC.TOTAL_ORDERS">Total orders:</span>
-                    <span>{{vm.orders.length}}</span>
+                    <span>Total orders:</span>
+                    <span>{{vm.dispensaryOrders.order.length}}</span>
                 </div>
             </div>
 
             <div class="search" layout="row" layout-align="start center" flex>
                 <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
-                <input id="e-commerce-products-search" class="search-input" type="text" placeholder="Search"
-                       translate translate-attr-placeholder="EC.SEARCH" flex>
+                    <input id="e-commerce-products-search" class="search-input" type="text" 
+                            placeholder="Search" flex>
+                <md-button class="md-raised text-boxed green-bg white-fg m-o hover" 
+                    ng-click="vm.createNewOrder()">
+                        New Order
+                </md-button>     
             </div>
-            <md-button class="text-boxed green-bg white-fg m-o hover" ng-click="">Add New Order</md-button>
         </div>
         <!-- / CONTENT HEADER -->
 
         <!-- CONTENT CARD -->
         <div class="content-card" layout="column" flex>
 
-            <!-- CONTENT TOOLBAR -->
-
-            <!-- / CONTENT TOOLBAR -->
-
             <!-- CONTENT -->
             <div class="content fullpage-datatable" layout="column" flex>
-
                 <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
                        dt-options="vm.dtOptions">
                     <thead>
                         <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Date</span>
+                                </div>
+                            </th>
                             <th class="secondary-text">
                                 <div class="table-header">
                                     <span class="column-title">ID</span>
@@ -50,12 +53,7 @@
                             </th>
                             <th class="secondary-text">
                                 <div class="table-header">
-                                    <span class="column-title">Reference</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Delivery</span>
+                                    <span class="column-title">Driver</span>
                                 </div>
                             </th>
                             <th class="secondary-text">
@@ -70,17 +68,7 @@
                             </th>
                             <th class="secondary-text">
                                 <div class="table-header">
-                                    <span class="column-title">Payment</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
                                     <span class="column-title">Status</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Date</span>
                                 </div>
                             </th>
                             <th class="secondary-text">
@@ -90,19 +78,31 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr ng-repeat="order in ::vm.orders">
-                            <td>{{order.id}}</td>
-                            <td>{{order.reference}}</td>
-                            <td>{{order.delivery}}</td>
-                            <td>{{order.customer}}</td>
-                            <td>{{order.total}}</td>
-                            <td>{{order.payment}}</td>
-                            <td>{{order.status}}</td>
-                            <td class="date">{{order.date}}</td>
+                    <tbody>     
+                        <tr ng-repeat="row in ::vm.dispensaryOrders.order">
+                            <td class="date" data-order="{{row.orderDate}}">
+                                {{row.orderDate | date:'MM/dd/yy h:mma'}}
+                            </td>
                             <td>
-                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoOrderDetail(order.id)" aria-label="Order details"
-                                           translate translate-attr-aria-label="EC.ORDER_DETAILS">
+                                {{row.dispensaryOrderNo}}
+                            </td>
+                            <td>
+                                {{row.driverInfo.firstName || "n/a"}} 
+                                {{row.driverInfo.lastName || "n/a"}}
+                            </td>
+                            <td>
+                                {{row.customerInfo.firstName || "n/a"}} 
+                                {{row.customerInfo.lastName || "n/a"}} 
+                            </td>
+                            <td>
+                                ${{row.totalOrderSale}}
+                            </td> 
+                            <td>
+                                {{row.orderStatus}}
+                            </td>
+                            <td>
+                                <md-button class="edit-button md-icon-button" 
+                                ng-click="vm.gotoOrderDetail(row.orderId)" aria-label="Order details">
                                     <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
                                 </md-button>
                             </td>

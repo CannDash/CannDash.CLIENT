@@ -1,0 +1,100 @@
+<div id="e-commerce-patients" class="page-layout carded fullwidth" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-account"></md-icon>
+                    <span>Patients</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total patients:</span>
+                    <span>{{vm.customerData.length}}</span>
+                </div>
+            </div>
+
+            <div class="search" layout="row" layout-align="start center" flex>
+                <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
+                <input id="e-commerce-patients-search" class="search-input" type="text"
+                        placeholder="Search" flex />
+                <md-button class="md-raised text-boxed green-bg white-fg m-o hover"
+                    ng-click="vm.createNewPatient()">
+                        New Patient
+                </md-button>
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <!-- CONTENT -->
+            <div class="content fullpage-datatable" layout="column" flex>
+                <table class="dataTable row-border hover" datatable="ng"
+                       dt-options="vm.dtOptions">
+                    <thead>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Name</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">MMIC#</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">MMIC Exp.</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Phone</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Details</span>
+                            </div>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in vm.customerData">
+                            <td>
+                                <div layout="row" layout-align="start center">
+                                    <span class="name text-nowrap">
+                                        {{ row.firstName }} 
+                                        {{ row.lastName }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                {{ row.mmicId }}
+                            </td>
+                            <td>
+                                {{ row.mmicExpiration | date:'MM/dd/yy' }}
+                            </td>
+                            <td>
+                                {{ row.phone }}
+                            </td>
+                            <td>
+                                <md-button class="edit-button md-icon-button"
+                                ng-click="vm.gotoPatientDetail(row.customerId)" aria-label="Patient details">
+                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+                                </md-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>  <!-- / CONTENT -->
+        </div>  <!-- CONTENT CARD -->
+    </div>  <!-- CENTER -->
+</div>

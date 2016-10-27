@@ -1,0 +1,237 @@
+<div id="e-commerce-order" class="page-layout simple tabbed" layout="column">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="start center">
+        <div class="white-fg" layout="row" layout-align="start center" flex>
+            <md-button class="goto-orders-button md-icon-button" aria-label="Back to all patients"
+                       ng-click="vm.goToPatients()">
+                <md-icon md-font-icon="icon-arrow-left"></md-icon>
+            </md-button>
+
+            <div layout="column" layout-align="start start">
+                <div class="h2">
+                    <span>
+                        Patient Details
+                    </span>
+                </div>
+
+                <div class="subtitle secondary-text">
+                    <span>
+                        {{ vm.customer.firstName }} 
+                        {{ vm.customer.lastName }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" layout-phone="column" flex> 
+        <md-tabs md-dynamic-height>
+            <!-- Patient Details tab -->
+            <md-tab>
+                <md-tab-label>
+                    <span>Patient Details</span>
+                </md-tab-label>
+
+                <md-tab-body>
+                    <div class="order-detail-form-container customer md-background-bg md-whiteframe-1dp">
+
+                        <!-- General info -->
+                        <div class="pb-16" layout="row" layout-align="start center">
+                            <md-icon md-font-icon="icon-account" class="m-0 mr-16"></md-icon>
+                            <div class="h2 secondary-text">General Info</div>
+                        </div>
+                       
+                        <!-- General content -->
+                        <md-content layout-padding="">
+                            <!-- General card div -->
+                            <div table-responsive-vertical class="customer">
+                                <!-- General form -->
+                                <form name="assignDriverForm" >
+
+                                    <div layout="row" layout-align="start center">
+                                        <md-input-container class="md-block" flex>
+                                          <label>First name</label>
+                                          <input required ng-model="vm.customer.firstName">
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex>
+                                          <label>Last name</label>
+                                          <input required ng-model="vm.customer.lastName">      
+                                        </md-input-container>
+                                    </div>
+                                    <div layout="row" layout-align="start center">                         
+                                        <md-input-container class="md-block" flex>
+                                            <label>Gender</label>
+                                            <md-select ng-model="vm.customer.gender">
+                                                <md-option value="Male">Male</md-option>
+                                                <md-option value="Female">Female</md-option>
+                                            </md-select>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex>
+                                          <label>Age</label>
+                                          <input required ng-model="vm.customer.age" maxlength="2">
+                                        </md-input-container>
+                                    </div>
+
+                                    <div layout="row" layout-align="start center">  
+                                        <md-input-container class="md-block" flex>
+                                          <label>D.O.B.</label>
+                                          <md-datepicker  required ng-model="vm.customer.dateOfBirth"></md-datepicker>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex>
+                                          <label>D.L.#</label>
+                                          <input required ng-model="vm.customer.driversLicense" maxlength="8">
+                                        </md-input-container>
+                                    </div>      
+
+                                </form>   <!-- General form -->
+                            </div>  <!-- General card div -->
+
+                            <!-- Contact -->
+                            <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
+                                <div class="pb-16" layout="row" layout-align="start center">
+                                    <md-icon md-font-icon="icon-phone" class="m-0 mr-16"></md-icon>
+                                    <div class="h2 secondary-text">Contact</div>
+                                </div>
+                                <div layout="row" layout-align="center center">
+                                    <md-input-container class="md-block" flex>
+                                      <label>Phone</label>
+                                      <input required ng-model="vm.customer.phone">
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex>
+                                      <label>Email</label>
+                                      <input required ng-model="vm.customer.email">
+                                    </md-input-container>
+                                </div> 
+                            </div>  <!-- Contact -->
+                           
+                            <!-- Address -->
+                            <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
+                                <div class="pb-16" layout="row" layout-align="start center">
+                                    <md-icon md-font-icon="icon-home" class="m-0 mr-16"></md-icon>
+                                    <div class="h2 secondary-text">Address(s)</div>
+                                    <div flex></div>
+                                    <!-- Add address button -->
+                                    <md-button class="md-raised blue-bg white-fg m-o hover" 
+                                                ng-click="vm.addAddress()" layout-align="end center">
+                                        Add Address
+                                    </md-button> 
+                                </div>
+                                <table class="simple" ms-responsive-table>
+                                    <thead>
+                                        <tr>
+                                            <th>Primary</th>
+                                            <th>Street</th>
+                                            <th>Apt/Unit#</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>ZIP</th>
+                                            <th>Notes</th>
+                                            <th width="1%">Delete</th>             
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="address in vm.customer.addresses">
+                                            <td style="width: 30%">
+                                                <md-checkbox ng-model="address.primaryAddress" 
+                                                    ng-click="vm.onPrimaryAddressSelected(address)" class="md-block" aria-label="Primary" flex>
+                                                </md-checkbox>
+                                            </td>
+                                            <td style="width: 30%">
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="address.street"
+                                                        placeholder="Street">
+                                                </md-input-container>
+                                            </td>
+                                            <td style="width: 10%">
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="address.unitNo"
+                                                        placeholder="Apt/Unit#">
+                                                </md-input-container>
+                                            </td>
+                                            <td style="width: 15%">
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="address.city"
+                                                        placeholder="City">
+                                                </md-input-container>
+                                            </td>
+                                            <td style="width: 10%">
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="address.state"
+                                                        placeholder="State">
+                                                </md-input-container>
+                                            </td>
+                                            <td style="width: 10%">
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="address.zipCode"
+                                                        placeholder="ZIP">
+                                                </md-input-container>
+                                            </td>
+                                            <td style="width: 25%">
+                                                <md-input-container class="md-block" flex>
+                                                    <input required ng-model="address.deliveryNotes"
+                                                        placeholder="Notes">
+                                                </md-input-container>
+                                            </td>
+
+                                            <!-- Delete button -->
+                                            <td>
+                                                <md-button ng-click="vm.deleteAddress(address)">
+                                                    <md-icon md-font-icon="icon-delete" type="button" 
+                                                                aria-label="Delete" >   
+                                                    </md-icon>
+                                                </md-button>
+                                            </td>                                               
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>  <!-- Address -->
+                      
+                            <!-- Medical Info -->
+                            <div class="order-detail-form-container status md-background-bg md-whiteframe-1dp">
+                                <div class="pb-16" layout="row" layout-align="start center">
+                                    <md-icon md-font-icon="icon-account-box" class="m-0 mr-16"></md-icon>
+                                    <div class="h2 secondary-text">Medical</div>
+                                </div>
+                                <div layout="row" layout-align="center center">
+                                    <md-input-container class="md-block" flex>
+                                      <label>Doctor Letter</label>
+                                      <input required ng-model="vm.customer.doctorLetter">
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex>
+                                      <label>Medical Reason</label>
+                                      <input required ng-model="vm.customer.medicalReason">
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex>
+                                      <label>MMIC ID#</label>
+                                      <input required ng-model="vm.customer.mmicId">
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-xs>
+                                      <label>MMIC Exp.</label>
+                                      <md-datepicker required ng-model="vm.customer.mmicExpiration"></md-datepicker>
+                                    </md-input-container>
+                                </div>                    
+                            </div>  <!-- Medical Info -->
+
+                            <!-- Submit order button -->
+                            <md-input-container layout="row" layout-align="end center">
+                                <md-button md-no-ink type="submit" class="md-raised green-bg white-fg m-o hover" ng-click="vm.onSubmit()">
+                                    Submit
+                                </md-button>
+                            </md-input-container>   
+
+                        </md-content>   <!-- Main content -->
+
+                    </div>  <!-- Main card div -->
+                </md-tab-body>
+                
+            </md-tab>   <!-- Patient Details tab -->
+        </md-tabs>
+
+    </div> <!-- / CONTENT -->
+</div>  <!-- MAIN CONTENT DIV -->

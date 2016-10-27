@@ -7,89 +7,46 @@
         .controller('ProductsController', ProductsController);
 
     /** @ngInject */
-    function ProductsController($state, Products)
+    function ProductsController(
+        $state, 
+        Products, 
+        dispensaryProductFactory, 
+        dispensaryFactory)
     {
+
         var vm = this;
+        var wProductsUrl = null;
 
         // Data
-        vm.products = Products.data;
+        //vm.products = Products.data;
+        var dispensaryId = 266;
+
+        dispensaryFactory.getByDispensary(dispensaryId).then(
+             function (response) {
+                  wProductsUrl = response.weedMapMenu;
+
+                  dispensaryProductFactory.getDispensaryProducts(wProductsUrl).then(
+                       function (data) {
+                            vm.products =
+                                _.flatMap(data.categories, function (c) {return c.items}); //jshint ignore:line
+                       }
+                  );
+             }
+        ); 
 
         vm.dtInstance = {};
+        
+        // Options for pagination
         vm.dtOptions = {
             dom         : 'rt<"bottom"<"left"<"length"l>><"right"<"info"i><"pagination"p>>>',
             columnDefs  : [
                 {
-                    // Target the id column
-                    targets: 0,
-                    width  : '72px'
-                },
-                {
                     // Target the image column
-                    targets   : 1,
+                    targets   : 0,
                     filterable: false,
                     sortable  : false,
                     width     : '80px'
                 },
-                {
-                    // Target the quantity column
-                    targets: 5,
-                    render : function (data, type)
-                    {
-                        if ( type === 'display' )
-                        {
-                            if ( parseInt(data) <= 5 )
-                            {
-                                return '<div class="quantity-indicator md-red-500-bg"></div><div>' + data + '</div>';
-                            }
-                            else if ( parseInt(data) > 5 && parseInt(data) <= 25 )
-                            {
-                                return '<div class="quantity-indicator md-amber-500-bg"></div><div>' + data + '</div>';
-                            }
-                            else
-                            {
-                                return '<div class="quantity-indicator md-green-600-bg"></div><div>' + data + '</div>';
-                            }
-                        }
-
-                        return data;
-                    }
-                },
-                {
-                    // Target the status column
-                    targets   : 6,
-                    filterable: false,
-                    render    : function (data, type)
-                    {
-                        if ( type === 'display' )
-                        {
-                            if ( data === 'true' )
-                            {
-                                return '<i class="icon-checkbox-marked-circle green-500-fg"></i>';
-                            }
-
-                            return '<i class="icon-cancel red-500-fg"></i>';
-                        }
-
-                        if ( type === 'filter' )
-                        {
-                            if ( data )
-                            {
-                                return '1';
-                            }
-
-                            return '0';
-                        }
-
-                        return data;
-                    }
-                },
-                {
-                    // Target the actions column
-                    targets           : 7,
-                    responsivePriority: 1,
-                    filterable        : false,
-                    sortable          : false
-                }
             ],
             initComplete: function ()
             {
@@ -119,8 +76,6 @@
 
         /**
          * Go to product detail
-         *
-         * @param id
          */
         function gotoProductDetail(id)
         {

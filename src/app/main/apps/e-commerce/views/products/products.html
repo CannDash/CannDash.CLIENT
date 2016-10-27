@@ -12,29 +12,23 @@
             <div class="white-fg" layout="column" layout-align="start start">
                 <div class="h1" layout="row" layout-align="start center">
                     <md-icon md-font-icon="icon-cube-outline"></md-icon>
-                    <span translate="EC.PRODUCTS">Products</span>
+                    <span>Products</span>
                 </div>
                 <div class="product-count secondary-text">
-                    <span translate="EC.TOTAL_PRODUCTS">Total products:</span>
+                    <span>Total products:</span>
                     <span>{{vm.products.length}}</span>
                 </div>
             </div>
 
             <div class="search" layout="row" layout-align="start center" flex>
                 <md-icon md-font-icon="icon-magnify" class="white-text icon search-icon"></md-icon>
-                <input id="e-commerce-products-search" class="search-input" type="text" placeholder="Search"
-                       translate translate-attr-placeholder="EC.SEARCH" flex>
-            <md-button class="text-boxed green-bg white-fg m-o hover" ng-click="">Add New Product</md-button>
+                <input id="searchKeyword" class="search-input" type="text" placeholder="Search" ng-model="searchKeyword" flex>
             </div>
         </div>
         <!-- / CONTENT HEADER -->
 
         <!-- CONTENT CARD -->
         <div class="content-card" layout="column" flex>
-
-            <!-- CONTENT TOOLBAR -->
-
-            <!-- / CONTENT TOOLBAR -->
 
             <!-- CONTENT -->
             <div class="content fullpage-datatable" layout="column" flex>
@@ -43,11 +37,6 @@
                        dt-options="vm.dtOptions">
                     <thead>
                         <tr>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">ID</span>
-                                </div>
-                            </th>
                             <th class="secondary-text">
                                 <div class="table-header">
                                     <span class="column-title">Image</span>
@@ -65,52 +54,22 @@
                             </th>
                             <th class="secondary-text">
                                 <div class="table-header">
-                                    <span class="column-title">Price</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Quantity</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">In Stock</span>
-                                </div>
-                            </th>
-                            <th class="secondary-text">
-                                <div class="table-header">
-                                    <span class="column-title">Edit</span>
+                                    <span class="column-title">Price per 8th</span>
                                 </div>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="product in ::vm.products">
-                            <td>{{product.id}}</td>
-                            <td><img class="product-image" ng-src="{{product.image}}"></td>
+                        <tr ng-repeat="product in vm.products  | filter: searchKeyword">
+                            <td><img src="{{product.thumb_image_url}}" width="75px" length="75px"></td>
                             <td>{{product.name}}</td>
-                            <td>{{product.category}}</td>
-                            <td>{{product.price}}</td>
-                            <td>{{product.quantity}}</td>
-                            <td>{{product.active}}</td>
-                            <td>
-                                <md-button class="edit-button md-icon-button" ng-click="vm.gotoProductDetail(product.id)" aria-label="Product details"
-                                           translate translate-attr-aria-label="EC.PRODUCT_DETAILS">
-                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
-                                </md-button>
-                            </td>
+                            <td>{{product.category_name}}</td>
+                            <td>{{product.prices.eighth | currency:undefined:0}}</td>
                         </tr>
                     </tbody>
                 </table>
 
-            </div>
-            <!-- / CONTENT -->
-
-        </div>
-        <!-- / CONTENT CARD -->
-
-    </div>
-    <!-- / CENTER -->
-
+            </div>    <!-- / CONTENT -->
+        </div>    <!-- / CONTENT CARD -->
+    </div>  <!-- / CENTER -->
 </div>

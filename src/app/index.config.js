@@ -13,7 +13,7 @@
 
         // uiGmapgoogle-maps configuration
         uiGmapGoogleMapApiProvider.configure({
-            //    key: 'your api key',
+            key: 'AIzaSyB3vfh3bRErYos0ftOCj7LMenzwnoseUag',
             v        : '3.exp',
             libraries: 'weather,geometry,visualization'
         });
