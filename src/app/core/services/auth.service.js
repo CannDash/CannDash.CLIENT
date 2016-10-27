@@ -19,23 +19,19 @@
       }, callback);
     }
 
-    function signup(username, password, callback) {
-      angularAuth0.signup({
-        connection: AUTHO_CONNECTION,
-        responseType: 'token',
-        email: username,
-        password: password
-      }, callback);
+    // function signup(dispensary, callback) {
+    //   angularAuth0.signup(dispensary, callback);
+    // }
+
+    function signup(data, callback) {
+         var defer = $q.defer();
+         $http.post('https://' + AUTH0_DOMAIN + '/dbconnections/signup', data);
+
+         return defer.promise;
     }
 
-    function reset(email, password, callback) {
+    function reset(data, callback) {
          var defer = $q.defer();
-         var data ={
-              'client_id': AUTH0_CLIENT_ID,
-              'email': email,
-              'password': password,
-              'connection': AUTHO_CONNECTION
-         }
          $http.post('https://' + AUTH0_DOMAIN + '/dbconnections/change_password', data);
 
          return defer.promise;
