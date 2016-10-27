@@ -13,6 +13,7 @@
             addDispensary: addDispensary,
             getByDispensary: getByDispensary,
             getByDispensaryCustomers: getByDispensaryCustomers,
+            getByDispensaryCustomerNames: getByDispensaryCustomerNames,
             getByDispensaryDrivers: getByDispensaryDrivers,
             getByDispensaryDriverNames: getByDispensaryDriverNames,
             getByDispensaryInventory: getByDispensaryInventory,
@@ -72,6 +73,24 @@
                   );
 
              return defer.promise;
+        }
+
+        function getByDispensaryCustomerNames(id) {
+            var defer = $q.defer();
+
+            $http.get(apiUrl + '/dispensaries/' + id + '/customerNames')
+                .then(
+                    function(response) {
+                        defer.resolve(response.data);
+                    },
+                    function(error) {
+                        defer.reject(error);
+                        toastr.error(
+                            'Error getting dispensary customer names: ' + error.message, 'Error');
+                    }
+                );
+
+            return defer.promise;
         }
 
         function getByDispensaryDrivers(id) {

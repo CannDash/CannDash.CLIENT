@@ -48,7 +48,7 @@
         function activate() {
 			// Initialize data immediately
 			if ($stateParams.id)
-				orderFactory.getByOrderId($stateParams.id).then(
+				orderFactory.getByOrderId($stateParams.id).then(	//jshint ignore:line
 					function (data) {
 						vm.order = data.order;
 						vm.order.customer = data.customer;
@@ -132,7 +132,7 @@
 	            }
 	        );
 
-	        dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
+	        dispensaryFactory.getByDispensaryCustomerNames(dispensaryId).then(
                 function(data) {
                     vm.customers = data;
 						
@@ -265,15 +265,15 @@
             if (!patient || patient == previousPatient) 	//jshint ignore:line
             	return;	//jshint ignore:line
             
-            if (previousPatient) vm.order.customerId = vm.order.customer.customerId;
+            if (previousPatient) vm.order.customerId = vm.order.customer.customerId;	//jshint ignore:line
 			previousPatient = patient;
 
 			fetchCustomerAddresses(
 				function () {
 					var address =
-						_.find(
+						_.find(	//jshint ignore:line
 							vm.customerAddresses,
-							function (a) {return a.primaryAddress});
+							function (a) {return a.primaryAddress});	//jshint ignore:line
 					if (address) copyAddressToOrder(address, vm.order);	//jshint ignore:line
 				}
 			);

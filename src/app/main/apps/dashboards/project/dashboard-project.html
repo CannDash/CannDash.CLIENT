@@ -193,21 +193,21 @@
             <!-- CALENDAR WIDGET -->
             <ms-widget flippable="false" class="sidenav-widget">
 
-                <!-- Front -->
+                <!-- Day/Month/Year -->
                 <ms-widget-front>
 
-                    <div class="pl-16 pr-8 pv-16" layout="row" layout-align="space-between center">
+                    <div class="pl-16 pr-8 pv-16 grey-300-bg" layout="row" layout-align="space-between center">
                         <div class="h3">{{vm.nowWidget.now.weekDay}},
                             {{vm.nowWidget.now.hour}}:{{vm.nowWidget.now.minute}}:{{vm.nowWidget.now.second}}
                         </div>
                     </div>
 
-                    <div class="p-16 pb-24" layout="column" layout-align="center center">
+                    <div class="p-16 pb-24 grey-300-bg" layout="column" layout-align="center center">
                         <div class="h1 secondary-text">
                             <span>{{vm.nowWidget.now.month}}</span>
                         </div>
 
-                        <div class="font-size-72 line-height-88 secondary-text font-weight-400">
+                        <div class="font-size-72 line-height-88 secondary-text font-weight-400" grey-300-bg>
                             {{vm.nowWidget.now.day}}
                         </div>
 
@@ -231,60 +231,47 @@
                 <!-- Front -->
                 <ms-widget-front>
 
-                    <div class="pl-16 pr-8 pv-16" layout="row" layout-align="space-between center">
+                    <div class="pl-16 pr-8 pv-16 grey-300-bg" layout="row" layout-align="space-between center">
                         <div class="h4">
                             <md-icon md-font-icon="icon-map-marker" class="icon mr-8"></md-icon>
-                            {{vm.weatherWidget.locations[vm.weatherWidget.currentLocation].name}}
+                            {{ vm.dispensaryLocation.name }}
                         </div>
                     </div>
 
-                    <div class="p-16 pb-32" layout="column" layout-align="center center">
+                    <div class="p-16 pb-32 grey-300-bg " layout="column" layout-align="center center">
                         <div layout="row" layout-align="center center">
                             <md-icon
-                                    md-font-icon="{{vm.weatherWidget.locations[vm.weatherWidget.currentLocation].icon}}"
+                                    md-font-icon="{{vm.dispensaryLocation.weather[0].icon}}"
                                     class="icon s40 mr-16"></md-icon>
-                            <span class="md-display-2 font-weight-300 secondary-text">
-                                {{vm.weatherWidget.locations[vm.weatherWidget.currentLocation].temp[vm.weatherWidget.tempUnit]}}
+                            <span class="md-display-1 font-weight-300 secondary-text">
+                                {{vm.dispensaryLocation.weather[0].description}}
                             </span>
                             <span class="font-size-48 font-weight-300 hint-text text-super ml-8">&deg;</span>
-                            <span class="md-display-2 font-weight-300 hint-text">{{vm.weatherWidget.tempUnit}}</span>
+                            <span class="md-display-2 font-weight-300 hint-text">
+                                {{ (vm.dispensaryLocation.main.temp * 9/5) - 459.67 | number:0  }} 
+                            </span>
                         </div>
                     </div>
 
-                    <div class="grey-300-bg p-16" layout="row" layout-align="space-between center">
+                    <div class="grey-300-bg p-16 grey-300-bg" layout="row" layout-align="space-between center">
                         <div layout="row" layout-align="start center">
-                            <img ng-src="http://openweathermap.org/img/w/{{weather.weatherInfo.weather[0].icon}}.png" class="icon mr-8 s20">
+                            <img ng-src="http://openweathermap.org/img/w/{{vm.dispensaryLocation.weather[0].icon}}.png" class="icon mr-8 s20">
                             <span>
-                                {{vm.weatherInfo.locations[vm.weatherInfo.currentLocation].windSpeed[vm.weatherInfo.speedUnit]}}
                             </span>
-                            <span class="secondary-text ml-5">{{vm.weatherWidget.speedUnit}}</span>
+                            <span class="secondary-text ml-5">{{vm.dispensaryLocation.wind.speed}}</span>
                         </div>
 
                         <div layout="row" layout-align="start center">
                             <md-icon md-font-icon="icon-compass-outline" class="icon mr-8 s20"></md-icon>
-                            <span>{{vm.weatherWidget.locations[vm.weatherWidget.currentLocation].windDirection}}</span>
+                            <span>{{ vm.dispensaryLocation.wind.deg | number:0 }}&deg;</span>
                         </div>
 
                         <div layout="row" layout-align="start center">
-                            <md-icon md-font-icon="icon-umbrella" class="icon mr-8 s20"></md-icon>
-                            <span>{{vm.weatherWidget.locations[vm.weatherWidget.currentLocation].rainProbability}}</span>
+                            <md-icon md-font-icon="icon-humidity" class="icon mr-8 s20"></md-icon>
+                            <span>{{ vm.dispensaryLocation.rain }}</span>
                         </div>
                     </div>
-
-                    <div class="pv-16">
-                        <div class="pv-16 ph-24" layout="row" layout-align="space-between center"
-                             ng-repeat="day in vm.weatherWidget.locations[vm.weatherWidget.currentLocation].next3Days">
-                            <span class="h4">{{day.name}}</span>
-                            <div layout="row" layout-align="start center">
-                                <md-icon class="mr-16" md-font-icon="{{day.icon}}" class="icon"></md-icon>
-                                <span class="h2">{{day.temp[vm.weatherWidget.tempUnit]}}</span>
-                                <span class="h2 font-weight-300 secondary-text text-super">&deg;</span>
-                                <span class="h2 font-weight-300 secondary-text">{{vm.weatherWidget.tempUnit}}</span>
-                            </div>
-                        </div>
-                    </div>
-
-<pre> {{ weather.weatherInfo | json }} </pre>
+                    
                     <md-divider></md-divider>
 
                 </ms-widget-front>   <!-- / Front -->                

@@ -34,7 +34,7 @@
         function getWeather(city) {
         	var defer = $q.defer();
 
-        	$http.get(weatherApi + city + '&appid=' + keys.weather	).then(
+        	$http.get(weatherApi + city + '&appid=' + keys.weather).then(
         		function(response) {
         			defer.resolve(response.data);
         		},
