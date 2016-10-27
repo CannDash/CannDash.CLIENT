@@ -265,7 +265,7 @@
             if (!patient || patient == previousPatient) 	//jshint ignore:line
             	return;	//jshint ignore:line
             
-            if (previousPatient) vm.order.customerId = vm.order.customer.id;
+            if (previousPatient) vm.order.customerId = vm.order.customer.customerId;
 			previousPatient = patient;
 
 			fetchCustomerAddresses(

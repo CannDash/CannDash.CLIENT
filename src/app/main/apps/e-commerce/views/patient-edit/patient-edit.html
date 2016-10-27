@@ -125,6 +125,7 @@
                                 <table class="simple" ms-responsive-table>
                                     <thead>
                                         <tr>
+                                            <th>Primary</th>
                                             <th>Street</th>
                                             <th>Apt/Unit#</th>
                                             <th>City</th>
@@ -136,6 +137,11 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="address in vm.customer.addresses">
+                                            <td style="width: 30%">
+                                                <md-checkbox ng-model="address.primaryAddress" 
+                                                    ng-click="vm.onPrimaryAddressSelected(address)" class="md-block" aria-label="Primary" flex>
+                                                </md-checkbox>
+                                            </td>
                                             <td style="width: 30%">
                                                 <md-input-container class="md-block" flex>
                                                     <input required ng-model="address.street"

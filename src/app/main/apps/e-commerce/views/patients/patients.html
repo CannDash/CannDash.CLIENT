@@ -71,23 +71,23 @@
                             <td>
                                 <div layout="row" layout-align="start center">
                                     <span class="name text-nowrap">
-                                        {{ row.customer.firstName }} 
-                                        {{ row.customer.lastName }}
+                                        {{ row.firstName }} 
+                                        {{ row.lastName }}
                                     </span>
                                 </div>
                             </td>
                             <td>
-                                {{ row.customer.mmicId }}
+                                {{ row.mmicId }}
                             </td>
                             <td>
-                                {{ row.customer.mmicExpiration | date:'MM/dd/yy' }}
+                                {{ row.mmicExpiration | date:'MM/dd/yy' }}
                             </td>
                             <td>
-                                {{ row.customer.phone }}
+                                {{ row.phone }}
                             </td>
                             <td>
                                 <md-button class="edit-button md-icon-button"
-                                ng-click="vm.gotoPatientDetail(row.customer.customerId)" aria-label="Patient details">
+                                ng-click="vm.gotoPatientDetail(row.customerId)" aria-label="Patient details">
                                     <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
                                 </md-button>
                             </td>

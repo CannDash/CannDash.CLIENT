@@ -133,9 +133,14 @@
          */
         function updateStatus(order) {
             var currentOrder = vm.order;
+            
+            // Using constant over variable to reduce potential bugs, references stay the same.
+            const temp = currentOrder.productOrders;
+            
             delete currentOrder.productOrders;
 
             orderFactory.updateOrder(currentOrder); 
+            currentOrder.productOrders = temp;
         }   
 
         function getAddressFromOrder(order) {

@@ -56,19 +56,21 @@
             const patientId = $stateParams.id;     //jshint ignore:line
 
             vm.customer = {
-                dispensaryId: dispensaryId
+                dispensaryId: dispensaryId,
+                addresses: []
             };
 
-            customerFactory.getByCustomer(patientId).then(
-                function(customer) {
-                    vm.customer = customer;
+            if (patientId)
+                customerFactory.getByCustomer(patientId).then(
+                    function(customer) {
+                        vm.customer = customer;
 
-                    customerFactory.getCustomerAddresses(patientId).then(
-                        function (addresses) {
-                            vm.customer.addresses = addresses;
-                        });
-                }
-            );
+                        customerFactory.getCustomerAddresses(patientId).then(
+                            function (addresses) {
+                                vm.customer.addresses = addresses;
+                            });
+                    }
+                );
         }
 
         ///////////////
@@ -124,6 +126,15 @@
         function deleteAddress(address) {
             _.pull(vm.customer.addresses, address);    //jshint ignore:line
         }
+
+        vm.onPrimaryAddressSelected = function (address) {
+            vm.customer.addresses.forEach(
+                function(a) {
+                    // if this address is selected as primary all others are false
+                    if (a != address) a.primaryAddress = false;  //jshint ignore:line
+                }// body...
+        );
         
-    }
+    };
+}
 })();
