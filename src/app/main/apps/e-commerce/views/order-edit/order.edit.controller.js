@@ -38,6 +38,7 @@
         var vm = this;
         var wProductsUrl = null;
         var previousPatient = null;
+		var dispensaryId = 266;
 
         // Initialize
         activate();
@@ -45,14 +46,26 @@
         ////////////////
 
         function activate() {
-	        // Initialize data immediately
-	        var dispensaryId = 266;
-	        vm.order = $stateParams.order || 
-		        { 
-		        	dispensaryId : dispensaryId,
+			// Initialize data immediately
+			if ($stateParams.id)
+				orderFactory.getByOrderId($stateParams.id).then(
+					function (data) {
+						vm.order = data.order;
+						vm.order.customer = data.customer;
+						vm.order.driver = data.driver;
+						onOrderFetched();
+					});
+			else {
+				vm.order = {
+					dispensaryId: dispensaryId,
 					productOrders: []
-		        };
+				};
+				onOrderFetched();
+			}
+		}
 
+		function onOrderFetched()
+		{
 	        dispensaryFactory.getByDispensary(dispensaryId).then(
 	             function (response) {
 	                  wProductsUrl = response.weedMapMenu;
@@ -121,15 +134,8 @@
 
 	        dispensaryFactory.getByDispensaryCustomers(dispensaryId).then(
                 function(data) {
-                    vm.customers =
-						_.map(	//jshint ignore:line
-							data,
-							function (c) {
-								const customer = c.customer;	//jshint ignore:line
-								customer.address = c.address;
-								return customer;
-							});
-
+                    vm.customers = data;
+						
                     if (vm.order.customerId) {
 						previousPatient = vm.order.customer =	//jshint ignore:line
 							_.find(	//jshint ignore:line
@@ -149,7 +155,6 @@
 	    vm.addProduct = function () {
 			vm.order.productOrders.push({orderId: vm.order.orderId, orderQty: 0});
 	    };
-	    if (vm.order.productOrders.length == 0) vm.addProduct();	//jshint ignore:line
 
 	    vm.onSubmit = function () {
             // clone our order object so we can delete the parts we don't want to submit
@@ -211,23 +216,7 @@
 
 		vm.deleteOrderItem = function(product) {
 			_.pull(vm.order.productOrders, product);	//jshint ignore:line
-            //vm.order.productOrders.splice(vm.order.productOrders.indexOf(product));
         };
-
-		/**
-         * Go to order detail
-         */
-        function gotoOrderDetail(id) {
-            $state.go('app.e-commerce.order', { id: id });
-        }
-	    
-		    var dispensaryId = 266;
-	        
-	        orderFactory.getOrdersByDispensary(dispensaryId).then(
-	            function(data) {
-	                vm.dispensaryOrders = data;
-	            }
-	        );
 
         ///////////////
 
@@ -273,18 +262,21 @@
 		};
 
 		vm.onPatientSelected = function(patient) {
-			const order = vm.order;		//jshint ignore:line				
-            
             if (!patient || patient == previousPatient) 	//jshint ignore:line
             	return;	//jshint ignore:line
             
-            vm.order.customerId = vm.order.customer.customerId; 
-
+            if (previousPatient) vm.order.customerId = vm.order.customer.id;
 			previousPatient = patient;
-			var address = patient.address;
-			if (address) copyAddressToOrder(address, vm.order);	//jshint ignore:line
 
-			fetchCustomerAddresses();
+			fetchCustomerAddresses(
+				function () {
+					var address =
+						_.find(
+							vm.customerAddresses,
+							function (a) {return a.primaryAddress});
+					if (address) copyAddressToOrder(address, vm.order);	//jshint ignore:line
+				}
+			);
  	    };
 
 		vm.onProductSelected = function(productOrder) {
@@ -320,12 +312,13 @@
 				});	
 	    };
 
-		function fetchCustomerAddresses() {
+		function fetchCustomerAddresses(callback) {
 			vm.customerAddresses = null;
 			customerFactory.getCustomerAddresses(vm.order.customerId).then(
 				function (addresses) {
 					vm.customerAddresses = addresses;
-				});
+					if (callback) callback();	//jshint ignore:line
+				});	
 		}
 
 		function copyAddressToOrder(address, order) {

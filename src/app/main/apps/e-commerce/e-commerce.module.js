@@ -106,7 +106,6 @@
             // Edit order detail
             .state('app.e-commerce.edit-order', {
                 url      : '/edit-order/:id',   // need orderId to pass through with this state!!
-                params	: { order : null },
                 views    : {
                     'content@app': {
                         templateUrl: 'app/main/apps/e-commerce/views/order-edit/order.edit.html',
